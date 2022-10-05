@@ -41,8 +41,8 @@ namespace WarpConduitPartnerMod
     {
         private static void Prefix()
         {
-            ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitSenderConfig");
-            ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitReceiverConfig");
+            ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitSender");
+            ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitReceiver");
         }
 
     }

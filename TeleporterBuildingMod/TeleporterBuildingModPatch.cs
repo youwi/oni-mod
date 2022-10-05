@@ -8,7 +8,7 @@ using HarmonyLib;
 namespace TeleporterBuildingMod
 {
     //复制人传送器有多个类：WarpPortal，Teleporter
-    [HarmonyPatch(typeof(WarpPortal))]
+/*    [HarmonyPatch(typeof(WarpPortal))]
 
     public class TeleporterBuildingModPatch
     {
@@ -32,5 +32,5 @@ namespace TeleporterBuildingMod
             ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitReceiverConfig");
         }
 
-    }
+    }*/
 }
