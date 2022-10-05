@@ -57,11 +57,11 @@
     <Compile Include="TemporalTearOpenerPatch.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mod.yaml" />
-    <None Include="mod_info.yaml" />
+    <None Include="resource\mod.yaml" />
+    <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="preview.png" />
+    <Content Include="resource\preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
