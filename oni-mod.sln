@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemporalTearOpenerMod", "TemporalTearOpenerMod\TemporalTearOpenerMod.csproj", "{EA8165CA-1E72-47EA-AF47-9D692494B37C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestTreeMutantMod", "ForestTreeMutant\ForestTreeMutantMod.csproj", "{40349E3D-44E2-4004-8D85-627F2CCD3EAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestTreeMutantMod", "ForestTreeMutantMod\ForestTreeMutantMod.csproj", "{40349E3D-44E2-4004-8D85-627F2CCD3EAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarpConduitPartnerMod", "WarpConduitReceiverMod\WarpConduitPartnerMod.csproj", "{1F98832C-AB28-4CE7-AF9D-05C8D5365190}"
 EndProject
