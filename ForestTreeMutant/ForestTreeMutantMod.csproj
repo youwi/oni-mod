@@ -64,4 +64,9 @@
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>		mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
+		copy /y $(TargetDir)$(TargetFileName)  $(ONI_MOD_LOCAL)\$(ProjectName)\$(TargetFileName)
+		copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace oni_ForestTree
+namespace ForestTree
 {
 
     [HarmonyPatch(typeof(ForestTreeBranchConfig))]
@@ -19,7 +19,7 @@ namespace oni_ForestTree
         //参考: https://bbs.3dmgame.com/thread-6333693-1-1.html
         //收获种子可以得到变异属性的种子.
         [HarmonyPatch("OnSpawn")]
-        public static void Postfix(GameObject inst,GameObject __instance)
+        public static void Postfix(GameObject inst, GameObject __instance)
         {
             GameObject gameObject = inst;
             EntityTemplates.CreateAndRegisterPreviewForPlant(
@@ -57,26 +57,26 @@ namespace oni_ForestTree
             // gameObject.AddOrGet<MutantPlant>().SpeciesID = component2.SpeciesID;上级如果是有ID,是树枝的静态.
 
             // seed.Mutate();//获取随机变异. 
-/*
-            seed.SpeciesID = new Tag("rottenHeaps");//强制修改为旺盛属性.
-            seed.ApplyMutations();
-            seed.AddTag(GameTags.MutatedSeed);
-            seed.AddTag(new Tag("rottenHeaps"));//上面的办法改不了?
+            /*
+                        seed.SpeciesID = new Tag("rottenHeaps");//强制修改为旺盛属性.
+                        seed.ApplyMutations();
+                        seed.AddTag(GameTags.MutatedSeed);
+                        seed.AddTag(new Tag("rottenHeaps"));//上面的办法改不了?
 
 
-            Components.MutantPlants.Add(seed);
-            List<string> list =  new List<string>();
-            list.Add(Db.Get().PlantMutations.rottenHeaps.Id);
-            seed.Analyze();
-            seed.SetSubSpecies(list);
-            seed.ApplyMutations();
-            // PlantSubSpeciesCatalog.Instance.DiscoverSubSpecies(GetSubSpeciesInfo(), seed);
-*/
+                        Components.MutantPlants.Add(seed);
+                        List<string> list =  new List<string>();
+                        list.Add(Db.Get().PlantMutations.rottenHeaps.Id);
+                        seed.Analyze();
+                        seed.SetSubSpecies(list);
+                        seed.ApplyMutations();
+                        // PlantSubSpeciesCatalog.Instance.DiscoverSubSpecies(GetSubSpeciesInfo(), seed);
+            */
 
             //Console.WriteLine("ForestTreeBranchConfig树枝生成时：seed.MutationIDs：" + seed.SpeciesID);
-           // Console.WriteLine("ForestTreeBranchConfig树枝生成时：seed.IsOriginal：" + seed.IsOriginal);
-            
-          //  return gameObject;
+            // Console.WriteLine("ForestTreeBranchConfig树枝生成时：seed.IsOriginal：" + seed.IsOriginal);
+
+            //  return gameObject;
         }
 
     }
@@ -94,8 +94,8 @@ namespace oni_ForestTree
             //Console.WriteLine("BuddingTrunk 测试变异信息：" + gameObject.SpeciesID); //结果是 ForestTree
             /*  __instance.AddTag(GameTags.MutatedSeed);
               __instance.FindOrAddComponent<MutantPlant>();*/
-         
-           
+
+
         }
     }
     [HarmonyPatch(typeof(TreeBud))]
@@ -109,8 +109,8 @@ namespace oni_ForestTree
         public static void Postfix(TreeBud __instance)
         {
             var mutantBranch = __instance.GetComponentInParent<MutantPlant>();
-           // Console.WriteLine("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
-            var mutantUp= __instance.buddingTrunk.Get().GetComponentInParent<MutantPlant>();
+            // Console.WriteLine("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
+            var mutantUp = __instance.buddingTrunk.Get().GetComponentInParent<MutantPlant>();
 
             mutantUp.CopyMutationsTo(mutantBranch);
             mutantBranch.ApplyMutations();
