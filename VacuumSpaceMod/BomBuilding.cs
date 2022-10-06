@@ -25,7 +25,7 @@ namespace VacuumSpaceMod
             EffectorValues tier2 = NOISE_POLLUTION.NOISY.TIER6;
             string[] raw_METALS = MATERIALS.RAW_METALS;
             float melting_point = 2400f;
-            BuildLocationRule build_location_rule = BuildLocationRule.OnFloor;
+            BuildLocationRule build_location_rule = BuildLocationRule.Anywhere;
             BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(id, width, height, anim, hitpoints, construction_time, tais1, raw_METALS, melting_point, build_location_rule, TUNING.BUILDINGS.DECOR.BONUS.TIER2, tier2, 0.2f);
             buildingDef.DefaultAnimState = "off";
             buildingDef.Entombable = false;
@@ -38,7 +38,6 @@ namespace VacuumSpaceMod
         public override void DoPostConfigureComplete(GameObject go)
         {
             go.GetComponent<Deconstructable>().allowDeconstruction = true;
-            
         }
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
         {
@@ -47,7 +46,6 @@ namespace VacuumSpaceMod
             component.SetElement(SimHashes.Copper, true);
             component.Temperature = 294.15f;
         }
-
     }
    
      

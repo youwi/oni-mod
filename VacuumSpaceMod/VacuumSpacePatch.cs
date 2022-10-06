@@ -53,6 +53,11 @@ namespace VacuumSpaceMod
     {
         private static void Prefix()
         {
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.DESC", "make bomb destory all" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.EFFECT", "make bomb destory all" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.NAME", "SpaceBomb" });
+         
+
             ModUtil.AddBuildingToPlanScreen("Base", "VacuumSpaceMod");
         }
     }

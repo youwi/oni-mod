@@ -79,6 +79,13 @@ namespace TeleporterBuildingMod
     {
         private static void Prefix()
         {
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTAL1.DESC", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTAL1.EFFECT", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTAL1.NAME", "WarpPortal" });
+
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVER1.DESC", "WarpReceiver1" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVER1.EFFECT", "WarpReceiver1" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVER1.NAME", "WarpReceiver1" });
             //    ModUtil.AddBuildingToPlanScreen("Base", "TeleportalPad"); //传送台没什么用.
             ModUtil.AddBuildingToPlanScreen("Base", "WarpPortal1");
             ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver1");
