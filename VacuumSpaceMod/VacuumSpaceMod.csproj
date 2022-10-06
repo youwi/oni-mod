@@ -55,6 +55,27 @@
   <ItemGroup>
     <Compile Include="VacuumSpacePatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BomBuilding.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\anim\assets\bomb_build\bomb_build_anim.bytes" />
+    <None Include="resource\anim\assets\bomb_build\bomb_build_build.bytes" />
+    <None Include="resource\anim\assets\bomb_build_s\bomb_build_s_anim.bytes" />
+    <None Include="resource\anim\assets\bomb_build_s\bomb_build_s_build.bytes" />
+    <None Include="resource\mod.yaml" />
+    <None Include="resource\mod_info.yaml" />
+    <None Include="resource\templates\VacuumSpaceMod.yaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resource\anim\assets\bomb_build\bomb_build.png" />
+    <Content Include="resource\anim\assets\bomb_build_s\bomb_build_s.png" />
+    <Content Include="resource\preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
+copy /y $(TargetDir)$(TargetFileName)  $(ONI_MOD_LOCAL)\$(ProjectName)\$(TargetFileName)
+copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

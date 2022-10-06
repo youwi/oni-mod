@@ -40,4 +40,15 @@ kanimal-cli.exe kanim warp_portal_sender/warp_portal_sender.scml -o warp_portal_
 copy warp_portal_receiver.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes ../
 
 kanimal-cli.exe kanim warp_portal_receiver/warp_portal_receiver.scml -o warp_portal_receiver_new
+kanimal-cli.exe kanim bomb_build_s/bomb_build_s.scml -o bomb_build_s_new
+kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
+
+
 ```
+printing_pre
+printing_loop
+printing_pst
+idle
+off
+place
+ui

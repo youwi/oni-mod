@@ -17,7 +17,7 @@ namespace VacuumSpaceMod
         public static void Postfix(BuildingComplete __instance)
         {
             GameObject go = __instance.gameObject;
-            if (__instance.name == "VacuumSpaceModComplete" )
+            if (__instance.name == "VacuumSpaceModComplete")
             {
                 Vector3 pos = go.transform.position;
                 PrimaryElement element = go.GetComponent<PrimaryElement>();
@@ -28,7 +28,7 @@ namespace VacuumSpaceMod
                 SimMessages.ReplaceAndDisplaceElement(cell, element.ElementID,
                     null, 50f, temperature, byte.MaxValue, 0, -1); // spawn Natural Block
                                                                    //猜太空背景为
-                replaceBuilding(__instance.name, cell);
+               // replaceBuilding(__instance.name, cell);
 
 
                 go.DeleteObject(); // remove Natural Tile
@@ -44,6 +44,16 @@ namespace VacuumSpaceMod
             {
                 Console.WriteLine("替换打印了...");
             });
+        }
+    }
+
+    [HarmonyPatch(typeof(GeneratedBuildings))]
+    [HarmonyPatch("LoadGeneratedBuildings")]
+    public class GeneratedBuildingsPatch
+    {
+        private static void Prefix()
+        {
+            ModUtil.AddBuildingToPlanScreen("Base", "VacuumSpaceMod");
         }
     }
 }
