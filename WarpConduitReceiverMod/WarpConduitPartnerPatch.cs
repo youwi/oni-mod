@@ -1,39 +1,36 @@
-﻿using HarmonyLib;
+﻿using Database;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace WarpConduitPartnerMod
 {
     [HarmonyPatch(typeof(WarpConduitReceiverConfig))]
-
-    public class WarpConduitPartnerPatch
+    public class DeconstructionPatch
     {
-        [HarmonyPatch("CreateBuildingDef")]
-        public static BuildingDef Postfix(BuildingDef __result)
+        //添加可拆
+        [HarmonyPatch("DoPostConfigureComplete")]
+        public static void Postfix(GameObject go)
         {
-            __result.ShowInBuildMenu=true;
-            return __result;
-            //WarpConduitPartner
-
+            go.GetComponent<Deconstructable>().allowDeconstruction = true;
         }
-
     }
     [HarmonyPatch(typeof(WarpConduitSenderConfig))]
-
-    public class WarpConduitSenderConfigPatch
+    public class DeconstructionPatch2
     {
-        [HarmonyPatch("CreateBuildingDef")]
-        public static BuildingDef Postfix(BuildingDef __result)
+        //添加可拆
+        [HarmonyPatch("DoPostConfigureComplete")]
+        public static void Postfix(GameObject go)
         {
-            __result.ShowInBuildMenu = true;
-            return __result;
-
+            go.GetComponent<Deconstructable>().allowDeconstruction = true;
         }
-
     }
+
+
     //添加建筑到菜单中
     [HarmonyPatch(typeof(GeneratedBuildings))]
     [HarmonyPatch("LoadGeneratedBuildings")]
@@ -43,6 +40,29 @@ namespace WarpConduitPartnerMod
         {
             ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitSender");
             ModUtil.AddBuildingToPlanScreen("Base", "WarpConduitReceiver");
+        }
+
+    }
+    [HarmonyPatch(typeof(WarpConduitReceiverConfig))]
+    public class WarpConduitPartnerPatch
+    {
+        [HarmonyPatch("CreateBuildingDef")]
+        public static BuildingDef Postfix(BuildingDef __result)
+        {
+            __result.ShowInBuildMenu = true;
+            return __result;
+        }
+
+    }
+    [HarmonyPatch(typeof(WarpConduitSenderConfig))]
+    public class WarpConduitSenderConfigPatch
+    {
+        [HarmonyPatch("CreateBuildingDef")]
+        public static BuildingDef Postfix(BuildingDef __result)
+        {
+            __result.ShowInBuildMenu = true;
+            return __result;
+
         }
 
     }

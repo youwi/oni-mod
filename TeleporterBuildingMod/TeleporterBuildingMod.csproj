@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WarpPortalHack.cs" />
     <Compile Include="TeleporterBuildingModPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,10 +64,14 @@
   <ItemGroup>
     <Content Include="resource\preview.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="resource\anim\assets\warp_portal_sender_new\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>		mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
-		copy /y $(TargetDir)$(TargetFileName)  $(ONI_MOD_LOCAL)\$(ProjectName)\$(TargetFileName)
-		copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+    <PostBuildEvent>mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
+copy /y $(TargetDir)$(TargetFileName)  $(ONI_MOD_LOCAL)\$(ProjectName)\$(TargetFileName)
+copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
   </PropertyGroup>
 </Project>

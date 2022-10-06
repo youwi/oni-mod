@@ -43,14 +43,14 @@ namespace ForestTree
             // Tree-->BuddingTrunk x6--TreeBudx6---TreeBranch
             //MutantPlant seedParent =  gameObject.GetComponentInParent<TreeBud>().GetComponentInParent<BuddingTrunk>().GetComponentInParent<MutantPlant>();
             //MutantPlant seedParent =  gameObject.FindComponent<TreeBud>().FindComponent<BuddingTrunk>().GetComponentInParent<MutantPlant>();
-            MutantPlant seedParent = gameObject.GetComponentInParent<MutantPlant>();
+         /*   MutantPlant seedParent = gameObject.GetComponentInParent<MutantPlant>();
 
             if (seedParent != null)
             {
                 Console.WriteLine("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
             }
 
-            MutantPlant seed = gameObject.GetComponent<MutantPlant>();
+            MutantPlant seed = gameObject.GetComponent<MutantPlant>();*/
 
             // seed.SpeciesID = component2.PrefabTag;//上级如果是种子的形态.
 
