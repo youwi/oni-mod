@@ -56,6 +56,7 @@ namespace TemporalTearOpenerPatch
             HighEnergyParticleStorage highEnergyParticleStorage = __instance.GetComponent<HighEnergyParticleStorage>();
             if (highEnergyParticleStorage != null)
                 highEnergyParticleStorage.ConsumeAll();
+           // highEnergyParticleStorage.IsFull
 
 
         }

@@ -9,6 +9,10 @@
 	https://bbs.3dmgame.com/thread-6226681-1-2.html
 	https://robophred.github.io/oni-duplicity/#/raw
 
+## TODO
+	真空变太空
+	粒子满了以自动发陨石
+
 # 脚本
 
 设置环境 :ONI_MOD_LOCAL  D:\Klei\OxygenNotIncluded\mods\local
