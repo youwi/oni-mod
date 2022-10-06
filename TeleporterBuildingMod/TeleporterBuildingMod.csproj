@@ -63,6 +63,8 @@
     <None Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new_build.bytes" />
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
+    <None Include="resource\templates\WarpReceiver1Complete.yaml" />
+    <None Include="resource\templates\WarpPortal1Complete.yaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new.png" />

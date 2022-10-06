@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Database;
 using HarmonyLib;
 using UnityEngine;
+using static System.Net.Mime.MediaTypeNames;
+using static STRINGS.UI.CLUSTERMAP;
 
 namespace TeleporterBuildingMod
 {
@@ -84,7 +86,7 @@ namespace TeleporterBuildingMod
             GameObject go = __instance.gameObject;
             if (__instance.name == "WarpPortal1"
                 || __instance.name == "WarpPortal1Complete"
-                || __instance.name == "WarpReceiver1Complete"
+                || __instance.name == "WarpReceiver1Complete" //这里和配置的模板名一样.
                 || __instance.name == "WarpReceiver1"
 
                 )
@@ -99,12 +101,20 @@ namespace TeleporterBuildingMod
                 SimMessages.ReplaceAndDisplaceElement(cell, element.ElementID,
                     null, mass, temperature, byte.MaxValue, 0, -1); // spawn Natural Block
                 //猜太空背景为
-                SimMessages.ModifyCellWorldZone(cell, Sim.SpaceZoneID);
-
+                replaceBuilding(__instance.name,cell);
+                // SimMessages.ModifyCellWorldZone(cell, Sim.SpaceZoneID);
                 // DestroyCellWithBackground(cell);
 
                 go.DeleteObject(); // remove Natural Tile
             }
+        }
+        public static void replaceBuilding(string templateName, int cell)
+        {
+            TemplateContainer template = TemplateCache.GetTemplate(templateName);
+            TemplateLoader.Stamp(template, Grid.CellToPos(cell), delegate
+            {
+                Console.WriteLine("替换打印了...");
+            });
         }
         public static void DestroyCellWithBackground(int cell)
         {
