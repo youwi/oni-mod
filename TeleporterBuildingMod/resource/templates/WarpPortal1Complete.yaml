@@ -1,60 +1,12 @@
 info:
   size:
-    X: 6
+    X: 3
     Y: 3
-  area: 18
-cells:
-- element: Vacuum
-  location_x: -2
-  location_y: -1
-- element: Vacuum
-  location_x: -1
-  location_y: -1
-- element: Vacuum
-  location_y: -1
-- element: Vacuum
-  location_x: 1
-  location_y: -1
-- element: Vacuum
-  location_x: 2
-  location_y: -1
-- element: Vacuum
-  location_x: 3
-  location_y: -1
-- element: Vacuum
-  location_x: -2
-- element: Vacuum
-  location_x: -1
-- element: Vacuum
-- element: Vacuum
-  location_x: 1
-- element: Vacuum
-  location_x: 2
-- element: Vacuum
-  location_x: 3
-- element: Vacuum
-  location_x: -2
-  location_y: 1
-- element: Vacuum
-  location_x: -1
-  location_y: 1
-- element: Vacuum
-  location_y: 1
-- element: Vacuum
-  location_x: 1
-  location_y: 1
-- element: Vacuum
-  location_x: 2
-  location_y: 1
-- element: Vacuum
-  location_x: 3
-  location_y: 1
+  area: 9
 otherEntities:
 - id: WarpPortal
-  location_x: -1
-  location_y: -1
-  element: Unobtanium
+  location_y: 0
+  element: Copper
   temperature: 294.149994
   units: 1
   type: Other
-

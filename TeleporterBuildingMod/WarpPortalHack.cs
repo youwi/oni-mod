@@ -38,6 +38,7 @@ namespace TeleporterBuildingMod
             KBatchedAnimController kBatchedAnimController = obj.AddOrGet<KBatchedAnimController>();
             kBatchedAnimController.sceneLayer = Grid.SceneLayer.BuildingBack;
             kBatchedAnimController.fgLayer = Grid.SceneLayer.BuildingFront;
+           
             return obj;
         }
 

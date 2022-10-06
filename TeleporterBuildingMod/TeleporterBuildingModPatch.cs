@@ -40,25 +40,38 @@ namespace TeleporterBuildingMod
             }
 
         }*/
-    /*    //可拆可建
-        [HarmonyPatch(typeof(WarpPortalConfig))]
-        public class WarpPortalConfigDeconstructionPatch
+    //可拆可建
+
+    [HarmonyPatch(typeof(WarpReceiverConfig), "OnSpawn")]
+    public class WarpReceiverConfigDeconstructionPatch
+    {
+        public static void Postfix(GameObject inst)
         {
-            [HarmonyPatch("OnPrefabInit")]
-            public static void Postfix(GameObject __instance)
+            inst.AddOrGet<Deconstructable>();
+            PrimaryElement component = inst.GetComponent<PrimaryElement>();
+            component.SetElement(SimHashes.Lead);
+            var obj = inst.GetComponent<Deconstructable>();
+            if (obj != null)
             {
-                __instance.GetComponent<Deconstructable>().allowDeconstruction = true;
+                obj.allowDeconstruction = true;
             }
+            // inst.FindOrAddComponent<Deconstructable>();
         }
-        [HarmonyPatch(typeof(WarpReceiverConfig))]
-        public class WarpReceiverConfigDeconstructionPatch
+    }
+    [HarmonyPatch(typeof(WarpPortalConfig), "OnSpawn")]
+    public class WarpPortalConfigDeconstructionPatch
+    {
+        public static void Postfix(GameObject inst)
         {
-            [HarmonyPatch("OnPrefabInit")]
-            public static void Postfix(GameObject __instance)
-            {
-                __instance.GetComponent<Deconstructable>().allowDeconstruction = true;
-            }
-        }*/
+            PrimaryElement component = inst.GetComponent<PrimaryElement>();
+            component.SetElement(SimHashes.Lead);
+            inst.AddOrGet<Deconstructable>();
+            var obj = inst.GetComponent<Deconstructable>();
+            if(obj != null)
+                obj.allowDeconstruction = true;
+        }
+    }
+
     //添加建筑到菜单中
     [HarmonyPatch(typeof(GeneratedBuildings))]
     [HarmonyPatch("LoadGeneratedBuildings")]
@@ -101,13 +114,16 @@ namespace TeleporterBuildingMod
                 SimMessages.ReplaceAndDisplaceElement(cell, element.ElementID,
                     null, mass, temperature, byte.MaxValue, 0, -1); // spawn Natural Block
                 //猜太空背景为
-                replaceBuilding(__instance.name,cell);
+                replaceBuilding(__instance.name, cell);
                 // SimMessages.ModifyCellWorldZone(cell, Sim.SpaceZoneID);
                 // DestroyCellWithBackground(cell);
 
                 go.DeleteObject(); // remove Natural Tile
             }
         }
+        /**
+         * 使用模板来替换建筑.模板名放在模板目录下.
+         */
         public static void replaceBuilding(string templateName, int cell)
         {
             TemplateContainer template = TemplateCache.GetTemplate(templateName);
