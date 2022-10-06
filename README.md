@@ -1,12 +1,13 @@
 # oni-mod 备注
 说明:
-StampTool 图章工具
-TemplateCache  Yaml处理工具
+	StampTool 图章工具
+	TemplateCache  Yaml处理工具
 
 # 其它
 
-https://code.ecool.dev/ONI-Mods/BuildableNaturalTile
-https://bbs.3dmgame.com/thread-6226681-1-2.html
+	https://code.ecool.dev/ONI-Mods/BuildableNaturalTile
+	https://bbs.3dmgame.com/thread-6226681-1-2.html
+	https://robophred.github.io/oni-duplicity/#/raw
 
 # 脚本
 
@@ -24,9 +25,9 @@ Space exposure  STATUSITEMS.SPACE  太空暴露  MISC.STATUSITEMS.SPACE
 
 # 动画
 https://github.com/skairunner/kanimal-SE
-	 动画太麻烦了
+	动画太麻烦了
 	AssetStudio 批量提取文件
-得到 TextAsset,Texture2D文件夹
+	得到 TextAsset,Texture2D文件夹
 ```
 cd TextAsset && rename *.prefab *.bytes 
 kanimal-cli batch-convert -o .
