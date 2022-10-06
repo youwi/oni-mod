@@ -66,9 +66,9 @@ namespace TeleporterBuildingMod
         {
             //    ModUtil.AddBuildingToPlanScreen("Base", "TeleportalPad"); //传送台没什么用.
             ModUtil.AddBuildingToPlanScreen("Base", "WarpPortal1");
-            //    ModUtil.AddBuildingToPlanScreen("Base", "WarpPortalHack");
+            ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver1");
 
-            ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver");
+            //    ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver");//原生不支持
             //    ModUtil.AddBuildingToPlanScreen("Base", "TeleporterTransmitter");//可能的翻译
             //    ModUtil.AddBuildingToPlanScreen("Base", "TeleporterReceiver");//可能的翻译
         }
@@ -83,7 +83,11 @@ namespace TeleporterBuildingMod
         {
             GameObject go = __instance.gameObject;
             if (__instance.name == "WarpPortal1"
-                || __instance.name == "WarpPortal1Complete")
+                || __instance.name == "WarpPortal1Complete"
+                || __instance.name == "WarpReceiver1Complete"
+                || __instance.name == "WarpReceiver1"
+
+                )
             {
                 Vector3 pos = go.transform.position;
                 PrimaryElement element = go.GetComponent<PrimaryElement>();
@@ -97,8 +101,8 @@ namespace TeleporterBuildingMod
                 //猜太空背景为
                 SimMessages.ModifyCellWorldZone(cell, Sim.SpaceZoneID);
 
-               // DestroyCellWithBackground(cell);
-                 
+                // DestroyCellWithBackground(cell);
+
                 go.DeleteObject(); // remove Natural Tile
             }
         }
@@ -122,13 +126,13 @@ namespace TeleporterBuildingMod
                 if (gameObject != null)
                 {
                     UnityEngine.Object.Destroy(gameObject);
-                /*    World.Instance.groundRenderer;
-                    SaveGame.Instance.get;
-                    Grid.Spawnable;*/
+                    /*    World.Instance.groundRenderer;
+                        SaveGame.Instance.get;
+                        Grid.Spawnable;*/
                 }
             }
             // World.Instance.zoneRenderData.GetSubWorldZoneType(cell) == SubWorld.ZoneType.Space;
-           // World.Instance.zoneRenderData;
+            // World.Instance.zoneRenderData;
             if (ElementLoader.elements[(int)Grid.ElementIdx[cell]].id == SimHashes.Void)
             {
                 SimMessages.ReplaceElement(cell, SimHashes.Void, null, 0f, 0f, byte.MaxValue, 0, -1);
