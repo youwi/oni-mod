@@ -30,4 +30,7 @@ kanimal-cli.exe scml warp_portal_sender_0.png warp_portal_sender_anim.bytes warp
 kanimal-cli.exe scml warp_portal_receiver_0.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes -o warp_portal_receiver_scml
 kanimal-cli.exe scml temporal_tear_opener_0.png temporal_tear_opener_anim.bytes temporal_tear_opener_build.bytes -o temporal_tear_opener_scml
 
-kanimal-cli.exe kanim warp_portal_sender/warp_portal_sender.scml -o .
+kanimal-cli.exe kanim warp_portal_sender/warp_portal_sender.scml -o warp_portal_sender_new
+copy warp_portal_receiver.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes ../
+
+kanimal-cli.exe kanim warp_portal_receiver/warp_portal_receiver.scml -o warp_portal_receiver_new

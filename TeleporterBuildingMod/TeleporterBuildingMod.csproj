@@ -58,10 +58,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new_anim.bytes" />
+    <None Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new_build.bytes" />
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new.png" />
     <Content Include="resource\preview.png" />
   </ItemGroup>
   <ItemGroup>
