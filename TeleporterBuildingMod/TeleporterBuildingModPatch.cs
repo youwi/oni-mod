@@ -139,39 +139,6 @@ namespace TeleporterBuildingMod
                 Console.WriteLine("替换打印了...");
             });
         }
-        public static void DestroyCellWithBackground(int cell)
-        {
-            foreach (GameObject gameObject in new List<GameObject>
-        {
-            Grid.Objects[cell, 2],
-            Grid.Objects[cell, 1],
-            Grid.Objects[cell, 12],
-            Grid.Objects[cell, 16],
-            Grid.Objects[cell, 0],
-            Grid.Objects[cell, 26],
-            Grid.Objects[cell,29] 
-            // Grid.SceneLayer.Background; =-1 //这个溢出
-            //InteriorWall  16
-            //BackWall  1
-            //Ground = 29,
-        })
-            {
-                if (gameObject != null)
-                {
-                    UnityEngine.Object.Destroy(gameObject);
-                    /*    World.Instance.groundRenderer;
-                        SaveGame.Instance.get;
-                        Grid.Spawnable;*/
-                }
-            }
-            // World.Instance.zoneRenderData.GetSubWorldZoneType(cell) == SubWorld.ZoneType.Space;
-            // World.Instance.zoneRenderData;
-            if (ElementLoader.elements[(int)Grid.ElementIdx[cell]].id == SimHashes.Void)
-            {
-                SimMessages.ReplaceElement(cell, SimHashes.Void, null, 0f, 0f, byte.MaxValue, 0, -1);
-                return;
-            }
-            SimMessages.ReplaceElement(cell, SimHashes.Vacuum, null, 0f, 0f, byte.MaxValue, 0, -1);
-        }
+       
     }
 }

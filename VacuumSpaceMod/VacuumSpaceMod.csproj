@@ -65,6 +65,7 @@
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
     <None Include="resource\templates\VacuumSpaceMod.yaml" />
+    <None Include="resource\translations\zh.po" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\anim\assets\bomb_build\bomb_build.png" />

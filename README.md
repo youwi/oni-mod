@@ -13,6 +13,10 @@
 	真空变太空
 	粒子满了以自动发陨石
 
+## 翻译
+PoissonDisk 不规则圆区?
+	CreateChore
+
 # 脚本
 
 设置环境 :ONI_MOD_LOCAL  D:\Klei\OxygenNotIncluded\mods\local
@@ -49,10 +53,10 @@ kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 
 
 ```
-printing_pre
-printing_loop
-printing_pst
-idle
-off
-place
-ui
+	printing_pre
+	printing_loop
+	printing_pst
+	idle
+	off
+	place
+	ui
