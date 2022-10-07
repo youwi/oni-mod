@@ -108,7 +108,7 @@ namespace VacuumSpaceMod
         public static void Prefix()
         {
             Console.WriteLine("OnActiveWorldChanged:测试标记所有为太空:markCellToSpace");
-            // markCellToSpace();
+            //markCellToSpace();
         }
         public static void markAllCellToSpace()
         {
@@ -121,6 +121,22 @@ namespace VacuumSpaceMod
 
                 //强制修改所有地为太空背景.  Space为7
                 overworldCell.zoneType = SubWorld.ZoneType.Space;
+            }
+        }
+        /**
+         * 
+         * 不切割直接标记为太空背景.
+         */
+        public static void markCellToSpaceAnyway(Vector2 pos)
+        {
+            WorldDetailSave clusterDetailSave = SaveLoader.Instance.clusterDetailSave;
+
+            for (int i = 0; i < clusterDetailSave.overworldCells.Count; i++)
+            {
+                if (clusterDetailSave.overworldCells[i].poly.Contains(pos))
+                {
+                     clusterDetailSave.overworldCells[i].zoneType = SubWorld.ZoneType.Space;
+                }
             }
         }
         public static void markCellToSpace(Vector3 pos)
@@ -154,7 +170,8 @@ namespace VacuumSpaceMod
             }
             if (overworldCell.poly.Vertices.Count == 3)
             {
-                Console.WriteLine("markCellToSpace已经切分为三角形了,不处理.");
+                Console.WriteLine("markCellToSpace已经切分为三角形了,直接标记为太空");
+                markCellToSpaceAnyway(pos);
                 return;//如果已经是三角形了,也不处理了.
             }
             if (overworldCell != null)
@@ -280,6 +297,56 @@ namespace VacuumSpaceMod
                 polynew.Add(bPoint);
 
                 result[i]=polynew;
+                ;
+            }
+
+            return result;
+        }
+        /**
+         * 取中心点切割成一个十字块.
+         * 剩下的点切为多边形.采用挖空中间的形状
+         * 
+         */
+        public static Polygon[] splitPolygon4(Polygon src)
+        {
+            int blockSize = 20;//中间的洞大小
+            if (src.Vertices.Count == 3)
+            {
+                return new Polygon[1] { src };
+                //三角形不能再切了
+            }
+            Polygon[] result = new Polygon[src.Vertices.Count];
+            var centerPoint = PloyUT.GetCenterOfGravityPoint(src.Vertices);
+
+            var blockCenter=new Polygon();
+            blockCenter.Clip
+            blockCenter.Add(new Vector2(centerPoint.x + blockSize, centerPoint.y + blockSize));
+            blockCenter.Add(new Vector2(centerPoint.x + blockSize, centerPoint.y - blockSize));
+            blockCenter.Add(new Vector2(centerPoint.x - blockSize, centerPoint.y - blockSize));
+            blockCenter.Add(new Vector2(centerPoint.x - blockSize, centerPoint.y + blockSize));
+
+
+            for (int i = 0; i < src.Vertices.Count; i++)
+            {
+
+                //  List<Vector2> listnew = new List<Vector2>();
+                Polygon polynew = new Polygon();
+                Vector2 aPoint = src.Vertices[i];
+                Vector2 bPoint;
+                if (i + 1 == src.Vertices.Count)
+                {
+                    bPoint = src.Vertices[0];
+                }
+                else
+                {
+                    bPoint = src.Vertices[i + 1];
+                }
+
+                polynew.Add(centerPoint);//生成三形.
+                polynew.Add(aPoint);
+                polynew.Add(bPoint);
+
+                result[i] = polynew;
                 ;
             }
 
