@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleporterBuildingMod", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceMod", "VacuumSpaceMod\VacuumSpaceMod.csproj", "{084191CF-9A65-448D-ADE8-9AD89593CAE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceModTests", "VacuumSpaceModTests\VacuumSpaceModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{084191CF-9A65-448D-ADE8-9AD89593CAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{084191CF-9A65-448D-ADE8-9AD89593CAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{084191CF-9A65-448D-ADE8-9AD89593CAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
