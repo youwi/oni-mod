@@ -11,15 +11,16 @@ using ProcGen;
 using UnityEngine;
 using static Klei.WorldDetailSave;
 using static ProcGen.SubWorld;
+using static STRINGS.UI.CLUSTERMAP;
 
 namespace VacuumSpaceMod
 {
 
 
     [HarmonyPatch(typeof(BuildingComplete), "OnSpawn")]
-    public static class BuildingComplete_OnSpawn_Patch
+    public  class BuildingComplete_OnSpawn_Patch
     {
-
+      
         public static void Postfix(BuildingComplete __instance)
         {
             GameObject go = __instance.gameObject;
@@ -37,6 +38,18 @@ namespace VacuumSpaceMod
                 try
                 {
                     DebugViewClassPath.markCellToSpace(pos);
+                    DebugViewClassPath.dig40Grid(pos);
+                    Notification notification = new Notification("Need Rstart Game[需要重启游戏]", NotificationType.Bad,
+                        (List<Notification> n, object d) => "over", null, true, 0f, null, null, null, false, false)
+                    {
+                        clearOnClick = true
+                    };
+                   
+                    Notifier notifier = World.Instance.gameObject.AddComponent<Notifier>();
+                    if (notifier != null)
+                    {
+                        notifier.Add(notification);
+                    }
 
                 }
                 catch (Exception ex)
@@ -107,8 +120,8 @@ namespace VacuumSpaceMod
         }*/
         public static void Prefix()
         {
-            Console.WriteLine("OnActiveWorldChanged:测试标记所有为太空:markCellToSpace");
-            //markCellToSpace();
+            Console.WriteLine("OnActiveWorldChanged:切换了星球视角:");
+            //markAllCellToSpace();
         }
         public static void markAllCellToSpace()
         {
@@ -135,7 +148,7 @@ namespace VacuumSpaceMod
             {
                 if (clusterDetailSave.overworldCells[i].poly.Contains(pos))
                 {
-                     clusterDetailSave.overworldCells[i].zoneType = SubWorld.ZoneType.Space;
+                    clusterDetailSave.overworldCells[i].zoneType = SubWorld.ZoneType.Space;
                 }
             }
         }
@@ -146,37 +159,40 @@ namespace VacuumSpaceMod
             int currentCell = Grid.PosToCell(pos);
 
             int markId = 0;
-            WorldDetailSave.OverworldCell overworldCell = null;
-            bool markFindOne=false;
+            WorldDetailSave.OverworldCell fmarkCellBlock = null;
+            bool markFindOne = false;
 
             for (int i = 0; i < clusterDetailSave.overworldCells.Count; i++)
             {
                 if (clusterDetailSave.overworldCells[i].poly.Contains(pos))
                 {
-                    overworldCell=clusterDetailSave.overworldCells[i];  
+                    fmarkCellBlock = clusterDetailSave.overworldCells[i];
                     markId = i;
                     break;
                 }
             }
-            if (overworldCell == null)
+            if (fmarkCellBlock == null)
             {
                 Console.WriteLine("markCellToSpace没有找到背景单元格");
                 return;
             }
-            if (overworldCell.zoneType == SubWorld.ZoneType.Space)
+            
+
+            if (fmarkCellBlock.zoneType == SubWorld.ZoneType.Space)
             {
                 Console.WriteLine("markCellToSpace已经是太空背景了");
                 return;//如果已经是太空背景就返回了.不做
             }
-            if (overworldCell.poly.Vertices.Count == 3)
+            if (fmarkCellBlock.poly.Vertices.Count == 3)
             {
                 Console.WriteLine("markCellToSpace已经切分为三角形了,直接标记为太空");
                 markCellToSpaceAnyway(pos);
+
                 return;//如果已经是三角形了,也不处理了.
             }
-            if (overworldCell != null)
+            if (fmarkCellBlock != null)
             {
-                var list=splitOverworldCell(overworldCell);
+                var list = splitOverworldCell(fmarkCellBlock);
                 Console.WriteLine("切分多边形数量:" + list.Count);
 
                 //list.Last().zoneType = SubWorld.ZoneType.Space;//设置最后一个区域为太空背景.
@@ -185,7 +201,17 @@ namespace VacuumSpaceMod
                     if (list[i].poly.Contains(pos))
                     {
                         list[i].zoneType = SubWorld.ZoneType.Space;
-                        markFindOne=true;
+                        markFindOne = true;
+                      //  digBlockByPos(list[i]);
+                    }
+                }//以下是方案二:
+                for (int i = 0; i < clusterDetailSave.overworldCells.Count; i++)
+                {
+                    WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[i];
+
+                    if (isInBlock(overworldCell, pos))
+                    {
+                        markFindOne = true;
                     }
                 }
 
@@ -196,56 +222,95 @@ namespace VacuumSpaceMod
                 }
                 //删除原多边形
                 Console.WriteLine("原区块数量:" + clusterDetailSave.overworldCells.Count);
-                var succ = clusterDetailSave.overworldCells.Remove(overworldCell);
-                Console.WriteLine("删除原多边形:"+succ);
+                var succ = clusterDetailSave.overworldCells.Remove(fmarkCellBlock);
+                Console.WriteLine("删除原多边形:" + succ);
                 //添加新的多边形.
                 list.ForEach(item => clusterDetailSave.overworldCells.Add(item));
                 Console.WriteLine("新区块数量:" + clusterDetailSave.overworldCells.Count);
+                // YellowAlertManager.Instance.
+                // Game.Instance.Trigger();
+                //
+
+
+                /*
+
+
+                 */
+                /*
+                if (block <= clusterDetailSave.overworldCells.Count)
+                {
+                    WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[block];
+                    //  Space为7
+                    overworldCell.zoneType = SubWorld.ZoneType.Space;
+                    Console.WriteLine("测试标记为太空:markCellToSpace:" + cell+"/"+ clusterDetailSave.overworldCells.Count);
+
+                }*/
+            }
+        }
+        public static bool isInBlock(WorldDetailSave.OverworldCell block, Vector2 pos)
+        {
+
+            Vector2 zero = Vector2.zero;
+            int currentCell = Grid.PosToCell(pos);
+
+
+            Polygon poly = block.poly;
+            zero.y = (float)((int)Mathf.Floor(poly.bounds.yMin));
+            while (zero.y < Mathf.Ceil(poly.bounds.yMax))
+            {
+                zero.x = (float)((int)Mathf.Floor(poly.bounds.xMin));
+                while (zero.x < Mathf.Ceil(poly.bounds.xMax))
+                {
+                    if (poly.Contains(zero))
+                    {
+                        int num = Grid.XYToCell((int)zero.x, (int)zero.y);
+                        if (Grid.IsValidCell(num))
+                        {
+                            //遍历找区块,找到就标记为太空.
+                            if (num == currentCell)
+                            {
+                                block.zoneType = SubWorld.ZoneType.Space;
+                                return true;
+                            }
+
+                        }
+                    }
+                    zero.x += 1f;
+                }
+                zero.y += 1f;
+            }
+            return false;
+
+        }
+        public static void dig40Grid(Vector2 pos)
+        {
+            int cell = Grid.PosToCell(pos);
+            int digSize = 8;
+            System.Random rnd = new System.Random();
+            
+     
+            for (int i = -digSize; i < digSize ; i++)
+            {
+                for(int j = -digSize; j < digSize ; j++)
+                {
+                    int pcell = cell + Grid.WidthInCells*i+j;
+                    pcell += rnd.Next(-2, 2);
+                    if (pcell>0)
+                        SimMessages.Dig(pcell, -1, false);//.
+                }
             }
 
-            /*
-                          Vector2 zero = Vector2.zero;
+        }
+        public static void digBlockByPos(WorldDetailSave.OverworldCell block)
+        {
 
-                        for (int i = 0; i < clusterDetailSave.overworldCells.Count; i++)
-                        {
-                            WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[i];
-                            Polygon poly = overworldCell.poly;
-                            zero.y = (float)((int)Mathf.Floor(poly.bounds.yMin));
-                            while (zero.y < Mathf.Ceil(poly.bounds.yMax))
-                            {
-                                zero.x = (float)((int)Mathf.Floor(poly.bounds.xMin));
-                                while (zero.x < Mathf.Ceil(poly.bounds.xMax))
-                                {
-                                    if (poly.Contains(zero))
-                                    {
-                                        int num = Grid.XYToCell((int)zero.x, (int)zero.y);
-                                        if (Grid.IsValidCell(num))
-                                        {
-                                            //遍历找区块,找到就标记为太空.
-                                            if (num==currentCell)
-                                            {
-                                                Console.WriteLine("测试标记为太空:for/while : " + currentCell  );
-                                                overworldCell.zoneType = SubWorld.ZoneType.Space;
-                                                //分割区块.
-
-                                            }
-
-                                        }
-                                    }
-                                    zero.x += 1f;
-                                }
-                                zero.y += 1f;
-                            }
-                        }*/
-            /*
-            if (block <= clusterDetailSave.overworldCells.Count)
+            string msg = "";
+            block.poly.Vertices.ForEach(v =>
             {
-                WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[block];
-                //  Space为7
-                overworldCell.zoneType = SubWorld.ZoneType.Space;
-                Console.WriteLine("测试标记为太空:markCellToSpace:" + cell+"/"+ clusterDetailSave.overworldCells.Count);
-
-            }*/
+                msg += Grid.PosToCell(v) + ",";
+                SimMessages.Dig(Grid.PosToCell(v), -1, false);//.
+            });
+            Console.WriteLine("挖掉所有物质:" + msg);
         }
         /**
          * 按中线生成多边形. 6边形切成7份. 5边形切成6份.
@@ -268,21 +333,21 @@ namespace VacuumSpaceMod
         */
         public static Polygon[] splitPolygon3(Polygon src)
         {
-       
-            if(src.Vertices.Count == 3)
+
+            if (src.Vertices.Count == 3)
             {
-                return new Polygon[1] { src};
+                return new Polygon[1] { src };
                 //三角形不能再切了
             }
             Polygon[] result = new Polygon[src.Vertices.Count];
-            var centerPoint= PolyUT.GetCenterOfGravityPoint(src.Vertices);
-            for(int i = 0; i < src.Vertices.Count; i++)
+            var centerPoint = PolyUT.GetCenterOfGravityPoint(src.Vertices);
+            for (int i = 0; i < src.Vertices.Count; i++)
             {
-                
+
                 //  List<Vector2> listnew = new List<Vector2>();
                 Polygon polynew = new Polygon();
                 Vector2 aPoint = src.Vertices[i];
-                Vector2 bPoint ;
+                Vector2 bPoint;
                 if (i + 1 == src.Vertices.Count)
                 {
                     bPoint = src.Vertices[0];
@@ -296,7 +361,7 @@ namespace VacuumSpaceMod
                 polynew.Add(aPoint);
                 polynew.Add(bPoint);
 
-                result[i]=polynew;
+                result[i] = polynew;
                 ;
             }
 
@@ -318,8 +383,8 @@ namespace VacuumSpaceMod
             Polygon[] result = new Polygon[src.Vertices.Count];
             var centerPoint = PolyUT.GetCenterOfGravityPoint(src.Vertices);
 
-            var blockCenter=new Polygon();
-          //  blockCenter.Clip 
+            var blockCenter = new Polygon();
+            //  blockCenter.Clip 
             blockCenter.Add(new Vector2(centerPoint.x + blockSize, centerPoint.y + blockSize));
             blockCenter.Add(new Vector2(centerPoint.x + blockSize, centerPoint.y - blockSize));
             blockCenter.Add(new Vector2(centerPoint.x - blockSize, centerPoint.y - blockSize));
@@ -361,7 +426,8 @@ namespace VacuumSpaceMod
         {
             var outs = new List<WorldDetailSave.OverworldCell>();
             Polygon[] outPolys = splitPolygon3(oriCell.poly);
-            for(int i = 0; i < outPolys.Length; i++){
+            for (int i = 0; i < outPolys.Length; i++)
+            {
                 var outPoly = outPolys[i];//三角形是等分的
 
                 WorldDetailSave.OverworldCell cell = new WorldDetailSave.OverworldCell();
@@ -385,14 +451,18 @@ namespace VacuumSpaceMod
         {
             private static void Prefix()
             {
-                Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.DESC", "make bomb destory all" });
-                Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.EFFECT", "make bomb destory all" });
+                Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.DESC",
+                    "make bomb destory all 10x10 block. background will delete. need restart game." +
+                    "炸弹会删除背景,范围10x10 .需要重新加载才能看到效果,删除的背景是三角形" });
+                Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.EFFECT",
+                    "Bomb destory 10x10 ,backgroun will deleted\n" +
+                    "范围10x10,炸弹会删除背景," });
                 Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.VACUUMSPACEMOD.NAME", "SpaceBomb" });
-
 
                 ModUtil.AddBuildingToPlanScreen("Base", "VacuumSpaceMod");
             }
         }
 
     }
+
 }
