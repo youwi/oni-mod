@@ -60,3 +60,7 @@ kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 	off
 	place
 	ui
+
+## ClipperLib 
+使用这个库切割多边形,太麻烦不搞了.
+自带: Voronoi lib可以使用.

@@ -29,9 +29,9 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
 
              };
 
-            object value = PloyUT.GetCenterOfGravityPoint(mPoints);
+            object value = PolyUT.GetCenterOfGravityPoint(mPoints);
             Console.WriteLine(value);
-            Console.WriteLine(PloyUT.GetMaxY(mPoints));
+            Console.WriteLine(PolyUT.GetMaxY(mPoints));
 
         }
     }

@@ -275,7 +275,7 @@ namespace VacuumSpaceMod
                 //三角形不能再切了
             }
             Polygon[] result = new Polygon[src.Vertices.Count];
-            var centerPoint= PloyUT.GetCenterOfGravityPoint(src.Vertices);
+            var centerPoint= PolyUT.GetCenterOfGravityPoint(src.Vertices);
             for(int i = 0; i < src.Vertices.Count; i++)
             {
                 
@@ -316,10 +316,10 @@ namespace VacuumSpaceMod
                 //三角形不能再切了
             }
             Polygon[] result = new Polygon[src.Vertices.Count];
-            var centerPoint = PloyUT.GetCenterOfGravityPoint(src.Vertices);
+            var centerPoint = PolyUT.GetCenterOfGravityPoint(src.Vertices);
 
             var blockCenter=new Polygon();
-            blockCenter.Clip
+          //  blockCenter.Clip 
             blockCenter.Add(new Vector2(centerPoint.x + blockSize, centerPoint.y + blockSize));
             blockCenter.Add(new Vector2(centerPoint.x + blockSize, centerPoint.y - blockSize));
             blockCenter.Add(new Vector2(centerPoint.x - blockSize, centerPoint.y - blockSize));
