@@ -119,37 +119,47 @@ namespace VacuumSpaceMod
             Vector2 zero = Vector2.zero;
             int currentCell = Grid.PosToCell(pos);
 
+
             for (int i = 0; i < clusterDetailSave.overworldCells.Count; i++)
             {
-                WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[i];
-                Polygon poly = overworldCell.poly;
-                zero.y = (float)((int)Mathf.Floor(poly.bounds.yMin));
-                while (zero.y < Mathf.Ceil(poly.bounds.yMax))
+                if (clusterDetailSave.overworldCells[i].poly.Contains(pos))
                 {
-                    zero.x = (float)((int)Mathf.Floor(poly.bounds.xMin));
-                    while (zero.x < Mathf.Ceil(poly.bounds.xMax))
-                    {
-                        if (poly.Contains(zero))
-                        {
-                            int num = Grid.XYToCell((int)zero.x, (int)zero.y);
-                            if (Grid.IsValidCell(num))
-                            {
-                                //遍历找区块,找到就标记为太空.
-                                if (num==currentCell)
-                                {
-                                    Console.WriteLine("测试标记为太空:for/while : " + currentCell  );
-                                    overworldCell.zoneType = SubWorld.ZoneType.Space;
-                                    //分割区块.
-                                    break;
-                                }
-
-                            }
-                        }
-                        zero.x += 1f;
-                    }
-                    zero.y += 1f;
+                    clusterDetailSave.overworldCells[i].zoneType = SubWorld.ZoneType.Space;
+                    break;
                 }
             }
+            /*
+                        for (int i = 0; i < clusterDetailSave.overworldCells.Count; i++)
+                        {
+                            WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[i];
+                            Polygon poly = overworldCell.poly;
+                            zero.y = (float)((int)Mathf.Floor(poly.bounds.yMin));
+                            while (zero.y < Mathf.Ceil(poly.bounds.yMax))
+                            {
+                                zero.x = (float)((int)Mathf.Floor(poly.bounds.xMin));
+                                while (zero.x < Mathf.Ceil(poly.bounds.xMax))
+                                {
+                                    if (poly.Contains(zero))
+                                    {
+                                        int num = Grid.XYToCell((int)zero.x, (int)zero.y);
+                                        if (Grid.IsValidCell(num))
+                                        {
+                                            //遍历找区块,找到就标记为太空.
+                                            if (num==currentCell)
+                                            {
+                                                Console.WriteLine("测试标记为太空:for/while : " + currentCell  );
+                                                overworldCell.zoneType = SubWorld.ZoneType.Space;
+                                                //分割区块.
+
+                                            }
+
+                                        }
+                                    }
+                                    zero.x += 1f;
+                                }
+                                zero.y += 1f;
+                            }
+                        }*/
             /*
             if (block <= clusterDetailSave.overworldCells.Count)
             {
@@ -159,6 +169,14 @@ namespace VacuumSpaceMod
                 Console.WriteLine("测试标记为太空:markCellToSpace:" + cell+"/"+ clusterDetailSave.overworldCells.Count);
 
             }*/
+        }
+        public static Polygon[] splitPolygon5(Polygon src)
+        {
+            //多边形切割成多份.
+            Polygon[] result = new Polygon[4];
+            /*src.Vertices;
+            PolygonUtils;*/
+            return result;
         }
 
     }
