@@ -1,0 +1,16 @@
+name: STRINGS.WORLDS.TINYEMPTY.NAME
+description: STRINGS.WORLDS.TINYEMPTY.DESCRIPTION
+requiredDlcId: EXPANSION1_ID
+menuOrder: 102
+coordinatePrefix: DLC-E-C
+clusterCategory: 2
+disableStoryTraits: true
+
+numRings: 12
+startWorldIndex: 0 
+worldPlacements:
+- world: expansion1::worlds/DlcExample
+  locationType: StartWorld
+  allowedRings:
+    min: 0
+    max: 0

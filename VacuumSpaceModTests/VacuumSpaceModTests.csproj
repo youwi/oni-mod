@@ -69,11 +69,16 @@
   <ItemGroup>
     <Compile Include="GetCenterPointFunctionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleStarWorldModPatchTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj">
+      <Project>{B69904B6-0FD5-4AEC-BA34-03E305387E87}</Project>
+      <Name>SingleStarWorldMod</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj">
       <Project>{084191CF-9A65-448D-ADE8-9AD89593CAE5}</Project>
       <Name>VacuumSpaceMod</Name>

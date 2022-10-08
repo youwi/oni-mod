@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceMod", "VacuumSpa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceModTests", "VacuumSpaceModTests\VacuumSpaceModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleStarWorldMod", "SingleStarWorldMod\SingleStarWorldMod.csproj", "{B69904B6-0FD5-4AEC-BA34-03E305387E87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DEDD116-F90A-4350-8C93-B031C2F41F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

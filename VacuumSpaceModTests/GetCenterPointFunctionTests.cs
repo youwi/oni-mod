@@ -34,5 +34,11 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
             Console.WriteLine(PolyUT.GetMaxY(mPoints));
 
         }
+        [TestMethod()]
+        public void RandTest()
+        {
+            SeededRandom rnd = new SeededRandom(2123121);
+             Console.WriteLine( rnd.RandomRange(2, 5));
+        }
     }
 }

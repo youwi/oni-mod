@@ -8,6 +8,7 @@
 	https://code.ecool.dev/ONI-Mods/BuildableNaturalTile
 	https://bbs.3dmgame.com/thread-6226681-1-2.html
 	https://robophred.github.io/oni-duplicity/#/raw
+	https://steamcommunity.com/sharedfiles/filedetails/?id=1883272681
 
 ## TODO
 	真空变太空
@@ -64,7 +65,13 @@ kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 ## ClipperLib 
 使用这个库切割多边形,太麻烦不搞了.
 自带: Voronoi lib可以使用.
-
+PoissonDisk  6边形 圆盘
 
 Notification
 logical armsidescreen
+
+ 
+ 
+clusterCategory:1/2 小行星风格群 (经典和眼冒金星)
+ 
+ AssignClusterLocations 创建星图位置
