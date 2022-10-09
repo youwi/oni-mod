@@ -75,3 +75,7 @@ logical armsidescreen
 clusterCategory:1/2 小行星风格群 (经典和眼冒金星)
  
  AssignClusterLocations 创建星图位置
+
+ DistanceFromTag 这种Tag标记好像在生成世界时按结构走
+
+ WorldBorderThickness 生成的中子物质边界大小

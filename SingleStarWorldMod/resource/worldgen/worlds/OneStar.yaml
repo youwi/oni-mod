@@ -18,7 +18,7 @@ defaultsOverrides:
     OverworldDensityMax: 10
     DrawWorldBorder: true
     DrawWorldBorderForce: false
-    WorldBorderThickness: 1
+    WorldBorderThickness: 2
     WorldBorderRange: 0
 #    OverworldMinNodes: 1
 
@@ -40,8 +40,13 @@ subworldFiles:
   - name: subworlds/sandstone/SandstoneStart
   - name: subworlds/sandstone/Sandstone
   - name: subworlds/frozen/Frozen
+  - name: subworlds/marsh/HotMarsh
+  - name: subworlds/ocean/OceanHot
   - name: subworlds/onestar/OneStarSub
-
+  - name: subworlds/oil/OilPockets
+  - name: subworlds/jungle/Jungle
+  - name: subworlds/rust/RustWarm
+  - name: subworlds/forest/ForestHot
   
 unknownCellsAllowedSubworlds: 
   - tagcommand: Default
@@ -78,8 +83,33 @@ unknownCellsAllowedSubworlds:
       - subworlds/magma/Bottom
   - tagcommand: DistanceFromTag
     tag: AtSurface
-    minDistance: 3
-    maxDistance: 3
+    minDistance: 4
+    maxDistance: 4
     command: Replace
     subworldNames:
       - subworlds/onestar/OneStarSub
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 4
+    maxDistance: 4
+    command: Replace
+    subworldNames:
+      - subworlds/onestar/OneStarSub
+  - tagcommand: DistanceFromTag
+    tag: AtDepths
+    minDistance: 1
+    maxDistance: 1
+    command: Replace
+    subworldNames:
+      - subworlds/oil/OilPockets
+  - tagcommand: DistanceFromTag
+    tag: AtStart
+    minDistance: 5
+    maxDistance: 999
+    command: Replace
+    subworldNames:
+      - subworlds/marsh/HotMarsh
+      - subworlds/jungle/Jungle
+      - subworlds/ocean/OceanHot
+      - subworlds/rust/RustWarm
+      - subworlds/forest/ForestHot
