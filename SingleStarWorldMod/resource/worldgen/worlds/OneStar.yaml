@@ -1,9 +1,10 @@
+#
 name: STRINGS.WORLDS.TINYSURFACE.NAME
 description: STRINGS.WORLDS.TINYSURFACE.DESCRIPTION
 disableWorldTraits: false
 asteroidIcon: asteroid_swamp_rocket_kanim
 
-worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
+worldTraitScale: 0.12
 worldsize:
   X: 70
   Y: 100
@@ -17,23 +18,41 @@ defaultsOverrides:
     OverworldDensityMax: 10
     DrawWorldBorder: true
     DrawWorldBorderForce: false
-    WorldBorderThickness: 4
-    WorldBorderRange: 4
+    WorldBorderThickness: 1
+    WorldBorderRange: 0
 #    OverworldMinNodes: 1
-  startingWorldElements: [] # remove the algae check
 
-worldTraitRules: [] # Disable world traits
+
+fixedTraits:
+  - sunlightVeryVeryHigh
+  - cosmicRadiationHigh
+
 
 # List all the subworld files to load
+# List all the subworld files to load
+startSubworldName: subworlds/sandstone/SandstoneStart
+startingBaseTemplate: bases/sandstoneBase
+
+
 subworldFiles:
   - name: subworlds/space/Space
   - name: subworlds/space/SurfaceCrags
+  - name: subworlds/sandstone/SandstoneStart
+  - name: subworlds/sandstone/Sandstone
+  - name: subworlds/frozen/Frozen
+  - name: subworlds/onestar/OneStarSub
 
+  
 unknownCellsAllowedSubworlds: 
   - tagcommand: Default
     command: Replace
     subworldNames:
-      -  subworlds/space/Space
+      - subworlds/sandstone/Sandstone
+  - tagcommand: AtTag
+    tag: AtSurface
+    command: Replace
+    subworldNames:
+      - subworlds/space/Space
   - tagcommand: DistanceFromTag
     tag: AtSurface
     minDistance: 1
@@ -44,8 +63,23 @@ unknownCellsAllowedSubworlds:
   - tagcommand: DistanceFromTag
     tag: AtSurface
     minDistance: 2
-    maxDistance: 999
+    maxDistance: 2
     command: Replace
     subworldNames:
-      - subworlds/barren/BarrenGranite
-
+      - subworlds/frozen/Frozen
+      - subworlds/marsh/HotMarsh
+      - subworlds/jungle/Jungle
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 3
+    maxDistance: 3
+    command: Replace
+    subworldNames:
+      - subworlds/magma/Bottom
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 3
+    maxDistance: 3
+    command: Replace
+    subworldNames:
+      - subworlds/onestar/OneStarSub

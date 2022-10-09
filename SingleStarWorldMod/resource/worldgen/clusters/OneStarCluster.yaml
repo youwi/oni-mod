@@ -1,20 +1,22 @@
-#  
+# 
 name: STRINGS.WORLDS.TINYEMPTY.NAME
 description: STRINGS.WORLDS.TINYEMPTY.DESCRIPTION
 requiredDlcId: EXPANSION1_ID
-menuOrder: 1
-coordinatePrefix: TCL-E-C
-disableStoryTraits: true
+menuOrder: 0
+coordinatePrefix: OneStar
+
 clusterCategory: 1
-difficulty: 5
-numRings: 12
+disableStoryTraits: true
+
 startWorldIndex: 0
+
 worldPlacements:
-  - world: worlds/OneStar
-    locationType: StartWorld
-    allowedRings:
-      min: 0
-      max: 0
+- world: worlds/OneStar
+  locationType: StartWorld
+  allowedRings:
+    min: 0
+    max: 0
+
 poiPlacements:
   - pois:
       - HarvestableSpacePOI_GildedAsteroidField

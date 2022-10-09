@@ -1,0 +1,108 @@
+﻿
+
+
+worldTemplateRules:
+  - names:
+      - expansion1::geysers/molten_niobium
+    listRule: GuaranteeAll
+    priority: 98 # placed later than the mining room since this is easier to fit
+    allowedCellsFilter:
+      - command: Replace
+        subworldNames:
+          - expansion1::subworlds/niobium/NiobiumPatch
+
+worldTemplateRules:
+  - names:
+      - expansion1::poi/poi_module_interior
+    listRule: TryOne
+  - names:
+      - expansion1::poi/poi_ocean_geyser_saltwater
+      - expansion1::poi/dirty_slush
+      - expansion1::poi/molten_cobalt
+      - expansion1::poi/molten_tungsten_compact
+      - expansion1::poi/slush_salt_water
+      - expansion1::poi/liquid_sulfur
+      - expansion1::poi/molten_niobium
+      - expansion1::poi/molten_tungsten_exposed
+      - expansion1::poi/molten_aluminum
+      - expansion1::poi/molten_tungsten
+      - expansion1::poi/molten_tungsten_exposed_compact
+    listRule: GuaranteeAll
+
+    subworldTemplateRules:
+  - names:
+      - expansion1::poi/poi_module_interior
+    listRule: TryOne
+  - names:
+      - expansion1::poi/poi_ocean_geyser_saltwater
+      - expansion1::poi/dirty_slush
+      - expansion1::poi/molten_cobalt
+      - expansion1::poi/molten_tungsten_compact
+      - expansion1::poi/slush_salt_water
+      - expansion1::poi/liquid_sulfur
+      - expansion1::poi/molten_niobium
+      - expansion1::poi/molten_tungsten_exposed
+      - expansion1::poi/molten_aluminum
+      - expansion1::poi/molten_tungsten
+      - expansion1::poi/molten_tungsten_exposed_compact
+    listRule: GuaranteeAll
+    someCount: 3
+
+
+    subworldFiles:
+  - name: subworlds/space/Space
+  - name: expansion1::subworlds/space/SpaceWithNoBorder
+  - name: expansion1::subworlds/space/SpaceWithNoBorder
+  - name: subworlds/forest/ForestStart
+  - name: expansion1::subworlds/radioactive/med_Radioactive
+  - name: expansion1::subworlds/oil/OilSparse
+  - name: expansion1::subworlds/niobium/NiobiumPatch
+  - name: subworlds/onestar/OneStarSub
+
+
+  
+worldTemplateRules:
+  # Marsh
+  - names:
+      - poi/hotmarsh/geyser_steam
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [BoggyMarsh]
+  - names:
+      - poi/hotmarsh/geyser_methane
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [BoggyMarsh]
+  # Jungle
+  - names:
+      - poi/jungle/geyser_steam
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [ToxicJungle]
+  - names:
+      - poi/jungle/geyser_methane
+      - poi/jungle/geyser_chlorine
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [ToxicJungle]
+  # Frozen
+  - names:
+      - poi/frozen/heatsink_a
+      - poi/frozen/heatsink_b
+      - poi/frozen/heatsink_c
+      - poi/frozen/heatsink_d
+    listRule: GuaranteeSomeTryMore
+    someCount: 1
+    moreCount: 2
+    priority: 100 
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [FrozenWastes]

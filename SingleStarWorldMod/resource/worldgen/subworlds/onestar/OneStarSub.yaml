@@ -1,0 +1,52 @@
+# 这是修改
+biomeNoise: noise/Generic
+temperatureRange: VeryCold
+minChildCount: 1
+density:
+  min: 10
+  max: 20
+avoidRadius: 10.0
+sampleBehaviour: PoissonDisk
+biomes:
+  - name: biomes/Misc/Space
+    weight: 1
+  - name: biomes/Ocean/Basic
+    weight: 2
+    tags:
+      - Pacu
+      - Crab
+      - SeaLettuce
+      - SpiceVine
+      - SeaLettuceSeed
+      - SpiceVineSeed
+  - name: biomes/Jungle/Basic
+    weight: 1
+    tags:
+      - Glom
+      - Drecko
+      - SwampLily
+      - SpiceVine
+      - SpiceVineSeed
+      - LeafyPlant
+      - LeafyPlantSeed
+  - name: biomes/Jungle/Toxic
+    weight: 1
+    tags:
+      - Glom
+      - Drecko
+      - SwampLily
+      - SpiceVine
+      - SpiceVineSeed
+      - LeafyPlant
+      - LeafyPlantSeed
+features:
+  - type: features/forest/SmallLake
+  - type: expansion1::features/forest/OxyrockCave
+  - type: features/ocean/SaltCave
+  - type: features/ocean/DeepPool
+  - type: features/ocean/BleachLump
+tags:
+  - IgnoreCaveOverride
+
+
+zoneType: Space

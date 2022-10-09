@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace SingleStarWorldMod
 {
-    [HarmonyPatch(typeof(Cluster), "AssignClusterLocations")]
+    [HarmonyPatch(typeof(Cluster), nameof(Cluster.AssignClusterLocations))]
     public class SingleStarWorldModPatch
     {
         public static void Postfix(Cluster __instance)
@@ -39,7 +39,7 @@ namespace SingleStarWorldMod
                 SpaceMapPOIPlacement placement = allPlacements[i];
 
                 List<string> pois = new List<string>(placement.pois);
-                List<AxialI> allPoint=AxialUtil.GetAllPointsWithinRadius(AxialI.ZERO, placement.allowedRings.max);
+                List<AxialI> allPoint = AxialUtil.GetAllPointsWithinRadius(AxialI.ZERO, placement.allowedRings.max);
 
                 for (int j = 0; j < placement.numToSpawn && j < pois.Count; j++)
                 {
@@ -54,13 +54,13 @@ namespace SingleStarWorldMod
                        // int a = rnd.RandomRange(0, max);
                        // int b = rnd.RandomRange(0, max);
                        // location = new AxialI(a * rand1(), b * rand1());
-                        location = allPoint[rnd.RandomRange(0,allPoint.Count)];
+                        location = allPoint[rnd.RandomRange(0, allPoint.Count)];
 
 
                         loopCount++;
                         if (loopCount > 1000) break;
 
-                    } while (location == AxialI.ZERO 
+                    } while (location == AxialI.ZERO
                     || existLocations.Contains(location)
                     || AxialUtil.GetDistance(AxialI.ZERO, location) < min
 
@@ -96,6 +96,7 @@ namespace SingleStarWorldMod
 
             }
         }
-        //
+  
     }
-}
+
+  }
