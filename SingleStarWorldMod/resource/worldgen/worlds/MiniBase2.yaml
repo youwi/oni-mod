@@ -1,0 +1,40 @@
+name: STRINGS.WORLDS.TINYSURFACE.NAME
+description: STRINGS.WORLDS.TINYSURFACE.DESCRIPTION
+asteroidIcon: asteroid_swamp_rocket_kanim
+disableWorldTraits: true
+
+worldsize:
+  X: 128
+  Y: 128
+layoutMethod: PowerTree
+
+defaultsOverrides:
+  data:
+    OverworldMinNodes: 0
+
+# List all the subworld files to load
+subworldFiles:
+  - name: subworlds/sandstone/SandstoneStart
+  - name: subworlds/forest/Forest
+  - name: subworlds/space/Space
+
+startSubworldName: subworlds/sandstone/SandstoneStart
+startingBaseTemplate: bases/sandstoneBase
+
+seasons:
+  - MeteorShowers
+
+# Specify where subworlds can spawn. These rules are processed in order and their effects are cumulative.
+unknownCellsAllowedSubworlds: 
+  - tagcommand: Default
+    command: Replace
+    subworldNames:
+      - subworlds/sandstone/Sandstone
+  # Start extension
+  - tagcommand: DistanceFromTag
+    tag: AtStart
+    minDistance: 1
+    maxDistance: 999
+    command: Replace
+    subworldNames:
+      - subworlds/space/Space

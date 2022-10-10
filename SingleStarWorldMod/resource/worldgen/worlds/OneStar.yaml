@@ -22,16 +22,57 @@ defaultsOverrides:
     WorldBorderRange: 0
 #    OverworldMinNodes: 1
 
+worldTraitRules:  []  #关闭特性设置. 很容易崩溃
+storyTraits: []  # 故事特性强设为空
+#globalFeatures: []
+#additionalSubworldFiles: []
+#additionalUnknownCellFilters: []
+#additionalWorldTemplateRules: []
 
 fixedTraits:
   - sunlightVeryVeryHigh
   - cosmicRadiationHigh
 
-
+ 
 # List all the subworld files to load
 # List all the subworld files to load
 startSubworldName: subworlds/sandstone/SandstoneStart
 startingBaseTemplate: bases/sandstoneBase
+
+worldTemplateRules:
+  - names: 
+    - geysers/steam
+    - geysers/chlorine_gas
+    - geysers/methane
+    - geysers/filthy_water
+    - geysers/hot_hydrogen
+    - geysers/big_volcano
+    - expansion1::geysers/poi_ocean_geyser_saltwater
+    - expansion1::geysers/dirty_slush
+    - expansion1::geysers/molten_cobalt
+    - expansion1::geysers/molten_tungsten_compact
+    - expansion1::geysers/slush_salt_water
+    - expansion1::geysers/liquid_sulfur
+    - expansion1::geysers/molten_niobium
+    - expansion1::geysers/molten_tungsten_exposed
+    - expansion1::geysers/molten_aluminum
+    - expansion1::geysers/molten_tungsten
+    - expansion1::geysers/molten_tungsten_exposed_compact
+    listRule: TryOne
+    times: 5
+    allowDuplicates: true
+    priority: 10
+    allowedCellsFilter:
+      - command: Replace
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 2
+        maxDistance: 10
+      - command: ExceptWith
+        zoneTypes: [ Space ]
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning
 
 
 subworldFiles:
@@ -43,11 +84,14 @@ subworldFiles:
   - name: subworlds/marsh/HotMarsh
   - name: subworlds/ocean/OceanHot
   - name: subworlds/onestar/OneStarSub
+  - name: subworlds/onestar/OneStarPOI
   - name: subworlds/oil/OilPockets
   - name: subworlds/jungle/Jungle
   - name: subworlds/rust/RustWarm
   - name: subworlds/forest/ForestHot
-  
+
+
+
 unknownCellsAllowedSubworlds: 
   - tagcommand: Default
     command: Replace
@@ -103,9 +147,16 @@ unknownCellsAllowedSubworlds:
     subworldNames:
       - subworlds/oil/OilPockets
   - tagcommand: DistanceFromTag
+    tag: AtDepths
+    minDistance: 1
+    maxDistance: 1
+    command: Replace
+    subworldNames:
+      - subworlds/onestar/OneStarPOI
+  - tagcommand: DistanceFromTag
     tag: AtStart
-    minDistance: 5
-    maxDistance: 999
+    minDistance: 2
+    maxDistance: 2
     command: Replace
     subworldNames:
       - subworlds/marsh/HotMarsh

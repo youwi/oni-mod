@@ -16,17 +16,19 @@ worldTemplateRules:
       - expansion1::poi/poi_module_interior
     listRule: TryOne
   - names:
-      - expansion1::poi/poi_ocean_geyser_saltwater
-      - expansion1::poi/dirty_slush
-      - expansion1::poi/molten_cobalt
-      - expansion1::poi/molten_tungsten_compact
-      - expansion1::poi/slush_salt_water
-      - expansion1::poi/liquid_sulfur
-      - expansion1::poi/molten_niobium
-      - expansion1::poi/molten_tungsten_exposed
-      - expansion1::poi/molten_aluminum
-      - expansion1::poi/molten_tungsten
-      - expansion1::poi/molten_tungsten_exposed_compact
+        - geysers/salt_water
+      - geysers/hot_water
+      - expansion1::geysers/poi_ocean_geyser_saltwater
+      - expansion1::geysers/dirty_slush
+      - expansion1::geysers/molten_cobalt
+      - expansion1::geysers/molten_tungsten_compact
+      - expansion1::geysers/slush_salt_water
+      - expansion1::geysers/liquid_sulfur
+      - expansion1::geysers/molten_niobium
+      - expansion1::geysers/molten_tungsten_exposed
+      - expansion1::geysers/molten_aluminum
+      - expansion1::geysers/molten_tungsten
+      - expansion1::geysers/molten_tungsten_exposed_compact
     listRule: GuaranteeAll
 
     subworldTemplateRules:
@@ -60,6 +62,20 @@ worldTemplateRules:
   - name: subworlds/onestar/OneStarSub
 
 
+
+  subworldTemplateRules:
+  # Marsh
+  - names:
+      - poi/hotmarsh/geyser_steam
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Space]
+subworldTemplateRules:
+  - names:
+      - poi/sli_geyser
+    listRule: TryAll
   
 worldTemplateRules:
   # Marsh

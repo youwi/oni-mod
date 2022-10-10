@@ -1,0 +1,86 @@
+name: sli_gesyer
+info:
+  size:
+    X: 4
+    Y: 3
+  area: 12
+cells:
+- element: Unobtanium
+  mass: 20260
+  temperature: 1
+  location_x: -1
+  location_y: -1
+- element: Unobtanium
+  mass: 20260
+  temperature: 1
+  location_y: -1
+- element: Unobtanium
+  mass: 20260
+  temperature: 1
+  location_x: 1
+  location_y: -1
+- element: Unobtanium
+  mass: 20260
+  temperature: 1
+  location_x: 2
+  location_y: -1
+- element: DirtyWater
+  mass: 0.0364266932
+  temperature: 373.321869
+  diseaseName: FoodPoisoning
+  diseaseCount: 36
+  location_x: -1
+- element: DirtyWater
+  mass: 0.0741759315
+  temperature: 373.530273
+  diseaseName: FoodPoisoning
+  diseaseCount: 68
+- element: DirtyWater
+  mass: 0.0761008561
+  temperature: 374.349915
+  diseaseName: FoodPoisoning
+  diseaseCount: 76
+  location_x: 1
+- element: DirtyWater
+  mass: 0.0389678627
+  temperature: 374.833435
+  diseaseName: FoodPoisoning
+  diseaseCount: 38
+  location_x: 2
+- element: Water
+  mass: 0.0327778347
+  temperature: 374.027069
+  diseaseName: FoodPoisoning
+  diseaseCount: 3
+  location_x: -1
+  location_y: 1
+- element: Water
+  mass: 0.0662770271
+  temperature: 374.304565
+  diseaseName: FoodPoisoning
+  diseaseCount: 11
+  location_y: 1
+- element: Water
+  mass: 0.0385405496
+  temperature: 374.661072
+  diseaseName: FoodPoisoning
+  diseaseCount: 11
+  location_x: 1
+  location_y: 1
+- element: Steam
+  mass: 0.0225332007
+  temperature: 375.663818
+  location_x: 2
+  location_y: 1
+buildings: []
+pickupables: []
+elementalOres: []
+otherEntities:
+- id: GeyserGeneric_filthy_water
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  storage: []
+  type: Other
+  rottable: {}
+  amounts: []

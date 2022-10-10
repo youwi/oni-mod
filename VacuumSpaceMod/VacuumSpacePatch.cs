@@ -64,14 +64,7 @@ namespace VacuumSpaceMod
         /**
          * 使用模板来替换建筑.模板名放在模板目录下.
          */
-        public static void replaceBuilding(string templateName, int cell)
-        {
-            TemplateContainer template = TemplateCache.GetTemplate(templateName);
-            TemplateLoader.Stamp(template, Grid.CellToPos(cell), delegate
-            {
-                Console.WriteLine("替换打印了...");
-            });
-        }
+ 
         public static void DestroyCellWithBackground(int cell)
         {
             foreach (GameObject gameObject in new List<GameObject>

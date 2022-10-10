@@ -3,19 +3,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace VacuumSpaceMod.DebugViewClassPath.Tests
 {
-    [TestClass()]
-    public class GetCenterPointFunctionTests
+  [TestClass()]
+  public class GetCenterPointFunctionTests
+  {
+    [TestMethod()]
+    public void GetCenterOfGravityPointTest()
     {
-        [TestMethod()]
-        public void GetCenterOfGravityPointTest()
-        {
-            List<Vector2> mPoints = new List<Vector2>() {
+      List<Vector2> mPoints = new List<Vector2>() {
             new Vector2(135.18809509277344f, 205.34129333496094f),
             new Vector2(139.27040100097656f, 226.0731964111328f),
             new Vector2(133.2449951171875f, 236.0638885498047f),
@@ -29,16 +30,30 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
 
              };
 
-            object value = PolyUT.GetCenterOfGravityPoint(mPoints);
-            Console.WriteLine(value);
-            Console.WriteLine(PolyUT.GetMaxY(mPoints));
+      object value = PolyUT.GetCenterOfGravityPoint(mPoints);
+      Console.WriteLine(value);
+      Console.WriteLine(PolyUT.GetMaxY(mPoints));
 
-        }
-        [TestMethod()]
-        public void RandTest()
-        {
-            SeededRandom rnd = new SeededRandom(2123121);
-             Console.WriteLine( rnd.RandomRange(2, 5));
-        }
     }
+    [TestMethod()]
+    public void RandTest()
+    {
+      SeededRandom rnd = new SeededRandom(2123121);
+      Console.WriteLine(rnd.RandomRange(2, 5));
+    }
+
+    [TestMethod()]
+    public void sfssfTest()
+    {
+      // GeyserGenericConfig
+      FieldInfo[] fieldInfos = typeof(GeyserGenericConfig).GetFields();
+      for(int i=0; i<fieldInfos.Length; i++)
+      {
+        FieldInfo field = fieldInfos[i];
+        Console.WriteLine("- id: GeyserGeneric_{0}\r\n  element: Obsidian\r\n  temperature: 2000\r\n  units: 1\r\n  type: Other\n", field.GetValue(field.Name));
+
+      }
+      
+    }
+  }
 }
