@@ -1,0 +1,94 @@
+biomeNoise: noise/OilPockets
+temperatureRange: Hot
+minChildCount: 8
+density:
+  min: 10
+  max: 15
+avoidRadius: 10.0
+sampleBehaviour: PoissonDisk
+# WeightedBiome
+biomes:
+  - name: expansion1::biomes/Aquatic
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Barren
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Forest
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Frozen
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+
+  - name: expansion1::biomes/Metallic
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+
+  - name: expansion1::biomes/Radioactive
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+
+  - name: expansion1::biomes/Niobium
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Sedimentary
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Wasteland
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Swamp
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Moo
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+  - name: expansion1::biomes/Misc
+    weight: 1
+    tags:
+      # - OilEater
+    overrides:
+      massMultiplier: 50
+
+features:
+  #- type: features/oilpockets/Cavity
+  - type: features/oilpockets/CavityPond
+  - type: features/oilpockets/DiamondClump
+ 
+tags:
+  - IgnoreCaveOverride
+zoneType: Space

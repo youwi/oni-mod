@@ -19,16 +19,6 @@ biomes:
       - SpiceVine
       - SeaLettuceSeed
       - SpiceVineSeed
-  - name: biomes/Jungle/Basic
-    weight: 1
-    tags:
-      - Glom
-      - Drecko
-      - SwampLily
-      - SpiceVine
-      - SpiceVineSeed
-      - LeafyPlant
-      - LeafyPlantSeed
   - name: biomes/Jungle/Toxic
     weight: 1
     tags:
@@ -48,19 +38,18 @@ biomes:
       - CactusPlantSeed
       - EvilFlower
       - EvilFlowerSeed
-features:
-  - type: features/forest/SmallLake
-  - type: expansion1::features/forest/OxyrockCave
-  - type: features/ocean/SaltCave
-  - type: features/ocean/DeepPool
-  - type: features/ocean/BleachLump
-  - type: features/oilpockets/DiamondClump
+#features:
+#  - type: features/forest/SmallLake
+#  - type: expansion1::features/forest/OxyrockCave
+#  - type: features/ocean/SaltCave
+#  - type: features/ocean/BleachLump
+#  - type: features/oilpockets/DiamondClump
 
-subworldTemplateRules:
-  - names:
-      - poi/poi_oil_switchdoor
-      - poi/poi_oil_six_switch_door
-    listRule: TryAll
+#subworldTemplateRules:
+#  - names:
+#      - poi/poi_oil_switchdoor
+#      - poi/poi_oil_six_switch_door
+#    listRule: TryAll
 tags:
   - IgnoreCaveOverride
 

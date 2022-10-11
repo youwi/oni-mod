@@ -43,16 +43,40 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
     }
 
     [TestMethod()]
-    public void sfssfTest()
+    public void buildGeyserTest()
     {
       // GeyserGenericConfig
+      // 获取所有的泉
       FieldInfo[] fieldInfos = typeof(GeyserGenericConfig).GetFields();
-      for(int i=0; i<fieldInfos.Length; i++)
+      string outStr = "name: pure_geyser" +
+        "info:\n" +
+        "  size:\n" +
+        "    X: 6\n" +
+        "    Y: 7\n" +
+        "  min:\n" +
+        "    X: -2\n" +
+        "    Y: -3\n" +
+        "  area: 38\n" +
+        "cells: []\n" +
+        "buildings: []\n" +
+        "pickupables: []\n" +
+        "elementalOres: []\n" +
+        "otherEntities:\n";
+      for (int i=0; i<fieldInfos.Length; i++)
       {
         FieldInfo field = fieldInfos[i];
-        Console.WriteLine("- id: GeyserGeneric_{0}\r\n  element: Obsidian\r\n  temperature: 2000\r\n  units: 1\r\n  type: Other\n", field.GetValue(field.Name));
+        string value = (string)field.GetValue(field.Name);
+        if (value == "GeyserGeneric") continue;
+        outStr+=string.Format("\n"+
+          "- id: GeyserGeneric_{0}\n" +
+          "  element: Obsidian\n" +
+          "  temperature: 2000\n" +
+          "  units: 1\n" +
+          "  type: Other\n" +
+          "  location_x: {1}\n", value, i*2+1);
 
       }
+      Console.WriteLine(outStr);  
       
     }
   }

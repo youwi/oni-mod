@@ -41,9 +41,6 @@ namespace SingleStarWorldMod
       }
 
       //        TUNING.ROCKETRY.ROCKET_INTERIOR_SIZE = new Vector2I(32, 32);
-
-
-
       Console.WriteLine("修改了:模板名为: " + interiorTemplateName);
     }
 
@@ -139,6 +136,7 @@ namespace SingleStarWorldMod
       //worldTraitRules:  []  #关闭特性设置. 很容易崩溃
       var yaml = serializer.Serialize(trait);
       Console.WriteLine("trait: " + yaml);
+      //DistanceFromTag
 
       // Sim/Cell.SetValues(byte,single,single) 只是在加水bug
       //.DrawWorldBorder_Patch1(ProcGenGame.WorldGen,Sim/Cell[],Chunk,SeededRandom,System.Collections.Generic.HashSet`1<int>&,System.Collections.Generic.List`1<UnityEngine.RectInt>&,ProcGenGame.WorldGen/OfflineCallbackFunction)

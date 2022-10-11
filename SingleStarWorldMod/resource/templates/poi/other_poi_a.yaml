@@ -1,0 +1,56 @@
+# 一些其它POI要加入的东西
+# 神经机器, 时隙打开器,反嫡器,52B.
+name: pure_geyser
+info:
+  size:
+    X: 6
+    Y: 7
+  min:
+    X: -2
+    Y: -3
+  area: 38
+cells: []
+
+pickupables: []
+elementalOres: []
+otherEntities:
+- id: GeneShuffler   # 神经
+  element: Unobtanium
+  temperature: 294.149994
+  units: 1
+  type: Other
+
+- id: SapTree  # 树 
+  location_y: 7
+  element: Creature
+  temperature: 293
+  units: 1
+  type: Other
+  amounts:
+  - id: Temperature
+    value: 307.490082
+
+- id: TemporalTearOpener
+  location_y: 13
+  element: Unobtanium
+  temperature: 293.149994
+
+
+buildings: 
+- id: GravitasCreatureManipulator  # 故事POI,动物分析器
+  location_y: 19
+  element: Iron
+  temperature: 293.235565
+
+- id: MegaBrainTank  #故事POI,梦生成器
+  location_y: 25
+  location_x: -2
+  element: Steel
+  temperature: 294.796021
+  storage:
+  - id: Oxygen
+    element: Oxygen
+    units: 5
+    isOre: true
+    temperature: 273.594482
+    rottable: {}

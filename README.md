@@ -76,6 +76,20 @@ clusterCategory:1/2 小行星风格群 (经典和眼冒金星)
  
  AssignClusterLocations 创建星图位置
 
- DistanceFromTag 这种Tag标记好像在生成世界时按结构走
+ DistanceFromTag 这种Tag标记好像在生成世界时按结构走 在标记的相对位置生成
 
  WorldBorderThickness 生成的中子物质边界大小
+
+ TemplateRules: Tag命令和list对应. 
+ 位置坐标
+
+ StartMedium
+ StartFar
+ NearEdge
+ NearSurface
+ NearDepths 
+ AtStart   在开始区生成
+ AtSurface 在上层生成
+ AtDepths  在下层生成
+ AtEdge   在边缘生成(是区块边还是地图边不清)
+ 

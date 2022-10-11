@@ -1,0 +1,69 @@
+# 底层多个泉.这需要代码来实现
+# 直接用规则生成好像是随机的
+# 这个模板文件由代码加载,硬加载
+# 2格高的水泉 4格宽
+name: pure_geyser
+info:
+  size:
+    X: 6
+    Y: 7
+  min:
+    X: -2
+    Y: -3
+  area: 38
+cells: []
+buildings: []
+pickupables: []
+elementalOres: []
+otherEntities: 
+
+- id: GeyserGeneric_molten_tungsten
+  location_x: 1
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+
+- id: GeyserGeneric_molten_iron
+  location_x: 5
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_molten_copper
+  location_x: 9
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_small_volcano
+  location_x: 13
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_molten_cobalt
+  location_x: 17
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_molten_aluminum
+  location_x: 21
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_molten_gold
+  element: Katairite
+  temperature: 372.149994
+  location_x: 25
+  units: 1
+  type: Other
+
+- id: GeyserGeneric_molten_niobium
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 29

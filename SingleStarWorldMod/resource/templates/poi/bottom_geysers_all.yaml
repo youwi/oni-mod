@@ -1,0 +1,200 @@
+# 底层多个泉.这需要代码来实现
+# 直接用规则生成好像是随机的
+# 这个模板文件由代码加载,硬加载
+name: pure_geyser
+info:
+  size:
+    X: 6
+    Y: 7
+  min:
+    X: -2
+    Y: -3
+  area: 38
+cells: []
+buildings: []
+pickupables: []
+elementalOres: []
+otherEntities:
+- id: GeyserGeneric_filthy_water
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+  location_x: 1
+
+- id: GeyserGeneric_steam
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 3
+    
+- id: GeyserGeneric_hot_steam
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 5
+    
+- id: GeyserGeneric_hot_water
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 7
+    
+- id: GeyserGeneric_slush_water
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 9
+    
+- id: GeyserGeneric_filthy_water
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 11
+    
+- id: GeyserGeneric_slush_salt_water
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 13
+    
+- id: GeyserGeneric_salt_water
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 15
+    
+- id: GeyserGeneric_small_volcano
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 17
+    
+- id: GeyserGeneric_big_volcano
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 19
+    
+- id: GeyserGeneric_liquid_co2
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 21
+    
+- id: GeyserGeneric_hot_co2
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 23
+    
+- id: GeyserGeneric_hot_hydrogen
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 25
+    
+- id: GeyserGeneric_hot_po2
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 27
+    
+- id: GeyserGeneric_slimy_po2
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 29
+    
+- id: GeyserGeneric_chlorine_gas
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 31
+    
+- id: GeyserGeneric_methane
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 33
+    
+- id: GeyserGeneric_molten_copper
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 35
+    
+- id: GeyserGeneric_molten_iron
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 37
+    
+- id: GeyserGeneric_molten_gold
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 39
+    
+- id: GeyserGeneric_molten_aluminum
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 41
+    
+- id: GeyserGeneric_molten_tungsten
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 43
+    
+- id: GeyserGeneric_molten_niobium
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 45
+    
+- id: GeyserGeneric_molten_cobalt
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 47
+    
+- id: GeyserGeneric_oil_drip
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 49
+    
+- id: GeyserGeneric_liquid_sulfur
+  element: Obsidian
+  temperature: 2000
+  units: 1
+  type: Other
+  location_x: 51
+    
+    

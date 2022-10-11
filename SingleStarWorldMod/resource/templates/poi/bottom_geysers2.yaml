@@ -1,0 +1,56 @@
+# 底层多个泉.这需要代码来实现
+# 直接用规则生成好像是随机的
+# 这个模板文件由代码加载,硬加载
+name: pure_geyser
+info:
+  size:
+    X: 6
+    Y: 7
+  min:
+    X: -2
+    Y: -3
+  area: 38
+cells: []
+buildings: []
+pickupables: []
+elementalOres: []
+otherEntities:
+ 
+
+- id: GeyserGeneric_salt_water
+  location_x: 1
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_slush_salt_water
+  location_x: 7
+  element: Katairite
+  temperature: 263
+  units: 1
+  type: Other
+- id: GeyserGeneric_hot_water
+  location_x: 13
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_filthy_water
+  location_x: 18
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_liquid_sulfur
+  location_x: 23
+  element: Katairite
+  temperature: 372.149994
+  units: 1
+  type: Other
+- id: GeyserGeneric_slush_water
+  location_x: 28
+  element: Katairite
+  temperature: 263
+  units: 1
+  type: Other
+

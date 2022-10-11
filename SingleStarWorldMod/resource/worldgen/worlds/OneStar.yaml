@@ -1,13 +1,13 @@
-#
+# 复制文件有可能不成功
 name: STRINGS.WORLDS.TINYSURFACE.NAME
 description: STRINGS.WORLDS.TINYSURFACE.DESCRIPTION
-disableWorldTraits: false
+disableWorldTraits: true
 asteroidIcon: asteroid_swamp_rocket_kanim
 
 worldTraitScale: 0.12
 worldsize:
-  X: 70
-  Y: 100
+  X: 80
+  Y: 120
 layoutMethod: PowerTree
 
 defaultsOverrides:
@@ -30,137 +30,180 @@ storyTraits: []  # 故事特性强设为空
 #additionalWorldTemplateRules: []
 
 fixedTraits:
-  - sunlightVeryVeryHigh
-  - cosmicRadiationHigh
+  - sunlightVeryVeryHigh   #光照很高 9W
+  - cosmicRadiationVeryVeryHigh    #辐射高370
 
  
 # List all the subworld files to load
 # List all the subworld files to load
 startSubworldName: subworlds/sandstone/SandstoneStart
 startingBaseTemplate: bases/sandstoneBase
-
 worldTemplateRules:
   - names: 
-    - geysers/steam
-    - geysers/chlorine_gas
-    - geysers/methane
-    - geysers/filthy_water
-    - geysers/hot_hydrogen
-    - geysers/big_volcano
-    - expansion1::geysers/poi_ocean_geyser_saltwater
-    - expansion1::geysers/dirty_slush
-    - expansion1::geysers/molten_cobalt
-    - expansion1::geysers/molten_tungsten_compact
-    - expansion1::geysers/slush_salt_water
-    - expansion1::geysers/liquid_sulfur
-    - expansion1::geysers/molten_niobium
-    - expansion1::geysers/molten_tungsten_exposed
-    - expansion1::geysers/molten_aluminum
-    - expansion1::geysers/molten_tungsten
-    - expansion1::geysers/molten_tungsten_exposed_compact
+    - poi/poi_animal_plant
     listRule: TryOne
-    times: 5
-    allowDuplicates: true
+    times: 1
+    allowDuplicates: false
     priority: 10
     allowedCellsFilter:
       - command: Replace
         tagcommand: DistanceFromTag
-        tag: AtStart
-        minDistance: 2
-        maxDistance: 10
-      - command: ExceptWith
-        zoneTypes: [ Space ]
-      - command: ExceptWith
-        tagcommand: AtTag
-        tag: NoGlobalFeatureSpawning
+        tag: AtDepths
+        minDistance: 3
+        maxDistance: 3
+
+# 转由代码固定生成,代码能控制在什么具体位置
+#worldTemplateRules:
+#  - names: 
+#    - geysers/steam
+#    - geysers/chlorine_gas
+#    - geysers/methane
+#    - geysers/filthy_water
+#    - geysers/hot_hydrogen
+#    - geysers/small_volcano
+#    - geysers/slush_water
+#    - geysers/molten_copper    
+#    - geysers/molten_gold    
+#    - poi/pure_geyser
+#    - expansion1::geysers/slush_salt_water
+#    - expansion1::geysers/dirty_slush
+#    - expansion1::geysers/molten_cobalt
+#    - expansion1::geysers/slush_salt_water
+#    - expansion1::geysers/liquid_sulfur
+#    - expansion1::geysers/molten_niobium
+#    - expansion1::geysers/molten_aluminum
+#    - expansion1::geysers/molten_tungsten
+#    listRule: TryOne
+#    times: 10
+#    allowDuplicates: false
+#    priority: 10
+#    allowedCellsFilter:
+#      - command: Replace
+#        tagcommand: DistanceFromTag
+#        tag: AtStart
+#        minDistance: 2
+#        maxDistance: 10
+#      - command: ExceptWith
+#        zoneTypes: [ Space ]
+#      - command: ExceptWith
+#        tagcommand: AtTag
+#        tag: NoGlobalFeatureSpawning
 
 
 subworldFiles:
   - name: subworlds/space/Space
   - name: subworlds/space/SurfaceCrags
   - name: subworlds/sandstone/SandstoneStart
-  - name: subworlds/sandstone/Sandstone
-  - name: subworlds/frozen/Frozen
-  - name: subworlds/marsh/HotMarsh
-  - name: subworlds/ocean/OceanHot
   - name: subworlds/onestar/OneStarSub
-  - name: subworlds/onestar/OneStarPOI
-  - name: subworlds/oil/OilPockets
-  - name: subworlds/jungle/Jungle
-  - name: subworlds/rust/RustWarm
-  - name: subworlds/forest/ForestHot
+  #- name: subworlds/onestar/OneStarBiomes
+  - name: subworlds/sandstone/Sandstone
+  - name: subworlds/forest/ForestMiniWater
+  #- name: subworlds/frozen/Frozen
+  #- name: subworlds/marsh/HotMarsh
+  #- name: subworlds/ocean/OceanHot
 
-
+  #- name: subworlds/oil/OilPockets
+  #- name: subworlds/jungle/Jungle
+  #- name: subworlds/rust/RustWarm   盐区
+  #- name: subworlds/forest/ForestHot   森林区
+  - name: expansion1::subworlds/radioactive/Radioactive   #辐射区
+  #- name: expansion1::subworlds/aquatic/GraphiteCaves     #石墨区
+  #- name: expansion1::subworlds/forest/ForestMiniWaterCold
 
 unknownCellsAllowedSubworlds: 
-  - tagcommand: Default
-    command: Replace
-    subworldNames:
-      - subworlds/sandstone/Sandstone
-  - tagcommand: AtTag
-    tag: AtSurface
-    command: Replace
-    subworldNames:
-      - subworlds/space/Space
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 1
-    maxDistance: 1
-    command: Replace
-    subworldNames:
-      - subworlds/space/SurfaceCrags
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 2
-    maxDistance: 2
-    command: Replace
-    subworldNames:
-      - subworlds/frozen/Frozen
-      - subworlds/marsh/HotMarsh
-      - subworlds/jungle/Jungle
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 3
-    maxDistance: 3
-    command: Replace
-    subworldNames:
-      - subworlds/magma/Bottom
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 4
-    maxDistance: 4
-    command: Replace
-    subworldNames:
-      - subworlds/onestar/OneStarSub
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 4
-    maxDistance: 4
-    command: Replace
-    subworldNames:
-      - subworlds/onestar/OneStarSub
-  - tagcommand: DistanceFromTag
-    tag: AtDepths
-    minDistance: 1
-    maxDistance: 1
-    command: Replace
-    subworldNames:
-      - subworlds/oil/OilPockets
-  - tagcommand: DistanceFromTag
-    tag: AtDepths
-    minDistance: 1
-    maxDistance: 1
-    command: Replace
-    subworldNames:
-      - subworlds/onestar/OneStarPOI
-  - tagcommand: DistanceFromTag
-    tag: AtStart
-    minDistance: 2
-    maxDistance: 2
-    command: Replace
-    subworldNames:
-      - subworlds/marsh/HotMarsh
-      - subworlds/jungle/Jungle
-      - subworlds/ocean/OceanHot
-      - subworlds/rust/RustWarm
-      - subworlds/forest/ForestHot
+- tagcommand: Default
+  command: Replace
+  subworldNames:
+    - subworlds/forest/ForestMiniWater
+
+- tagcommand: AtTag
+  tag: AtSurface
+  command: Replace
+  subworldNames:
+    - subworlds/space/Space
+- tagcommand: DistanceFromTag
+  tag: AtSurface
+  minDistance: 1
+  maxDistance: 1
+  command: Replace
+  subworldNames:
+    - subworlds/space/SurfaceCrags
+
+- tagcommand: DistanceFromTag  #从地底生成真空地带
+  tag: AtDepths
+  command: Replace
+  minDistance: 1
+  maxDistance: 1
+  subworldNames:
+    - subworlds/onestar/OneStarSub
+
+- tagcommand: DistanceFromTag
+  tag: AtDepths
+  command: Replace
+  minDistance: 0
+  maxDistance: 0
+  subworldNames:
+    - expansion1::subworlds/radioactive/Radioactive
+
+#- tagcommand: DistanceFromTag
+#  tag: AtDepths  从地底生成
+#  command: Replace
+#  minDistance: 1
+#  maxDistance: 1
+#  subworldNames:
+#    - expansion1::subworlds/aquatic/GraphiteCaves
+
+#- tagcommand: DistanceFromTag
+#  tag: AtSurface
+#  minDistance: 1
+#  maxDistance: 1
+#  command: Replace
+#  subworldNames:
+#    - subworlds/space/SurfaceCrags
+
+#- tagcommand: DistanceFromTag
+#  tag: AtDepths
+#  minDistance: 2
+#  maxDistance: 2
+#  command: Replace
+#  subworldNames:
+#    - subworlds/frozen/Frozen
+#    - subworlds/marsh/HotMarsh
+#    - subworlds/jungle/Jungle
+#- tagcommand: DistanceFromTag
+#  tag: AtDepths
+#  minDistance: 1
+#  maxDistance: 3
+#  command: Replace
+#  subworldNames:
+#    - subworlds/magma/Bottom
+#- tagcommand: DistanceFromTag
+#  tag: AtDepths
+#  minDistance: 1
+#  maxDistance: 4
+#  command: Replace
+#  subworldNames:
+#    - subworlds/onestar/OneStarSub
+#- tagcommand: DistanceFromTag
+#  tag: AtDepths
+#  minDistance: 5
+#  maxDistance: 5
+#  command: Replace
+#  subworldNames:
+#    - subworlds/oil/OilPockets
+#- tagcommand: DistanceFromTag
+#  tag: AtDepths
+#  minDistance: 6
+#  maxDistance: 6
+#  command: Replace
+#  subworldNames:
+#    - subworlds/onestar/OneStarPOI
+#- tagcommand: DistanceFromTag
+#  tag: AtStart
+#  minDistance: 1
+#  maxDistance: 6
+#  command: Replace
+#  subworldNames:
+#    - subworlds/ocean/OceanHot
+#    - subworlds/rust/RustWarm
+#    - subworlds/forest/ForestHot

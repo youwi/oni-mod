@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemporalTearOpenerMod", "TemporalTearOpenerMod\TemporalTearOpenerMod.csproj", "{EA8165CA-1E72-47EA-AF47-9D692494B37C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestTreeMutantMod", "ForestTreeMutantMod\ForestTreeMutantMod.csproj", "{40349E3D-44E2-4004-8D85-627F2CCD3EAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestTreeMutateMod", "ForestTreeMutateMod\ForestTreeMutateMod.csproj", "{40349E3D-44E2-4004-8D85-627F2CCD3EAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarpConduitPartnerMod", "WarpConduitReceiverMod\WarpConduitPartnerMod.csproj", "{1F98832C-AB28-4CE7-AF9D-05C8D5365190}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceModTests", "VacuumSpaceModTests\VacuumSpaceModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleStarWorldMod", "SingleStarWorldMod\SingleStarWorldMod.csproj", "{B69904B6-0FD5-4AEC-BA34-03E305387E87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleMutateMod", "DoubleMutateMod\DoubleMutateMod.csproj", "{68646D03-FF3C-4BC0-AF34-F20D0FC98247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B69904B6-0FD5-4AEC-BA34-03E305387E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68646D03-FF3C-4BC0-AF34-F20D0FC98247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68646D03-FF3C-4BC0-AF34-F20D0FC98247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68646D03-FF3C-4BC0-AF34-F20D0FC98247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68646D03-FF3C-4BC0-AF34-F20D0FC98247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
