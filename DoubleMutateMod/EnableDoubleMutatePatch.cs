@@ -14,32 +14,46 @@ namespace DoubleMutantMod
     {
       try
       {
-        //添加一轮变异,按20%概率添加.
-        List<string> list = (List<string>)__instance.GetType().GetField("mutationIDs").GetValue(__instance);
-        if (list == null || list.Count > 1   || list.Count==0 || rand10() >3)
-        {//已经双重变异就不需要了.
-          return;
-        }
-        string newMutionId = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
-
-        if (list[0]== newMutionId)
-        {
-          return;
-
-        }
-        list.Add(newMutionId);
        
+        var field = __instance.GetType().GetField("mutationIDs");
+        List<string> list = null;
+        if (field != null)
+        {
+          list = (List<string>)field.GetValue(__instance);
+        }
+        if (list == null)
+        {
+          Console.WriteLine("变异listNull:" + list);
+          list= new List<string>();
+        }
+        if (list.Count > 2 )
+        {//已经双重变异就不需要了.
+          Console.WriteLine("变异已经大于2:"+list);
+          return;
+        }
+        //添加一轮变异,按20%概率添加.
+        if ( rand10() > 3)
+        {
+          Console.WriteLine("二次变异率为20%,变异未触发,:" + list);
+          return;
+        }
+        string name = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
+        list.Add(name);
+        string name2 = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
+        if(name!=name2)
+          list.Add(name2);//防止重复添加,如果重复了就当成一次变异
         __instance.SetSubSpecies(list);
-      }catch(Exception ex)
+      }
+      catch (Exception ex)
       {
-        Debug.LogException(ex);
+        Console.WriteLine(ex.Message);
       }
 
     }
     public static int rand10()
     {
       Random rand = new System.Random();
-      return rand.Next(1,10);
+      return rand.Next(1, 10);
     }
   }
 }
