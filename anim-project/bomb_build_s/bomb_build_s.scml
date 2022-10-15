@@ -2,7 +2,7 @@
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r7">
     <folder id="0">
         <file id="0" name="ui_0.png" width="115" height="115" pivot_x="0" pivot_y="1"/>
-        <file id="1" name="place_0.png" width="300" height="300" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="place_0.png" width="600" height="661" pivot_x="0" pivot_y="1"/>
         <file id="2" name="300_0.png" width="300" height="300" pivot_x="0" pivot_y="1"/>
     </folder>
     <entity id="0" name="bomb_build_s">
@@ -14,7 +14,7 @@
             </mainline>
             <timeline id="0" name="300_0">
                 <key id="0" spin="0">
-                    <object folder="0" file="2" x="-153" y="310"/>
+                    <object folder="0" file="2" x="-153" y="310" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -26,7 +26,7 @@
             </mainline>
             <timeline id="0" name="300_0_000">
                 <key id="0" spin="0">
-                    <object folder="0" file="2" x="-150" y="295"/>
+                    <object folder="0" file="2" x="-150" y="295" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -38,7 +38,7 @@
             </mainline>
             <timeline id="0" name="300_0_001">
                 <key id="0" spin="0">
-                    <object folder="0" file="2" x="-147" y="298"/>
+                    <object folder="0" file="2" x="-147" y="298" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -50,7 +50,7 @@
             </mainline>
             <timeline id="0" name="300_0_002">
                 <key id="0" spin="0">
-                    <object folder="0" file="2" x="-152" y="304"/>
+                    <object folder="0" file="2" x="-152" y="304" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -62,7 +62,7 @@
             </mainline>
             <timeline id="0" name="300_0_003">
                 <key id="0" spin="0">
-                    <object folder="0" file="2" x="-153" y="301"/>
+                    <object folder="0" file="2" x="-150" y="295" angle="0"/>
                 </key>
             </timeline>
         </animation>
@@ -74,7 +74,7 @@
             </mainline>
             <timeline id="0" name="place_0">
                 <key id="0" spin="0">
-                    <object folder="0" file="1" x="-151.041667" y="300" angle="0"/>
+                    <object folder="0" file="1" x="-298.041667" y="484" angle="0"/>
                 </key>
             </timeline>
         </animation>

@@ -67,6 +67,7 @@ kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 自带: Voronoi lib可以使用.
 PoissonDisk  6边形 圆盘
 
+通知消息
 Notification
 logical armsidescreen
 

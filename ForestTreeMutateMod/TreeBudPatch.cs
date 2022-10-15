@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using static Operational;
 
 namespace ForestTree
 {
@@ -34,6 +35,14 @@ namespace ForestTree
                 EntityTemplates.CollisionShape.CIRCLE, 0.3f, 0.3f, null, "", false),
             "ForestTree_preview", Assets.GetAnim("tree_kanim"),
             "place", 3, 3);
+            var mutations = gameObject.GetComponent<MutantPlant>();//获取变异属性
+            mutations.Analyze();
+            
+               
+            
+         
+        
+           
             //SeedProducer.ProductionType.Harvest//收获掉落
 
 
@@ -43,14 +52,14 @@ namespace ForestTree
             // Tree-->BuddingTrunk x6--TreeBudx6---TreeBranch
             //MutantPlant seedParent =  gameObject.GetComponentInParent<TreeBud>().GetComponentInParent<BuddingTrunk>().GetComponentInParent<MutantPlant>();
             //MutantPlant seedParent =  gameObject.FindComponent<TreeBud>().FindComponent<BuddingTrunk>().GetComponentInParent<MutantPlant>();
-         /*   MutantPlant seedParent = gameObject.GetComponentInParent<MutantPlant>();
+            /*   MutantPlant seedParent = gameObject.GetComponentInParent<MutantPlant>();
 
-            if (seedParent != null)
-            {
-                Console.WriteLine("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
-            }
+               if (seedParent != null)
+               {
+                   Console.WriteLine("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
+               }
 
-            MutantPlant seed = gameObject.GetComponent<MutantPlant>();*/
+               MutantPlant seed = gameObject.GetComponent<MutantPlant>();*/
 
             // seed.SpeciesID = component2.PrefabTag;//上级如果是种子的形态.
 
@@ -90,7 +99,7 @@ namespace ForestTree
         [HarmonyPatch("OnSpawn")]
         public static void Postfix(BuddingTrunk __instance)
         {
-            var gameObject = __instance.GetComponentInParent<MutantPlant>();
+           // var gameObject = __instance.GetComponentInParent<MutantPlant>();
             //Console.WriteLine("BuddingTrunk 测试变异信息：" + gameObject.SpeciesID); //结果是 ForestTree
             /*  __instance.AddTag(GameTags.MutatedSeed);
               __instance.FindOrAddComponent<MutantPlant>();*/
@@ -111,9 +120,23 @@ namespace ForestTree
             var mutantBranch = __instance.GetComponentInParent<MutantPlant>();
             // Console.WriteLine("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
             var mutantUp = __instance.buddingTrunk.Get().GetComponentInParent<MutantPlant>();
-
-            mutantUp.CopyMutationsTo(mutantBranch);
-            mutantBranch.ApplyMutations();
+            //防止多余的复制。在重新加载时可防止为负
+            if(mutantBranch.MutationIDs==null|| mutantBranch.MutationIDs.Count == 0)
+            {
+              
+             
+                mutantUp.CopyMutationsTo(mutantBranch);
+                PlantSubSpeciesCatalog.Instance.IdentifySubSpecies(mutantBranch.SubSpeciesID);
+                //  mutantBranch.Analyze();// 在上branch.Spwan上分析
+                //  mutantBranch.ApplyMutations();
+                mutantBranch.ApplyMutations();
+                var branchSelectable = __instance.GetComponentInParent<KSelectable>();
+                branchSelectable.SetName(
+                    "Tree"
+                    //mutantBranch.GetSubSpeciesInfo().GetNameWithMutations(component.PrefabTag.ProperName(), true, true)
+                    );
+            }
+           
             // GetComponent<KSelectable>().SetName(GetSubSpeciesInfo().GetNameWithMutations(component.PrefabTag.ProperName(), flag, flag2));
             // 可以手动更新名字“乔木（旺盛）”需要手动更新信息。这里太复杂了,不做.
         }
