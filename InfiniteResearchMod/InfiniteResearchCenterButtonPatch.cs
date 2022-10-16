@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using static InfiniteResearch.BUILDING.STATUSITEMS;
+using static LogicGateBase;
+using static Operational;
 
 namespace InfiniteResearch
 {
@@ -12,6 +15,7 @@ namespace InfiniteResearch
         static bool IsEndlessWorking(Workable instance) => instance.GetComponent<InfiniteModeToggleButton>().isInfiniteMode;
         protected override void UpdateState()
         {
+           
             if (researchCenter != null)
             {
                 var fun = researchCenter.GetType().GetMethod("UpdateWorkingState",
@@ -50,7 +54,7 @@ namespace InfiniteResearch
                 if (___chore != null && !IsEndlessWorking(__instance))
                 {
                     ___chore.Cancel("disable");//取消任务
-
+                    
                     if (___chore.driver != null)
                         ___chore.driver.StopChore();
                 }
@@ -75,26 +79,58 @@ namespace InfiniteResearch
             {
                 id = "RequireAttributeRange",
                 fn = delegate (ref Chore.Precondition.Context context, object data) {
+                   // Console.Write("Precondition....." + data);
                     return IsEndlessWorking(__instance);
                 },
                 description = DUPLICANTS.CHORES.PRECONDITIONS.REQUIRES_ATTRIBUTE_RANGE.DESCRIPTION
             };
             chore.AddPrecondition(precondition);
+          
             //修改内部变量
             AccessTools.Field(typeof(ResearchCenter), "chore").SetValue(__instance, chore);
             //  var op = new Operational();
             //  op.IsOperational = true;
             // op.IsActive = true;
             //op.SetActive(true);
+            
+             Operational op = (Operational)AccessTools.Field(typeof(ResearchCenter), "operational").GetValue(__instance);
+             
+             
+            op.SetFlag(ResearchCenter.ResearchSelectedFlag, true);//不生效.
+            op.Flags[ResearchCenter.ResearchSelectedFlag] = true;
+            AccessTools.Method(typeof(Operational), "UpdateOperational").Invoke(op, null);//需要更新状态.
+       
 
-            // Operational  op = (Operational)AccessTools.Field(typeof(ResearchCenter), "operational").GetValue(__instance);
-            // op.SetActive(true);
+            Dictionary<Flag, bool>.Enumerator enumerator = op.Flags.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                Flag tmp = enumerator.Current.Key;
+                Console.WriteLine("-->.Operational.Flags  :  " + tmp.Name+ enumerator.Current);
+            }
+        
+            var opP = AccessTools.Field(typeof(Operational), "IsOperational");
+            Console.WriteLine("Operational.IsOperational(反射)  :  " + opP);
+            var opM = AccessTools.Method(typeof(Operational), "IsOperational");
+            Console.WriteLine("Operational.IsOperational(方法)  :  " + opM);
+            Console.WriteLine("Operational.IsOperational  :  " + op.IsOperational);
 
-            // AccessTools.Field(typeof(Operational), "IsOperational").SetValue(op, true);
+             
 
-
-
-
+            // RequestDelivery();
+            //this.NotifyResearchCenters(GameHashes.ActiveResearchChanged, this.queuedTech);
+            __instance.GetComponent<KSelectable>().RemoveStatusItem(Db.Get().BuildingStatusItems.NoResearchSelected, false);
+            //__instance.GetComponent<KSelectable>().AddStatusItem(Db.Get().BuildingStatusItems.NoApplicableResearchSelected, null);
+             var requiresAttributeRange = new StatusItem("RequiresAttributeRange", "BUILDING", "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID)
+            {
+                resolveStringCallback = (string str, object obj) =>
+                {
+                    var minMax = ((int, int))obj;
+                    return str.Replace("{Attributes}", minMax.Item1 + " - " + minMax.Item2);
+                }
+            };
+            __instance.GetComponent<KSelectable>().AddStatusItem(requiresAttributeRange);
+            __instance.GetComponent<ManualDeliveryKG>().UpdateDeliveryState();
+           
             __instance.SetWorkTime(float.PositiveInfinity);
             return chore;
         }

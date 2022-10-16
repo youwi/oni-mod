@@ -53,9 +53,15 @@ namespace InfiniteResearch
         {
             static bool Prefix(ResearchCenter __instance, ref float __result)
             {
-                if (IsEndlessWorking(__instance))
+                if (IsEndlessWorking(__instance) && __instance.worker != null)
                 {
-                    __result = __instance.worker.GetComponent<AttributeLevels>().GetPercentComplete("Learning");
+               
+                    var fat = __instance.worker.GetComponent<AttributeLevels>();
+                    if (fat != null)
+                    {
+                        __result =fat.GetPercentComplete("Learning");
+                    }
+                    
                     return false;
                 }
                 return true;
@@ -101,7 +107,7 @@ namespace InfiniteResearch
         static class CreateChore_Patch { static void Postfix(ResearchCenter __instance, Chore __result)
             {
                 Console.WriteLine("CreateChore ...ModifyChore");
-                ModifyChore(__instance, __result, IsEndlessWorking);
+              //  ModifyChore(__instance, __result, IsEndlessWorking);
             } 
         }
 

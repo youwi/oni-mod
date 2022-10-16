@@ -62,19 +62,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buttons\InfiniteModeToggleButton.cs" />
-    <Compile Include="Buttons\InfiniteResearchCenterButtonPatch.cs" />
-    <Compile Include="Buttons\InfiniteTelescopeButton.cs" />
+    <Compile Include="InfiniteModeToggleButton.cs" />
+    <Compile Include="InfiniteResearchCenterButtonPatch.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="InfiniteResearch\InfiniteResearchCenterPatch.cs" />
-    <Compile Include="InfiniteResearch\InfiniteTelescope.cs" />
-    <Compile Include="InfiniteResearch\InfiniteWorkable.cs" />
+    <Compile Include="InfiniteResearchCenterPatch.cs" />
+    <Compile Include="InfiniteWorkable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Options.cs" />
     <Compile Include="Util\STRINGS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Previews\Preview.png" />
+    <Content Include="resource\Preview.png" />
+    <Content Include="resource\preview.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
