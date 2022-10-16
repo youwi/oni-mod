@@ -1,5 +1,6 @@
-﻿ 
+﻿
 using Database;
+using Epic.OnlineServices;
 using HarmonyLib;
 using Klei.AI;
 using System;
@@ -20,11 +21,11 @@ namespace InfiniteResearch
             public static void Postfix(ResearchCenter __instance, Chore ___chore)
             {
                 AccessTools.Method(typeof(InfiniteResearchCenterPatch), nameof(InfiniteResearchCenterPatch.IsEndlessWorking));
-                Console.WriteLine("UpdateWorkingState_patch: "+IsEndlessWorking(__instance));
+                Console.WriteLine("UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
                 // var button=__instance.GetComponent<InfiniteResearchCenterButton>();
                 // button.isInfiniteMode=true;
-              
-              
+
+
 
             }
 
@@ -45,8 +46,8 @@ namespace InfiniteResearch
                                         yield return i;
                                 }*/
 
-        
-    }
+
+        }
 
         [HarmonyPatch(typeof(ResearchCenter), nameof(ResearchCenter.GetPercentComplete))]
         static class ProgressBar_Patch
@@ -55,13 +56,15 @@ namespace InfiniteResearch
             {
                 if (IsEndlessWorking(__instance) && __instance.worker != null)
                 {
-               
+
                     var fat = __instance.worker.GetComponent<AttributeLevels>();
                     if (fat != null)
                     {
-                        __result =fat.GetPercentComplete("Learning");
+                        __result = fat.GetPercentComplete("Learning");
                     }
-                    
+
+
+
                     return false;
                 }
                 return true;
@@ -91,24 +94,73 @@ namespace InfiniteResearch
 
         // Not necessary for functionality, but prevents the log from spamming warnings about adding research points with no target.
         [HarmonyPatch(typeof(ResearchCenter), "ConvertMassToResearchPoints")]
-        static class PreventResearchPoints_Patch { static bool Prefix(ResearchCenter __instance) => !IsEndlessWorking(__instance); }
+        static class PreventResearchPoints_Patch
+        {
+            static bool Prefix(ResearchCenter __instance)
+            {
+                //ConvertMassToResearchPoints
+                if (IsEndlessWorking(__instance) && __instance.worker != null)
+                {
+
+                    var fat = __instance.worker.GetComponent<AttributeLevels>();
+/*                    var rnd=new System.Random();
+                    var tkid = rnd.Next(1, 11);
+                    switch (tkid)
+                    {
+                        case 0:
+                            fat.AddExperience("Construction", Options.ResearchCenterExpRate * 1f, 1f);
+                            break;
+                    }
+*/
+                    fat.AddExperience("Construction", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Digging", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Machinery", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Athletics", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Learning", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Cooking", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Art", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Strength", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Caring", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Botanist", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("Ranching", Options.ResearchCenterExpRate * 1f, 1f);
+                    fat.AddExperience("SpaceNavigation", Options.ResearchCenterExpRate * 1f, 1f);
+
+                    /* foreach(var ab in fat)
+                  {
+                      //fat.AddExperience( ab.attribute, 1f);//添加全局经验
+                      ab.AddExperience(fat, 1f);
+                  }*/
+                    /* fat.AddExperience(STRINGS.DUPLICANTS.ATTRIBUTES.CONSTRUCTION.NAME, 1f, 1f);
+                       fat.AddExperience(STRINGS.DUPLICANTS.ATTRIBUTES.DIGGING.NAME, 1f, 1f);
+                       fat.AddExperience(STRINGS.DUPLICANTS.ATTRIBUTES.DECOR.NAME, 1f, 1f);
+                       fat.AddExperience(STRINGS.DUPLICANTS.ATTRIBUTES.RANCHING.NAME, 1f, 1f);
+                    */
+
+                    return false;
+                }
+
+                return !IsEndlessWorking(__instance);
+            }
+        }
 
         [HarmonyPatch(typeof(ResearchCenter), nameof(ResearchCenter.Sim200ms))]
         static class Sim_Patch
         {
             static void Postfix(ResearchCenter __instance, Chore ___chore)
             {
-               
+
                 RemoveDupe(__instance, ___chore, IsEndlessWorking);
             }
         }
 
         [HarmonyPatch(typeof(ResearchCenter), "CreateChore")]
-        static class CreateChore_Patch { static void Postfix(ResearchCenter __instance, Chore __result)
+        static class CreateChore_Patch
+        {
+            static void Postfix(ResearchCenter __instance, Chore __result)
             {
                 Console.WriteLine("CreateChore ...ModifyChore");
-              //  ModifyChore(__instance, __result, IsEndlessWorking);
-            } 
+                //  ModifyChore(__instance, __result, IsEndlessWorking);
+            }
         }
 
         /*           public Func<Chore.Precondition.Context, bool> GetFunc()

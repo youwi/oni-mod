@@ -129,8 +129,10 @@ namespace InfiniteResearch
                 }
             };
             __instance.GetComponent<KSelectable>().AddStatusItem(requiresAttributeRange);
-            __instance.GetComponent<ManualDeliveryKG>().UpdateDeliveryState();
-           
+            var mkg = __instance.GetComponent<ManualDeliveryKG>();
+         
+           // mkg.choreTypeIDHash = Db.Get().ChoreTypes.Build.IdHash;//修改任务类型
+            mkg.UpdateDeliveryState();
             __instance.SetWorkTime(float.PositiveInfinity);
             return chore;
         }
