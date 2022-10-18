@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55ABDAF1-B224-4446-995B-FE26DCEF6E58}</ProjectGuid>
+    <ProjectGuid>{6DBF9F5D-E293-4B64-958D-8620183192B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InfiniteResearchMod</RootNamespace>
-    <AssemblyName>InfiniteResearchMod</AssemblyName>
+    <RootNamespace>DropArtifactsMod</RootNamespace>
+    <AssemblyName>DropArtifactsMod</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,9 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>F:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\0Harmony.dll</HintPath>
@@ -42,9 +39,6 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>F:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>F:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,23 +56,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InfiniteModeToggleButton.cs" />
-    <Compile Include="InfiniteResearchCenterButtonPatch.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="InfiniteResearchCenterPatch.cs" />
-    <Compile Include="InfiniteWorkable.cs" />
+    <Compile Include="DropArtifactsModPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\Options.cs" />
-    <Compile Include="Util\STRINGS.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="resource\preview3.png" />
-    <Content Include="resource\preview.png" />
-    <Content Include="resource\preview2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resource\preview.jpg" />
+    <Content Include="resource\scre.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleMutateMod", "DoubleMu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteResearchMod", "InfiniteResearchMod\InfiniteResearchMod.csproj", "{55ABDAF1-B224-4446-995B-FE26DCEF6E58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropArtifactsMod", "DropArtifactsMod\DropArtifactsMod.csproj", "{6DBF9F5D-E293-4B64-958D-8620183192B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{55ABDAF1-B224-4446-995B-FE26DCEF6E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55ABDAF1-B224-4446-995B-FE26DCEF6E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55ABDAF1-B224-4446-995B-FE26DCEF6E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBF9F5D-E293-4B64-958D-8620183192B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DBF9F5D-E293-4B64-958D-8620183192B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DBF9F5D-E293-4B64-958D-8620183192B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DBF9F5D-E293-4B64-958D-8620183192B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

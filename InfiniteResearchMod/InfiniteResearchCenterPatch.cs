@@ -13,7 +13,13 @@ namespace InfiniteResearch
 {
     class InfiniteResearchCenterPatch : InfiniteWorkable
     {
-        static bool IsEndlessWorking(Workable instance) => instance.GetComponent<InfiniteModeToggleButton>().isInfiniteMode;
+        static bool IsEndlessWorking(Workable instance)
+        {
+            var ins = instance.GetComponent<InfiniteModeToggleButton>();
+            if (ins != null)
+                return ins.isInfiniteMode;
+            return false;
+        }
 
         [HarmonyPatch(typeof(ResearchCenter), "UpdateWorkingState")]
         static class InfiniteResearch_Patch
@@ -103,27 +109,34 @@ namespace InfiniteResearch
                 {
 
                     var fat = __instance.worker.GetComponent<AttributeLevels>();
-/*                    var rnd=new System.Random();
-                    var tkid = rnd.Next(1, 11);
-                    switch (tkid)
-                    {
-                        case 0:
-                            fat.AddExperience("Construction", Options.ResearchCenterExpRate * 1f, 1f);
-                            break;
-                    }
-*/
-                    fat.AddExperience("Construction", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Digging", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Machinery", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Athletics", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Learning", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Cooking", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Art", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Strength", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Caring", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Botanist", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("Ranching", Options.ResearchCenterExpRate * 1f, 1f);
-                    fat.AddExperience("SpaceNavigation", Options.ResearchCenterExpRate * 1f, 1f);
+                    /*                    var rnd=new System.Random();
+                                        var tkid = rnd.Next(1, 11);
+                                        switch (tkid)
+                                        {
+                                            case 0:
+                                                fat.AddExperience("Construction", mul, 1f);
+                                                break;
+                                        }
+                    */
+                      
+                 
+                    // fat.GetAttributes().Get("Learning").Attribute.BaseValue;
+                    var level = fat.GetAttributeLevel("Learning").level;
+                    level++;
+                    Console.WriteLine("Learning level:  "+ level);
+                    var mul = Options.ResearchCenterExpRate * (level * 0.1f*5 +5);
+                    fat.AddExperience("Construction", mul, 1f);
+                    fat.AddExperience("Digging", mul, 1f);
+                    fat.AddExperience("Machinery", mul, 1f);
+                    fat.AddExperience("Athletics", mul, 1f);
+                    fat.AddExperience("Learning", mul, 1f);
+                    fat.AddExperience("Cooking", mul, 1f);
+                    fat.AddExperience("Art", mul, 1f);
+                    fat.AddExperience("Strength", mul, 1f);
+                    fat.AddExperience("Caring", mul, 1f);
+                    fat.AddExperience("Botanist", mul, 1f);
+                    fat.AddExperience("Ranching", mul, 1f);
+                    fat.AddExperience("SpaceNavigation", mul, 1f);
 
                     /* foreach(var ab in fat)
                   {

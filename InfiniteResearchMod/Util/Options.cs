@@ -106,20 +106,6 @@ namespace InfiniteResearch
 
             [SerializeField] public   float CosmicResearchCenterExpRate { get; set; } = 1;
         }
-        public Options()
-        {
-            ResearchCenterMin = 0;
-            ResearchCenterMax = 1;
-            ResearchCenterExpRate = TUNING.SKILLS.ALL_DAY_EXPERIENCE;
-            AdvancedResearchCenterMin = 2;
-            AdvancedResearchCenterMax = 7;
-            AdvancedResearchCenterExpRate = TUNING.SKILLS.ALL_DAY_EXPERIENCE;
-            TelescopeMin = 8;
-            TelescopeMax = 13;
-            TelescopeExpRate = TUNING.SKILLS.ALL_DAY_EXPERIENCE;
-            CosmicResearchCenterMin = 14;
-            CosmicResearchCenterMax = 19;
-            CosmicResearchCenterExpRate = TUNING.SKILLS.ALL_DAY_EXPERIENCE;
-        }
+  
     }
 }

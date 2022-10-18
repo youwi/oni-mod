@@ -12,7 +12,13 @@ namespace InfiniteResearch
     class InfiniteResearchCenterButtonPatch : InfiniteModeToggleButton
     {
         [MyCmpGet] ResearchCenter researchCenter;
-        static bool IsEndlessWorking(Workable instance) => instance.GetComponent<InfiniteModeToggleButton>().isInfiniteMode;
+        static bool IsEndlessWorking(Workable instance)
+        {
+            var ins = instance.GetComponent<InfiniteModeToggleButton>();
+            if (ins != null)
+                return ins.isInfiniteMode;
+            return false;
+        }
         protected override void UpdateState()
         {
            
