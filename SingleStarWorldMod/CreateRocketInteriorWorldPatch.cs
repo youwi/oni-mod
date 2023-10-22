@@ -124,24 +124,26 @@ namespace SingleStarWorldMod
         Console.WriteLine("ApplyTrait为空" + trait);
         return;
       }
-       
-      // var json = new JsonSerializer.Serialize(trait);
-      // var json = JsonSerializer.Serialize(trait);
-      // var json = JsonConvert.SerializeObject(trait);
-      // string jsonString = JsonSerializer.Serialize(weatherForecast);
+            // storyTraits 
+            // trait.
 
-      // jsetting.TypeNameHandling =;
-      var serializer = new SerializerBuilder()
-        .WithNamingConvention(new CamelCaseNamingConvention())
-        .Build();
-      //worldTraitRules:  []  #关闭特性设置. 很容易崩溃
-      //var yaml = serializer.Serialize(trait);
-      //Console.WriteLine("trait: " + yaml);
-      //DistanceFromTag
+            // var json = new JsonSerializer.Serialize(trait);
+            // var json = JsonSerializer.Serialize(trait);
+            // var json = JsonConvert.SerializeObject(trait);
+            // string jsonString = JsonSerializer.Serialize(weatherForecast);
 
-      // Sim/Cell.SetValues(byte,single,single) 只是在加水bug
-      //.DrawWorldBorder_Patch1(ProcGenGame.WorldGen,Sim/Cell[],Chunk,SeededRandom,System.Collections.Generic.HashSet`1<int>&,System.Collections.Generic.List`1<UnityEngine.RectInt>&,ProcGenGame.WorldGen/OfflineCallbackFunction)
+            // jsetting.TypeNameHandling =;
+             var serializer = new SerializerBuilder()
+              .WithNamingConvention(new CamelCaseNamingConvention())
+              .Build();
+            //worldTraitRules:  []  #关闭特性设置. 很容易崩溃
+            var yaml = serializer.Serialize(trait);
+            Console.WriteLine("trait: " + yaml);
+            //DistanceFromTag
+
+            // Sim/Cell.SetValues(byte,single,single) 只是在加水bug
+            //.DrawWorldBorder_Patch1(ProcGenGame.WorldGen,Sim/Cell[],Chunk,SeededRandom,System.Collections.Generic.HashSet`1<int>&,System.Collections.Generic.List`1<UnityEngine.RectInt>&,ProcGenGame.WorldGen/OfflineCallbackFunction)
+        }
     }
-  }
 }
 

@@ -20,7 +20,7 @@ otherEntities:
   units: 1
   type: Other
 
-- id: SapTree  # 树 
+- id: SapTree  # 52B树 
   location_y: 7
   element: Creature
   temperature: 293
@@ -30,21 +30,41 @@ otherEntities:
   - id: Temperature
     value: 307.490082
 
-- id: TemporalTearOpener
-  location_y: 13
+- id: TemporalTearOpener  # 时空裂口
+  location_y: 50
   element: Unobtanium
   temperature: 293.149994
+
+- id: FossilRock
+  location_x: -4
+  location_y: 40
+  element: Fossil
+  temperature: 315.103333
+  units: 1
+  type: Other
+- id: FossilResin
+  location_y: 40
+  element: Fossil
+  temperature: 315.001038
+  units: 1
+  type: Other
+- id: FossilIce
+  location_x: -2
+  location_y: 40
+  element: Fossil
+  temperature: 229.999207
+  units: 1
+  type: Other
 
 
 buildings: 
 - id: GravitasCreatureManipulator  # 故事POI,动物分析器
-  location_y: 19
+  location_y: 20
   element: Iron
   temperature: 293.235565
 
 - id: MegaBrainTank  #故事POI,梦生成器
   location_y: 25
-  location_x: -2
   element: Steel
   temperature: 294.796021
   storage:
@@ -54,3 +74,9 @@ buildings:
     isOre: true
     temperature: 273.594482
     rottable: {}
+
+- id: FossilDig
+  location_x: 4
+  location_y: 40
+  element: Fossil
+  temperature: 273.149994
