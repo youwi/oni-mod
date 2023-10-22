@@ -10,7 +10,7 @@ cells:
   temperature: 301.000427
   location_x: -10
   location_y: -6
-- element: SuperCoolant  #³¬¼¶Àä
+- element: SuperCoolant  #³¬¼¶Àä ËÍ4¶Ö
   mass: 43520
   temperature: 301.993408
   location_x: -9
@@ -25,13 +25,13 @@ cells:
   temperature: 302.000305
   location_x: -7
   location_y: -6
-- element: ViscoGel  # ½º
-  mass: 1026.16895
+- element: ViscoGel  # Äý½º10¶Ö
+  mass: 9026.16895
   temperature: 302.065582
   location_x: -6
   location_y: -6
-- element: Algae
-  mass: 5026.16895
+- element: Algae   # Ìí¼Ó´óÐ¡Îª15¶Ö
+  mass: 15026.16895
   temperature: 302.091125
   location_x: -5
   location_y: -6
