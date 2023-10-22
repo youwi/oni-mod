@@ -124,6 +124,7 @@ namespace SingleStarWorldMod
         Console.WriteLine("ApplyTrait为空" + trait);
         return;
       }
+       
       // var json = new JsonSerializer.Serialize(trait);
       // var json = JsonSerializer.Serialize(trait);
       // var json = JsonConvert.SerializeObject(trait);
@@ -134,8 +135,8 @@ namespace SingleStarWorldMod
         .WithNamingConvention(new CamelCaseNamingConvention())
         .Build();
       //worldTraitRules:  []  #关闭特性设置. 很容易崩溃
-      var yaml = serializer.Serialize(trait);
-      Console.WriteLine("trait: " + yaml);
+      //var yaml = serializer.Serialize(trait);
+      //Console.WriteLine("trait: " + yaml);
       //DistanceFromTag
 
       // Sim/Cell.SetValues(byte,single,single) 只是在加水bug

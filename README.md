@@ -20,7 +20,7 @@ PoissonDisk 不规则圆区?
 
 # 脚本
 
-设置环境 :ONI_MOD_LOCAL  D:\Klei\OxygenNotIncluded\mods\local
+设置环境 :ONI_MOD_LOCAL   文档\Klei\OxygenNotIncluded\mods\local
 ```
 mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
 copy /y $(TargetDir)$(ProjectName).*  $(ONI_MOD_LOCAL)\$(ProjectName)\
