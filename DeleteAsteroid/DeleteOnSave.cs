@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DeleteAsteroid
 {
-  
+    [HarmonyPatch(typeof(SaveLoader), nameof(SaveLoader.Save))]
     public class DeleteOnSave
     {
 
-        [HarmonyPatch(typeof(SaveLoader), nameof(SaveLoader.Save))]
+   
         public static void Prefix()
         {
             //SaveLoader.Instance.Save(filename, false, true);
@@ -37,6 +37,7 @@ namespace DeleteAsteroid
 
         public static void DeleteMarkedAsteroid()
         {
+            //  SaveGame.Instance. //存档格式
             //  WorldDetailSave clusterDetailSave = SaveLoader.Instance.clusterDetailSave;
             // SaveGame.Instance.gameObject.as
             //SaveLoader.Instance.GetMyWorldDetail(clusterDetailSave);
