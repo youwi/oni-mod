@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.png" />
+    <Content Include="resource\TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
