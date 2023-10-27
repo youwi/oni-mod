@@ -4,6 +4,7 @@ using ProcGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,10 @@ namespace DeleteAsteroid
     {
 
         [HarmonyPatch(typeof(SaveLoader), nameof(SaveLoader.Save))]
-        public static void Postfix(MutantPlant __instance)
+        public static void Prefix()
         {
             //SaveLoader.Instance.Save(filename, false, true);
+        
             DeleteMarkedAsteroid();
         }
         /*
@@ -25,6 +27,12 @@ namespace DeleteAsteroid
          * 当殖民地改名为 "delete" 时
          * 保存再重新加载就可以 删除 殖民地.
          * 需要改名的支持.
+         * 优点: 删除之后可以提升游戏帧数.
+         * 
+         * 删除之后不能还原,请做好备份.
+         * 删除之后还是有隐藏垃圾存在,这些隐藏垃圾不影响.
+         * 
+         * 功能测试中.
          */
 
         public static void DeleteMarkedAsteroid()
@@ -57,6 +65,7 @@ namespace DeleteAsteroid
             //int max = ClusterManager.Instance.WorldContainers.Count;
             var worlds = ClusterManager.Instance.WorldContainers;
             //WorldContainer markDeleteWorld = null;
+            Console.WriteLine("查找delete:" + worlds.Count);
             for (int i = 0; i < worlds.Count; i++)
             {
                 if (worlds.Count > 1)
@@ -72,9 +81,11 @@ namespace DeleteAsteroid
                         continue;
                     };
                     var gridEntity = world.GetComponent<ClusterGridEntity>();
-                    if (gridEntity.Name == "delete")  // 获取右上角底层的实体名.
+                    if (gridEntity.Name == "delete"
+                      || gridEntity.Name.ToLower() == "delete")  // 获取右上角底层的实体名.
                     {
                         worlds.Remove(world);// markDeleteWorld = world;
+                        Console.WriteLine("删除了星名:"+ gridEntity.Name);
                     };
                     //循环删除
                 }
