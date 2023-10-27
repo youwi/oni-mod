@@ -139,14 +139,19 @@ namespace DeleteAsteroid
             tmp = SaveLoader.Instance.FindComponent("Asteroid");
             Console.WriteLine("find Asteroid(:" + tmp);
 
+       
             if (tmp == null)
             {
                 Console.WriteLine("tmp为空");
             }
             var sse=SaveLoader.Instance.GetComponentInParent<AsteroidConfig>();
-
             Console.WriteLine("SaveLoader.GetComponentInParent<AsteroidConfig>:" + sse );
 
+            sse=ClusterManager.Instance.gameObject.GetComponent<AsteroidConfig>();
+            Console.WriteLine("gameObject.GetComponent<AsteroidConfig>:" + sse);
+
+
+            // SaveLoadRoot;
 
             //for (int i = 0; i < asteroidList.Count(); i++)
             //{
