@@ -1,8 +1,10 @@
 ﻿using HarmonyLib;
 using Klei;
+using Newtonsoft.Json;
 using ProcGen;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -29,6 +31,70 @@ namespace DeleteAsteroid
             }
           
         }
+        public static void DeleteWorldObjects(WorldContainer world)
+        {
+            Grid.FreeGridSpace(world.WorldSize, world.WorldOffset);
+            WorldInventory worldInventory = null;
+            if (world != null)
+            {
+                worldInventory = world.GetComponent<WorldInventory>();
+            }
+            if (worldInventory != null)
+            {
+                UnityEngine.Object.Destroy(worldInventory);
+            }
+            if (world != null)
+            {
+                UnityEngine.Object.Destroy(world);
+            }
+        
+        }
+        public static void loopList(Dictionary<Tag, List<SaveLoadRoot>> sceneObjects)
+        {
+            List<Tag> orderedKeys = new List<Tag>();
+ 
+            orderedKeys.Clear();
+            orderedKeys.AddRange(sceneObjects.Keys);
+            orderedKeys.Remove(SaveGame.Instance.PrefabID());
+            orderedKeys = orderedKeys.OrderBy((Tag a) => a.Name == "Asteroid").ToList();
+        
+            foreach (Tag orderedKey in orderedKeys)
+            {
+                List<SaveLoadRoot> list = sceneObjects[orderedKey];
+                if (list.Count <= 0)
+                {
+                    continue;
+                }
+               // Console.WriteLine(orderedKey.ToString()+" -->"+list.Count);
+          
+                if (orderedKey.Name == "Asteroid")
+                {
+                    Console.WriteLine(" 搜索Asteroid: ");
+                    for(int i=0; i<list.Count; i++)
+                    {
+                        SaveLoadRoot item = list[i];
+                        if (!(item == null))
+                        {
+                            //  if(item.)
+                            var age = item.GetComponent<AsteroidGridEntity>();
+                            // YamlIO.
+                            if (age.Name == "delete" || age.Name.Trim().ToLower() == "delete")
+                            {
+                                // SaveloadRoot需要删除.
+                                list[i]=null;//这里直接删除没
+                                UnityEngine.Object.Destroy(item);
+                                list.RemoveAt(i);
+                              
+                                i--;
+                                Console.WriteLine("删除+1");
+                            }
+                        }
+                    }
+                    Console.WriteLine(" 搜索Asteroid:结束 ");
+                }
+            }
+
+            }
         /*
          * 
          * 删除星球mod
@@ -96,7 +162,16 @@ namespace DeleteAsteroid
                         continue;
                     };
                     var gridEntity = world.GetComponent<ClusterGridEntity>();
-                    var parentComp = world.GetComponentsInParent<AsteroidGridEntity>( );
+                    
+                    var age = world.GetComponentInParent<AsteroidGridEntity>();
+                    var wi= world.GetComponentInParent<WorldInventory>();
+                    var wom=world.GetComponentInParent<OrbitalMechanics>();
+                    var wsmc=world.GetComponentInParent<StateMachineController>();
+                    Console.WriteLine("WorldInventory  ---> :" + wi);
+                    Console.WriteLine("OrbitalMechanics  ---> :" + wom);
+                    Console.WriteLine("StateMachineController  ---> :" + wsmc);
+                    Console.WriteLine("AsteroidGridEntity-->:" + age);
+
                     if (gridEntity != null)
                     {
                         if (gridEntity.Name == "delete" || gridEntity.Name.Trim().ToLower() == "delete" )  // 获取右上角底层的实体名.
@@ -106,22 +181,69 @@ namespace DeleteAsteroid
                             //worlds.Remove(world);// markDeleteWorld = world;
                             // worlds.RemoveAt(i);
                             //Collection is read-only. 这里有只读问题.
-                            Console.WriteLine("删除了星名:" + gridEntity.Name);
-                            Console.WriteLine("parentComp List:" + parentComp);
+                            // ClusterManager.Instance.DestoryRocketInteriorWorld
+                            Console.WriteLine("掩盖星名:" + gridEntity.Name);
+                            //DeleteWorldObjects(world);
                         };
                     }
-
-                   
                 }
             }
+            var allObjmaybe= SaveLoader.Instance.saveManager.GetLists();
+            loopList(allObjmaybe);
+            //allObjmaybe[]
+            // SaveManager
+
+
+
+            //以下代码好像是创建星球的代码.
             GameObject gameObject = Util.KInstantiate(Assets.GetPrefab("Asteroid"), null, null);
             GameObject gameObject2 = Util.KInstantiate(Assets.GetPrefab("Asteroid"), null, null);
 
             Console.WriteLine("KInstantiate:gameObject:" + gameObject);
             Console.WriteLine("KInstantiate:gameObject:对象相等：" + gameObject.Equals(gameObject2));
-
-            GameObject go=Assets.GetPrefab("Asteroid");
+            Console.WriteLine("Asteroid:gameObject:对象相等：" +
+            Assets.GetPrefab("Asteroid").Equals(Assets.GetPrefab("Asteroid")));
+            GameObject go=Assets.GetPrefab("Asteroid");//好像只初始化一个星球.
+            //好像是空对象.
+            //===> Asteroid(KPrefabID)
+            //===> Asteroid(KSelectable)
+            //===> Asteroid(SaveLoadRoot)
+            //===> Asteroid(WorldInventory)
+            //===> Asteroid(WorldContainer)
+            //===> Asteroid(AsteroidGridEntity)
+            //===> Asteroid(OrbitalMechanics)
+            //===> Asteroid(StateMachineController)
             Console.WriteLine("Asteroid GameObject :" + go);
+            //go.RemoveTag("");
+            var s = go.GetComponents<KMonoBehaviour>();
+            foreach(var tmp in s)
+            {
+                Console.WriteLine("===>  "+tmp.ToString());
+                if(tmp is AsteroidGridEntity tt)
+                {
+                     
+                    Console.WriteLine("AsteroidGridEntity.Name:  " + tt.Name);
+                    YamlIO.Save(tmp, "D:/GameObject3.yaml");
+                }
+                if(tmp is KPrefabID iD)
+                {
+                   Console.WriteLine("KPrefabID" +  iD.InstanceID);
+                }
+            }
+            Console.WriteLine("Asteroid  ->AsteroidGridEntity.length :" + go.GetComponents<AsteroidGridEntity>().Length);
+           // YamlIO.Save(go, "D:/GameObject.yaml");
+           // YamlIO.Save(gameObject, "D:/GameObjectIn.yaml");
+           // go.DeleteObject();
+
+            //go.IsNullOrDestroyed();
+            //go.re
+           // go.
+           // Console.WriteLine(" a - config :" + go.GetComponent<AsteroidConfig>());
+           //go.gameObjects
+           //string json = JsonConvert.SerializeObject(go);
+           //Console.WriteLine("Asteroid GameObject: "+json);
+
+
 
             // var asteroidList = SaveGame.Instance.GetComponents<AsteroidConfig>( );
             //看看这是什么东西. Asteroid为8个或1个.
