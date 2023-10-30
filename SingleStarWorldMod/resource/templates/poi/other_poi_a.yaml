@@ -35,21 +35,22 @@ otherEntities:
   element: Unobtanium
   temperature: 293.149994
 
-- id: FossilRock
-  location_x: -4
+- id: FossilRock  #化石特性 石头
+  location_x: 2
   location_y: 40
   element: Fossil
   temperature: 315.103333
   units: 1
   type: Other
-- id: FossilResin
+- id: FossilResin  #化石特性 石头
+  location_x: 4
   location_y: 40
   element: Fossil
   temperature: 315.001038
   units: 1
   type: Other
-- id: FossilIce
-  location_x: -2
+- id: FossilIce  #化石特性 石头
+  location_x: 6
   location_y: 40
   element: Fossil
   temperature: 229.999207
@@ -75,8 +76,8 @@ buildings:
     temperature: 273.594482
     rottable: {}
 
-- id: FossilDig
-  location_x: 4
+- id: FossilDig  #化石转台主
+  location_x: 0
   location_y: 40
   element: Fossil
   temperature: 273.149994

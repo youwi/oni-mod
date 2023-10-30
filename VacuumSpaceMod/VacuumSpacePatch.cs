@@ -73,9 +73,11 @@ namespace VacuumSpaceMod
                 {
                     DebugViewClassPath.markCellToSpace(pos);
                     DebugViewClassPath.dig40Grid(pos);
-                    Notification notification = new Notification("Save Game/Switch>to Refresh[切换星图/保存游戏后会重绘背景]", NotificationType.Neutral,
-                        (List<Notification> n, object d) => "" +
-                        "save game,or change view to rocket or to starmap .it will rebuild background.", null, true, 0f, null, null, null, false, false)
+                    Notification notification = 
+                        new Notification(
+                        "Save Game/Switch>to Refresh[切换星图/保存游戏后会重绘背景]",
+                        NotificationType.Neutral,
+                        (List<Notification> n, object d) => "save game,or change view to rocket or to starmap .it will rebuild background.", null, true, 0f, null, null, null, false, false)
                     {
                         clearOnClick = true
                     };
@@ -170,6 +172,7 @@ namespace VacuumSpaceMod
                 Polygon poly = overworldCell.poly;
 
                 //强制修改所有地为太空背景.  Space为7
+                //这里是测试.
                 overworldCell.zoneType = SubWorld.ZoneType.Space;
             }
         }
@@ -217,7 +220,13 @@ namespace VacuumSpaceMod
 
                 return;
             }
-
+            //防止炸火箭内容
+            if (fmarkCellBlock.zoneType == SubWorld.ZoneType.RocketInterior)
+            {
+                //火箭内部需要绕过. 火箭为14
+                Console.WriteLine("火箭内部");
+                return;
+            }
 
             if (fmarkCellBlock.zoneType == SubWorld.ZoneType.Space)
             {
@@ -333,13 +342,30 @@ namespace VacuumSpaceMod
             return false;
 
         }
-
+        /**
+         * 判断中子物质么?
+         * 判断世界边缘么?
+         * 是否增加延迟呢?
+         * 火箭坐标并不是从0开始
+         */
         public static void dig40Grid(Vector2 pos)
         {
             int cell = Grid.PosToCell(pos);
             int digSize = BuildingComplete_OnSpawn_Patch.digSize;
             System.Random rnd = new System.Random();
 
+            // SimHashes.Unobtanium;//中子物质.
+            // Unobtanium.Element().hardness;
+ 
+
+            // int[] sideList= new int[1];
+            // Grid.CellToPos(cell, sideList);
+            Grid.IsValidCell(cell);
+
+         
+            Console.Write("  爆炸pos坐标:" + pos.ToString());
+            Console.Write("  爆炸int坐标:" + cell);
+            Console.Write("  爆炸pos坐标(反转):" + Grid.CellToPos(cell).ToString());
 
             for (int i = -digSize; i < digSize; i++)
             {
@@ -347,11 +373,70 @@ namespace VacuumSpaceMod
                 {
                     int pcell = cell + Grid.WidthInCells * i + j;
                     pcell += rnd.Next(-2, 2);
-                    if (pcell > 0)
-                        SimMessages.Dig(pcell, -1, false);//.
+
+                    if (pcell <= 0) { continue; }//火箭中间也易出错
+                    if (DebugViewClassPath.isWorldSide(pcell)){ continue; }
+
+                    if (DebugViewClassPath.isUnobtanium(pcell))
+                    {
+                        Console.WriteLine("找到中子物质:" + pcell);
+                        // bool isLiquid = Grid.Element[cell].IsLiquid;判断内容
+                    }
+                    //SimMessages.ReplaceElement(num, SimHashes.Vacuum, CellEventLogger.Instance.SandBoxTool, 0f, 0f, 0, 0, -1);
+                   
+                    SimMessages.Dig(pcell, -1, false);//.中子也能挖掉.
                 }
             }
 
+        }
+        public static bool isWorldSide(int cell)
+        {
+            
+            // POS坐标是左下角到右上角xy坐标.
+            // 保留2行中子物质. y=2 最小. x坐标4舍5入就是1最小.
+            // pos.y = cell;
+            // var posMax= World.Instance.PosMax();//这个方法获取错误.
+            // var posMin=World.Instance.PosMin();
+            var maxWidth = Grid.WidthInCells;  //这个最大值是 包含火箭的最大值
+            var maxHeight = Grid.HeightInCells; //这个最大值是 包含火箭的最大值 这个值可以用.
+            // World.Instance.HeightInCells WidthInCells  存档里这个是最大值.
+            int worldId = ClusterManager.Instance.activeWorldId;
+            var worldContainer = ClusterManager.Instance.WorldContainers[worldId];
+
+            var WorldSize = worldContainer.WorldSize;
+            var WorldOffset = worldContainer.WorldOffset;// 固定值
+            // worldContainer.
+            var pos = Grid.CellToPos(cell);
+            //var offsetY=pos.y- WorldOffset.y;
+            //var offsetX=pos.x- WorldOffset.x;
+            //var offsetYR=pos.y- WorldOffset.y- WorldSize.y;
+            //var offsetxR = pos.x - WorldOffset.x - WorldSize.x;
+
+            //Console.Write("  地图WorldOffset:" + worldContainer.WorldOffset.ToString());
+            //Console.Write("  地图WorldSize:" + worldContainer.WorldSize.ToString());
+
+            if (pos.y <= 0 || pos.x <= 0) { return true; }//易出错
+
+            if(pos.y  - WorldOffset.y <= 1) {  return true; }//下
+            if(pos.x  - WorldOffset.x <= 1) {  return true; }//左
+            if((pos.x - WorldOffset.x) >= WorldSize.x - 2) { return true; }//右
+            if((pos.y - WorldOffset.y) >= WorldSize.y - 2 ) { return true; }//上
+
+            return false;
+        }
+        public static  bool isUnobtanium(int cell)
+        {
+            if (Grid.Element[cell] == null)
+            {
+                return false;//空白格,空的话就不要
+            }
+            if (Grid.Element[cell].id == SimHashes.Unobtanium)
+            {
+
+                // Grid.get
+                return true;
+            };
+            return false;
         }
         public static void digBlockByPos(WorldDetailSave.OverworldCell block)
         {

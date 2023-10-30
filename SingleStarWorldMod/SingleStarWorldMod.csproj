@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.png" />
+    <Content Include="resource\preview.jpg" />
+    <Content Include="resource\scr1.jpg" />
     <None Include="resource\worldgen\worlds\backup.yaml" />
     <None Include="resource\worldgen\subworlds\onestar\OneStarSub.yaml" />
   </ItemGroup>

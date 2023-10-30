@@ -16,11 +16,11 @@ namespace VacuumSpaceMod
         {
             string id = "VacuumSpaceMod";
 
-            int width = 3;
-            int height = 3;
+            int width = 1;
+            int height = 1;
             string anim = "bomb_build_s_kanim";// 动画ID要以这个结尾 _kanim
-            int hitpoints = 100;
-            float construction_time = 120f;
+            int hitpoints = 100;//不知道这个参数是做什么的
+            float construction_time = 50f;
             float[] tais1 = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER5;
             EffectorValues tier2 = NOISE_POLLUTION.NOISY.TIER6;
             string[] raw_METALS = MATERIALS.RAW_METALS;
