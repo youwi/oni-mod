@@ -36,22 +36,22 @@ otherEntities:
   temperature: 293.149994
 
 - id: FossilRock  #化石特性 石头
-  location_x: 2
-  location_y: 40
+  location_x: 4
+  location_y: 42
   element: Fossil
   temperature: 315.103333
   units: 1
   type: Other
 - id: FossilResin  #化石特性 石头
-  location_x: 4
-  location_y: 40
+  location_x: 6
+  location_y: 42
   element: Fossil
   temperature: 315.001038
   units: 1
   type: Other
 - id: FossilIce  #化石特性 石头
-  location_x: 6
-  location_y: 40
+  location_x: 8
+  location_y: 42
   element: Fossil
   temperature: 229.999207
   units: 1
@@ -63,6 +63,7 @@ buildings:
   location_y: 20
   element: Iron
   temperature: 293.235565
+
 
 - id: MegaBrainTank  #故事POI,梦生成器
   location_y: 25
@@ -76,8 +77,20 @@ buildings:
     temperature: 273.594482
     rottable: {}
 
+- id: LonelyMinionHouse  # 隐士+7属性
+  location_x: 0
+  location_y: 33
+  element: Steel
+  temperature: 293.149994
+- id: LonelyMailBox   #隐士的邮箱
+  location_x: -3
+  location_y: 33
+  element: Steel
+  temperature: 293.149994
+
 - id: FossilDig  #化石转台主
   location_x: 0
-  location_y: 40
+  location_y: 42
   element: Fossil
   temperature: 273.149994
+
