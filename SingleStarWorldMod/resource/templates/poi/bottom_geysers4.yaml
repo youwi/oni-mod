@@ -17,37 +17,37 @@ pickupables: []
 elementalOres: []
 otherEntities:
 
-- id: GeyserGeneric_chlorine_gas
+- id: GeyserGeneric_chlorine_gas  # 氯气
   location_x: 1
   element: Katairite
   temperature: 372.149994
   units: 1
   type: Other
-- id: GeyserGeneric_slimy_po2
+- id: GeyserGeneric_slimy_po2  # 有菌 污染氧
   location_x: 4
   element: Katairite
   temperature: 372.149994
   units: 1
   type: Other
-- id: GeyserGeneric_hot_po2
+- id: GeyserGeneric_methane  # 天然气泉
   location_x: 7
   element: Katairite
   temperature: 372.149994
   units: 1
   type: Other
-- id: GeyserGeneric_hot_steam
+- id:  GeyserGeneric_hot_hydrogen  # 500度氢气泉
   location_x: 10
   element: Katairite
   temperature: 372.149994
   units: 1
   type: Other
-- id: GeyserGeneric_hot_hydrogen
+- id: GeyserGeneric_steam  # 110度 蒸汽泉
   location_x: 13
   element: Katairite
   temperature: 372.149994
   units: 1
   type: Other
-- id: GeyserGeneric_methane
+- id: GeyserGeneric_hot_steam  # 500度蒸汽泉
   location_x: 16
   element: Katairite
   temperature: 372.149994

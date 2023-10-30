@@ -28,13 +28,14 @@ namespace SingleStarWorldMod
          */
         public void insertMeteorShowersRain(WorldGen gen)
         {
-            //ClassicStyleStartMeteorShowers
+            //ClassicStyleStartMeteorShowers 标准3个流星雨
            // gen.sm
            //gen.data.world.
             ClusterManager.Instance.activeWorld
                 .GetSMI<GameplaySeasonManager.Instance>()
                 .StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
             // Db.Get().GameplaySeasons.MeteorShowers 
+            //ClassicStyleStartMeteorShowers
         }
         public static bool WorldReplaceFix(WorldGen gen, ref Sim.Cell[] cells, ref Sim.DiseaseCell[] dc, int baseId)
     {
