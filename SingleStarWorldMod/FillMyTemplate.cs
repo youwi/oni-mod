@@ -23,7 +23,20 @@ namespace SingleStarWorldMod
       //mod.
       base.OnLoad(harmony);
     }
-    public static bool WorldReplaceFix(WorldGen gen, ref Sim.Cell[] cells, ref Sim.DiseaseCell[] dc, int baseId)
+        /**
+         * 插入流星雨
+         */
+        public void insertMeteorShowersRain(WorldGen gen)
+        {
+            //ClassicStyleStartMeteorShowers
+           // gen.sm
+           //gen.data.world.
+            ClusterManager.Instance.activeWorld
+                .GetSMI<GameplaySeasonManager.Instance>()
+                .StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
+            // Db.Get().GameplaySeasons.MeteorShowers 
+        }
+        public static bool WorldReplaceFix(WorldGen gen, ref Sim.Cell[] cells, ref Sim.DiseaseCell[] dc, int baseId)
     {
    
       Console.WriteLine("插入了模板中: " + ModPath);
