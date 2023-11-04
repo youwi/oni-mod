@@ -41,7 +41,7 @@ namespace SingleStarWorldMod
       }
 
       //        TUNING.ROCKETRY.ROCKET_INTERIOR_SIZE = new Vector2I(32, 32);
-      Console.WriteLine("修改了:模板名为: " + interiorTemplateName);
+       global::Debug.LogWarning("修改了:模板名为: " + interiorTemplateName);
     }
 
     // [HarmonyPatch(typeof(ClusterManager))]
@@ -121,7 +121,7 @@ namespace SingleStarWorldMod
         || trait.additionalWorldTemplateRules == null
         || trait.filePath == null)
       {
-        Console.WriteLine("ApplyTrait为空" + trait);
+         global::Debug.LogWarning("ApplyTrait为空" + trait);
         return;
       }
             // storyTraits 
@@ -138,7 +138,7 @@ namespace SingleStarWorldMod
               .Build();
             //worldTraitRules:  []  #关闭特性设置. 很容易崩溃
             var yaml = serializer.Serialize(trait);
-            Console.WriteLine("trait: " + yaml);
+             global::Debug.LogWarning("trait: " + yaml);
             //DistanceFromTag
 
             // Sim/Cell.SetValues(byte,single,single) 只是在加水bug

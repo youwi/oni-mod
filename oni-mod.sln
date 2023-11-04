@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropArtifactsMod", "DropArt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteAsteroid", "DeleteAsteroid\DeleteAsteroid.csproj", "{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeMapMod", "ChangeMapMod\ChangeMapMod.csproj", "{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

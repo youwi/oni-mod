@@ -23,18 +23,19 @@ namespace DoubleMutantMod
         }
         if (list == null)
         {
-          Console.WriteLine("变异listNull:" + list);
+           global::Debug.LogWarning("变异listNull:" + list);
           list= new List<string>();
         }
         if (list.Count > 2 )
         {//已经双重变异就不需要了.
-          Console.WriteLine("变异已经大于2:"+list);
+           global::Debug.LogWarning("变异已经大于2:"+list);
           return;
         }
         //添加一轮变异,按20%概率添加.
         if ( rand10() > 3)
         {
-          Console.WriteLine("二次变异率为20%,变异未触发,:" + list);
+                    //看看能不能加性能
+           global::Debug.LogWarning("二次变异率为20%,变异未触发,:" + list);
           return;
         }
         string name = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
@@ -46,7 +47,7 @@ namespace DoubleMutantMod
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex.Message);
+         global::Debug.LogWarning(ex.Message);
       }
 
     }

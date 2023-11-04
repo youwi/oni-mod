@@ -27,7 +27,7 @@ namespace InfiniteResearch
             public static void Postfix(ResearchCenter __instance, Chore ___chore)
             {
                 AccessTools.Method(typeof(InfiniteResearchCenterPatch), nameof(InfiniteResearchCenterPatch.IsEndlessWorking));
-                Console.WriteLine("UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
+                 global::Debug.LogWarning("UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
                 // var button=__instance.GetComponent<InfiniteResearchCenterButton>();
                 // button.isInfiniteMode=true;
 
@@ -123,7 +123,7 @@ namespace InfiniteResearch
                     // fat.GetAttributes().Get("Learning").Attribute.BaseValue;
                     var level = fat.GetAttributeLevel("Learning").level;
                     level++;
-                    Console.WriteLine("Learning level:  "+ level);
+                     global::Debug.LogWarning("Learning level:  "+ level);
                     var mul = Options.ResearchCenterExpRate * (level * 0.1f*5 +5);
                     fat.AddExperience("Construction", mul, 1f);
                     fat.AddExperience("Digging", mul, 1f);
@@ -171,7 +171,7 @@ namespace InfiniteResearch
         {
             static void Postfix(ResearchCenter __instance, Chore __result)
             {
-                Console.WriteLine("CreateChore ...ModifyChore");
+                 global::Debug.LogWarning("CreateChore ...ModifyChore");
                 //  ModifyChore(__instance, __result, IsEndlessWorking);
             }
         }

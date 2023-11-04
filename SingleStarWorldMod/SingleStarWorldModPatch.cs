@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,40 @@ using UnityEngine;
 
 namespace SingleStarWorldMod
 {
-  [HarmonyPatch(typeof(Cluster), nameof(Cluster.AssignClusterLocations))]
+
+    // Add minibase asteroid cluster
+    [HarmonyPatch(typeof(Db), "Initialize")]
+    public class Db_Initialize_Patch : KMod.UserMod2
+    {
+        public static string ModPath;
+        public static string ClusterName = "OneStar";
+        public static string ClusterDescription = " start game only one star.";
+        public static string ClusterIconName = "OneStarCluster";
+        public override void OnLoad(Harmony harmony)
+        {
+      
+            ModPath = mod.ContentPath;
+            base.OnLoad(harmony);
+ 
+        }
+        public static void Prefix()
+        {
+
+            Strings.Add($"STRINGS.WORLDS.{ClusterName.ToUpperInvariant()}.NAME", ClusterName);
+            Strings.Add($"STRINGS.WORLDS.{ClusterName.ToUpperInvariant()}.DESCRIPTION", ClusterDescription);
+            Strings.Add($"STRINGS.CLUSTER_NAMES.{ClusterIconName.ToUpperInvariant()}.NAME", ClusterIconName);
+            Strings.Add($"STRINGS.CLUSTER_NAMES.{ClusterIconName.ToUpperInvariant()}.DESCRIPTION", ClusterDescription);
+            //以下可能出错
+            //string spritePath = System.IO.Path.Combine(ModPath, ClusterIconName) + ".png";
+            //Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            //ImageConversion.LoadImage(texture, File.ReadAllBytes(spritePath));
+            //Sprite sprite = Sprite.Create(texture, new Rect(0f, 0f, 400f, 400f), Vector2.zero);
+            //Assets.Sprites.Add(ClusterIconName, sprite);
+        }
+    }
+
+
+    [HarmonyPatch(typeof(Cluster), nameof(Cluster.AssignClusterLocations))]
   public static class SingleStarWorldModPatch
   {
     public static void Postfix(Cluster __instance)
@@ -25,8 +59,9 @@ namespace SingleStarWorldMod
       {
         return;//如果不是我的这个星
       }
-       
-      SeededRandom rnd = new SeededRandom(2123121);
+
+         
+      SeededRandom rnd = new SeededRandom(new System.Random().Next(1, 10000));
 
       ClusterLayout clusterLayout = SettingsCache.clusterLayouts.clusterCache[__instance.Id];
       List<SpaceMapPOIPlacement> allPlacements = (clusterLayout.poiPlacements == null) ? new List<SpaceMapPOIPlacement>() : new List<SpaceMapPOIPlacement>(clusterLayout.poiPlacements);
@@ -50,7 +85,7 @@ namespace SingleStarWorldMod
         for (int j = 0; j < placement.numToSpawn && j < pois.Count; j++)
         {
           int min = placement.allowedRings.min;
-          int max = placement.allowedRings.max;
+          int max = placement.allowedRings.max+1;
 
           AxialI location = AxialI.ZERO;
           int loopCount = 0;
@@ -111,13 +146,13 @@ namespace SingleStarWorldMod
         || clName == "expansion1::clusters/OneStar"
         || clName == "expansion1::clusters/OneStarCluster"
         || clName == "expansion1::clusters/OneStarDLC";
-      Console.WriteLine("IsMyOneWorld: " + clName + " ->" + outFlag);
+       global::Debug.LogWarning("IsMyOneWorld: " + clName + " ->" + outFlag);
       return outFlag;
     }
   }
 
   // Bypass and rewrite world generation
-  [HarmonyPatch(typeof(WorldGen), "RenderOffline")]
+  [HarmonyPatch(typeof(WorldGen), nameof(WorldGen.RenderOffline))]
   public static class WorldGen_RenderOffline_Patch
   {
   
@@ -129,6 +164,28 @@ namespace SingleStarWorldMod
        __result = GenWorldFix.WorldReplaceFix(__instance, ref cells, ref dc, baseId);
     }
   }
+
+    [HarmonyPatch(typeof(WorldGen), nameof(WorldGen.SetWorldSize))]
+    public static class WorldGen_SetWorldSize_Patch
+    {
+
+
+        public static void Postfix(WorldGen __instance,int width, int height)
+        {
+            if (SingleStarWorldModPatch.IsMyOneWorld())
+            {
+               
+                 global::Debug.LogWarning($"reset size:{width} ,{height}, GridSize: { Grid.HeightInCells} ,{Grid.WidthInCells}");
+                if(width>100)
+                  __instance.data.world = new Chunk(0, 0, width - 100, height);
+               // Grid.HeightInCells = height;
+                Grid.WidthInCells -= 100;
+             
+                   
+            }
+                
+        }
+    }
 
 
 

@@ -43,13 +43,13 @@ namespace VacuumSpaceMod
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                 global::Debug.LogWarning(ex.Message);
                 YamlIO.Save(config, fileName);
                   
             }
             if(config.digSize>2)
                 digSize = config.digSize;
-            Console.WriteLine("VacuumSpaceMod: digSize: " + config.digSize);
+             global::Debug.LogWarning("VacuumSpaceMod: digSize: " + config.digSize);
 
             base.OnLoad(harmony);
         }
@@ -93,8 +93,8 @@ namespace VacuumSpaceMod
                 catch (Exception ex)
                 {
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                    Console.WriteLine("发生错误行号为:" + line);
-                    Console.WriteLine(ex.ToString());
+                     global::Debug.LogWarning("发生错误行号为:" + line);
+                     global::Debug.LogWarning(ex.ToString());
                 }
                 // CameraController.Instance.CameraGoTo(pos);
                 /*                CameraController cameraController = World.Instance.gameObject.GetComponent<CameraController>();
@@ -139,7 +139,7 @@ namespace VacuumSpaceMod
             // World.Instance.zoneRenderData.GetSubWorldZoneType(cell) == SubWorld.ZoneType.Space;
             var zoneRenderData = World.Instance.zoneRenderData;
 
-            Console.WriteLine("zoneRenderData");
+             global::Debug.LogWarning("zoneRenderData");
             if (ElementLoader.elements[(int)Grid.ElementIdx[cell]].id == SimHashes.Void)
             {
                 SimMessages.ReplaceElement(cell, SimHashes.Void, null, 0f, 0f, byte.MaxValue, 0, -1);
@@ -155,11 +155,11 @@ namespace VacuumSpaceMod
     {
         /*public static void Postfix()
         {
-            Console.WriteLine("测试切换世界:OnActiveWorldChanged");
+             global::Debug.LogWarning("测试切换世界:OnActiveWorldChanged");
         }*/
         public static void Prefix()
         {
-            Console.WriteLine("OnActiveWorldChanged:切换了星球视角:");
+             global::Debug.LogWarning("OnActiveWorldChanged:切换了星球视角:");
             //markAllCellToSpace();
         }
         public static void markAllCellToSpace()
@@ -216,7 +216,7 @@ namespace VacuumSpaceMod
             }
             if (fmarkCellBlock == null)
             {
-                Console.WriteLine("markCellToSpace没有找到背景单元格:({0},{1}),区块为:{2}", pos.x,pos.y, clusterDetailSave.overworldCells.Count);
+                 global::Debug.LogWarning("markCellToSpace没有找到背景单元格:({0},{1}),区块为:{2}", pos.x,pos.y, clusterDetailSave.overworldCells.Count);
 
                 return;
             }
@@ -224,23 +224,23 @@ namespace VacuumSpaceMod
             if (fmarkCellBlock.zoneType == SubWorld.ZoneType.RocketInterior)
             {
                 //火箭内部需要绕过. 火箭为14
-                Console.WriteLine("火箭内部");
+                 global::Debug.LogWarning("火箭内部");
                 return;
             }
 
             if (fmarkCellBlock.zoneType == SubWorld.ZoneType.Space)
             {
-                Console.WriteLine("markCellToSpace已经是太空背景了{0},{1},区块:{2}", pos.x, pos.y,markId);
+                 global::Debug.LogWarning("markCellToSpace已经是太空背景了{0},{1},区块:{2}", pos.x, pos.y,markId);
                 return;//如果已经是太空背景就返回了.不做
             }
             if (  IsTooSmall(fmarkCellBlock.poly))
             {
-                Console.WriteLine("markCellToSpace太小,直接标记为太空");
+                 global::Debug.LogWarning("markCellToSpace太小,直接标记为太空");
                 fmarkCellBlock.zoneType = SubWorld.ZoneType.Space;
             }
             if (fmarkCellBlock.poly.Vertices.Count == 3 )
             {
-                Console.WriteLine("markCellToSpace已经切分为三角形了或太小,直接标记为太空");
+                 global::Debug.LogWarning("markCellToSpace已经切分为三角形了或太小,直接标记为太空");
                 markCellToSpaceAnyway(pos);
                 return;//如果已经是三角形了,也不处理了.
             }
@@ -250,7 +250,7 @@ namespace VacuumSpaceMod
           
                 //if(Polygon.)面积过小不分割.
                 var list = splitOverworldCell(fmarkCellBlock);
-                Console.WriteLine("切分多边形数量:" + list.Count);
+                 global::Debug.LogWarning("切分多边形数量:" + list.Count);
 
                 //list.Last().zoneType = SubWorld.ZoneType.Space;//设置最后一个区域为太空背景.
                 for (int i = 0; i < list.Count; i++)
@@ -273,18 +273,18 @@ namespace VacuumSpaceMod
                     }
                 }
 
-                Console.WriteLine("在新的多边形里找到坐标:" + markFindOne);
+                 global::Debug.LogWarning("在新的多边形里找到坐标:" + markFindOne);
                 if (markFindOne == false)
                 {
                     list.First().zoneType = SubWorld.ZoneType.Space;//没有找到的话,直接把第1个标记为真空
                 }
                 //删除原多边形
-                Console.WriteLine("原区块数量:" + clusterDetailSave.overworldCells.Count);
+                 global::Debug.LogWarning("原区块数量:" + clusterDetailSave.overworldCells.Count);
                 var succ = clusterDetailSave.overworldCells.Remove(fmarkCellBlock);
-                Console.WriteLine("删除原多边形:" + succ);
+                 global::Debug.LogWarning("删除原多边形:" + succ);
                 //添加新的多边形.
                 list.ForEach(item => clusterDetailSave.overworldCells.Add(item));
-                Console.WriteLine("新区块数量:" + clusterDetailSave.overworldCells.Count);
+                 global::Debug.LogWarning("新区块数量:" + clusterDetailSave.overworldCells.Count);
                 // YellowAlertManager.Instance.
                 // Game.Instance.Trigger();
                 //
@@ -296,7 +296,7 @@ namespace VacuumSpaceMod
                     WorldDetailSave.OverworldCell overworldCell = clusterDetailSave.overworldCells[block];
                     //  Space为7
                     overworldCell.zoneType = SubWorld.ZoneType.Space;
-                    Console.WriteLine("测试标记为太空:markCellToSpace:" + cell+"/"+ clusterDetailSave.overworldCells.Count);
+                     global::Debug.LogWarning("测试标记为太空:markCellToSpace:" + cell+"/"+ clusterDetailSave.overworldCells.Count);
                 }*/
             }
         }
@@ -311,7 +311,7 @@ namespace VacuumSpaceMod
            
 
             Polygon poly = block.poly;
-           // Console.WriteLine("isInBlockThanMark:左下角方块:{0}{1}", poly.bounds.xMin, poly.bounds.yMin);
+           //  global::Debug.LogWarning("isInBlockThanMark:左下角方块:{0}{1}", poly.bounds.xMin, poly.bounds.yMin);
             zero.y = (float)((int)Mathf.Floor(poly.bounds.yMin));
             while (zero.y < Mathf.Ceil(poly.bounds.yMax))
             {
@@ -379,7 +379,7 @@ namespace VacuumSpaceMod
 
                     if (DebugViewClassPath.isUnobtanium(pcell))
                     {
-                        Console.WriteLine("找到中子物质:" + pcell);
+                         global::Debug.LogWarning("找到中子物质:" + pcell);
                         // bool isLiquid = Grid.Element[cell].IsLiquid;判断内容
                     }
                     //SimMessages.ReplaceElement(num, SimHashes.Vacuum, CellEventLogger.Instance.SandBoxTool, 0f, 0f, 0, 0, -1);
@@ -447,7 +447,7 @@ namespace VacuumSpaceMod
                 msg += Grid.PosToCell(v) + ",";
                 SimMessages.Dig(Grid.PosToCell(v), -1, false);//.
             });
-            Console.WriteLine("挖掉所有物质:" + msg);
+             global::Debug.LogWarning("挖掉所有物质:" + msg);
         }
         public static bool IsTooSmall(Polygon poly)
         {

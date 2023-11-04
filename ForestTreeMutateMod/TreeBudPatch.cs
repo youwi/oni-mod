@@ -56,7 +56,7 @@ namespace ForestTree
 
                if (seedParent != null)
                {
-                   Console.WriteLine("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
+                    global::Debug.LogWarning("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
                }
 
                MutantPlant seed = gameObject.GetComponent<MutantPlant>();*/
@@ -82,8 +82,8 @@ namespace ForestTree
                         // PlantSubSpeciesCatalog.Instance.DiscoverSubSpecies(GetSubSpeciesInfo(), seed);
             */
 
-            //Console.WriteLine("ForestTreeBranchConfig树枝生成时：seed.MutationIDs：" + seed.SpeciesID);
-            // Console.WriteLine("ForestTreeBranchConfig树枝生成时：seed.IsOriginal：" + seed.IsOriginal);
+            // global::Debug.LogWarning("ForestTreeBranchConfig树枝生成时：seed.MutationIDs：" + seed.SpeciesID);
+            //  global::Debug.LogWarning("ForestTreeBranchConfig树枝生成时：seed.IsOriginal：" + seed.IsOriginal);
 
             //  return gameObject;
         }
@@ -100,7 +100,7 @@ namespace ForestTree
         public static void Postfix(BuddingTrunk __instance)
         {
            // var gameObject = __instance.GetComponentInParent<MutantPlant>();
-            //Console.WriteLine("BuddingTrunk 测试变异信息：" + gameObject.SpeciesID); //结果是 ForestTree
+            // global::Debug.LogWarning("BuddingTrunk 测试变异信息：" + gameObject.SpeciesID); //结果是 ForestTree
             /*  __instance.AddTag(GameTags.MutatedSeed);
               __instance.FindOrAddComponent<MutantPlant>();*/
 
@@ -118,7 +118,7 @@ namespace ForestTree
         public static void Postfix(TreeBud __instance)
         {
             var mutantBranch = __instance.GetComponentInParent<MutantPlant>();
-            // Console.WriteLine("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
+            //  global::Debug.LogWarning("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
             var mutantUp = __instance.buddingTrunk.Get().GetComponentInParent<MutantPlant>();
             //防止多余的复制。在重新加载时可防止为负
             if(mutantBranch.MutationIDs==null|| mutantBranch.MutationIDs.Count == 0)

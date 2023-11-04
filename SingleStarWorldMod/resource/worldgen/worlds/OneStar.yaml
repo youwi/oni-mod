@@ -1,13 +1,13 @@
 # 复制文件有可能不成功
-name: STRINGS.WORLDS.TINYSURFACE.NAME
-description: STRINGS.WORLDS.TINYSURFACE.DESCRIPTION
+name: STRINGS.WORLDS.ONESTAR.NAME
+description: STRINGS.WORLDS.ONESTAR.DESCRIPTION
 disableWorldTraits: true
 asteroidIcon: asteroid_swamp_rocket_kanim
 
 worldTraitScale: 0.12
 worldsize:
   X: 80
-  Y: 120
+  Y: 140
 layoutMethod: PowerTree
 
 defaultsOverrides:

@@ -14,15 +14,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace SingleStarWorldMod
 {
-  public class GenWorldFix : KMod.UserMod2
+  public class GenWorldFix  
   {
-    public static string ModPath;
-    public override void OnLoad(Harmony harmony)
-    {
-      ModPath = mod.ContentPath;
-      //mod.
-      base.OnLoad(harmony);
-    }
+   
         /**
          * 插入流星雨
          */
@@ -39,10 +33,12 @@ namespace SingleStarWorldMod
         }
         public static bool WorldReplaceFix(WorldGen gen, ref Sim.Cell[] cells, ref Sim.DiseaseCell[] dc, int baseId)
     {
-   
-      Console.WriteLine("插入了模板中: " + ModPath);
+
+            var ModPath = Db_Initialize_Patch.ModPath;
+       global::Debug.LogWarning("插入了模板中: " + ModPath);
       int width = gen.data.world.size.x;
       int height = gen.data.world.size.y;
+          //  gen.data.world.HeightInCells;
 
       string path = ModPath + "/templates/poi/bottom_geysers.yaml";
       var claimedCells = new Dictionary<int, int>();
@@ -53,7 +49,7 @@ namespace SingleStarWorldMod
       //
       //TemplateLoader.Stamp(bottomTemplate, new Vector2I(10, 10), delegate
       //{
-      //  Console.WriteLine("插入了模板成功");
+      //   global::Debug.LogWarning("插入了模板成功");
       //});
       //Vector2I bottomPos = new Vector2I(2, 2);//在地底插入模板
       //gen.data.gameSpawnData.AddTemplate(bottomTemplate, bottomPos, ref claimedCells);

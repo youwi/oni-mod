@@ -14,12 +14,14 @@ namespace SingleStarWorldMod.Tests
         [TestMethod()]
         public void rand1Test()
         {
-            Console.WriteLine(SingleStarWorldModPatch.rand1());
-            Console.WriteLine(SingleStarWorldModPatch.rand1());
-            Console.WriteLine(SingleStarWorldModPatch.rand1());
-            Console.WriteLine(SingleStarWorldModPatch.rand1());
-            Console.WriteLine(SingleStarWorldModPatch.rand1());
-            Console.WriteLine(SingleStarWorldModPatch.rand1());
+             global::Debug.LogWarning(SingleStarWorldModPatch.rand1());
+             global::Debug.LogWarning(SingleStarWorldModPatch.rand1());
+             global::Debug.LogWarning(SingleStarWorldModPatch.rand1());
+             global::Debug.LogWarning(SingleStarWorldModPatch.rand1());
+             global::Debug.LogWarning(SingleStarWorldModPatch.rand1());
+             global::Debug.LogWarning(SingleStarWorldModPatch.rand1());
+
+            global::Debug.LogWarning(new System.Random().Next(1, 10000)) ;
         }
     }
 }
