@@ -83,7 +83,7 @@ namespace VacuumSpaceMod
                     };
 
                     Notifier  notifier = World.Instance.gameObject.AddComponent<Notifier>();
-
+                    Game.Instance.roomProber.Refresh();
                     if (notifier != null)
                     {
                         notifier.Add(notification);
@@ -216,7 +216,7 @@ namespace VacuumSpaceMod
             }
             if (fmarkCellBlock == null)
             {
-                 global::Debug.LogWarning("markCellToSpace没有找到背景单元格:({0},{1}),区块为:{2}", pos.x,pos.y, clusterDetailSave.overworldCells.Count);
+                 global::Debug.LogWarning($"markCellToSpace没有找到背景单元格:({pos.x},{pos.y}),区块为:{clusterDetailSave.overworldCells.Count}") ;
 
                 return;
             }
@@ -230,7 +230,7 @@ namespace VacuumSpaceMod
 
             if (fmarkCellBlock.zoneType == SubWorld.ZoneType.Space)
             {
-                 global::Debug.LogWarning("markCellToSpace已经是太空背景了{0},{1},区块:{2}", pos.x, pos.y,markId);
+                 global::Debug.LogWarning($"markCellToSpace已经是太空背景了{pos.x},{pos.y},区块:{markId}");
                 return;//如果已经是太空背景就返回了.不做
             }
             if (  IsTooSmall(fmarkCellBlock.poly))

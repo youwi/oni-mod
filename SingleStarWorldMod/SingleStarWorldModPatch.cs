@@ -6,11 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
+using Klei;
 using Klei.CustomSettings;
 using ProcGen;
 using ProcGenGame;
 using STRINGS;
 using UnityEngine;
+using static STRINGS.DUPLICANTS.ATTRIBUTES;
+using static STRINGS.UI;
 
 namespace SingleStarWorldMod
 {
@@ -140,16 +143,28 @@ namespace SingleStarWorldMod
     public static bool IsMyOneWorld()
     {
       string clName = CustomGameSettings.Instance.GetCurrentQualitySetting(CustomGameSettingConfigs.ClusterLayout).id;
-      bool outFlag =
-        clName == "clusters/OneStar"
-        || clName == "clusters/OneStarCluster"
-        || clName == "expansion1::clusters/OneStar"
-        || clName == "expansion1::clusters/OneStarCluster"
-        || clName == "expansion1::clusters/OneStarDLC";
+            bool outFlag =
+              clName == "clusters/OneStar"
+              || clName == "clusters/OneStarCluster"
+              || clName == "expansion1::clusters/OneStar"
+              || clName == "expansion1::clusters/OneStarCluster"
+              || clName == "expansion1::clusters/OneStarDLC"
+            ;
        global::Debug.LogWarning("IsMyOneWorld: " + clName + " ->" + outFlag);
-      return outFlag;
+
+            return outFlag;
     }
-  }
+        public static bool IsMiniBase()
+        {
+            string clName = CustomGameSettings.Instance.GetCurrentQualitySetting(CustomGameSettingConfigs.ClusterLayout).id;
+
+            // expansion1::clusters/MiniBaseDLC
+
+            bool outFlag =clName.Contains("MiniBase");
+      
+            return outFlag;
+        }  
+    }
 
   // Bypass and rewrite world generation
   [HarmonyPatch(typeof(WorldGen), nameof(WorldGen.RenderOffline))]
@@ -162,30 +177,167 @@ namespace SingleStarWorldMod
       if (!SingleStarWorldModPatch.IsMyOneWorld())
         return;
        __result = GenWorldFix.WorldReplaceFix(__instance, ref cells, ref dc, baseId);
-    }
-  }
-
-    [HarmonyPatch(typeof(WorldGen), nameof(WorldGen.SetWorldSize))]
-    public static class WorldGen_SetWorldSize_Patch
-    {
-
-
-        public static void Postfix(WorldGen __instance,int width, int height)
-        {
-            if (SingleStarWorldModPatch.IsMyOneWorld())
-            {
-               
-                 global::Debug.LogWarning($"reset size:{width} ,{height}, GridSize: { Grid.HeightInCells} ,{Grid.WidthInCells}");
-                if(width>100)
-                  __instance.data.world = new Chunk(0, 0, width - 100, height);
-               // Grid.HeightInCells = height;
-                Grid.WidthInCells -= 100;
-             
-                   
-            }
-                
+            global::Debug.LogWarning($"RenderOffline:  GridSize: {Grid.HeightInCells} ,{Grid.WidthInCells}");
         }
     }
+    [HarmonyPatch(typeof(Cluster), "Load")]
+    public static class Cluster_Load_Patch
+    {
+        //public static void Prefix(Cluster __instance)
+        //{
+        //    try
+        //    {
+        //        //  YamlIO.Save(SettingsCache.clusterLayouts, "D:/clusterLayouts.yaml"); ;
+        //        //  WorldGen.LoadSettings();
+        //        //  __instance.Save(WorldGen.WORLDGEN_SAVE_FILENAME + "TTTest");
+        //        // FastReader fastReader = new FastReader(File.ReadAllBytes(WorldGen.WORLDGEN_SAVE_FILENAME));
+        //        // __instance.saveAsText
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        global::Debug.LogWarning(">>>>>" + e.Message);
+        //    }
+
+        //    global::Debug.LogWarning($"-----Cluster.Load Prefix Grid:{Grid.HeightInCells} ,{Grid.WidthInCells}");
+        //    //  global::Debug.LogWarning($"--LoadFromWorldGen size----->-- {__instance.}");
+
+        //}
+        public static void Postfix(Cluster __instance, ref Cluster __result)
+        {
+            //生成之后查看世界大小
+            //__instance.ClusterLayout.
+            global::Debug.LogWarning($"-----Cluster.load Postfix Cluster.size----->-- {__result.size}");
+            if (SingleStarWorldModPatch.IsMyOneWorld() || SingleStarWorldModPatch.IsMiniBase())
+            {
+                __result.size.x -= 99;
+                global::Debug.LogWarning($"-----修改的地图大小:----->-- {__result.size}");
+ 
+            }
+
+
+            //这个值可以改变大小
+            global::Debug.LogWarning($"-----Cluster.Load Postfix Grid.size:{Grid.HeightInCells} ,{Grid.WidthInCells}");
+        }
+        //this.m_clusterLayout
+    }
+
+    //[HarmonyPatch(typeof(WorldGen), nameof(WorldGen.SetWorldSize))]
+    //public static class WorldGen_SetWorldSize_Patch
+    //{
+
+
+    //    public static void Postfix(WorldGen __instance,int width, int height)
+    //    {
+    //        if (SingleStarWorldModPatch.IsMyOneWorld())
+    //        {
+
+    //            global::Debug.LogWarning($"--->reset size:{width} ,{height}, GridSize: { Grid.HeightInCells} ,{Grid.WidthInCells}");
+    //            global::Debug.LogWarning($"--->WorldGen.GetSize:{__instance.GetSize()}");
+
+    //            //此时没有初始化,数字为0
+    //            if (width>100)
+    //              __instance.data.world = new Chunk(0, 0, width - 100, height);
+    //           // Grid.HeightInCells = height;
+    //           // Grid.WidthInCells -= 100;
+
+    //            //修改世界布局.多个图拼在一起.
+    //           //var lv= new LevelLayerSettings();
+    //            //lv.LevelLayers.
+    //            //WorldLayout.ma
+    //            //重置大小?
+    //           // Grid.InitializeCells();
+    //           // WorldLayout.SetLayerGradient(SettingsCache.layers.LevelLayers);
+
+    //        }
+
+    //    }
+    //}
+
+    //[HarmonyPatch(typeof(Grid), nameof(Grid.InitializeCells))]
+    //public static class Grid_InitializeCells_Path
+    //{
+    //    public static void Postfix()
+    //    {
+    //       // GridSettings.Reset(this.m_clusterLayout.size.x, this.m_clusterLayout.size.y);
+
+    //        global::Debug.LogWarning($"InitializeCells Grid:{Grid.HeightInCells} ,{Grid.WidthInCells}");
+    //        if (Grid.WidthInCells > 100)
+    //        {
+    //           // GridSettings.Reset(200, 200);//强制设置为200x200,会崩溃
+    //           // Grid.WidthInCells = 100;
+    //            Debug.LogWarning(new System.Diagnostics.StackTrace().ToString());
+    //        }
+    //        //worldGen.GetSize();
+    //       // Cluster.Load();
+    //        //SaveLoader.OnSpawn();
+    //    }
+    //}
+
+    //[HarmonyPatch(typeof(GridSettings), nameof( GridSettings.Reset))]
+    //public static class GridSettings_Reset_Path
+    //{
+    //    public static void Prefix(int width, int height)
+    //    {
+    //       // ListPool<SimSaveFileStructure, SaveLoader>.PooledList pooledList = ListPool<SimSaveFileStructure, SaveLoader>.Allocate();
+    //       // this.m_clusterLayout.LoadClusterLayoutSim(pooledList);
+    //        global::Debug.LogWarning($"----GridSettings.Reset :{width} ,{height}");
+    //    }
+    //}
+
+    //GridSettings.Reset
+    /* 
+     [HarmonyPatch(typeof(Cluster), "BeginGeneration")]
+     public static class Cluster_BeginGeneration_Patch
+     {
+         public static void Postfix(Cluster __instance) 
+         {
+             //生成之后查看世界大小
+
+
+             List<WorldGen> list = new List<WorldGen>(__instance.worlds);
+             foreach(var wg in list )
+             {
+                 global::Debug.LogWarning($"----BeginGeneration size----->-- {wg.GetSize()}");
+             }
+
+             global::Debug.LogWarning($"----Cluster_BeginGeneration_Patch:{Grid.HeightInCells} ,{Grid.WidthInCells}");
+         }
+         //this.m_clusterLayout
+     }
+     [HarmonyPatch(typeof(SaveLoader), "LoadFromWorldGen")]
+     public static class SaveLoader_LoadFromWorldGen_Patch
+     {
+         public static void Prefix(SaveLoader __instance)
+         {
+             var tt = __instance.ClusterLayout;
+             if(tt== null)
+             {
+                 global::Debug.LogWarning($"-----LoadFromWorldGen Prefix:----->- null");
+             }
+             else
+             {
+                 global::Debug.LogWarning($"-----LoadFromWorldGen Prefix:----->- {tt.size}");
+             }
+
+             global::Debug.LogWarning($"-----LoadFromWorldGen Prefix:Grid:{Grid.HeightInCells} ,{Grid.WidthInCells}");
+             //  global::Debug.LogWarning($"--LoadFromWorldGen size----->-- {__instance.}");
+             // Cluster.Save();
+
+         }
+         public static void Postfix(SaveLoader __instance)
+         {
+             //生成之后查看世界大小
+             //__instance.ClusterLayout.
+             global::Debug.LogWarning($"-----LoadFromWorldGen Postfix:----->-- {__instance.ClusterLayout.size}");
+
+             global::Debug.LogWarning($"-----LoadFromWorldGen Postfix Grid:{Grid.HeightInCells} ,{Grid.WidthInCells}");
+         }
+         //this.m_clusterLayout
+     }
+     //WORLDGEN COMPLETE
+
+     // 
+    */
 
 
 

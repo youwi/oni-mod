@@ -27,12 +27,28 @@ namespace DeleteAsteroid
             }
             catch (Exception ex)
             {
-                 global::Debug.LogWarning(ex.Message);
+                global::Debug.LogWarning(ex.Message);
             }
-          
+
+        }
+        public static void DeleteWorldBuildings(WorldContainer world)
+        {
+ 
+            world.CancelChores();
+            HashSet<int> noRefundTiles;
+            world.DestroyWorldBuildings(out noRefundTiles);
+         
+            OrbitalMechanics component = world.GetComponent<OrbitalMechanics>();
+            if (!component.IsNullOrDestroyed())
+            {
+                UnityEngine.Object.Destroy(component);
+            }
+
         }
         public static void DeleteWorldObjects(WorldContainer world)
         {
+
+            //这是火箭删除的代码
             Grid.FreeGridSpace(world.WorldSize, world.WorldOffset);
             WorldInventory worldInventory = null;
             if (world != null)
@@ -47,17 +63,62 @@ namespace DeleteAsteroid
             {
                 UnityEngine.Object.Destroy(world);
             }
-        
         }
-        public static void loopList(Dictionary<Tag, List<SaveLoadRoot>> sceneObjects)
+        public static void ResizeMapAfterDelete(List<SaveLoadRoot> list)
+        {
+            //找到world的最大offset。
+            var maxWidthOff = 0;
+            var maxOffsetx = 0;
+           
+            for (int i = 0; i < list.Count; i++)
+            {
+                var tt = list[i].GetComponent<WorldContainer>();
+                var age = list[i].GetComponent<AsteroidGridEntity>();
+                if (age == null) continue;//防止火箭空间写入在这里.
+
+                if (tt.IsModuleInterior) continue;// 火箭的world绕过去.
+                                                  //HabitatModuleMedium 火箭
+                if (age.Name == null ||age.Name == "") continue;
+                if (tt != null)
+                {
+                    var tmp = tt.WorldSize.x + tt.WorldOffset.x;
+                    if (tmp > maxWidthOff)
+                    {
+                        maxWidthOff = tmp;
+                        maxOffsetx= tt.WorldOffset.x;
+                    }
+                }
+            }
+
+            var newwidth = maxWidthOff + 37;//设置新大小.不改高度.
+            global::Debug.LogWarning($">>>> 星数:{list.Count} 最大位置:<{maxOffsetx},{maxWidthOff}>, Grid.WidthInCells :{Grid.WidthInCells},新大小: {newwidth},{Grid.HeightInCells}");
+            //星数:8 最大位置:<404,500>, Grid.WidthInCells :636,新大小: 537,404
+            //星数:8 最大位置:<404,500>, Grid.WidthInCells :636,新大小: 537,404
+            if (Grid.WidthInCells > newwidth + 99 || Grid.WidthInCells < newwidth)
+            {   //大于136才需要改大小.
+                //GridSettings.ClearGrid();//
+                
+                //World.Camera 可能也需要重置.
+                //PropertyTextures.UpdateFogOfWar
+                Camera.main.transform.parent.GetComponent<CameraController>().CameraGoHome();
+                GridSettings.Reset(newwidth, Grid.HeightInCells);
+                // Grid.WidthInCells=newwidth;
+                // Game.Instance.gasConduitFlow.
+                // Game.Instance.gasConduitFlow.
+                global::Debug.LogWarning($">>>>设置新大小: {newwidth},{Grid.HeightInCells}");
+            }
+            // GridSettings.Reset(worldGen.GetSize().x, worldGen.GetSize().y);
+
+        }
+        public static void DeleteAstoidFirst(Dictionary<Tag, List<SaveLoadRoot>> sceneObjects)
         {
             List<Tag> orderedKeys = new List<Tag>();
- 
+
             orderedKeys.Clear();
             orderedKeys.AddRange(sceneObjects.Keys);
             orderedKeys.Remove(SaveGame.Instance.PrefabID());
             orderedKeys = orderedKeys.OrderBy((Tag a) => a.Name == "Asteroid").ToList();
-        
+
             foreach (Tag orderedKey in orderedKeys)
             {
                 List<SaveLoadRoot> list = sceneObjects[orderedKey];
@@ -65,36 +126,43 @@ namespace DeleteAsteroid
                 {
                     continue;
                 }
-               //  global::Debug.LogWarning(orderedKey.ToString()+" -->"+list.Count);
-          
+                //  global::Debug.LogWarning(orderedKey.ToString()+" -->"+list.Count);
+
                 if (orderedKey.Name == "Asteroid")
                 {
-                     global::Debug.LogWarning(" 搜索Asteroid: ");
-                    for(int i=0; i<list.Count; i++)
+                    global::Debug.LogWarning(" 搜索Asteroid: ");
+                    for (int i = 0; i < list.Count; i++)
                     {
                         SaveLoadRoot item = list[i];
                         if (!(item == null))
                         {
-                            //  if(item.)
+                      
                             var age = item.GetComponent<AsteroidGridEntity>();
-                            // YamlIO.
                             if (age.Name == "delete" || age.Name.Trim().ToLower() == "delete")
                             {
+
+                                //var tt = item.GetComponent<WorldContainer>();
+                                //Grid.FreeGridSpace(tt.WorldSize, tt.WorldOffset);
                                 // SaveloadRoot需要删除.
-                                list[i]=null;//这里直接删除没
+                                list[i] = null;//这里直接删除没
+                          
                                 UnityEngine.Object.Destroy(item);
                                 list.RemoveAt(i);
-                              
                                 i--;
-                                 global::Debug.LogWarning("删除+1");
+                                global::Debug.LogWarning("删除+1");
                             }
+
+
                         }
                     }
-                     global::Debug.LogWarning(" 搜索Asteroid:结束 ");
+                
+                    global::Debug.LogWarning(" 搜索Asteroid:结束 ");
+                    ResizeMapAfterDelete(list);
                 }
             }
 
-            }
+        }
+
         /*
          * 
          * 删除星球mod
@@ -176,22 +244,25 @@ namespace DeleteAsteroid
                     {
                         if (gridEntity.Name == "delete" || gridEntity.Name.Trim().ToLower() == "delete" )  // 获取右上角底层的实体名.
                         {
+                            global::Debug.LogWarning("删除小行星:" + gridEntity.Name);
+
                             ClusterManager.Instance.UnregisterWorldContainer(world);
+                            //DeleteWorldBuildings(world);
+                            //DeleteWorldObjects(world);
+                            //Sim.Shutdown();
                             // remove 方法被隐藏了,只能使用自带的方法删除
                             //worlds.Remove(world);// markDeleteWorld = world;
                             // worlds.RemoveAt(i);
                             //Collection is read-only. 这里有只读问题.
                             // ClusterManager.Instance.DestoryRocketInteriorWorld
-                             global::Debug.LogWarning("掩盖星名:" + gridEntity.Name);
-                            //DeleteWorldObjects(world);
                         };
                     }
                 }
             }
+          
             var allObjmaybe= SaveLoader.Instance.saveManager.GetLists();
-            loopList(allObjmaybe);
-            //allObjmaybe[]
-            // SaveManager
+            //DeleteAstoidFirst(allObjmaybe);
+ 
 
 
 
@@ -223,7 +294,7 @@ namespace DeleteAsteroid
                 {
                      
                      global::Debug.LogWarning("AsteroidGridEntity.Name:  " + tt.Name);
-                    YamlIO.Save(tmp, "D:/GameObject3.yaml");
+                   // YamlIO.Save(tmp, "D:/GameObject3.yaml");
                 }
                 if(tmp is KPrefabID iD)
                 {

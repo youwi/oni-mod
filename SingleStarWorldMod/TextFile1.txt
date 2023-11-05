@@ -1,0 +1,79 @@
+﻿THREAD - started 'SimThread' (6188)
+[02:03:22.919] [1] [WARNING] InitializeCells:140 ,216
+[02:03:22.925] [1] [WARNING]   at SingleStarWorldMod.Grid_InitializeCells_Path.Postfix () [0x00000] in <002c630d680d4413a391c1e2c524b61e>:0
+  at Grid.Grid.InitializeCells_Patch1 () [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at Sim.Start () [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at SaveLoader.LoadFromWorldGen () [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at SaveLoader.SaveLoader.OnSpawn_Patch1 (SaveLoader ) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at KMonoBehaviour.Spawn () [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0
+  at KMonoBehaviour.Start () [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0
+
+  
+  
+
+  [DebugConsole][1]: Error[Exception]: IndexOutOfRangeException: Index was outside the bounds of the array.
+ConduitFlow+Conduit.GetContents (ConduitFlow manager) (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+ConduitFlow.OnSerializing () (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <695d1cc93cca45069c528c15c9fdd749>:0)
+Rethrow as TargetInvocationException: Exception has been thrown by the target of an invocation.
+System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <695d1cc93cca45069c528c15c9fdd749>:0)
+System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) (at <695d1cc93cca45069c528c15c9fdd749>:0)
+KSerialization.SerializationTemplate.SerializeData (System.Object obj, System.IO.BinaryWriter writer) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+KSerialization.Helper.WriteValue (System.IO.BinaryWriter writer, KSerialization.TypeInfo type_info, System.Object value) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+KSerialization.SerializationTemplate.SerializeData (System.Object obj, System.IO.BinaryWriter writer) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+Rethrow as ArgumentException: Error occurred while serializing field gasConduitFlow on template GameSaveData
+KSerialization.SerializationTemplate.SerializeData (System.Object obj, System.IO.BinaryWriter writer) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+KSerialization.Serializer.Serialize (System.Object obj, System.IO.BinaryWriter writer) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+Game.Save (System.IO.BinaryWriter writer) (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+SaveLoader.Save (System.IO.BinaryWriter writer) (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+ 
+
+  80 140  216 140
+
+  216-80=136
+  136/16=8.5
+  100-> 236
+  加载时重置世界大小:
+重置世界大小的代码:
+
+
+
+
+[08:07:11.215] [25] [WARNING] ----BeginGeneration size----->-- 100, 140
+[08:07:11.215] [25] [WARNING] ----Cluster_BeginGeneration_Patch:140 ,100
+[08:07:12.476] [1] [WARNING] -----LoadFromWorldGen Prefix:----->- null
+[08:07:12.476] [1] [WARNING] -----LoadFromWorldGen Prefix:Grid:140 ,100
+
+[08:07:12.479] [1] [WARNING] -----Cluster.Load Prefix Grid:140 ,100
+[08:07:12.836] [1] [WARNING] -----Cluster.load Cluster.size----->-- 236, 140
+[08:07:12.837] [1] [WARNING] -----Cluster.Load Postfix:140 ,100
+[08:07:12.851] [1] [WARNING] ----GridSettings.Reset :236 ,140
+
+if (DlcManager.FeatureClusterSpaceEnabled())
+//这里设置了136这个固定宽度.
+this.size = BestFit.BestFitWorlds(this.clusterLayout.worldPlacements, false);
+
+ LoadFromWorldGen:
+  this.m_clusterLayout = Cluster.Load();
+GridSettings.Reset(this.m_clusterLayout.size.x, this.m_clusterLayout.size.y);
+
+Error deserializing prefabs
+
+ System.ArgumentOutOfRangeException: Index and count must refer to a location within the buffer.
+Parameter name: bytes
+  at System.Text.UTF8Encoding.GetString (System.Byte[] bytes, System.Int32 index, System.Int32 count) [0x00057] in <695d1cc93cca45069c528c15c9fdd749>:0 
+  at FastReader.ReadKleiString () [0x00012] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at SaveManager.Load (IReader reader) [0x000b1] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+UNEXPECTED!
+Error in WorldRenderer.SubworldZoneRenderData.OnSpawn 
+System.NullReferenceException: Object reference not set to an instance of an object
+  at SubworldZoneRenderData.GenerateTexture () [0x00287] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at SubworldZoneRenderData.OnSpawn () [0x00017] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at KMonoBehaviour.Spawn () [0x0005d] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+Exception in: (SaveGame).Klei.AI.MeteorShowerEvent+States.root.starMap. 
+
+
+[DebugConsole][1]: Error[Error]: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+  at Grid.IsActiveWorld (System.Int32 cell) [0x00017] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at PropertyTextures.UpdateFogOfWar (TextureRegion region, System.Int32 x0, System.Int32 y0, System.Int32 x1, System.Int32 y1) [0x00051] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at (wrapper delegate-invoke) <Module>.invoke_void_TextureRegion_int_int_int_int(TextureRegion,int,int,int,int)

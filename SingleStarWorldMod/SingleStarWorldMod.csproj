@@ -270,6 +270,7 @@
     <Content Include="resource\preview.jpg" />
     <Content Include="resource\OneStarCluster.png" />
     <Content Include="resource\scr1.jpg" />
+    <Content Include="TextFile1.txt" />
     <None Include="resource\worldgen\worlds\backup.yaml" />
     <None Include="resource\worldgen\subworlds\onestar\OneStarSub.yaml" />
   </ItemGroup>
