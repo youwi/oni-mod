@@ -23,7 +23,8 @@ namespace DeleteAsteroid
 
             try
             {
-                DeleteMarkedAsteroid();
+                UnRegMarkedAsteroid();
+                DeleteAstoidLoop();
             }
             catch (Exception ex)
             {
@@ -110,8 +111,9 @@ namespace DeleteAsteroid
             // GridSettings.Reset(worldGen.GetSize().x, worldGen.GetSize().y);
 
         }
-        public static void DeleteAstoidFirst(Dictionary<Tag, List<SaveLoadRoot>> sceneObjects)
+        public static void DeleteAstoidLoop()
         {
+            Dictionary<Tag, List<SaveLoadRoot>> sceneObjects = SaveLoader.Instance.saveManager.GetLists();
             List<Tag> orderedKeys = new List<Tag>();
 
             orderedKeys.Clear();
@@ -157,7 +159,7 @@ namespace DeleteAsteroid
                     }
                 
                     global::Debug.LogWarning(" 搜索Asteroid:结束 ");
-                    ResizeMapAfterDelete(list);
+                   // ResizeMapAfterDelete(list);
                 }
             }
 
@@ -177,7 +179,7 @@ namespace DeleteAsteroid
          * 功能测试中.
          */
 
-        public static void DeleteMarkedAsteroid()
+        public static void UnRegMarkedAsteroid()
         {
             //  SaveGame.Instance. //存档格式
             //  WorldDetailSave clusterDetailSave = SaveLoader.Instance.clusterDetailSave;
@@ -260,8 +262,8 @@ namespace DeleteAsteroid
                 }
             }
           
-            var allObjmaybe= SaveLoader.Instance.saveManager.GetLists();
-            //DeleteAstoidFirst(allObjmaybe);
+            
+        
  
 
 
