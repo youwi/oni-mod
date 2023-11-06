@@ -448,6 +448,12 @@ namespace VacuumSpaceMod
             if (poly.bounds.xMax - poly.bounds.xMin <= size
                 || poly.bounds.yMax - poly.bounds.yMin <= size)
                 return true;
+            if (poly.Area() < 50) //计算面积
+            {
+
+                return true;
+            }
+            global::Debug.LogWarning("面积为::" + poly.Area());
             return false;
         }
         /**

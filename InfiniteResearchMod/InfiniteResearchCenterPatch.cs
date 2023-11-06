@@ -21,7 +21,7 @@ namespace InfiniteResearch
             public static void Postfix(ResearchCenter __instance, Chore ___chore)
             {
                 AccessTools.Method(typeof(InfiniteResearchCenterPatch), nameof(InfiniteResearchCenterPatch.IsEndlessWorking));
-                global::Debug.LogWarning("UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
+                global::Debug.LogWarning("InfiniteResearch_UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
                 // var button=__instance.GetComponent<InfiniteResearchCenterButton>();
                 // button.isInfiniteMode=true;
 
