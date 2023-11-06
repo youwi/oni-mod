@@ -1,12 +1,7 @@
 ﻿using Delaunay.Geo;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace VacuumSpaceMod.DebugViewClassPath.Tests
@@ -32,8 +27,8 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
              };
 
             object value = PolyUT.GetCenterOfGravityPoint(mPoints);
-             global::Debug.LogWarning(value);
-             global::Debug.LogWarning(PolyUT.GetMaxY(mPoints));
+            global::Debug.LogWarning(value);
+            global::Debug.LogWarning(PolyUT.GetMaxY(mPoints));
 
         }
         [TestMethod()]
@@ -50,14 +45,14 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
             poly.Add(new Vector2(103.17119598388672f, 202.0290985107422f));
             poly.Add(new Vector2(114.10679626464844f, 198.60479736328125f));
 
-          //  poly.Clip(poly,ClipperLib.ClipType.ctXor);
+            //  poly.Clip(poly,ClipperLib.ClipType.ctXor);
 
         }
         [TestMethod()]
         public void RandTest()
         {
             SeededRandom rnd = new SeededRandom(2123121);
-             global::Debug.LogWarning(rnd.RandomRange(2, 5));
+            global::Debug.LogWarning(rnd.RandomRange(2, 5));
         }
 
         [TestMethod()]
@@ -94,7 +89,7 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
                   "  location_x: {1}\n", value, i * 2 + 1);
 
             }
-             global::Debug.LogWarning(outStr);
+            global::Debug.LogWarning(outStr);
 
         }
     }

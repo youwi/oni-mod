@@ -1,14 +1,7 @@
 ﻿using HarmonyLib;
-using Klei;
-using Newtonsoft.Json;
-using ProcGen;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace DeleteAsteroid
@@ -34,11 +27,11 @@ namespace DeleteAsteroid
         }
         public static void DeleteWorldBuildings(WorldContainer world)
         {
- 
+
             world.CancelChores();
             HashSet<int> noRefundTiles;
             world.DestroyWorldBuildings(out noRefundTiles);
-         
+
             OrbitalMechanics component = world.GetComponent<OrbitalMechanics>();
             if (!component.IsNullOrDestroyed())
             {
@@ -70,7 +63,7 @@ namespace DeleteAsteroid
             //找到world的最大offset。
             var maxWidthOff = 0;
             var maxOffsetx = 0;
-           
+
             for (int i = 0; i < list.Count; i++)
             {
                 var tt = list[i].GetComponent<WorldContainer>();
@@ -79,14 +72,14 @@ namespace DeleteAsteroid
 
                 if (tt.IsModuleInterior) continue;// 火箭的world绕过去.
                                                   //HabitatModuleMedium 火箭
-                if (age.Name == null ||age.Name == "") continue;
+                if (age.Name == null || age.Name == "") continue;
                 if (tt != null)
                 {
                     var tmp = tt.WorldSize.x + tt.WorldOffset.x;
                     if (tmp > maxWidthOff)
                     {
                         maxWidthOff = tmp;
-                        maxOffsetx= tt.WorldOffset.x;
+                        maxOffsetx = tt.WorldOffset.x;
                     }
                 }
             }
@@ -98,7 +91,7 @@ namespace DeleteAsteroid
             if (Grid.WidthInCells > newwidth + 99 || Grid.WidthInCells < newwidth)
             {   //大于136才需要改大小.
                 //GridSettings.ClearGrid();//
-                
+
                 //World.Camera 可能也需要重置.
                 //PropertyTextures.UpdateFogOfWar
                 Camera.main.transform.parent.GetComponent<CameraController>().CameraGoHome();
@@ -138,7 +131,7 @@ namespace DeleteAsteroid
                         SaveLoadRoot item = list[i];
                         if (!(item == null))
                         {
-                      
+
                             var age = item.GetComponent<AsteroidGridEntity>();
                             if (age.Name == "delete" || age.Name.Trim().ToLower() == "delete")
                             {
@@ -147,7 +140,7 @@ namespace DeleteAsteroid
                                 //Grid.FreeGridSpace(tt.WorldSize, tt.WorldOffset);
                                 // SaveloadRoot需要删除.
                                 list[i] = null;//这里直接删除没
-                          
+
                                 UnityEngine.Object.Destroy(item);
                                 list.RemoveAt(i);
                                 i--;
@@ -157,9 +150,9 @@ namespace DeleteAsteroid
 
                         }
                     }
-                
+
                     global::Debug.LogWarning(" 搜索Asteroid:结束 ");
-                   // ResizeMapAfterDelete(list);
+                    // ResizeMapAfterDelete(list);
                 }
             }
 
@@ -215,14 +208,14 @@ namespace DeleteAsteroid
             //worlds 属于数据分区.  steroid属于存档.
             //ClusterManager.Instance.GetAllWorldsAccessibleAmounts
             //WorldContainer markDeleteWorld = null;
-           
-             global::Debug.LogWarning("查找delete:" + worlds.Count);
+
+            global::Debug.LogWarning("查找delete:" + worlds.Count);
             for (int i = 0; i < worlds.Count; i++)
             {
                 if (worlds.Count > 1)
                 {
                     var world = worlds[i];
-                    if(world == null)
+                    if (world == null)
                     {
                         continue;
                     }
@@ -232,19 +225,19 @@ namespace DeleteAsteroid
                         continue;
                     };
                     var gridEntity = world.GetComponent<ClusterGridEntity>();
-                    
+
                     var age = world.GetComponentInParent<AsteroidGridEntity>();
-                    var wi= world.GetComponentInParent<WorldInventory>();
-                    var wom=world.GetComponentInParent<OrbitalMechanics>();
-                    var wsmc=world.GetComponentInParent<StateMachineController>();
-                     global::Debug.LogWarning("WorldInventory  ---> :" + wi);
-                     global::Debug.LogWarning("OrbitalMechanics  ---> :" + wom);
-                     global::Debug.LogWarning("StateMachineController  ---> :" + wsmc);
-                     global::Debug.LogWarning("AsteroidGridEntity-->:" + age);
+                    var wi = world.GetComponentInParent<WorldInventory>();
+                    var wom = world.GetComponentInParent<OrbitalMechanics>();
+                    var wsmc = world.GetComponentInParent<StateMachineController>();
+                    global::Debug.LogWarning("WorldInventory  ---> :" + wi);
+                    global::Debug.LogWarning("OrbitalMechanics  ---> :" + wom);
+                    global::Debug.LogWarning("StateMachineController  ---> :" + wsmc);
+                    global::Debug.LogWarning("AsteroidGridEntity-->:" + age);
 
                     if (gridEntity != null)
                     {
-                        if (gridEntity.Name == "delete" || gridEntity.Name.Trim().ToLower() == "delete" )  // 获取右上角底层的实体名.
+                        if (gridEntity.Name == "delete" || gridEntity.Name.Trim().ToLower() == "delete")  // 获取右上角底层的实体名.
                         {
                             global::Debug.LogWarning("删除小行星:" + gridEntity.Name);
 
@@ -261,10 +254,10 @@ namespace DeleteAsteroid
                     }
                 }
             }
-          
-            
-        
- 
+
+
+
+
 
 
 
@@ -272,49 +265,49 @@ namespace DeleteAsteroid
             GameObject gameObject = Util.KInstantiate(Assets.GetPrefab("Asteroid"), null, null);
             GameObject gameObject2 = Util.KInstantiate(Assets.GetPrefab("Asteroid"), null, null);
 
-             global::Debug.LogWarning("KInstantiate:gameObject:" + gameObject);
-             global::Debug.LogWarning("KInstantiate:gameObject:对象相等：" + gameObject.Equals(gameObject2));
-             global::Debug.LogWarning("Asteroid:gameObject:对象相等：" +
-            Assets.GetPrefab("Asteroid").Equals(Assets.GetPrefab("Asteroid")));
-            GameObject go=Assets.GetPrefab("Asteroid");//好像只初始化一个星球.
-            //好像是空对象.
-            //===> Asteroid(KPrefabID)
-            //===> Asteroid(KSelectable)
-            //===> Asteroid(SaveLoadRoot)
-            //===> Asteroid(WorldInventory)
-            //===> Asteroid(WorldContainer)
-            //===> Asteroid(AsteroidGridEntity)
-            //===> Asteroid(OrbitalMechanics)
-            //===> Asteroid(StateMachineController)
-             global::Debug.LogWarning("Asteroid GameObject :" + go);
+            global::Debug.LogWarning("KInstantiate:gameObject:" + gameObject);
+            global::Debug.LogWarning("KInstantiate:gameObject:对象相等：" + gameObject.Equals(gameObject2));
+            global::Debug.LogWarning("Asteroid:gameObject:对象相等：" +
+           Assets.GetPrefab("Asteroid").Equals(Assets.GetPrefab("Asteroid")));
+            GameObject go = Assets.GetPrefab("Asteroid");//好像只初始化一个星球.
+                                                         //好像是空对象.
+                                                         //===> Asteroid(KPrefabID)
+                                                         //===> Asteroid(KSelectable)
+                                                         //===> Asteroid(SaveLoadRoot)
+                                                         //===> Asteroid(WorldInventory)
+                                                         //===> Asteroid(WorldContainer)
+                                                         //===> Asteroid(AsteroidGridEntity)
+                                                         //===> Asteroid(OrbitalMechanics)
+                                                         //===> Asteroid(StateMachineController)
+            global::Debug.LogWarning("Asteroid GameObject :" + go);
             //go.RemoveTag("");
             var s = go.GetComponents<KMonoBehaviour>();
-            foreach(var tmp in s)
+            foreach (var tmp in s)
             {
-                 global::Debug.LogWarning("===>  "+tmp.ToString());
-                if(tmp is AsteroidGridEntity tt)
+                global::Debug.LogWarning("===>  " + tmp.ToString());
+                if (tmp is AsteroidGridEntity tt)
                 {
-                     
-                     global::Debug.LogWarning("AsteroidGridEntity.Name:  " + tt.Name);
-                   // YamlIO.Save(tmp, "D:/GameObject3.yaml");
+
+                    global::Debug.LogWarning("AsteroidGridEntity.Name:  " + tt.Name);
+                    // YamlIO.Save(tmp, "D:/GameObject3.yaml");
                 }
-                if(tmp is KPrefabID iD)
+                if (tmp is KPrefabID iD)
                 {
-                    global::Debug.LogWarning("KPrefabID" +  iD.InstanceID);
+                    global::Debug.LogWarning("KPrefabID" + iD.InstanceID);
                 }
             }
-             global::Debug.LogWarning("Asteroid  ->AsteroidGridEntity.length :" + go.GetComponents<AsteroidGridEntity>().Length);
-           // YamlIO.Save(go, "D:/GameObject.yaml");
-           // YamlIO.Save(gameObject, "D:/GameObjectIn.yaml");
-           // go.DeleteObject();
+            global::Debug.LogWarning("Asteroid  ->AsteroidGridEntity.length :" + go.GetComponents<AsteroidGridEntity>().Length);
+            // YamlIO.Save(go, "D:/GameObject.yaml");
+            // YamlIO.Save(gameObject, "D:/GameObjectIn.yaml");
+            // go.DeleteObject();
 
             //go.IsNullOrDestroyed();
             //go.re
-           // go.
-           //  global::Debug.LogWarning(" a - config :" + go.GetComponent<AsteroidConfig>());
-           //go.gameObjects
-           //string json = JsonConvert.SerializeObject(go);
-           // global::Debug.LogWarning("Asteroid GameObject: "+json);
+            // go.
+            //  global::Debug.LogWarning(" a - config :" + go.GetComponent<AsteroidConfig>());
+            //go.gameObjects
+            //string json = JsonConvert.SerializeObject(go);
+            // global::Debug.LogWarning("Asteroid GameObject: "+json);
 
 
 

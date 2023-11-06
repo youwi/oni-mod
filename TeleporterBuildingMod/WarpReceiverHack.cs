@@ -1,17 +1,11 @@
-﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 
 namespace TeleporterBuildingMod
 {
     public class WarpReceiverHack : IBuildingConfig
     {
-  
+
         public override BuildingDef CreateBuildingDef()
         {
             string id = "WarpReceiver1";
@@ -38,7 +32,7 @@ namespace TeleporterBuildingMod
         public override void DoPostConfigureComplete(GameObject go)
         {
             go.GetComponent<Deconstructable>().allowDeconstruction = true;
-            
+
         }
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
         {
@@ -49,7 +43,7 @@ namespace TeleporterBuildingMod
         }
 
     }
-   
-     
-    
+
+
+
 }

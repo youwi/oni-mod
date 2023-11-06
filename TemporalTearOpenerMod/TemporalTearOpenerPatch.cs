@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Database;
+using HarmonyLib;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Database;
-using HarmonyLib;
 using UnityEngine;
 
 namespace TemporalTearOpenerPatch
@@ -56,7 +51,7 @@ namespace TemporalTearOpenerPatch
             HighEnergyParticleStorage highEnergyParticleStorage = __instance.GetComponent<HighEnergyParticleStorage>();
             if (highEnergyParticleStorage != null)
                 highEnergyParticleStorage.ConsumeAll();
-           // highEnergyParticleStorage.IsFull
+            // highEnergyParticleStorage.IsFull
 
 
         }

@@ -48,7 +48,7 @@ namespace InfiniteResearch
 
         private void OnCopySettings(object sourceObj)
         {
-            if((sourceObj as GameObject).GetComponent<InfiniteModeToggleButton>() is var comp)
+            if ((sourceObj as GameObject).GetComponent<InfiniteModeToggleButton>() is var comp)
                 isInfiniteMode = comp.isInfiniteMode;
         }
 

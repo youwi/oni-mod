@@ -1,17 +1,11 @@
-﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 
 namespace TeleporterBuildingMod
 {
     public class WarpPortalHack : IBuildingConfig
     {
- 
+
 
         public GameObject CreatePrefab()
         {
@@ -38,7 +32,7 @@ namespace TeleporterBuildingMod
             KBatchedAnimController kBatchedAnimController = obj.AddOrGet<KBatchedAnimController>();
             kBatchedAnimController.sceneLayer = Grid.SceneLayer.BuildingBack;
             kBatchedAnimController.fgLayer = Grid.SceneLayer.BuildingFront;
-           
+
             return obj;
         }
 
@@ -60,7 +54,7 @@ namespace TeleporterBuildingMod
             int width = 3;
             int height = 3;
             string anim = "warp_portal_sender_new_kanim";//动画有bug,使用修改后的动画
-          //  string anim = "temporal_tear_opener_kanim";
+                                                         //  string anim = "temporal_tear_opener_kanim";
             int hitpoints = 100;
             float construction_time = 120f;
             float[] tais1 = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER5;
@@ -75,14 +69,14 @@ namespace TeleporterBuildingMod
 
             buildingDef.ShowInBuildMenu = true;
             //buildingDef.GetBuildingCell();
- 
+
             return buildingDef;
         }
 
         public override void DoPostConfigureComplete(GameObject go)
         {
             go.GetComponent<Deconstructable>().allowDeconstruction = true;
-            
+
         }
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
         {
@@ -91,14 +85,14 @@ namespace TeleporterBuildingMod
             component.SetElement(SimHashes.Copper, true);
             component.Temperature = 294.15f;
             //go.get
-             
+
 
             // TemporalTearOpener.Def def;= go.AddOrGetDef<WarpPortal.Def>();
 
         }
 
     }
-   
-     
-    
+
+
+
 }

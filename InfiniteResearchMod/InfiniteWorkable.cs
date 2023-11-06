@@ -1,8 +1,6 @@
 ﻿using HarmonyLib;
 using Klei.AI;
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace InfiniteResearch
@@ -55,9 +53,9 @@ namespace InfiniteResearch
 
         protected static void RemoveDupe(Workable instance, Chore chore, Func<Workable, bool> isEndlessWorking)
         {
-       
+
             KSelectable kSelectable = instance.GetComponent<KSelectable>();
-             
+
             if (isEndlessWorking(instance) && chore != null)
             {
                 bool isBeingWorked = false;
@@ -67,12 +65,12 @@ namespace InfiniteResearch
                     if (!ShouldChoreBeWorked(chore))
                         chore.driver.StopChore();
                 }
-                if(requiresAttributeRange!=null && kSelectable!=null)
-                kSelectable.ToggleStatusItem(requiresAttributeRange, !isBeingWorked, GetAttributeRange(chore));
+                if (requiresAttributeRange != null && kSelectable != null)
+                    kSelectable.ToggleStatusItem(requiresAttributeRange, !isBeingWorked, GetAttributeRange(chore));
             }
             else if (requiresAttributeRange != null && kSelectable != null)
                 kSelectable.ToggleStatusItem(requiresAttributeRange, false);
- 
+
         }
         public static float GetMultiplier(GameObject go)
         {
@@ -99,15 +97,15 @@ namespace InfiniteResearch
             }
 
 
-         }
+        }
 
 
         [HarmonyPatch(typeof(Telescope), "OnSpawn")]
         private static class TelescopeAddStatusItemPatch
         {
-     
 
-            public  static void Postfix(Workable __instance)
+
+            public static void Postfix(Workable __instance)
             {
                 requiresAttributeRange = new StatusItem("RequiresAttributeRange", "BUILDING", "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID)
                 {
@@ -117,12 +115,12 @@ namespace InfiniteResearch
                         return str.Replace("{Attributes}", minMax.Item1 + " - " + minMax.Item2);
                     }
                 };
-         
-                __instance.GetType().GetField("attributeExperienceMultiplier").SetValue(__instance,GetMultiplier(__instance.gameObject));
-               // __instance.attributeExperienceMultiplier = GetMultiplier(__instance.gameObject);
+
+                __instance.GetType().GetField("attributeExperienceMultiplier").SetValue(__instance, GetMultiplier(__instance.gameObject));
+                // __instance.attributeExperienceMultiplier = GetMultiplier(__instance.gameObject);
             }
 
-           
+
         }
     }
 }
