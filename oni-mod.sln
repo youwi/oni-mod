@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleporterBuildingMod", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceMod", "VacuumSpaceMod\VacuumSpaceMod.csproj", "{084191CF-9A65-448D-ADE8-9AD89593CAE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceModTests", "VacuumSpaceModTests\VacuumSpaceModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModTests", "VacuumSpaceModTests\ModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleStarWorldMod", "SingleStarWorldMod\SingleStarWorldMod.csproj", "{B69904B6-0FD5-4AEC-BA34-03E305387E87}"
 EndProject

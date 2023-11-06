@@ -1,12 +1,63 @@
 ﻿using HarmonyLib;
+using Klei.AI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DoubleMutantMod
 {
     [HarmonyPatch(typeof(MutantPlant), nameof(MutantPlant.Mutate))]
     public class DoubleMutantModPatch
     {
+        //使用名单机制. 算了,这个表太大
+        public static string[] blickList =
+        {
+                    "moderatelyLoose_moderatelyTight",
+                    "moderatelyLoose_extremelyTight",
+               //     "moderatelyLoose_bonusLice",
+                    "moderatelyLoose_sunnySpeed",
+               //     "moderatelyLoose_slowBurn",
+                //    "moderatelyLoose_blooms",
+                    "moderatelyLoose_loadedWithFruit",
+                    "moderatelyLoose_heavyFruit",
+                    "moderatelyLoose_rottenHeaps",
+                    "moderatelyTight_extremelyTight",
+               //     "moderatelyTight_bonusLice",
+                    "moderatelyTight_sunnySpeed",
+               //     "moderatelyTight_slowBurn",
+               //     "moderatelyTight_blooms",
+                    "moderatelyTight_loadedWithFruit",
+                    "moderatelyTight_heavyFruit",
+                    "moderatelyTight_rottenHeaps",
+               //     "extremelyTight_bonusLice",
+                    "extremelyTight_sunnySpeed",
+               //     "extremelyTight_slowBurn",
+               //     "extremelyTight_blooms",
+                    "extremelyTight_loadedWithFruit",
+                    "extremelyTight_heavyFruit",
+                    "extremelyTight_rottenHeaps",
+              //      "bonusLice_sunnySpeed",
+              //      "bonusLice_slowBurn",
+              //      "bonusLice_blooms",
+              //      "bonusLice_loadedWithFruit",
+              //      "bonusLice_heavyFruit",
+              //      "bonusLice_rottenHeaps",
+               //     "sunnySpeed_slowBurn",
+               //     "sunnySpeed_blooms",
+                    "sunnySpeed_loadedWithFruit",
+                    "sunnySpeed_heavyFruit",
+              //      "sunnySpeed_rottenHeaps", //bug级别
+                //    "slowBurn_blooms",
+                //    "slowBurn_loadedWithFruit",
+                //    "slowBurn_heavyFruit",
+                //    "slowBurn_rottenHeaps",
+               //     "blooms_loadedWithFruit",
+               //     "blooms_heavyFruit",
+               //     "blooms_rottenHeaps",
+                    "loadedWithFruit_heavyFruit",
+                    "loadedWithFruit_rottenHeaps",
+                    "heavyFruit_rottenHeaps"
+        };
         public static void Postfix(MutantPlant __instance)
         {
             try
@@ -28,20 +79,55 @@ namespace DoubleMutantMod
                     global::Debug.LogWarning("变异已经大于2:" + list);
                     return;
                 }
-                //添加一轮变异,按20%概率添加.
-                if (rand10() > 3)
+                //添加一轮变异,按25%概率添加.
+                if (rand10() > 3) //还要按黑名单减一半
                 {
                     //看看能不能加性能
                     global::Debug.LogWarning("二次变异率为20%,变异未触发,:" + list);
                     return;
                 }
                 string name = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
-                list.Add(name);
                 string name2 = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
-                if (name != name2)
-                {
-                    list.Add(name2);//防止重复添加,如果重复了就当成一次变异
+                string nameTmp=name+ "_" + name2;//
 
+                list.Add(name);//一级变异,
+                if (blickList.Contains(nameTmp)) //机率再减50%
+                {
+                    if (name == "sunnySpeed" && name2 == "rottenHeaps") return;//bug级
+                    if (name == "rottenHeaps" && name2 == "sunnySpeed") return;//bug级
+
+                    //if (name == "slowBurn" || name2 == "slowBurn")
+                    //    return;//野化 为垃圾变异,不需要了.
+                    //if (name == "blooms" || name2 == "blooms")
+                    //    return;//盛开 为垃圾变异,不需要了.
+                    //if (name == "bonusLice" || name2 == "bonusLice")
+                    //    return;//米虱  为垃圾变异,不需要了.
+                    //if (name == "moderatelyTight" || name2 == "moderatelyTight")
+                    //    return;//专化 ,不需要了.
+
+                    //if (name == "rottenHeaps" && name2 == "loadedWithFruit") { return; }//无用的 
+
+                    ////无视顺序的删除一半.按字母顺序.
+                    //if (name == "rottenHeaps" ) return;//旺盛减一半,只后置.
+
+                    //if ( name== "heavyFruit") return;// 硕果减一半. 只后置.
+
+                    //if (name == "extremelyTight") return;//超专化减一半.
+
+                    //if (name == "heavyFruit") return;// 硕果减一半.
+
+                    // moderatelyLoose; 温和
+                    //-- moderatelyTight; 专化
+                    // extremelyTight; 超专化
+                    //-- bonusLice; 米虱   垃圾
+                    // sunnySpeed; 绿叶  要光,-50周期,不能和旺盛一起出.
+                    //-- slowBurn; 野化
+                    //-- blooms; 盛开 加20装饰
+                    // loadedWithFruit; 富饶 要光
+                    // heavyFruit; 硕果
+                    // rottenHeaps;旺盛
+                 
+                    list.Add(name2);//防止重复添加,如果重复了就当成一次变异
                 }
                 __instance.SetSubSpecies(list);
             }
