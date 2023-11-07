@@ -1,11 +1,6 @@
-﻿using Delaunay.Geo;
-using HarmonyLib;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using UnityEngine;
 
 
 namespace ModTests
@@ -16,7 +11,7 @@ namespace ModTests
     [TestClass()]
     public class UnitTest1
     {
-      
+
 
         #region 附加测试特性
         //
@@ -67,22 +62,23 @@ namespace ModTests
                 "heavyFruit",
                 "rottenHeaps"
             };
-            List<string> stou=new List<string>();
-            foreach(var s in ss) { 
-                foreach(var v in ss)
+            List<string> stou = new List<string>();
+            foreach (var s in ss)
+            {
+                foreach (var v in ss)
                 {
-                    if(s!=v)
+                    if (s != v)
                     {
                         var tmpa = s + "_" + v;
                         var tmpb = v + "_" + s;
-                       // Console.WriteLine(tmp) ;
-                       // stou.Append(tmp);
-                       if(!stou.Contains(tmpb))
+                        // Console.WriteLine(tmp) ;
+                        // stou.Append(tmp);
+                        if (!stou.Contains(tmpb))
                             stou.Add(tmpa);
                     }
                 }
             }
-            Console.WriteLine(String.Join("\",\n\"",stou) );
+            Console.WriteLine(String.Join("\",\n\"", stou));
             Console.WriteLine(stou.Count);
             // Console.WriteLine(stou);
             // 

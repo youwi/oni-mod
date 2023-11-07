@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Klei.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +70,7 @@ namespace DoubleMutantMod
                 }
                 if (list == null)
                 {
-                   // global::Debug.LogWarning("变异listNull:" + list);
+                    // global::Debug.LogWarning("变异listNull:" + list);
                     list = new List<string>();
                 }
                 if (list.Count > 2)
@@ -88,9 +87,9 @@ namespace DoubleMutantMod
                 }
                 string name = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
                 string name2 = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
-                string nameTmp=name+ "_" + name2;//
+                string nameTmp = name + "_" + name2;//
 
-                global::Debug.LogWarning("变异目标:" + nameTmp+ ",匹配:"+blickList.Contains(nameTmp));
+                global::Debug.LogWarning("变异目标:" + nameTmp + ",匹配:" + blickList.Contains(nameTmp));
 
                 list.Add(name);//一级变异,
                 if (blickList.Contains(nameTmp)) //机率再减50%
@@ -128,7 +127,7 @@ namespace DoubleMutantMod
                     // loadedWithFruit; 富饶 要光
                     // heavyFruit; 硕果
                     // rottenHeaps;旺盛
-                 
+
                     list.Add(name2);//防止重复添加,如果重复了就当成一次变异
                 }
                 __instance.SetSubSpecies(list);
