@@ -1,0 +1,35 @@
+﻿ 
+ 由于机制问题.暂时只支持这种操作.
+
+ 小麦和小吃豆收获时额外得到1到6个种子(变异的也可以)
+
+ 注: 变异的小麦收获时能得到额外的1到6个种子.支持变异
+ 原打算保持数量不变的,结果代码太麻烦了.
+
+
+
+ 挖掉小麦的调用: 事件机制.
+ at SeedProducer.SeedProducer.ProduceSeed_Patch1 (SeedProducer , System.String , System.Int32 , System.Boolean ) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at SeedProducer.DropSeed (System.Object data) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at SeedProducer+<>c.<.cctor>b__15_0 (SeedProducer component, System.Object data) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0
+  at EventSystem+IntraObjectHandler`1[ComponentType].Trigger (UnityEngine.GameObject gameObject, System.Object eventData) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0
+  at EventSystem.Trigger (UnityEngine.GameObject go, System.Int32 hash, System.Object data) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0
+  at KMonoBehaviour.Trigger (System.Int32 hash, System.Object data) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0
+  at StandardCropPlant+States+<>c.<InitializeStates>b__5_0 (St
+
+
+  Exception in: (ColdWheat).StandardCropPlant+States.root.alive.harvest.Enter 
+System.InvalidCastException
+  at (wrapper managed-to-native) System.Array.SetValueImpl(System.Array,object,int)
+  at System.Array.SetValue (System.Object value, System.Int32 index) [0x00057] in <695d1cc93cca45069c528c15c9fdd749>:0 
+  at ColdWheatSeedDropMod.ProduceMoreSeed_Patch.Postfix (SeedProducer __instance) [0x000a2] in <a1f63247b41c4bbb855536547efb728c>:0 
+  at (wrapper dynamic-method) SeedProducer.SeedProducer.CropPicked_Patch1(SeedProducer,object)
+  at SeedProducer+<>c.<.cctor>b__15_1 (SeedProducer component, System.Object data) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at EventSystem+IntraObjectHandler`1[ComponentType].Trigger (UnityEngine.GameObject gameObject, System.Object eventData) [0x0001e] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at EventSystem.Trigger (UnityEngine.GameObject go, System.Int32 hash, System.Object data) [0x0004f] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at KMonoBehaviour.Trigger (System.Int32 hash, System.Object data) [0x00026] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at Crop.SpawnConfiguredFruit (System.Object callbackParam) [0x0003a] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at StandardCropPlant+States+<>c.<InitializeStates>b__5_14 (StandardCropPlant+StatesInstance smi) [0x00014] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at StateMachine`4+GenericInstance[StateMachineType,StateMachineInstanceType,MasterType,DefType].ExecuteActions (StateMachine`4+State[StateMachineType,StateMachineInstanceType,MasterType,DefType] state, System.Collections.Generic.List`1[T] actions) [0x00048] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+   
+

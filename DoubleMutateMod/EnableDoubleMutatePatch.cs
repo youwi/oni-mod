@@ -20,7 +20,7 @@ namespace DoubleMutantMod
                     "moderatelyLoose_loadedWithFruit",
                     "moderatelyLoose_heavyFruit",
                     "moderatelyLoose_rottenHeaps",
-                    "moderatelyTight_extremelyTight",
+               //     "moderatelyTight_extremelyTight",
                //     "moderatelyTight_bonusLice",
                     "moderatelyTight_sunnySpeed",
                //     "moderatelyTight_slowBurn",
@@ -59,6 +59,7 @@ namespace DoubleMutantMod
         };
         public static void Postfix(MutantPlant __instance)
         {
+            //		plant.AddOrGet<SeedProducer>().Configure(id, productionType, numberOfSeeds);
             try
             {
 
@@ -78,13 +79,18 @@ namespace DoubleMutantMod
                     global::Debug.LogWarning("变异已经大于2:" + list);
                     return;
                 }
-                //添加一轮变异,按25%概率添加.
-                if (rand10() > 3) //还要按黑名单减一半
+                if (rand100() > 80) //注意双重随机数会重叠.
                 {
-                    //看看能不能加性能
-                    global::Debug.LogWarning("二次变异率为20%,变异未触发");
+                    //注释看看能不能加性能
+                   
+                    global::Debug.LogWarning("二次变异率为80%,变异未触发");
                     return;
                 }
+                //添加一轮变异,按25%概率添加.
+                //黑名单本身机率减一半,
+                /* 
+                 * // 这里是A方案.
+
                 string name = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
                 string name2 = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
                 string nameTmp = name + "_" + name2;//
@@ -131,6 +137,10 @@ namespace DoubleMutantMod
                     list.Add(name2);//防止重复添加,如果重复了就当成一次变异
                 }
                 __instance.SetSubSpecies(list);
+                */
+                // 这里是B方案
+                __instance.SetSubSpecies(randInList().Split('_').ToList());
+
             }
             catch (Exception ex)
             {
@@ -138,10 +148,22 @@ namespace DoubleMutantMod
             }
 
         }
-        public static int rand10()
+        static Random randA = new System.Random();
+        static Random randB = new System.Random();
+
+        public static int rand100()
         {
-            Random rand = new System.Random();
-            return rand.Next(1, 10);
+            
+            randB.Next();
+            randB.Next(1000);
+            return randB.Next(1, 100);
+        }
+        public static string randInList()
+        {
+        
+            string ot= blickList[randA.Next(0, blickList.Length)];
+            global::Debug.LogWarning("双重变异为:"+ot);
+            return ot;
         }
     }
 }

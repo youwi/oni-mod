@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-
+using System.Threading;
 
 namespace ModTests
 {
@@ -85,5 +85,31 @@ namespace ModTests
             // TODO:  在此处添加测试逻辑
             //
         }
+
+        [TestMethod()]
+        public void TestMethodFFsssF2()
+        {
+            for(int i = 0; i < 20; i++)
+            {
+                Console.WriteLine(DoubleMutantMod.DoubleMutantModPatch.randInList());
+                Thread.Sleep(100);
+                Console.WriteLine(DoubleMutantMod.DoubleMutantModPatch.randInList());
+            }
+        
+        }
+
+        [TestMethod()]
+        public void TestMethodFFsssF2222()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+
+               if(DoubleMutantMod.DoubleMutantModPatch.rand100()>3)
+                        DoubleMutantMod.DoubleMutantModPatch.randInList();
+                Thread.Sleep(100);
+            }
+
+        }
+        
     }
 }

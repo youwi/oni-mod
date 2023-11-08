@@ -83,13 +83,53 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChangeMapMod\ChangeMapMod.csproj">
+      <Project>{51fa70d5-a1c0-4a57-963c-9d87259dafda}</Project>
+      <Name>ChangeMapMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeleteAsteroid\DeleteAsteroid.csproj">
+      <Project>{10780224-fe59-434e-b8cf-7ff7b4c1b9be}</Project>
+      <Name>DeleteAsteroid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DoubleMutateMod\DoubleMutateMod.csproj">
+      <Project>{68646d03-ff3c-4bc0-af34-f20d0fc98247}</Project>
+      <Name>DoubleMutateMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DropArtifactsMod\DropArtifactsMod.csproj">
+      <Project>{6dbf9f5d-e293-4b64-958d-8620183192b1}</Project>
+      <Name>DropArtifactsMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForceMutateButton\ForceMutateMod.csproj">
+      <Project>{7aba2402-ed8d-443d-a615-e36e66d2d7e6}</Project>
+      <Name>ForceMutateMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForestTreeMutateMod\ForestTreeMutateMod.csproj">
+      <Project>{40349e3d-44e2-4004-8d85-627f2ccd3eae}</Project>
+      <Name>ForestTreeMutateMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InfiniteResearchMod\InfiniteResearchMod.csproj">
+      <Project>{55abdaf1-b224-4446-995b-fe26dcef6e58}</Project>
+      <Name>InfiniteResearchMod</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj">
       <Project>{B69904B6-0FD5-4AEC-BA34-03E305387E87}</Project>
       <Name>SingleStarWorldMod</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TeleporterBuildingMod\TeleporterBuildingMod.csproj">
+      <Project>{a72c572f-0112-4b93-9d38-5f1ad37a8678}</Project>
+      <Name>TeleporterBuildingMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TemporalTearOpenerMod\TemporalTearOpenerMod.csproj">
+      <Project>{ea8165ca-1e72-47ea-af47-9d692494b37c}</Project>
+      <Name>TemporalTearOpenerMod</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj">
       <Project>{084191CF-9A65-448D-ADE8-9AD89593CAE5}</Project>
       <Name>VacuumSpaceMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WarpConduitReceiverMod\WarpConduitPartnerMod.csproj">
+      <Project>{1f98832c-ab28-4ce7-af9d-05c8d5365190}</Project>
+      <Name>WarpConduitPartnerMod</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
