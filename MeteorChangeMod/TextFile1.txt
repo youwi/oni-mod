@@ -1,0 +1,27 @@
+﻿
+
+Rename Base 来源另一个mod. 
+
+原作者没更新
+https://steamcommunity.com/sharedfiles/filedetails/?id=2152476119&searchtext=rename+base
+
+添加陨石雨
+
+m_seasonIds
+
+
+ArgumentException: The Object you want to instantiate is null.
+
+UnityEngine.Object.Instantiate (UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace) (at <72b60a3dd8cd4f12a155b761a1af9144>:0)
+UnityEngine.Object.Instantiate[T] (T original, UnityEngine.Transform parent, System.Boolean worldPositionStays) (at <72b60a3dd8cd4f12a155b761a1af9144>:0)
+Util.KInstantiateUI (UnityEngine.GameObject original, UnityEngine.GameObject parent, System.Boolean force_active) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+MeteorChangeMod.CustomSettingsController.ShowWindow () (at <3666695f95234094b7a99f2b0667020d>:0)
+MeteorChangeMod.Patches.OnCustomMenuButtonPressed () (at <3666695f95234094b7a99f2b0667020d>:0)
+KButtonMenu+<>c__DisplayClass11_1.<RefreshButtons>b__1 () (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+KButton.SignalClick (KKeyCode btn) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+KButton.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at <e9635660f69b4d9d84c085aeda3be353>:0)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at <e9635660f69b4d9d84c085aeda3be353>:0)
+UnityEngine.EventSystems.EventSystem:Update()
+
+Build: U49-577063-SD

@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForceMutateMod", "ForceMuta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColdWheatSeedDropMod", "ColdWheatSeedDropMod\ColdWheatSeedDropMod.csproj", "{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteorChangeMod", "MeteorChangeMod\MeteorChangeMod.csproj", "{64BA700D-B959-454D-8DA3-F2BE9761585C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64BA700D-B959-454D-8DA3-F2BE9761585C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64BA700D-B959-454D-8DA3-F2BE9761585C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64BA700D-B959-454D-8DA3-F2BE9761585C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64BA700D-B959-454D-8DA3-F2BE9761585C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
