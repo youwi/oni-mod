@@ -45,11 +45,50 @@ namespace MeteorChangeMod
             }
         }
 
-        private static readonly KButtonMenu.ButtonInfo TwitchButtonInfo = new KButtonMenu.ButtonInfo((string)STRINGS.UI.CUSTOMGAMESETTINGSCHANGER.BUTTONTEXT, Action.NumActions, new UnityAction(OnCustomMenuButtonPressed));
+        private static readonly KButtonMenu.ButtonInfo toggleButtonInfo = new KButtonMenu.ButtonInfo(
+                (string)STRINGS.UI.CUSTOMGAMESETTINGSCHANGER.BUTTONTEXT, 
+                Action.NumActions, 
+                new UnityAction(OnCustomMenuButtonPressed));
+
+        static List<KButtonMenu.ButtonInfo> meteorShowersList = null;
+
+        //构建button名单.
+        public static void buildButtonList()
+        {
+            List<KButtonMenu.ButtonInfo> listOut= new List<KButtonMenu.ButtonInfo>();
+            // Db.Get().GameplaySeasons.MeteorShowers;
+            var fieldList=Type.GetType("Database.GameplaySeasons").GetFields();
+
+            if(fieldList==null || fieldList.Length==0)
+                fieldList=Db.Get().GameplaySeasons.GetType().GetFields(); ;
+
+            foreach (var field in fieldList)
+            {
+               // Database.GameplaySeasons;
+                if (field.Name.EndsWith("MeteorShowers"))
+                {
+                    KButtonMenu.ButtonInfo tmp = new KButtonMenu.ButtonInfo(
+                         field.Name,
+                         Action.NumActions,
+                         new UnityAction(OnCustomMenuButtonPressed));
+                    listOut.Add(tmp);
+                }
+               
+             }
+            if(meteorShowersList==null)
+            {
+                meteorShowersList = listOut;
+            }
+            Debug.LogWarning("buildButtonList菜单大小:" + listOut.Count);
+            //var fun = Database.GameplaySeasons.class.get ;
+            // Database.GameplaySeasons
+            // ClusterManager.Instance.me
+        }
+
         private static void OnCustomMenuButtonPressed()
         {
             PauseScreen.Instance.RefreshButtons(); 
-            CustomSettingsController.ShowWindow();
+            // CustomSettingsController.ShowWindow();
             GameScheduler.Instance.ScheduleNextFrame("OpenCustomSettings", (System.Action<object>)(_ =>
             {
                 PauseScreen.Instance.RefreshButtons();
@@ -63,8 +102,16 @@ namespace MeteorChangeMod
             private static void Postfix(ref IList<KButtonMenu.ButtonInfo> ___buttons)
             {
                 List<KButtonMenu.ButtonInfo> list = ___buttons.ToList<KButtonMenu.ButtonInfo>();
-                TwitchButtonInfo.isEnabled = true;
-                list.Insert(5, TwitchButtonInfo);
+                toggleButtonInfo.isEnabled = true;
+                // TwitchButtonInfo 
+                list.Insert(5, toggleButtonInfo);
+
+                buildButtonList();
+                for(int i=0;i< meteorShowersList.Count; i++)
+                {
+                    list.Insert(5+i, meteorShowersList[i]);
+                }
+
                 ___buttons = (IList<KButtonMenu.ButtonInfo>)list;
             }
         }
@@ -72,32 +119,18 @@ namespace MeteorChangeMod
         [HarmonyPatch(typeof(KButtonMenu), "RefreshButtons")]
         private static class PauseScreen_RefreshButtons_Patch
         {
+            static bool showMoreButton=false;
             [UsedImplicitly]
             private static void Postfix(KButtonMenu __instance)
             {
-                //if (!(__instance is PauseScreen) || !((UnityEngine.Object)PauseMenuPatches.TwitchButtonInfo.uibutton != (UnityEngine.Object)null) || !((UnityEngine.Object)PauseMenuPatches.twitchButtonStyle == (UnityEngine.Object)null) && !((UnityEngine.Object)PauseMenuPatches.TwitchButtonInfo.uibutton.bgImage.colorStyleSetting == (UnityEngine.Object)null) && !((UnityEngine.Object)PauseMenuPatches.TwitchButtonInfo.uibutton.bgImage.colorStyleSetting != (UnityEngine.Object)PauseMenuPatches.twitchButtonStyle))
-                //    return;
-                //PauseMenuPatches.twitchButtonStyle = ScriptableObject.CreateInstance<ColorStyleSetting>();
-                //PauseMenuPatches.twitchButtonStyle.disabledColor = PauseMenuPatches.DisabledColor;
-                //PauseMenuPatches.twitchButtonStyle.inactiveColor = PauseMenuPatches.InactiveTwitchColor;
-                //PauseMenuPatches.twitchButtonStyle.hoverColor = PauseMenuPatches.HoverTwitchColor;
-                //PauseMenuPatches.twitchButtonStyle.activeColor = PauseMenuPatches.PressedTwitchColor;
-                //PauseMenuPatches.TwitchButtonInfo.uibutton.bgImage.colorStyleSetting = PauseMenuPatches.twitchButtonStyle;
+               
+                //buildButton
+                //List<KButtonMenu.ButtonInfo> list = __instance.SetButtons.ToList<KButtonMenu.ButtonInfo>();
+
+               
             }
         }
-
-
-        /// <summary>
-        /// Init. auto translation
-        /// </summary>
-        [HarmonyPatch(typeof(Localization), "Initialize")]
-        public static class Localization_Initialize_Patch
-        {
-            public static void Postfix()
-            {
-                //LocalisationUtil.Translate(typeof(STRINGS), true);
-            }
-        }
+ 
     }
 }
 

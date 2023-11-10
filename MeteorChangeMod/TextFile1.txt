@@ -9,6 +9,12 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2152476119&searchtext=ren
 
 m_seasonIds
 
+  ClusterManager.Instance.activeWorld
+                .GetSMI<GameplaySeasonManager.Instance>()
+                .StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
+            // Db.Get().GameplaySeasons.MeteorShowers 
+            //ClassicStyleStartMeteorShowers
+
 
 ArgumentException: The Object you want to instantiate is null.
 
