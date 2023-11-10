@@ -56,11 +56,12 @@ namespace MeteorChangeMod
         public static void buildButtonList()
         {
             List<KButtonMenu.ButtonInfo> listOut= new List<KButtonMenu.ButtonInfo>();
+            // Db.Get().GameplaySeasons;
             // Db.Get().GameplaySeasons.MeteorShowers;
-            var fieldList=Type.GetType("Database.GameplaySeasons").GetFields();
-
-            if(fieldList==null || fieldList.Length==0)
-                fieldList=Db.Get().GameplaySeasons.GetType().GetFields(); ;
+            var fieldList = typeof(Database.GameplaySeasons).GetFields();
+            //var fieldList=Type.GetType("Database.GameplaySeasons").GetFields();
+            //if(fieldList==null || fieldList.Length==0)
+            //    fieldList=Db.Get().GameplaySeasons.GetType().GetFields(); ;
 
             foreach (var field in fieldList)
             {

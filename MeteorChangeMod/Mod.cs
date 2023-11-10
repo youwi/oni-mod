@@ -10,7 +10,7 @@ namespace MeteorChangeMod
     {
         public override void OnLoad(Harmony harmony)
         {
-            ModAssets.LoadAssets();
+          //  ModAssets.LoadAssets();
             base.OnLoad(harmony);
           //  SgtLogger.LogVersion(this);
         }

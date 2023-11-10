@@ -15,7 +15,14 @@ m_seasonIds
             // Db.Get().GameplaySeasons.MeteorShowers 
             //ClassicStyleStartMeteorShowers
 
-
+Exception while loading mod Yu.MeteorChangeMod at D:/Doc/Klei/OxygenNotIncluded/mods/Local/MeteorChangeMod. 
+System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+  at (wrapper managed-to-native) System.Reflection.Assembly.GetTypes(System.Reflection.Assembly,bool)
+  at System.Reflection.Assembly.GetTypes () [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
+  at KMod.DLLLoader.LoadDLLs (KMod.Mod ownerMod, System.String harmonyId, System.String path, System.Boolean isDev) [0x0010c] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  
+Build: U49-577063-SD
+ 
 ArgumentException: The Object you want to instantiate is null.
 
 UnityEngine.Object.Instantiate (UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace) (at <72b60a3dd8cd4f12a155b761a1af9144>:0)

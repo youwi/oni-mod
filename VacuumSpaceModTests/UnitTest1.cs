@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace ModTests
@@ -110,6 +111,16 @@ namespace ModTests
             }
 
         }
-        
+        [TestMethod()]
+        public void tests()
+        {
+            // var tt= Db.Get().GameplaySeasons;
+            // var fieldList = Type.GetType("Database.GameplaySeasons").GetFields();
+            var fieldList=typeof(Database.GameplaySeasons).GetFields();
+            Debug.LogWarning(fieldList.Length);
+            Debug.LogWarning(fieldList);
+
+        }
+
     }
 }
