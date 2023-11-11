@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace MeteorChangeMod
 {
-    internal class Patches
+    internal class MeteorChangePatches
     {
         [HarmonyPatch(typeof(CustomGameSettings))]
         [HarmonyPatch("OnDeserialized")]
@@ -33,18 +33,18 @@ namespace MeteorChangeMod
         {
             public static bool Prefix(KButtonEvent e)
             {
-                if (CustomSettingsController.Instance != null && CustomSettingsController.Instance.CurrentlyActive)
+                if (__CustomSettingsController.Instance != null && __CustomSettingsController.Instance.CurrentlyActive)
                     return false;
                 return true;
             }
         }
 
         private static readonly KButtonMenu.ButtonInfo toggleButtonInfo = new KButtonMenu.ButtonInfo(
-                (string)STRINGS.UI.CUSTOMGAMESETTINGSCHANGER.BUTTONTEXT,
+                (string)"Change "+STRINGS.UI.COLONY_DIAGNOSTICS.METEORDIAGNOSTIC.ALL_NAME,
                 Action.NumActions,
                 new UnityAction(OnCustomMenuButtonPressed));
 
-
+        //STRINGS.UI.COLONY_DIAGNOSTICS.METEORDIAGNOSTIC.ALL_NAME
         public static void setCurrWorldMeteor(string name)
         {
 
@@ -214,6 +214,7 @@ namespace MeteorChangeMod
             //var fun = Database.GameplaySeasons.class.get ;
             // Database.GameplaySeasons
             // ClusterManager.Instance.me
+            // STRINGS.NAMEGEN.COLONY.NOUN.COMET
         }
 
         private static void OnCustomMenuButtonPressed()

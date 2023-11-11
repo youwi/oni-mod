@@ -79,12 +79,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeXXMenuScreen.cs" />
+    <Compile Include="__ChangeXXMenuScreen.cs" />
     <Compile Include="RenameBase.cs" />
-    <Compile Include="CustomSettingsController.cs" />
-    <Compile Include="Patches.cs" />
+    <Compile Include="__CustomSettingsController.cs" />
+    <Compile Include="MeteorChangePatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="STRINGS.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\src1.jpg" />

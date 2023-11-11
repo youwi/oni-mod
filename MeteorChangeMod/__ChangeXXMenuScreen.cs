@@ -4,7 +4,7 @@ using UnityEngine;
 namespace MeteorChangeMod
 {
 
-    public class ChangeXXMenuScreen : KModalButtonMenu
+    public class __ChangeXXMenuScreen : KModalButtonMenu
     {
         [SerializeField]
         private GameOptionsScreen gameOptionsScreenPrefab;

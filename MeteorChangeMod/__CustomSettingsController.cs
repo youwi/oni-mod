@@ -5,12 +5,12 @@ using static CustomGameSettings;
 
 namespace MeteorChangeMod
 {
-    public class CustomSettingsController : KScreen
+    public class __CustomSettingsController : KScreen
     {
 #pragma warning disable IDE0051 // Remove unused private members
         new bool ConsumeMouseScroll = true; // do not remove!!!!
 #pragma warning restore IDE0051 // Remove unused private members
-        public static CustomSettingsController Instance = null;
+        public static __CustomSettingsController Instance = null;
 
         //private KleiCycle ImmuneSystem;
         //private FCycle CalorieBurn;
@@ -37,7 +37,7 @@ namespace MeteorChangeMod
                 var screen = Util.KInstantiateUI(xXMenuScreen,
                     PauseScreen.Instance.transform.parent.gameObject,
                     true);
-                Instance = screen.AddOrGet<CustomSettingsController>();
+                Instance = screen.AddOrGet<__CustomSettingsController>();
                 Instance.Init();
             }
 

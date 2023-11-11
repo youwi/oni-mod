@@ -162,15 +162,14 @@ namespace TemporalTearOpenerPatch
 
     // copy /Y "C:/Users/amd/source/repos/oni-mod-test/bin/Debug/oni-mod-test.dll"   "D:/Doc/Klei/OxygenNotIncluded\mods/local/OpenTest/oni-mod-test.dll" 
 
-    //添加建筑到菜单中
+    //添加建筑到菜单中,更新好像失效了..
     [HarmonyPatch(typeof(GeneratedBuildings))]
     [HarmonyPatch("LoadGeneratedBuildings")]
     public class GeneratedBuildingsPatch
     {
-        private static void Prefix()
+        private static void Postfix()
         {
             ModUtil.AddBuildingToPlanScreen("Base", "TemporalTearOpener");
         }
-
     }
 }
