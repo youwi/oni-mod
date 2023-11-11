@@ -82,7 +82,7 @@ namespace DoubleMutantMod
                 if (rand100() > 80) //注意双重随机数会重叠.
                 {
                     //注释看看能不能加性能
-                   
+
                     global::Debug.LogWarning("二次变异率为80%,变异未触发");
                     return;
                 }
@@ -153,16 +153,16 @@ namespace DoubleMutantMod
 
         public static int rand100()
         {
-            
+
             randB.Next();
             randB.Next(1000);
             return randB.Next(1, 100);
         }
         public static string randInList()
         {
-        
-            string ot= blickList[randA.Next(0, blickList.Length)];
-            global::Debug.LogWarning("双重变异为:"+ot);
+
+            string ot = blickList[randA.Next(0, blickList.Length)];
+            global::Debug.LogWarning("双重变异为:" + ot);
             return ot;
         }
     }

@@ -7,6 +7,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2152476119&searchtext=ren
 
 添加陨石雨
 
+Meteor Comets modify 修改陨石雨
+修改陨石雨,旧存档上生效. 本体未测试,应该无效.
+
 m_seasonIds
 
   ClusterManager.Instance.activeWorld
@@ -15,26 +18,68 @@ m_seasonIds
             // Db.Get().GameplaySeasons.MeteorShowers 
             //ClassicStyleStartMeteorShowers
 
-Exception while loading mod Yu.MeteorChangeMod at D:/Doc/Klei/OxygenNotIncluded/mods/Local/MeteorChangeMod. 
-System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
-  at (wrapper managed-to-native) System.Reflection.Assembly.GetTypes(System.Reflection.Assembly,bool)
-  at System.Reflection.Assembly.GetTypes () [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
-  at KMod.DLLLoader.LoadDLLs (KMod.Mod ownerMod, System.String harmonyId, System.String path, System.Boolean isDev) [0x0010c] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
-  
-Build: U49-577063-SD
+            ClassicStyleStartMeteorShowers 
  
-ArgumentException: The Object you want to instantiate is null.
+                "MeteorShowers",
+                "TemporalTearMeteorShowers",
+                "SpacedOutStyleStartMeteorShowers",
+                "SpacedOutStyleRocketMeteorShowers",
+                "SpacedOutStyleWarpMeteorShowers",
+                "ClassicStyleStartMeteorShowers",
+                "ClassicStyleWarpMeteorShowers",
+                "TundraMoonletMeteorShowers",
+                "MarshyMoonletMeteorShowers",
+                "NiobiumMoonletMeteorShowers",
+                "WaterMoonletMeteorShowers",
+                "RegolithMoonMeteorShowers",
+                "MiniMetallicSwampyMeteorShowers",
+                "MiniForestFrozenMeteorShowers",
+                "MiniBadlandsMeteorShowers",
+                "MiniFlippedMeteorShowers",
+                "MiniRadioactiveOceanMeteorShowers"
+     
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BLEACHSTONE.NAME Bleach Stone Meteor Shower	漂白石流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.COPPER.NAME Copper Meteor Shower	铜流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.GOLD.NAME Gold Meteor Shower	金流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.HEAVYDUST.NAME Dense Dust Meteor Shower	密集尘埃流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.ICE.NAME Ice Meteor Shower	冰流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.IRON.NAME Iron Meteor Shower	铁流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.LIGHTDUST.NAME Dust Fluff Meteor Shower	浮尘流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.MOO.NAME Gassy Mooteor Shower	释气海牛流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.OXYLITE.NAME Oxylite Meteor Shower	氧石流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.REGOLITH.NAME Regolith Meteor Shower	浮土流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.SLIME.NAME Slimy Meteor Shower	菌泥流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.SNOW.NAME Blizzard Meteor Shower	雪暴流星雨
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.UNIDENTIFIED.NAME Unidentified Object	不明物体
+STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.URANIUM.NAME Uranium Meteor Shower	铀流星雨
+STRINGS.UI.SPACEDESTINATIONS.COMETS.ALGAECOMET.NAME Algae Meteor	绿藻流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.BLEACHSTONECOMET.NAME Bleach Stone Meteor	漂白石流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.COPPERCOMET.NAME Copper Meteor	铜流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.DUSTCOMET.NAME Dust Meteor	尘埃流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.FOODCOMET.NAME Snack Bomb	小吃炸弹
+STRINGS.UI.SPACEDESTINATIONS.COMETS.FULLERENECOMET.NAME Fullerene Meteor	富勒烯流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.GASSYMOOCOMET.NAME Gassy Mooteor	释气海牛流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.GOLDCOMET.NAME Gold Meteor	金流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.HARDICECOMET.NAME Ice Meteor	冰流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.IRONCOMET.NAME Iron Meteor	铁流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.LIGHTDUSTCOMET.NAME Dust Fluff Meteor	浮尘流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.NUCLEAR_WASTE.NAME Radioactive Meteor	放射性流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.OXYLITECOMET.NAME Oxylite Meteor	氧石流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.PHOSPHORICCOMET.NAME Phosphoric Meteor	磷流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.ROCKCOMET.NAME Rock Meteor	岩石流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.SATELLITE.NAME Defunct Satellite	失效卫星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.SLIMECOMET.NAME Slime Meteor	菌泥流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.SNOWBALLCOMET.NAME Snow Meteor	雪流星
+STRINGS.UI.SPACEDESTINATIONS.COMETS.URANIUMORECOMET.NAME Uranium Meteor	铀流星
 
-UnityEngine.Object.Instantiate (UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace) (at <72b60a3dd8cd4f12a155b761a1af9144>:0)
-UnityEngine.Object.Instantiate[T] (T original, UnityEngine.Transform parent, System.Boolean worldPositionStays) (at <72b60a3dd8cd4f12a155b761a1af9144>:0)
-Util.KInstantiateUI (UnityEngine.GameObject original, UnityEngine.GameObject parent, System.Boolean force_active) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
-MeteorChangeMod.CustomSettingsController.ShowWindow () (at <3666695f95234094b7a99f2b0667020d>:0)
-MeteorChangeMod.Patches.OnCustomMenuButtonPressed () (at <3666695f95234094b7a99f2b0667020d>:0)
-KButtonMenu+<>c__DisplayClass11_1.<RefreshButtons>b__1 () (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
-KButton.SignalClick (KKeyCode btn) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
-KButton.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
-UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at <e9635660f69b4d9d84c085aeda3be353>:0)
-UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at <e9635660f69b4d9d84c085aeda3be353>:0)
-UnityEngine.EventSystems.EventSystem:Update()
 
-Build: U49-577063-SD
+
+
+  [DebugConsole][1]: Error[Error]: Error in PauseScreen(Clone).PauseScreen.OnPrefabInit
+System.ArgumentException: The value '铁流星' is not of type 'System.String' and cannot be used in this generic collection.
+Parameter name: value
+  at System.Collections.Generic.Dictionary`2[TKey,TValue].System.Collections.IDictionary.Add (System.Object key, System.Object value) [0x00059] in <695d1cc93cca45069c528c15c9fdd749>:0
+  at MeteorChangeMod.Patches.buildButtonList () [0x000fe] in <f45cccd116354785a38770477151e68e>:0
+  at MeteorChangeMod.Patches+PauseScreen_OnPrefabInit_Patch.Postfix (System.Collections.Generic.IList`1[KButtonMenu+ButtonInfo]& ___buttons) [0x00021] in <f45cccd116354785a38770477151e68e>:0
+  at (wrapper dynamic-method) PauseScreen.PauseScreen.OnPrefabInit_Patch2(PauseScreen)
+  at KMonoBehaviour.InitializeComponent () [0x00068] in <d9d260db23eb4b5ea9674097f27ddfad>:0

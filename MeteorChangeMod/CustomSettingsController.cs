@@ -1,21 +1,7 @@
-﻿using Database;
-using Epic.OnlineServices.Sessions;
-using Klei.AI;
-using Klei.CustomSettings;
-using KMod;
-using ProcGen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
- 
-using TUNING;
+﻿using Klei.CustomSettings;
 using UnityEngine;
-using UnityEngine.UI;
- 
+
 using static CustomGameSettings;
-using static SandboxSettings;
 
 namespace MeteorChangeMod
 {
@@ -42,12 +28,12 @@ namespace MeteorChangeMod
         //public FButton CloseButton2;
 
         public bool CurrentlyActive;
-        static GameObject xXMenuScreen  ;
+        static GameObject xXMenuScreen;
         public static void ShowWindow()
         {
             if (Instance == null)
             {
-                
+
                 var screen = Util.KInstantiateUI(xXMenuScreen,
                     PauseScreen.Instance.transform.parent.gameObject,
                     true);
@@ -78,7 +64,7 @@ namespace MeteorChangeMod
         private void AddMissingCustomGameSetting(SettingConfig type)
         {
 
-          //  SgtLogger.warning(type.GetType().ToString() + " value not found, defaulting");
+            //  SgtLogger.warning(type.GetType().ToString() + " value not found, defaulting");
             CustomGameSettings.Instance.QualitySettings[type.id] = type;
         }
 
@@ -216,12 +202,12 @@ namespace MeteorChangeMod
         private void SetCustomGameSettings(SettingConfig ConfigToSet, object valueId)
         {
             string valueToSet = valueId.ToString();
-            if(valueId is bool)
+            if (valueId is bool)
             {
                 var toggle = ConfigToSet as ToggleSettingConfig;
                 valueToSet = ((bool)valueId) ? toggle.on_level.id : toggle.off_level.id;
             }
-         //   SgtLogger.l("changing " + ConfigToSet.id.ToString() + " from " + CustomGameSettings.Instance.GetCurrentQualitySetting(ConfigToSet).id + " to " + valueToSet.ToString());
+            //   SgtLogger.l("changing " + ConfigToSet.id.ToString() + " from " + CustomGameSettings.Instance.GetCurrentQualitySetting(ConfigToSet).id + " to " + valueToSet.ToString());
             CustomGameSettings.Instance.SetQualitySetting(ConfigToSet, valueToSet);
         }
 
@@ -246,7 +232,7 @@ namespace MeteorChangeMod
             //{
             //    SetCustomGameSettings(CustomGameSettingConfigs.StressBreaks, StressBreaks.On);
             //};
-            
+
             //CarePackages = transform.Find("Content/CarePackages").FindOrAddComponent<FToggle2>();
 
             //var CarePackagesLabel = CarePackages.transform.Find("Label").gameObject.AddOrGet<LocText>();
@@ -259,7 +245,7 @@ namespace MeteorChangeMod
             //    SetCustomGameSettings(CustomGameSettingConfigs.CarePackages, CarePackages.On);
             //};
 
-            
+
             /**
             SandboxMode = transform.Find("Content/SandboxMode").FindOrAddComponent<FToggle2>();
 
@@ -459,7 +445,7 @@ namespace MeteorChangeMod
         protected override void OnShow(bool show)
         {
             base.OnShow(show);
-           
+
             CurrentlyActive = show;
         }
     }

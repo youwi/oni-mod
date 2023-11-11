@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Klei.AI;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 
 namespace ModTests
@@ -90,13 +90,13 @@ namespace ModTests
         [TestMethod()]
         public void TestMethodFFsssF2()
         {
-            for(int i = 0; i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 Console.WriteLine(DoubleMutantMod.DoubleMutantModPatch.randInList());
                 Thread.Sleep(100);
                 Console.WriteLine(DoubleMutantMod.DoubleMutantModPatch.randInList());
             }
-        
+
         }
 
         [TestMethod()]
@@ -105,8 +105,8 @@ namespace ModTests
             for (int i = 0; i < 20; i++)
             {
 
-               if(DoubleMutantMod.DoubleMutantModPatch.rand100()>3)
-                        DoubleMutantMod.DoubleMutantModPatch.randInList();
+                if (DoubleMutantMod.DoubleMutantModPatch.rand100() > 3)
+                    DoubleMutantMod.DoubleMutantModPatch.randInList();
                 Thread.Sleep(100);
             }
 
@@ -116,11 +116,31 @@ namespace ModTests
         {
             // var tt= Db.Get().GameplaySeasons;
             // var fieldList = Type.GetType("Database.GameplaySeasons").GetFields();
-            var fieldList=typeof(Database.GameplaySeasons).GetFields();
+            var fieldList = typeof(Database.GameplaySeasons).GetFields();
+            foreach (var field in fieldList)
+            {
+                // Database.GameplaySeasons;
+                if (field.Name.EndsWith("MeteorShowers"))
+                {
+                    //  Debug.LogWarning(field.Name);
+                    Console.WriteLine("\"" + field.Name + "\",");
+                }
+
+            }
             Debug.LogWarning(fieldList.Length);
             Debug.LogWarning(fieldList);
 
         }
 
+        [TestMethod()]
+        public void tests2()
+        {
+
+              new MeteorShowerSeason("RegolithMoonMeteorShowers", GameplaySeason.Type.World, "EXPANSION1_ID", 20f, synchronizedToPeriod: false, -1f, startActive: true, -1, 0f, float.PositiveInfinity, 1, affectedByDifficultySettings: true, 6000f)
+                .AddEvent(Db.Get().GameplayEvents.MeteorShowerDustEvent)
+                .AddEvent(Db.Get().GameplayEvents.ClusterIronShower)
+                .AddEvent(Db.Get().GameplayEvents.ClusterIceShower);
+
+        }
     }
 }

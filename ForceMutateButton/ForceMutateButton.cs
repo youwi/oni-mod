@@ -1,7 +1,5 @@
 ﻿using KSerialization;
 using UnityEngine;
-using static TUNING.METEORS;
-using UnityEngine.Diagnostics;
 
 namespace ForceMuate
 {
@@ -10,7 +8,7 @@ namespace ForceMuate
     class ForceMutateButton : KMonoBehaviour, ISaveLoadable
     {
         [Serialize] public bool isMutating = false;
-     
+
         protected override void OnPrefabInit()
         {
             Subscribe((int)GameHashes.RefreshUserMenu, (object data) => OnRefreshUserMenu());
@@ -51,21 +49,21 @@ namespace ForceMuate
         }
         public static void OnRefreshUserMenuPlanB(MutantPlant mutant)
         {
-    
-            if ( mutant != null)
+
+            if (mutant != null)
             {
-                    string iconName = "action_building_disabled";
-                    string text = "+ForceMutate";
-                    string tooltipText = BUTTONS.ENABLELEARN.TOOLTIP;
-                    void on_click()
-                    {
-                        mutant.Mutate();
-                        mutant.Analyze();
-                        PlantSubSpeciesCatalog.Instance.IdentifySubSpecies(mutant.SubSpeciesID);
-                        DetailsScreen.Instance.Trigger((int)GameHashes.UIRefreshData, null);
-                    }
-                    // Game.Instance.userMenu.AddButton(base.gameObject, button, 1f);
-                    Game.Instance.userMenu.AddButton(mutant.gameObject, new KIconButtonMenu.ButtonInfo(iconName, text, on_click, tooltipText: tooltipText));
+                string iconName = "action_building_disabled";
+                string text = "+ForceMutate";
+                string tooltipText = BUTTONS.ENABLELEARN.TOOLTIP;
+                void on_click()
+                {
+                    mutant.Mutate();
+                    mutant.Analyze();
+                    PlantSubSpeciesCatalog.Instance.IdentifySubSpecies(mutant.SubSpeciesID);
+                    DetailsScreen.Instance.Trigger((int)GameHashes.UIRefreshData, null);
+                }
+                // Game.Instance.userMenu.AddButton(base.gameObject, button, 1f);
+                Game.Instance.userMenu.AddButton(mutant.gameObject, new KIconButtonMenu.ButtonInfo(iconName, text, on_click, tooltipText: tooltipText));
             }
         }
 

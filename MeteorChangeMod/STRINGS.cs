@@ -1,19 +1,4 @@
-﻿using ProcGenGame;
-using STRINGS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static DistributionPlatform;
-using static STRINGS.BUILDINGS.PREFABS.DOOR.CONTROL_STATE;
-using static STRINGS.BUILDINGS.PREFABS;
-using static STRINGS.MISC.NOTIFICATIONS;
-using static STRINGS.UI.TOOLS;
- 
-using UnityEngine;
-
-namespace MeteorChangeMod
+﻿namespace MeteorChangeMod
 {
     internal class STRINGS
     {

@@ -1,13 +1,7 @@
-﻿using System;
+﻿using STRINGS;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static STRINGS.UI.FRONTEND;
 using UnityEngine;
-
- using STRINGS;
- namespace MeteorChangeMod
+namespace MeteorChangeMod
 {
 
     public class ChangeXXMenuScreen : KModalButtonMenu
@@ -84,7 +78,7 @@ using UnityEngine;
 
         private void OnGraphicsOptions()
         {
-            
+
         }
 
         private void OnAudioOptions()

@@ -1,53 +1,43 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using Klei.AI;
-using static STRINGS.ITEMS.FOOD;
-using static STRINGS.CREATURES.SPECIES;
-using static SeedProducer;
-using static STRINGS.BUILDINGS.PREFABS;
 using System.Reflection;
 
 namespace ColdWheatSeedDropMod
 {
-/*
-    [HarmonyPatch(typeof(SeedProducer))]
-    [HarmonyPatch("ProduceSeed")]
-    public static class SeedProducer_RollForMutation_Patch
-    {
-        public static void Postfix(SeedProducer __instance, string seedId, bool canMutate, ref GameObject __result)
+    /*
+        [HarmonyPatch(typeof(SeedProducer))]
+        [HarmonyPatch("ProduceSeed")]
+        public static class SeedProducer_RollForMutation_Patch
         {
-            // string seedId, int units = 1, bool canMutate = true
-            //检查小麦是否存在?
-            // 已经确认：收获时不触发SeedProducer.ProduceSeed方法.
-            // 挖开时触发SeedProducer.ProduceSeed方法
-            if (seedId == "ColdWheatSeed" || seedId.Contains("ColdWheat"))
+            public static void Postfix(SeedProducer __instance, string seedId, bool canMutate, ref GameObject __result)
             {
-             //   Debug.LogWarning(new System.Diagnostics.StackTrace().ToString());
-                Debug.LogWarning(">>>>>>>>小麦变异出来了:" + seedId + " ,canMutate:" + canMutate);
+                // string seedId, int units = 1, bool canMutate = true
+                //检查小麦是否存在?
+                // 已经确认：收获时不触发SeedProducer.ProduceSeed方法.
+                // 挖开时触发SeedProducer.ProduceSeed方法
+                if (seedId == "ColdWheatSeed" || seedId.Contains("ColdWheat"))
+                {
+                 //   Debug.LogWarning(new System.Diagnostics.StackTrace().ToString());
+                    Debug.LogWarning(">>>>>>>>小麦变异出来了:" + seedId + " ,canMutate:" + canMutate);
+
+                }
 
             }
-
         }
-    }
-*/
+    */
     [HarmonyPatch(typeof(SeedProducer))]
     [HarmonyPatch("Configure")]
     public static class SeedProducer_Configure_Patch
     {
-        public static void Prefix(SeedProducer __instance,string SeedID,ref SeedProducer.ProductionType productionType,ref int newSeedsProduced)
+        public static void Prefix(SeedProducer __instance, string SeedID, ref SeedProducer.ProductionType productionType, ref int newSeedsProduced)
         {
-          
+
             if (productionType == SeedProducer.ProductionType.DigOnly)
             {    //经过测试改变类型有效.
                 Debug.LogWarning(">>>>>>>>小麦,小吃豆类型改变");
                 productionType = SeedProducer.ProductionType.Harvest;
             }
-            if(SeedID.Contains("ColdWheat") )
+            if (SeedID.Contains("ColdWheat"))
             {
                 newSeedsProduced = 18;
             }
@@ -55,7 +45,7 @@ namespace ColdWheatSeedDropMod
             {
                 newSeedsProduced = 12;
             }
-           
+
         }
     }
     static class AccessExtensions
@@ -74,9 +64,9 @@ namespace ColdWheatSeedDropMod
     [HarmonyPatch("CropPicked")]
     public static class ProduceMoreSeed_Patch
     {
-        
+
         //强制18个种子
-        public static void Postfix  (SeedProducer __instance)
+        public static void Postfix(SeedProducer __instance)
         {
             if (__instance.seedInfo.seedId.Contains("ColdWheat")
                 || __instance.seedInfo.seedId.Contains("BeanPlant"))
@@ -92,15 +82,15 @@ namespace ColdWheatSeedDropMod
                 {
                     var fun = __instance.GetType().GetMethod("ProduceSeed", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
-                    var rdmax = UnityEngine.Random.Range(0f, __instance.seedInfo.newSeedsProduced/3);
+                    var rdmax = UnityEngine.Random.Range(0f, __instance.seedInfo.newSeedsProduced / 3);
                     for (int i = 0; i < rdmax; i++)
                     {
 
                         //var fun = AccessTools.Method(typeof(ResearchCenter), "UpdateWorkingState");
                         //fun.Invoke(__instance.seedInfo, 1, true);
 
-                         fun.Invoke(__instance, new object[] { __instance.seedInfo.seedId, num2,true });
-                         
+                        fun.Invoke(__instance, new object[] { __instance.seedInfo.seedId, num2, true });
+
                         //__instance.ProduceSeed(__instance.seedInfo.seedId, num2) .Trigger(580035959, completed_by);
                     }
 

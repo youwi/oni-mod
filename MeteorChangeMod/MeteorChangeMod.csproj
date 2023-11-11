@@ -80,31 +80,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeXXMenuScreen.cs" />
-    <Compile Include="CustomControl1.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CustomControl1.Designer.cs">
-      <DependentUpon>CustomControl1.cs</DependentUpon>
-    </Compile>
     <Compile Include="RenameBase.cs" />
     <Compile Include="CustomSettingsController.cs" />
-    <Compile Include="Mod.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STRINGS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\Preview.png" />
+    <Content Include="resource\src1.jpg" />
+    <Content Include="resource\preview.jpg" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomControl1.resx">
-      <DependentUpon>CustomControl1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ForceMuate
 {
-   // [HarmonyPatch]
+    // [HarmonyPatch]
     class Mutate_Patch_PlanA
     {
         static IEnumerable<MethodBase> TargetMethods()
@@ -15,13 +15,13 @@ namespace ForceMuate
             yield return AccessTools.Method(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicPlant));
         }
 
-        static void Postfix(GameObject   template) => template.AddComponent<ForceMutateButton>();
+        static void Postfix(GameObject template) => template.AddComponent<ForceMutateButton>();
     }
-    
-  
-        [HarmonyPatch(typeof(MutantPlant), "OnSpawn")]
-        public static class MutatePatchPlanB
-        {
+
+
+    [HarmonyPatch(typeof(MutantPlant), "OnSpawn")]
+    public static class MutatePatchPlanB
+    {
         /*
          * 直接给给种子和植物添加变异
          * 
@@ -32,14 +32,14 @@ namespace ForceMuate
          * 
          */
         public static void Postfix(MutantPlant __instance)
-            {
-                __instance.Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
-            }
-            private static readonly EventSystem.IntraObjectHandler<MutantPlant> OnRefreshUserMenuDelegate 
-            = new EventSystem.IntraObjectHandler<MutantPlant>(delegate (MutantPlant component, object data)
-            {
-                ForceMutateButton.OnRefreshUserMenuPlanB(component);
-            });
+        {
+            __instance.Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
+        }
+        private static readonly EventSystem.IntraObjectHandler<MutantPlant> OnRefreshUserMenuDelegate
+        = new EventSystem.IntraObjectHandler<MutantPlant>(delegate (MutantPlant component, object data)
+        {
+            ForceMutateButton.OnRefreshUserMenuPlanB(component);
+        });
     }
-    
+
 }
