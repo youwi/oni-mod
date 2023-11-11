@@ -1,0 +1,11 @@
+﻿NullReferenceException: Object reference not set to an instance of an object
+
+ForceEruptionMod.ForceEruptionPatch+<>c__DisplayClass5_0.<.cctor>b__1 () (at <6a18771c130b419198d8535ed5b881db>:0)
+UserMenu+<>c__DisplayClass15_0.<AddButton>b__0 () (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+KButton.SignalClick (KKeyCode btn) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+KButton.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at <d9d260db23eb4b5ea9674097f27ddfad>:0)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at <e9635660f69b4d9d84c085aeda3be353>:0)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at <e9635660f69b4d9d84c085aeda3be353>:0)
+UnityEngine.EventSystems.EventSystem:Update()
+
+Build: U49-577063-SD

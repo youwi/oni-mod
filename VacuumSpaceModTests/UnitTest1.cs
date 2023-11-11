@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Timers;
 
 namespace ModTests
 {
@@ -140,6 +141,31 @@ namespace ModTests
                 .AddEvent(Db.Get().GameplayEvents.MeteorShowerDustEvent)
                 .AddEvent(Db.Get().GameplayEvents.ClusterIronShower)
                 .AddEvent(Db.Get().GameplayEvents.ClusterIceShower);
+
+        }
+        [TestMethod()]
+        public void stesese()
+        {
+             var timer2 = new System.Threading.Timer(timerCallbackFun2, null, 1000,500);
+            //timer2.
+           
+           var st= new System.Timers.Timer(1000);
+            st.AutoReset = false;
+            st.Enabled = true;
+            st.Elapsed += timerCallbackFun;
+            st.Start();
+            Thread.Sleep(2000);
+        }
+        public static void timerCallbackFun(object data,ElapsedEventArgs ss)
+        {
+            
+                Console.WriteLine("测试");
+          
+        }
+        public static void timerCallbackFun2(object data )
+        {
+
+            Console.WriteLine("测试22");
 
         }
     }
