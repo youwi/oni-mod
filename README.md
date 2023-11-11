@@ -6,11 +6,13 @@
 	* 2. 修改流星 
 	*        已经有mod了: Meteor Migration /Modify Difficulty Settings
 	*        mod 好像没用...
+	*		 完成
 	*       
 	* 3. 修改技能点和存档
-	* 
+	*   
 	* 4. 修改小行星位置
 	* 
+	*    修改光照强度和辐射强度.
 	*
 	* 5. 强制种子变异. //已经完成 
 	* 
