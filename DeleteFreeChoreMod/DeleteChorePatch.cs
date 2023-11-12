@@ -18,9 +18,13 @@ namespace DeleteFreeChoreMod
                var ss= Traverse.Create(__instance)
                     .Field("idleChore")
                     .GetValue<WorkChore<SuitLocker.ReturnSuitWorkable>>();
-                ss.Cancel("ReturnSuitWorkable.CancelChore");
+                if(ss!= null)
+                {
+                    ss.Cancel("ReturnSuitWorkable.CancelChore");
+                }
+               
             }
-            Debug.LogWarning("取消任务：ReturnSuitWorkable CancelChore---->>>");
+            //Debug.LogWarning("取消任务：ReturnSuitWorkable CancelChore---->>>");
         }
 
     }
