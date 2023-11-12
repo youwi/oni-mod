@@ -63,6 +63,7 @@ namespace ForceEruptionMod
                     button.text = "Force Eruption";
                 };
                 Game.Instance.userMenu.Refresh(component.gameObject);
+                
                 //button.ref
                 st.Start();
                 //component.AddTag(component);//定时器搞不定呀...
