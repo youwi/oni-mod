@@ -1,12 +1,11 @@
 ﻿using HarmonyLib;
 using JetBrains.Annotations;
 using Klei.AI;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.Events;
 using STRINGS;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Events;
 
 namespace MeteorChangeMod
 {
@@ -40,7 +39,7 @@ namespace MeteorChangeMod
         }
 
         private static readonly KButtonMenu.ButtonInfo toggleButtonInfo = new KButtonMenu.ButtonInfo(
-                (string)"Change "+STRINGS.UI.COLONY_DIAGNOSTICS.METEORDIAGNOSTIC.ALL_NAME,
+                (string)"Change " + STRINGS.UI.COLONY_DIAGNOSTICS.METEORDIAGNOSTIC.ALL_NAME,
                 Action.NumActions,
                 new UnityAction(OnCustomMenuButtonPressed));
 
@@ -51,32 +50,32 @@ namespace MeteorChangeMod
             toggleMyBtn(PauseScreen.Instance);
             toggleButtonInfo.text = $"=>[{name}]<=";
             PauseScreen.Instance.RefreshButtons();
-           var smi= ClusterManager.Instance.activeWorld
-              .GetSMI<GameplaySeasonManager.Instance>();
+            var smi = ClusterManager.Instance.activeWorld
+               .GetSMI<GameplaySeasonManager.Instance>();
             // GameplaySeasonManager.Instance;
             ClusterManager.Instance.activeWorld.GetSeasonIds().Clear();
-            ClusterManager.Instance.activeWorld.GetSeasonIds() .Add(name);
+            ClusterManager.Instance.activeWorld.GetSeasonIds().Add(name);
             //smi.activeSeasons 
             //ClusterManager.Instance.get
             //WorldContainer wc=new WorldContainer();
             //wc.GetSeasonIds();
         }
-        static  IDictionary meteorShowerskeyValues = new System.Collections.Generic.Dictionary<string, string>();
-        static  List<KButtonMenu.ButtonInfo> meteorShowersBtnList = new List<KButtonMenu.ButtonInfo>();
+        static IDictionary meteorShowerskeyValues = new System.Collections.Generic.Dictionary<string, string>();
+        static List<KButtonMenu.ButtonInfo> meteorShowersBtnList = new List<KButtonMenu.ButtonInfo>();
 
-        public static  void GetDescriptors(string mskeyString)
+        public static void GetDescriptors(string mskeyString)
         {
 
-           // var s = Db.Get().GameplaySeasons.MarshyMoonletMeteorShowers.events[1];
-           
-          
+            // var s = Db.Get().GameplaySeasons.MarshyMoonletMeteorShowers.events[1];
+
+
             Db.Get().GameplaySeasons.Get("");
-           
+
             var trans = Db.Get().GameplaySeasons.MeteorShowers.events;// [1] = s;//全事件
             List<Descriptor> list = new List<Descriptor>();
             foreach (GameplayEvent gameplayEvent in trans)
             {
-               var name= gameplayEvent.title;
+                var name = gameplayEvent.title;
                 //var sMI = ClusterManager.Instance.activeWorld
                 //.GetSMI<GameplaySeasonManager.Instance>();
                 //if (sMI != null && gameplayEvent is MeteorShowerEvent)
@@ -98,23 +97,23 @@ namespace MeteorChangeMod
                 //            list.Add(item);
                 //        }
 
-                      
+
                 //    }
                 //}
             }
             // GameplayEvent gameplayEvent = Db.Get().GameplayEvents.Get(eventID);
-           
-            return  ;
+
+            return;
         }
         //构建button名单.
         public static void buildButtonList()
         {
-            if (meteorShowersBtnList.Count()>0)
+            if (meteorShowersBtnList.Count() > 0)
             {
                 return;
             }
-            List<string> meList=new List<string>();
-            List<string> preList= new List<string>() {
+            List<string> meList = new List<string>();
+            List<string> preList = new List<string>() {
                 "MeteorShowers",
                 "TemporalTearMeteorShowers",
                 "SpacedOutStyleStartMeteorShowers",
@@ -134,16 +133,16 @@ namespace MeteorChangeMod
                 "MiniRadioactiveOceanMeteorShowers"
             };
             IDictionary eventUIK = new System.Collections.Generic.Dictionary<GameplayEvent, LocString>();
-          
+
             eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerIronEvent, UI.SPACEDESTINATIONS.COMETS.IRONCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerGoldEvent, UI.SPACEDESTINATIONS.COMETS.GOLDCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerCopperEvent, UI.SPACEDESTINATIONS.COMETS.COPPERCOMET.NAME);
-            eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerDustEvent ,UI.SPACEDESTINATIONS.COMETS.DUSTCOMET.NAME);
+            eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerDustEvent, UI.SPACEDESTINATIONS.COMETS.DUSTCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerFullereneEvent, UI.SPACEDESTINATIONS.COMETS.FULLERENECOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.GassyMooteorEvent, UI.SPACEDESTINATIONS.COMETS.GASSYMOOCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterSnowShower, UI.SPACEDESTINATIONS.COMETS.SNOWBALLCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterIceShower, UI.SPACEDESTINATIONS.COMETS.HARDICECOMET.NAME);
-            eventUIK.Add(Db.Get().GameplayEvents.ClusterBiologicalShower, UI.SPACEDESTINATIONS.COMETS.SLIMECOMET.NAME); 
+            eventUIK.Add(Db.Get().GameplayEvents.ClusterBiologicalShower, UI.SPACEDESTINATIONS.COMETS.SLIMECOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterLightRegolithShower, UI.SPACEDESTINATIONS.COMETS.LIGHTDUSTCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterRegolithShower, UI.SPACEDESTINATIONS.COMETS.DUSTCOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterGoldShower, UI.SPACEDESTINATIONS.COMETS.GOLDCOMET.NAME);
@@ -152,8 +151,8 @@ namespace MeteorChangeMod
             eventUIK.Add(Db.Get().GameplayEvents.ClusterUraniumShower, UI.SPACEDESTINATIONS.COMETS.URANIUMORECOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterOxyliteShower, UI.SPACEDESTINATIONS.COMETS.OXYLITECOMET.NAME);
             eventUIK.Add(Db.Get().GameplayEvents.ClusterBleachStoneShower, UI.SPACEDESTINATIONS.COMETS.BLEACHSTONECOMET.NAME);
-    
-      
+
+
             // Db.Get().GameplaySeasons;
             // Db.Get().GameplaySeasons.MeteorShowers;
             var fieldList = typeof(Database.GameplaySeasons).GetFields();
@@ -170,16 +169,16 @@ namespace MeteorChangeMod
             //{
             //   meList.Add( tmp.Name);
             //}
-          
+
 
             foreach (var field in fieldList)
             {
                 // Database.GameplaySeasons;
-                if (field.Name.EndsWith("MeteorShowers") && field.Name!= "MeteorShowers")
+                if (field.Name.EndsWith("MeteorShowers") && field.Name != "MeteorShowers")
                 {
                     var namei18n = "";
                     GameplaySeason curr = (GameplaySeason)field.GetValue(Db.Get().GameplaySeasons);
-                   // var allMeteorShowers = Db.Get().GameplaySeasons.resources;// 使用这个不用反射了.
+                    // var allMeteorShowers = Db.Get().GameplaySeasons.resources;// 使用这个不用反射了.
 
                     foreach (GameplayEvent gameplayEvent in curr.events)
                     {
@@ -192,12 +191,12 @@ namespace MeteorChangeMod
                         {
                             namei18n += "";
                         }
-                     
-                       // namei18n += gameplayEvent.GetType().Name;
+
+                        // namei18n += gameplayEvent.GetType().Name;
                     }
-                    if (namei18n.Trim() == "" ||namei18n.Length<2)
+                    if (namei18n.Trim() == "" || namei18n.Length < 2)
                     {
-                        namei18n = "<"+field.Name+">";
+                        namei18n = "<" + field.Name + ">";
                     }
                     meteorShowerskeyValues.Add(field.Name, namei18n);
 
@@ -269,7 +268,7 @@ namespace MeteorChangeMod
                     buttonCache.Add(meteorShowersBtnList[i]);
                 }
                 showMoreButton = true;
-              //  toggleButtonInfo.text = "++++";
+                //  toggleButtonInfo.text = "++++";
                 __instance.SetButtons(buttonCache);
                 Debug.LogWarning("---showMoreButton--->" + showMoreButton);
             }
@@ -278,7 +277,7 @@ namespace MeteorChangeMod
 
                 showMoreButton = false;
                 __instance.SetButtons(buttonOri);
-               // toggleButtonInfo.text = "---";
+                // toggleButtonInfo.text = "---";
                 Debug.LogWarning("---showMoreButton--->" + showMoreButton);
 
             }

@@ -137,32 +137,32 @@ namespace ModTests
         public void tests2()
         {
 
-              new MeteorShowerSeason("RegolithMoonMeteorShowers", GameplaySeason.Type.World, "EXPANSION1_ID", 20f, synchronizedToPeriod: false, -1f, startActive: true, -1, 0f, float.PositiveInfinity, 1, affectedByDifficultySettings: true, 6000f)
-                .AddEvent(Db.Get().GameplayEvents.MeteorShowerDustEvent)
-                .AddEvent(Db.Get().GameplayEvents.ClusterIronShower)
-                .AddEvent(Db.Get().GameplayEvents.ClusterIceShower);
+            new MeteorShowerSeason("RegolithMoonMeteorShowers", GameplaySeason.Type.World, "EXPANSION1_ID", 20f, synchronizedToPeriod: false, -1f, startActive: true, -1, 0f, float.PositiveInfinity, 1, affectedByDifficultySettings: true, 6000f)
+              .AddEvent(Db.Get().GameplayEvents.MeteorShowerDustEvent)
+              .AddEvent(Db.Get().GameplayEvents.ClusterIronShower)
+              .AddEvent(Db.Get().GameplayEvents.ClusterIceShower);
 
         }
         [TestMethod()]
         public void stesese()
         {
-             var timer2 = new System.Threading.Timer(timerCallbackFun2, null, 1000,500);
+            var timer2 = new System.Threading.Timer(timerCallbackFun2, null, 1000, 500);
             //timer2.
-           
-           var st= new System.Timers.Timer(1000);
+            var ss = STRINGS.UI.CLUSTERMAP.POI.MASS_REMAINING;
+            var st = new System.Timers.Timer(1000);
             st.AutoReset = false;
             st.Enabled = true;
             st.Elapsed += timerCallbackFun;
             st.Start();
             Thread.Sleep(2000);
         }
-        public static void timerCallbackFun(object data,ElapsedEventArgs ss)
+        public static void timerCallbackFun(object data, ElapsedEventArgs ss)
         {
-            
-                Console.WriteLine("测试");
-          
+
+            Console.WriteLine("测试");
+
         }
-        public static void timerCallbackFun2(object data )
+        public static void timerCallbackFun2(object data)
         {
 
             Console.WriteLine("测试22");

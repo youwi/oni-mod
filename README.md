@@ -12,12 +12,13 @@
 	*   
 	* 4. 修改小行星位置
 	* 
-	*    修改光照强度和辐射强度.
+	*    修改光照强度和辐射强度. 不太需要
 	*
 	* 5. 强制种子变异. //已经完成 
-	* 
 	* 6. 添加变异小麦也能变异.  //完成
-	* 7. 泉水强制喷发
+	* 7. 泉水强制喷发 //完成部分，不完美
+	* 8  给小行星带添加 深渊晶石,等需要的东西.
+	     HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
 
 # oni-mod 备注
 说明:

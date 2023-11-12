@@ -53,7 +53,7 @@ namespace ForceMuate
             if (mutant != null)
             {
                 string iconName = "action_building_disabled";
-                string text = "+Force "+ STRINGS.UI.UISIDESCREENS.PLANTERSIDESCREEN.MUTATIONS_HEADER;
+                string text = "+Force " + STRINGS.UI.UISIDESCREENS.PLANTERSIDESCREEN.MUTATIONS_HEADER;
                 string tooltipText = BUTTONS.ENABLELEARN.TOOLTIP;
                 void on_click()
                 {
