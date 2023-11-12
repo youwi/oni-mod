@@ -19,6 +19,14 @@
 	* 7. 泉水强制喷发 //完成部分，不完美
 	* 8  给小行星带添加 深渊晶石,等需要的东西.
 	     HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
+		 完成
+	* 9  复制人空闲时不去检查站
+	     IdleChore
+		 ReturnSuitWorkable
+		 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
+
+		 WorkChore<SuitLocker.ReturnSuitWorkable>(Db.Get().ChoreTypes.ReturnSuitIdle, this, null, true, null, null, null, true, null, false, false, null, false, true, false, PriorityScreen.PriorityClass.idle, 5, false, false);
+
 
 # oni-mod 备注
 说明:
