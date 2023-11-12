@@ -80,7 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.jpg" />
-    <Content Include="resource\src1.jpg" />
+    <Content Include="resource\src.jpg" />
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

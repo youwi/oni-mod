@@ -1,0 +1,11 @@
+﻿
+
+
+.Katairite, 1f);//深渊晶石
+.Fossil, 0.5f);//化石
+.Radium, 0.5f);//镭
+.GoldAmalgam, 1f);//金汞矿 固体
+.Niobium, 0.1f);//铌 固体
+.Resin, 0.1f);//树脂  solid
+.Mercury, 0.5f);//汞   solid
+.Naphtha, 0.5f);//石脑油 固体
