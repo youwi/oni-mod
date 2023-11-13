@@ -21,6 +21,8 @@
 	     HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
 		 
 	* 9  复制人空闲时不去检查站 // 完成.
+		 已经有同样的mod:Idle Suits
+		 https://steamcommunity.com/sharedfiles/filedetails/?id=1748408711&searchtext=idle
 	     参考:
 		 IdleChore
 		 ReturnSuitWorkable

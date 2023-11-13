@@ -1,35 +1,24 @@
 ﻿using Database;
 using HarmonyLib;
 using Klei.AI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Timers;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace TemporalTearOpenerPatch
 {
-    //可拆可建
-    [HarmonyPatch(typeof(TemporalTearOpenerConfig))]
-    public class DeconstructionPatch
-    {
-        [HarmonyPatch("DoPostConfigureComplete")]
-        public static void Postfix(GameObject go)
-        {
-            go.GetComponent<Deconstructable>().allowDeconstruction = true;
-            EstablishColonies.BASE_COUNT = 1;//强制修改数量为0;
-        }
 
-    }
-    [HarmonyPatch(typeof(TemporalTearOpener.Instance))]
-    public class OpenTemporalTearPatch
+    [HarmonyPatch(typeof(TemporalTearOpener.Instance), "OpenTemporalTear")]
+    public class OpenTemporalTearPatchPlanA
     {
-        [HarmonyPatch("OpenTemporalTear")]
+       
         public static void Postfix(TemporalTearOpener.Instance __instance)
-
         {
             int openerWorldId = __instance.GetComponent<StateMachineController>().GetMyWorldId();//这个好像只能获取主星的ID
-            ClusterManager.Instance.GetClusterPOIManager().OpenTemporalTear(openerWorldId);
 
             FieldInfo fld = typeof(TemporalTearOpener.Instance).GetField("charging"); //初始化
             if (fld != null)
@@ -37,7 +26,6 @@ namespace TemporalTearOpenerPatch
                 var charging = fld.GetValue(__instance);
                 __instance.GoTo((StateMachine.BaseState)charging);
             }
-
 
             //    FieldInfo fld_op = typeof(TemporalTearOpener.Instance).GetField("opening_tear_beam"); //opening_tear_beam
             //   var opening_tear_beam = fld_op.GetValue(__instance);
@@ -48,25 +36,21 @@ namespace TemporalTearOpenerPatch
             {
                 fld_mc.SetValue(__instance, 0f);//点击开火,数据清0;
             }
-
+            //2个方法都可行.
+            //ClusterManager.Instance.GetClusterPOIManager().OpenTemporalTear(openerWorldId);
             ClusterManager.Instance.GetWorld(openerWorldId).GetSMI<GameplaySeasonManager.Instance>().StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
             //清理粒子
             HighEnergyParticleStorage highEnergyParticleStorage = __instance.GetComponent<HighEnergyParticleStorage>();
             if (highEnergyParticleStorage != null)
                 highEnergyParticleStorage.ConsumeAll();
             // highEnergyParticleStorage.IsFull
-
-
         }
     }
-    // [HarmonyPatch(typeof(TemporalTearOpener))]
+    // [HarmonyPatch(typeof(TemporalTearOpener),"InitializeStates")]
     public class TemporalTearOpenerInitPatch
     {
-        //     [HarmonyPatch("InitializeStates")]
-
         public static void Postfix(TemporalTearOpener __instance)
         {
-
             __instance.root.Enter(delegate (TemporalTearOpener.Instance smi)
             {
 
@@ -110,15 +94,13 @@ namespace TemporalTearOpenerPatch
                                     smi.GoTo((StateMachine.BaseState)check_requirements);//进入初始状态.
                                 }*/
             }).PlayAnim("off");//重新重置动画.
-
         }
 
     }
 
-    [HarmonyPatch(typeof(TemporalTearOpener.Instance))]
+    [HarmonyPatch(typeof(TemporalTearOpener.Instance), "SidescreenEnabled")]
     public class SidescreenEnabledPatch
     {
-        [HarmonyPatch("SidescreenEnabled")]
         public static bool Postfix(bool __result, TemporalTearOpener.Instance __instance)
         {
             //  __instance.m
@@ -129,28 +111,36 @@ namespace TemporalTearOpenerPatch
         }
 
     }
+    
     [HarmonyPatch(typeof(TemporalTearOpener.Instance), "UpdateMeter")]
     public class TemporalTearOpener_UpdateMeter_Patch
     {
+       
         public static void Postfix( TemporalTearOpener.Instance __instance)
         {
             //内部自动延时.
-            if (__instance.GetComponent<HighEnergyParticleStorage>().IsFull())
-                SidescreenButtonInteractablePatch.autoFire(__instance);
+            // var sm=Traverse.Create(__instance).Field("charging").GetValue() as TemporalTearOpener.ChargingState;
+            var hps = __instance.GetComponent<HighEnergyParticleStorage>();
+            // OnParticleStorageChanged= - 1837862626
+            hps.Subscribe(-1837862626, new Action<object>((o) => {
+                if (hps.IsFull()) 
+                    SidescreenButtonInteractablePatch.autoFire(__instance);
+            }));
+            Debug.LogWarning("<<<<<UpdateMeter init >>>>>>>>>>");
         }
     }
 
-    [HarmonyPatch(typeof(TemporalTearOpener.Instance))]
+    [HarmonyPatch(typeof(TemporalTearOpener.Instance), "SidescreenButtonInteractable")]
     public class SidescreenButtonInteractablePatch
     {
-        [HarmonyPatch("SidescreenButtonInteractable")]
+         
         public static bool Postfix(bool __result, TemporalTearOpener.Instance __instance)
         {
             //  __instance.m
             if (__instance.GetComponent<HighEnergyParticleStorage>().IsFull())
             {
                 __result = true;
-          
+               // SidescreenButtonInteractablePatch.autoFire(__instance);
             }
             // __instance.GoTo(__instance.sm.opening_tear_beam_pre);
             // TemporalTearOpener.Instance.FireTemporalTearOpener();
@@ -173,7 +163,8 @@ namespace TemporalTearOpenerPatch
                 //  Traverse.Create(__instance) .Method("OpenTemporalTear");
                 //方案二:手动启动 
                 var tt = randomMeterPlanC(); //PlanA好像出错了. PlanB太慢了.
-                
+                __instance.GetComponent<HighEnergyParticleStorage>().ConsumeAll();//重置
+                __instance.CreateBeamFX();//冲天特别动画?
                 ClusterManager.Instance.GetWorld(worldId).GetSMI<GameplaySeasonManager.Instance>() .StartNewSeason(tt);
                
                 Debug.LogWarning("<<<<<autoFire--end-on--->>>>>>>>>>"+tt.Name+tt.Id);
@@ -278,20 +269,19 @@ namespace TemporalTearOpenerPatch
         }
     }
 
-      
-
-    //清理多余的陨石
-    [HarmonyPatch(typeof(GameplaySeasonManager.Instance))]
+    
+    [HarmonyPatch(typeof(GameplaySeasonManager.Instance), "Update")]
     public class GameplaySeasonManagerPatch
     {
-        [HarmonyPatch("Update")]
         public static void Prefix(GameplaySeasonManager.Instance __instance)
         {
+            //清理多余的陨石,以前的陨石要删除.
             if (__instance.activeSeasons.Count() > 0)
             {
                 var obj = __instance.activeSeasons.Last();
                 __instance.activeSeasons.Clear();
-                __instance.activeSeasons.Add(obj);
+                
+               // __instance.activeSeasons.Add(obj);  //前置删除试试.
             }
         }
     }
@@ -307,7 +297,6 @@ namespace TemporalTearOpenerPatch
         private static void Postfix()
         {
             ModUtil.AddBuildingToPlanScreen("Base", "TemporalTearOpener");
-            
         }
     }
     [HarmonyPatch(typeof(TemporalTearOpenerConfig))]
@@ -321,7 +310,8 @@ namespace TemporalTearOpenerPatch
         }
 
     }
-    [HarmonyPatch(typeof(TemporalTearOpenerConfig), "ConfigureBuildingTemplate")]
+    //补丁和前面的重复了
+  //  [HarmonyPatch(typeof(TemporalTearOpenerConfig), "ConfigureBuildingTemplate")]
     public class TemporalTearOpenerConfigDeconstruction_Patch
     {
         public static void Postfix(GameObject go)
@@ -336,5 +326,17 @@ namespace TemporalTearOpenerPatch
             }
             // inst.FindOrAddComponent<Deconstructable>();
         }
+    }
+    //可拆可建
+    [HarmonyPatch(typeof(TemporalTearOpenerConfig), "DoPostConfigureComplete")]
+    public class DeconstructionPatch
+    {
+        [HarmonyPatch()]
+        public static void Postfix(GameObject go)
+        {
+            go.GetComponent<Deconstructable>().allowDeconstruction = true;
+            EstablishColonies.BASE_COUNT = 1;//强制修改数量为0;
+        }
+
     }
 }
