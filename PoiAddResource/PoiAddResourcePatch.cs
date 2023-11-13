@@ -91,22 +91,35 @@ namespace PoiAddResource
                 foreach (var tt in list)
                 {
                 
-                        if (tt.id == "RadioactiveGasCloud")
-                        {
-                            tt.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
-                            tt.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
-                            tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
-                            tt.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞矿 固体
-                            tt.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
-                            tt.harvestableElements.Add(SimHashes.Resin, 0.1f);//树脂  solid
-                        //  Debug.LogWarning("HarvestablePOIInstanceConfiguration O00000");
-                            inited = true;
-                        }
-                        if(tt.id == "OilyAsteroidField")
-                        {
-                            tt.harvestableElements.Add(SimHashes.Mercury, 0.5f);//汞   solid
-                            tt.harvestableElements.Add(SimHashes.Naphtha, 0.5f);//石脑油 固体
-                        }
+                    if (tt.id == "RadioactiveGasCloud") //辐射星
+                    {
+                        tt.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
+                        tt.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
+                        tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
+                        tt.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞矿 固体
+                        tt.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
+                        tt.harvestableElements.Add(SimHashes.Resin, 0.1f);//树脂  solid
+                    //  Debug.LogWarning("HarvestablePOIInstanceConfiguration O00000");
+                        inited = true;
+                    }
+                    if(tt.id == "OilyAsteroidField") //油星
+                    {
+                        tt.harvestableElements.Add(SimHashes.Mercury, 0.5f);//液体汞   solid
+                        tt.harvestableElements.Add(SimHashes.Naphtha, 0.5f);//石脑油 固体
+                      
+                    }
+                    if(tt.id== "GildedAsteroidField") //金质小行星
+                    {
+                        tt.harvestableElements.Add(SimHashes.Lead, 0.5f);//铅 固体
+                        tt.harvestableElements.Add(SimHashes.DepletedUranium, 0.5f);//贫铀 
+                    }
+                    if (tt.id == "ForestyOreField") //森林小行星
+                    {
+                        tt.harvestableElements.Add(SimHashes.Steel, 0.5f);//钢 固体
+                        tt.harvestableElements.Add(SimHashes.Phosphorite, 0.05f);// 磷矿 固体
+                        tt.harvestableElements.Add(SimHashes.Phosphorus, 0.1f);// 精炼磷 固体
+                    }
+                    
                     //Debug.LogWarning("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
                   }
                 

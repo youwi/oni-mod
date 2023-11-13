@@ -2,13 +2,13 @@
 	* 并不删除垃圾.
 	* 
 	* 1. 修改地图大小 直接修改
-	*          world.WidthInCells HeightInCells 会崩溃
+	*         world.WidthInCells HeightInCells 会崩溃
 	* 2. 修改流星 
 	*        已经有mod了: Meteor Migration /Modify Difficulty Settings
 	*        mod 好像没用...
 	*		 完成
 	*       
-	* 3. 修改技能点和存档
+	* 3. 修改技能点和存档  不太需要
 	*   
 	* 4. 修改小行星位置
 	* 
@@ -20,12 +20,12 @@
 	* 8  给小行星带添加 深渊晶石,等需要的东西.
 	     HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
 		 完成
-	* 9  复制人空闲时不去检查站
-	     IdleChore
+	* 9  复制人空闲时不去检查站 // 完成.
+	     参考:
+		 IdleChore
 		 ReturnSuitWorkable
 		 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
-
-		 WorkChore<SuitLocker.ReturnSuitWorkable>(Db.Get().ChoreTypes.ReturnSuitIdle, this, null, true, null, null, null, true, null, false, false, null, false, true, false, PriorityScreen.PriorityClass.idle, 5, false, false);
+		 SuitLocker.ReturnSuitWorkable.CreateChore()
 
 
 # oni-mod 备注
