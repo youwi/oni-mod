@@ -22,6 +22,11 @@ namespace TemporalTearOpenerPatch
             ClusterManager.Instance.GetClusterPOIManager().RevealTemporalTear();
             if (ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
                 return false;
+            //判断建造
+
+            //判断加载
+
+            //判断不了
               
             return true;
         }
@@ -132,8 +137,9 @@ namespace TemporalTearOpenerPatch
             var hps = __instance.GetComponent<HighEnergyParticleStorage>();
             // OnParticleStorageChanged= - 1837862626
             hps.Subscribe(-1837862626, new Action<object>((o) => {
-                if (hps.IsFull())
-                {
+                if (hps.IsFull() 
+                    && ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
+                { //防误触发
                     Debug.LogWarning("<<<<<触发陨石>>>>>>>>");
                     SidescreenButtonInteractablePatch.autoFire(__instance);
                 }
