@@ -11,12 +11,21 @@ using static UnityEngine.GraphicsBuffer;
 
 namespace TemporalTearOpenerPatch
 {
+   
 
     [HarmonyPatch(typeof(TemporalTearOpener.Instance), "OpenTemporalTear")]
     public class OpenTemporalTearPatchPlanA
     {
-       
-        public static void Postfix(TemporalTearOpener.Instance __instance)
+       public static bool Prefix(TemporalTearOpener.Instance __instance)
+        {
+            // 默认情况下,进入动画就触发陨石,需要判断是不是建造和加载游戏.
+            ClusterManager.Instance.GetClusterPOIManager().RevealTemporalTear();
+            if (ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
+                return false;
+              
+            return true;
+        }
+        public static void AAPostfix(TemporalTearOpener.Instance __instance)
         {
             int openerWorldId = __instance.GetComponent<StateMachineController>().GetMyWorldId();//这个好像只能获取主星的ID
 
@@ -46,6 +55,7 @@ namespace TemporalTearOpenerPatch
             // highEnergyParticleStorage.IsFull
         }
     }
+    
     // [HarmonyPatch(typeof(TemporalTearOpener),"InitializeStates")]
     public class TemporalTearOpenerInitPatch
     {
@@ -95,7 +105,6 @@ namespace TemporalTearOpenerPatch
                                 }*/
             }).PlayAnim("off");//重新重置动画.
         }
-
     }
 
     [HarmonyPatch(typeof(TemporalTearOpener.Instance), "SidescreenEnabled")]
@@ -123,10 +132,15 @@ namespace TemporalTearOpenerPatch
             var hps = __instance.GetComponent<HighEnergyParticleStorage>();
             // OnParticleStorageChanged= - 1837862626
             hps.Subscribe(-1837862626, new Action<object>((o) => {
-                if (hps.IsFull()) 
+                if (hps.IsFull())
+                {
+                    Debug.LogWarning("<<<<<触发陨石>>>>>>>>");
                     SidescreenButtonInteractablePatch.autoFire(__instance);
+                }
             }));
-            Debug.LogWarning("<<<<<UpdateMeter init >>>>>>>>>>");
+            // 充能会无限触发.
+            // 加载时会触发一次.
+            // Debug.LogWarning("<<<<<UpdateMeter 充能>>>>>>>>>>");
         }
     }
 
@@ -153,7 +167,7 @@ namespace TemporalTearOpenerPatch
             if(fireing == true) { return; };//已经开始了.防重进
             fireing = true;
             int worldId = __instance.GetMyWorldId();
-            var st = new System.Timers.Timer(10000);
+            var st = new System.Timers.Timer(3000); //延迟
             st.AutoReset = false;
             st.Enabled = true;
             st.Elapsed += (object data2, ElapsedEventArgs ss) =>
@@ -280,18 +294,14 @@ namespace TemporalTearOpenerPatch
             {
                 var obj = __instance.activeSeasons.Last();
                 __instance.activeSeasons.Clear();
-                
+                Debug.LogWarning("----activeSeasons:Count>>>>>" + __instance.activeSeasons.Count);
                // __instance.activeSeasons.Add(obj);  //前置删除试试.
             }
         }
     }
 
-
-    // copy /Y "C:/Users/amd/source/repos/oni-mod-test/bin/Debug/oni-mod-test.dll"   "D:/Doc/Klei/OxygenNotIncluded\mods/local/OpenTest/oni-mod-test.dll" 
-
-    //添加建筑到菜单中
-    [HarmonyPatch(typeof(GeneratedBuildings))]
-    [HarmonyPatch("LoadGeneratedBuildings")]
+     
+    [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]  //添加建筑到菜单中
     public class GeneratedBuildingsPatch
     {
         private static void Postfix()
@@ -299,10 +309,10 @@ namespace TemporalTearOpenerPatch
             ModUtil.AddBuildingToPlanScreen("Base", "TemporalTearOpener");
         }
     }
-    [HarmonyPatch(typeof(TemporalTearOpenerConfig))]
+    [HarmonyPatch(typeof(TemporalTearOpenerConfig), "CreateBuildingDef")]  //出现在菜单
     public class TemporalTearOpenerConfig_Patch
     {
-        [HarmonyPatch("CreateBuildingDef")]
+       
         public static BuildingDef Postfix(BuildingDef __result)
         {
             __result.ShowInBuildMenu = true;
@@ -311,7 +321,7 @@ namespace TemporalTearOpenerPatch
 
     }
     //补丁和前面的重复了
-  //  [HarmonyPatch(typeof(TemporalTearOpenerConfig), "ConfigureBuildingTemplate")]
+  //  [HarmonyPatch(typeof(TemporalTearOpenerConfig), "ConfigureBuildingTemplate")] //重复了
     public class TemporalTearOpenerConfigDeconstruction_Patch
     {
         public static void Postfix(GameObject go)
@@ -328,7 +338,7 @@ namespace TemporalTearOpenerPatch
         }
     }
     //可拆可建
-    [HarmonyPatch(typeof(TemporalTearOpenerConfig), "DoPostConfigureComplete")]
+    [HarmonyPatch(typeof(TemporalTearOpenerConfig), "DoPostConfigureComplete")] //可拆
     public class DeconstructionPatch
     {
         [HarmonyPatch()]
