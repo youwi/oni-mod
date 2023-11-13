@@ -129,6 +129,17 @@ namespace TemporalTearOpenerPatch
         }
 
     }
+    [HarmonyPatch(typeof(TemporalTearOpener.Instance), "UpdateMeter")]
+    public class TemporalTearOpener_UpdateMeter_Patch
+    {
+        public static void Postfix( TemporalTearOpener.Instance __instance)
+        {
+            //内部自动延时.
+            if (__instance.GetComponent<HighEnergyParticleStorage>().IsFull())
+                SidescreenButtonInteractablePatch.autoFire(__instance);
+        }
+    }
+
     [HarmonyPatch(typeof(TemporalTearOpener.Instance))]
     public class SidescreenButtonInteractablePatch
     {
@@ -139,8 +150,7 @@ namespace TemporalTearOpenerPatch
             if (__instance.GetComponent<HighEnergyParticleStorage>().IsFull())
             {
                 __result = true;
-                 
-                 autoFire(__instance);
+          
             }
             // __instance.GoTo(__instance.sm.opening_tear_beam_pre);
             // TemporalTearOpener.Instance.FireTemporalTearOpener();
