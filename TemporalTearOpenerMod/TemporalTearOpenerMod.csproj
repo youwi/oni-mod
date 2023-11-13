@@ -67,12 +67,15 @@
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\preview.png" />
+    <Content Include="resource\sc1.jpg" />
+    <Content Include="resource\preview.jpg" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
-copy /y $(TargetDir)$(TargetFileName)  $(ONI_MOD_LOCAL)\$(ProjectName)\$(TargetFileName)
-copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+copy /y $(TargetDir)$(ProjectName).*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
   </PropertyGroup>
 </Project>

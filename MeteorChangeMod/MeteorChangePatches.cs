@@ -132,6 +132,7 @@ namespace MeteorChangeMod
                 "MiniFlippedMeteorShowers",
                 "MiniRadioactiveOceanMeteorShowers"
             };
+            //翻译列表:
             IDictionary eventUIK = new System.Collections.Generic.Dictionary<GameplayEvent, LocString>();
 
             eventUIK.Add(Db.Get().GameplayEvents.MeteorShowerIronEvent, UI.SPACEDESTINATIONS.COMETS.IRONCOMET.NAME);
@@ -174,6 +175,7 @@ namespace MeteorChangeMod
             foreach (var field in fieldList)
             {
                 // Database.GameplaySeasons;
+               // field.DeclaringType== GameplaySeason
                 if (field.Name.EndsWith("MeteorShowers") && field.Name != "MeteorShowers")
                 {
                     var namei18n = "";

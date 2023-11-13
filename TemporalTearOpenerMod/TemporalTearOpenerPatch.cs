@@ -1,7 +1,10 @@
 ﻿using Database;
 using HarmonyLib;
+using Klei.AI;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Timers;
 using UnityEngine;
 
 namespace TemporalTearOpenerPatch
@@ -63,7 +66,6 @@ namespace TemporalTearOpenerPatch
 
         public static void Postfix(TemporalTearOpener __instance)
         {
-
 
             __instance.root.Enter(delegate (TemporalTearOpener.Instance smi)
             {
@@ -135,12 +137,138 @@ namespace TemporalTearOpenerPatch
         {
             //  __instance.m
             if (__instance.GetComponent<HighEnergyParticleStorage>().IsFull())
+            {
                 __result = true;
+                 
+                 autoFire(__instance);
+            }
+            // __instance.GoTo(__instance.sm.opening_tear_beam_pre);
+            // TemporalTearOpener.Instance.FireTemporalTearOpener();
             //强制显示菜单,强制让按钮可点击.
             return __result;
         }
+        static bool fireing=false; //正在操作
+        public static void autoFire(TemporalTearOpener.Instance __instance)
+        {
+            if(fireing == true) { return; };//已经开始了.防重进
+            fireing = true;
+            int worldId = __instance.GetMyWorldId();
+            var st = new System.Timers.Timer(10000);
+            st.AutoReset = false;
+            st.Enabled = true;
+            st.Elapsed += (object data2, ElapsedEventArgs ss) =>
+            {
+                fireing = false;//后面容易出异常
+                //方案一:内置启动
+                //  Traverse.Create(__instance) .Method("OpenTemporalTear");
+                //方案二:手动启动 
+                var tt = randomMeterPlanC(); //PlanA好像出错了. PlanB太慢了.
+                
+                ClusterManager.Instance.GetWorld(worldId).GetSMI<GameplaySeasonManager.Instance>() .StartNewSeason(tt);
+               
+                Debug.LogWarning("<<<<<autoFire--end-on--->>>>>>>>>>"+tt.Name+tt.Id);
+            };
+            st.Start();
+            Debug.LogWarning("<<<<<autoFire--10s-will-->>>>>>>>>>");
+            //默认为标准陨石.
 
+            // Db.Get().GameplaySeasons  
+            // GameScreenManager.Instance.Scr
+
+        }
+        
+        static List<string> nameList =null;
+        static List<MeteorShowerEvent> msList =null;
+        public static GameplaySeason randomMeterPlanA()
+        {
+            // 获取  MeteorShowerEvent 列表
+            //手动制作一个陨石.
+           if(nameList==null)
+            {
+                nameList=new List<string>();
+                msList=new List<MeteorShowerEvent>();
+                var fieldList = typeof(Database.GameplayEvents).GetFields();
+                foreach (var field in fieldList)
+                {
+                    if (field.DeclaringType == typeof(MeteorShowerEvent))
+                    {
+                        nameList.Add(field.Name);
+                        MeteorShowerEvent ev =(MeteorShowerEvent)field.GetValue(Db.Get().GameplayEvents);
+                        msList.Add(ev);
+                    };
+                };
+            }
+            GameplaySeason rndMeteorShowerSeason = new MeteorShowerSeason(
+              "TemporalTearMeteorShowers",
+              GameplaySeason.Type.World,
+              "EXPANSION1_ID",
+              1f, //1周期立即落下
+              false, 0f, false, -1, 0f,
+              float.PositiveInfinity,
+              1, false, -1f);//延时:clusterTravelDuration
+
+            rndMeteorShowerSeason.events.Clear();
+            // 方案一:随机3个效果
+            for (int i = 0; i < 3; i++)
+            {
+                var ridc = UnityEngine.Random.Range(0, nameList.Count);
+                rndMeteorShowerSeason.AddEvent(msList[ridc]);
+            }
+
+            //方案二,直接写,
+            //rndMeteorShowerSeason
+            //   .AddEvent(Db.Get().GameplayEvents.MeteorShowerDustEvent)
+            //   .AddEvent(Db.Get().GameplayEvents.MeteorShowerGoldEvent)
+            //   .AddEvent(Db.Get().GameplayEvents.MeteorShowerIronEvent)
+            //   .AddEvent(Db.Get().GameplayEvents.MeteorShowerCopperEvent)
+            //   .AddEvent(Db.Get().GameplayEvents.ClusterIceShower)
+            //   .AddEvent(Db.Get().GameplayEvents.MeteorShowerFullereneEvent);
+           
+            return rndMeteorShowerSeason;
+        }
+        public static GameplaySeason randomMeterPlanB()
+        {
+            //随机的只有一个TemporalTearMeteor是立即产生的,其它要其它陨石雨要20周期.
+            //GameplaySeasons 随机找一个...
+            var tmp = Db.Get().GameplaySeasons;
+
+            var rid = UnityEngine.Random.Range(0, tmp.Count);
+            var tt = Db.Get().GameplaySeasons.resources[rid];
+            if (tt.Id == "MeteorShowers")
+            {
+                return Db.Get().GameplaySeasons.TemporalTearMeteorShowers;
+            }
+            if (tt.Id.EndsWith("MeteorShowers"))
+            {
+                return tt;
+            }
+           return Db.Get().GameplaySeasons.TemporalTearMeteorShowers;
+        }
+
+        static bool initedPlanC=false;
+        public static GameplaySeason randomMeterPlanC()
+        {
+            // Db.Get().GameplaySeasons.TemporalTearMeteorShowers
+            if (initedPlanC == false)
+            {
+                Db.Get().GameplaySeasons.TemporalTearMeteorShowers
+                 .AddEvent(Db.Get().GameplayEvents.MeteorShowerDustEvent)
+                 .AddEvent(Db.Get().GameplayEvents.ClusterOxyliteShower)
+                 .AddEvent(Db.Get().GameplayEvents.ClusterBiologicalShower)
+                 .AddEvent(Db.Get().GameplayEvents.ClusterRegolithShower)
+                 .AddEvent(Db.Get().GameplayEvents.ClusterBleachStoneShower)
+                 .AddEvent(Db.Get().GameplayEvents.ClusterUraniumShower)
+                 .AddEvent(Db.Get().GameplayEvents.ClusterGoldShower)
+                 .AddEvent(Db.Get().GameplayEvents.MeteorShowerFullereneEvent);
+                initedPlanC = true;
+            }
+            return Db.Get().GameplaySeasons.TemporalTearMeteorShowers;
+
+
+        }
     }
+
+      
 
     //清理多余的陨石
     [HarmonyPatch(typeof(GameplaySeasonManager.Instance))]
@@ -155,14 +283,13 @@ namespace TemporalTearOpenerPatch
                 __instance.activeSeasons.Clear();
                 __instance.activeSeasons.Add(obj);
             }
-
         }
     }
 
 
     // copy /Y "C:/Users/amd/source/repos/oni-mod-test/bin/Debug/oni-mod-test.dll"   "D:/Doc/Klei/OxygenNotIncluded\mods/local/OpenTest/oni-mod-test.dll" 
 
-    //添加建筑到菜单中,更新好像失效了..
+    //添加建筑到菜单中
     [HarmonyPatch(typeof(GeneratedBuildings))]
     [HarmonyPatch("LoadGeneratedBuildings")]
     public class GeneratedBuildingsPatch
@@ -170,6 +297,34 @@ namespace TemporalTearOpenerPatch
         private static void Postfix()
         {
             ModUtil.AddBuildingToPlanScreen("Base", "TemporalTearOpener");
+            
+        }
+    }
+    [HarmonyPatch(typeof(TemporalTearOpenerConfig))]
+    public class TemporalTearOpenerConfig_Patch
+    {
+        [HarmonyPatch("CreateBuildingDef")]
+        public static BuildingDef Postfix(BuildingDef __result)
+        {
+            __result.ShowInBuildMenu = true;
+            return __result;
+        }
+
+    }
+    [HarmonyPatch(typeof(TemporalTearOpenerConfig), "ConfigureBuildingTemplate")]
+    public class TemporalTearOpenerConfigDeconstruction_Patch
+    {
+        public static void Postfix(GameObject go)
+        {
+            go.AddOrGet<Deconstructable>();
+            PrimaryElement component = go.GetComponent<PrimaryElement>();
+            component.SetElement(SimHashes.Steel);//钢
+            var obj = go.GetComponent<Deconstructable>();
+            if (obj != null)
+            {
+                obj.allowDeconstruction = true;
+            }
+            // inst.FindOrAddComponent<Deconstructable>();
         }
     }
 }

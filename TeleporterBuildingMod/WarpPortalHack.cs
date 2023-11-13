@@ -54,7 +54,7 @@ namespace TeleporterBuildingMod
             int width = 3;
             int height = 3;
             string anim = "warp_portal_sender_new_kanim";//动画有bug,使用修改后的动画
-                                                         //  string anim = "temporal_tear_opener_kanim";
+            //  string anim = "temporal_tear_opener_kanim";
             int hitpoints = 100;
             float construction_time = 120f;
             float[] tais1 = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER5;
