@@ -175,7 +175,7 @@ namespace MeteorChangeMod
             foreach (var field in fieldList)
             {
                 // Database.GameplaySeasons;
-               // field.DeclaringType== GameplaySeason
+                // field.DeclaringType== GameplaySeason
                 if (field.Name.EndsWith("MeteorShowers") && field.Name != "MeteorShowers")
                 {
                     var namei18n = "";
