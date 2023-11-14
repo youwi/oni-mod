@@ -182,12 +182,12 @@ namespace TemporalTearOpenerPatch
                 //方案一:内置启动
                 //  Traverse.Create(__instance) .Method("OpenTemporalTear");
                 //方案二:手动启动 
-                var tt = randomMeterPlanC(); //PlanA好像出错了. PlanB太慢了.
+                var tt = randomMeterPlanC2(); //PlanA好像出错了. PlanB太慢了.
                 __instance.GetComponent<HighEnergyParticleStorage>().ConsumeAll();//重置
-                __instance.CreateBeamFX();//冲天特别动画?
+                __instance.CreateBeamFX();//冲天特别动画,对的.
                 ClusterManager.Instance.GetWorld(worldId).GetSMI<GameplaySeasonManager.Instance>() .StartNewSeason(tt);
-               
-                Debug.LogWarning("<<<<<autoFire--end-on--->>>>>>>>>>"+tt.Name+tt.Id);
+                var dlcFlag=DlcManager.IsContentActive(tt.dlcId);
+                Debug.LogWarning($"<<<<<AutoFire--end-on->>>>{tt.Name}:{dlcFlag}");//tt.Id和Name一样
             };
             st.Start();
             Debug.LogWarning("<<<<<autoFire--10s-will-->>>>>>>>>>");
@@ -286,6 +286,10 @@ namespace TemporalTearOpenerPatch
             return Db.Get().GameplaySeasons.TemporalTearMeteorShowers;
 
 
+        }
+        public static GameplaySeason randomMeterPlanC2()
+        { //有bug测试有问题.直接用原版看看.
+           return Db.Get().GameplaySeasons.TemporalTearMeteorShowers;
         }
     }
 
