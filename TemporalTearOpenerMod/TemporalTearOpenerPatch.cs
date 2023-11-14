@@ -327,9 +327,12 @@ namespace TemporalTearOpenerPatch
             buildMsList();
             for(int i = 0; i < 3; i++)
             {  //循环3次
-                GameplayEventManager.Instance.StartNewEvent(
-                 msList[UnityEngine.Random.Range(0, msList.Count)], worldId,
-                 new Action<StateMachine.Instance>(callbackInfo)).StartEvent();
+                var ttm = GameplayEventManager.Instance.StartNewEvent(
+                     msList[UnityEngine.Random.Range(0, msList.Count)], worldId,
+                     new Action<StateMachine.Instance>(callbackInfo));
+                 ttm.StartEvent();
+               // GameplayEventManager.Instance
+               // ttm.disa
             }
              
             return null;
