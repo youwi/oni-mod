@@ -3,7 +3,7 @@
 	* 
 	* 1. 修改地图大小 直接修改
 	*         world.WidthInCells HeightInCells 会崩溃
-	* 2. 修改流星 
+	* 2. 修改流星 。召唤流星
 	*        已经有mod了: Meteor Migration /Modify Difficulty Settings
 	*        mod 好像没用...
 	*		 完成

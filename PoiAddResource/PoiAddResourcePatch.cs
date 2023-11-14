@@ -89,7 +89,7 @@ namespace PoiAddResource
 
                 foreach (var tt in list)
                 {
-
+                    //HarvestablePOIConfig.gen
                     if (tt.id == "RadioactiveGasCloud") //辐射星
                     {
                         tt.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
@@ -117,6 +117,27 @@ namespace PoiAddResource
                         tt.harvestableElements.Add(SimHashes.Steel, 0.5f);//钢 固体
                         tt.harvestableElements.Add(SimHashes.Phosphorite, 0.05f);// 磷矿 固体
                         tt.harvestableElements.Add(SimHashes.Phosphorus, 0.1f);// 精炼磷 固体
+                    }
+                    if (tt.id == "SwampyOreField") //沼泽矿带
+                    {
+                        tt.harvestableElements.Add(SimHashes.Fertilizer, 0.5f);//肥料
+                        tt.harvestableElements.Add(SimHashes.Ethanol, 0.5f);//乙醇
+
+                    }
+                    if (tt.id == "RockyAsteroidField") //岩石小行星
+                    {
+                        tt.harvestableElements.Add(SimHashes.Obsidian, 0.5f);//黑曜石
+                        tt.harvestableElements.Add(SimHashes.Granite, 0.5f);// 花岗岩
+                        tt.harvestableElements.Add(SimHashes.Lime, 0.01f);// 石灰 
+                        tt.harvestableElements.Add(SimHashes.MaficRock, 1f);// 镁铁岩
+                    }
+                    if(tt.id== "HeliumCloud")  //氦气云
+                    {
+                        tt.harvestableElements.Add(SimHashes.Lime, 0.5f);// 添加石灰 
+                    }
+                    if (tt.id == "CarbonAsteroidField")  //碳质小行星
+                    {
+                        tt.harvestableElements.Add(SimHashes.Ceramic, 0.5f);// 添加陶瓷 
                     }
 
                     //Debug.LogWarning("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
