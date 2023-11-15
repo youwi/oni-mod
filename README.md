@@ -28,7 +28,8 @@
 		 ReturnSuitWorkable
 		 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
 		 SuitLocker.ReturnSuitWorkable.CreateChore()
-
+# 反射:
+	Traverse.Create
 
 # oni-mod 备注
 说明:
@@ -39,7 +40,7 @@
 
 	https://code.ecool.dev/ONI-Mods/BuildableNaturalTile
 	https://bbs.3dmgame.com/thread-6226681-1-2.html
-	https://robophred.github.io/oni-duplicity/#/raw
+	https://robophred.github.io/oni-duplicity/#/raw  存档修改器.
 	https://steamcommunity.com/sharedfiles/filedetails/?id=1883272681
 
 ## TODO
@@ -61,6 +62,11 @@ xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
 ```
 TeleporterBuild 传送器可建造
 
+资源查看器 (解包)
+assetstudio https://github.com/Perfare/AssetStudio/releases
+https://www.bilibili.com/read/cv4265805/
+解包软件:
+https://github.com/fgc0109/OxygenNotIncludedDev/tree/master
 
 Space exposure  STATUSITEMS.SPACE  太空暴露  MISC.STATUSITEMS.SPACE
 

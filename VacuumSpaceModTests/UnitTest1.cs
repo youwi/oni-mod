@@ -144,6 +144,14 @@ namespace ModTests
 
         }
         [TestMethod()]
+        public void sfefawefawefaw()
+        {
+            Assets.GetSprite("space_race");
+
+
+
+        }
+        [TestMethod()]
         public void stesese()
         {
             var timer2 = new System.Threading.Timer(timerCallbackFun2, null, 1000, 500);
@@ -168,5 +176,7 @@ namespace ModTests
             Console.WriteLine("测试22");
 
         }
+
+       
     }
 }

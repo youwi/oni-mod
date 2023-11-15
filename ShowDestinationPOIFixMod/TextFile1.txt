@@ -1,0 +1,40 @@
+﻿
+
+
+Show Destination POI
+
+这个mod虽然显示了位置,但是没有图标.
+
+
+ClusterPOIManager
+
+HarvestablePOIConfig 初始化图标.
+
+ClusterDestinationSideScreen.Refresh() 刷新图标出bug
+	调用了:
+	ClusterGrid.Instance.GetLocationDescription(
+	     this.targetSelector.GetDestination(),
+		 out sprite, out str, out text);
+
+HarvestablePOIClusterGridEntity.AnimConfigs
+	共用一张图片
+	Def.GetUISpriteFromMultiObjectAnim(animConfigs[0].animFile, "ui", false, "");
+打补丁有2个方案
+
+
+NullReferenceException: Object reference not set to an instance of an object
+
+ShowDestinationPOIFixMod.ClusterGrid_GetLocationDescription_Patch.Prefix (ClusterGrid __instance, AxialI location, UnityEngine.Sprite& sprite, System.String& label, System.String& sublabel) (at <092e23c6de1747339e5c34cd4f9a14b1>:0)
+(wrapper dynamic-method) ClusterGrid.ClusterGrid.GetLocationDescription_Patch1(ClusterGrid,AxialI,UnityEngine.Sprite&,string&,string&)
+Database.BuildingStatusItems+<>c.<CreateStatusItems>b__281_70 (System.String str, System.Object data) (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+StatusItem.ResolveString (System.String str, System.Object data) (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+StatusItem.GetName (System.Object data) (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+StatusItemGroup+Entry.GetName () (at <d1b7643456214f4e8c00f70e3a2b4469>:0)
+ 
+ 
+
+Build: U49-577063-SD
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=2705123166
+
+ 

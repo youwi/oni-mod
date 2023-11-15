@@ -9,3 +9,5 @@
 .Resin, 0.1f);//树脂  solid
 .Mercury, 0.5f);//汞   solid
 .Naphtha, 0.5f);//石脑油 固体
+
+增加黑耀石
