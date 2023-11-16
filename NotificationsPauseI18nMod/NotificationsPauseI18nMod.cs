@@ -9,18 +9,65 @@ using Newtonsoft.Json;
  
 using UnityEngine;
 using HarmonyLib;
+using Klei;
 
 namespace NotificationsPauseI18nMod
 {
+   
+    public class InitConfig : KMod.UserMod2 
+    {
+        static string ModPath = null;
+        public override void OnLoad(Harmony harmony)
+        {
+            ModPath = mod.ContentPath;
+            string fileName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
+            try
+            {
+              var  config = YamlIO.LoadFile<NotificationsPause.SettingsFile>(fileName);
+
+            }
+            catch (System.Exception ex) {
+                if(ex is FileNotFoundException)
+                {   //  翻译表:
+                    //  STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME 战斗!
+                    //  STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME 失禁
+                    //  STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME  未选择研究方向
+                    //  
+                    //  STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME   红色警报
+                    //  STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME 窒息
+                    //  STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME  顶级优先度
+
+                    SortedDictionary<string, bool> kv= new SortedDictionary<string, bool>();
+                    kv.Add(STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME, false);
+                    kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME, false);
+                    kv.Add(STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME, false);
+                    kv.Add(STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME, false);
+                    kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
+                    kv.Add(STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME, false);
+
+                    kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
+
+                    var sett = new NotificationsPause.SettingsFile
+                    {
+                        PauseOnNotification = kv
+                    };
+                    YamlIO.Save(sett, fileName);
+                }
+            }
+
+            base.OnLoad(harmony);
+        }
+    }
+
     public static class NotificationsPause
     {
-        private static SettingsFile settings;
-        private static bool tryReadOnce = true;
-        private static float lastPause = 0f;
-        private class SettingsFile
+        public static SettingsFile settings;
+        public static bool tryReadOnce = true;
+        public static float lastPause = 0f;
+        public class SettingsFile
         {
-            public string fileversion;
-            public float cooldown;
+            public string fileversion="0.1";
+            public float cooldown=10;
             public SortedDictionary<string, bool> PauseOnNotification;
         }
 

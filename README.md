@@ -55,6 +55,7 @@ PoissonDisk 不规则圆区?
 
 设置环境 :ONI_MOD_LOCAL   文档\Klei\OxygenNotIncluded\mods\local
 ```
+node ../../../auto_version.mjs
 mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
 copy /y $(TargetDir)$(ProjectName).*  $(ONI_MOD_LOCAL)\$(ProjectName)\
 copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
@@ -99,6 +100,8 @@ kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 	off
 	place
 	ui
+# json:
+     Newtonsoft.Json.JsonConvert.DeserializeObject<SettingsFile>(string);
 
 ## ClipperLib 
 使用这个库切割多边形,太麻烦不搞了.

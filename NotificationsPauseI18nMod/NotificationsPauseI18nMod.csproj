@@ -68,4 +68,15 @@
     <Content Include="resource\src.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>node ../../../auto_version.mjs
+mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
+copy /y $(TargetDir)$(ProjectName).*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>
