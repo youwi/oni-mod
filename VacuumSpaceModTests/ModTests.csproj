@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="exp.yaml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

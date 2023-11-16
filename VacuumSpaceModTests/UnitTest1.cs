@@ -1,9 +1,12 @@
-﻿using Klei.AI;
+﻿using Klei;
+using Klei.AI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Timers;
+using UnityEngine;
 
 namespace ModTests
 {
@@ -98,6 +101,19 @@ namespace ModTests
                 Console.WriteLine(DoubleMutantMod.DoubleMutantModPatch.randInList());
             }
 
+        }
+        [TestMethod()]
+        public void TestMethodFFsssF3()
+        {
+            var configPlanB = YamlIO.LoadFile<SortedDictionary<string, bool>>("../../exp.yaml");
+
+            var tflot=File.GetLastWriteTime("../../exp.yaml").Ticks;
+            ;// 6383574106505 99408
+            var dd =   System.DateTime.Now.Ticks;
+            Console.WriteLine(""+ tflot+ " ");
+            Console.WriteLine("" + dd + " ");
+            Console.WriteLine((dd-tflot)/10000/1000);
+            // Time.time
         }
 
         [TestMethod()]
