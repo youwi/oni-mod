@@ -1,0 +1,23 @@
+﻿Tried to add WARPCONDUITSENDER to the Codex screen multiple times
+
+  at UnityEngine.Debug.LogError (System.Object message) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
+  at Debug.LogError (System.Object obj) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at CodexCache.AddEntry (System.String id, CodexEntry entry, System.Collections.Generic.List`1[T] categoryEntries) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at CodexEntryGenerator.GenerateSingleBuildingEntry (BuildingDef def, System.String categoryEntryID) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at CodexEntryGenerator.GenerateEntriesForBuildingsInCategory (PlanScreen+PlanInfo category, System.String categoryPrefx, System.Collections.Generic.Dictionary`2[System.String,CodexEntry]& categoryEntries) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at CodexEntryGenerator.GenerateBuildingEntries () [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at CodexCache.CodexCacheInit () [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at ManagementMenu.OnPrefabInit () [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at KMonoBehaviour.InitializeComponent () [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at KMonoBehaviour.Awake () [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at UnityEngine.Object.Internal_CloneSingleWithParent (UnityEngine.Object data, UnityEngine.Transform parent, System.Boolean worldPositionStays) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
+  at UnityEngine.Object.Instantiate[T] (T original, UnityEngine.Transform parent, System.Boolean worldPositionStays) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
+  at Util.KInstantiateUI (UnityEngine.GameObject original, UnityEngine.GameObject parent, System.Boolean force_active) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at ScheduledUIInstantiation.InstantiateElements (System.Object data) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at EventSystem.Trigger (UnityEngine.GameObject go, System.Int32 hash, System.Object data) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at KMonoBehaviour.Trigger (System.Int32 hash, System.Object data) [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at Game.Game.OnSpawn_Patch4 (Game ) [0x00000] in <d1b7643456214f4e8c00f70e3a2b4469>:0 
+  at KMonoBehaviour.Spawn () [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+  at KMonoBehaviour.Start () [0x00000] in <d9d260db23eb4b5ea9674097f27ddfad>:0 
+Build: U49-577063-SD

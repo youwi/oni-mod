@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using HarmonyLib;
 using Klei;
+using static NotificationsPauseI18nMod.NotificationsPause;
 
 namespace NotificationsPauseI18nMod
 {
@@ -20,39 +21,45 @@ namespace NotificationsPauseI18nMod
         public override void OnLoad(Harmony harmony)
         {
             ModPath = mod.ContentPath;
-            string fileName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
+            string fileName = mod.ContentPath + "/../../NotificationsPauseI18n.json";
+            if (!File.Exists(fileName))
+            {
+                //  翻译表:
+                //  STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME 战斗!
+                //  STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME 失禁
+                //  STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME  未选择研究方向
+                //  
+                //  STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME   红色警报
+                //  STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME 窒息
+                //  STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME  顶级优先度
+
+                SortedDictionary<string, bool> kv = new SortedDictionary<string, bool>();
+                kv.Add(STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME, false);
+                kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME, false);
+                kv.Add(STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME, false);
+                kv.Add(STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME, false);
+                kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
+                kv.Add(STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME, false);
+
+                // kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
+
+                var sett = new NotificationsPause.SettingsFile
+                {
+                    PauseOnNotification = kv
+                };
+                File.WriteAllText(fileName, JsonConvert.SerializeObject(sett));
+
+                //YamlIO.Save(sett, fileName);
+            };
             try
             {
-              var  config = YamlIO.LoadFile<NotificationsPause.SettingsFile>(fileName);
-
+              // var  config = YamlIO.LoadFile<NotificationsPause.SettingsFile>(fileName);
+                var config =  JsonConvert.DeserializeObject<SettingsFile>(fileName);
+                NotificationsPause.settings= config;
             }
             catch (System.Exception ex) {
-                if(ex is FileNotFoundException)
-                {   //  翻译表:
-                    //  STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME 战斗!
-                    //  STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME 失禁
-                    //  STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME  未选择研究方向
-                    //  
-                    //  STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME   红色警报
-                    //  STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME 窒息
-                    //  STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME  顶级优先度
-
-                    SortedDictionary<string, bool> kv= new SortedDictionary<string, bool>();
-                    kv.Add(STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME, false);
-                    kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME, false);
-                    kv.Add(STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME, false);
-                    kv.Add(STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME, false);
-                    kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
-                    kv.Add(STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME, false);
-
-                    kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
-
-                    var sett = new NotificationsPause.SettingsFile
-                    {
-                        PauseOnNotification = kv
-                    };
-                    YamlIO.Save(sett, fileName);
-                }
+                Debug.LogWarning(ex.Message);
+                File.Delete(fileName);
             }
 
             base.OnLoad(harmony);
@@ -74,7 +81,7 @@ namespace NotificationsPauseI18nMod
         [HarmonyPatch(typeof(Notification), "IsReady")]
         public static class Notification_IsReady_Patch
         {
-            private static void readSettings()
+            private static void readSettings_backUp()
             {
                 FileInfo sfile = new FileInfo(Assembly.GetExecutingAssembly().Location);
                 DirectoryInfo dirInfo = sfile.Directory;
@@ -105,7 +112,7 @@ namespace NotificationsPauseI18nMod
                 if (tryReadOnce && settings == null)
                 {
                     //First notification, read file and stuff
-                    readSettings();
+                   // readSettings();
                     tryReadOnce = false;
                 }
 

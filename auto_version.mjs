@@ -1,5 +1,5 @@
 
-
+//自动更新版本号 的脚本
 import FS from 'fs';
 
 process.argv
