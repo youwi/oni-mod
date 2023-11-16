@@ -63,10 +63,6 @@
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="resource\preview.jpg" />
-    <Content Include="resource\src.jpg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>node ../../../auto_version.mjs

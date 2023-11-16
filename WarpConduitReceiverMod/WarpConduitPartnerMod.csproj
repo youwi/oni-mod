@@ -7,8 +7,8 @@
     <ProjectGuid>{1F98832C-AB28-4CE7-AF9D-05C8D5365190}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WarpConduitReceiverMod</RootNamespace>
-    <AssemblyName>WarpConduitReceiverMod</AssemblyName>
+    <RootNamespace>WarpConduitPartnerMod</RootNamespace>
+    <AssemblyName>WarpConduitPartnerMod</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -71,8 +71,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>		mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
-		copy /y $(TargetDir)$(TargetFileName)  $(ONI_MOD_LOCAL)\$(ProjectName)\$(TargetFileName)
-		copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+    <PostBuildEvent>node ../../../auto_version.mjs
+mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
+copy /y $(TargetDir)$(ProjectName).*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
   </PropertyGroup>
 </Project>
