@@ -79,7 +79,7 @@
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\src1.jpg" />
+    <Content Include="src1.jpg" />
     <Content Include="resource\preview.jpg" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>

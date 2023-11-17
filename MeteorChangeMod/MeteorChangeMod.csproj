@@ -86,7 +86,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\src1.jpg" />
+    <Content Include="src1.jpg" />
     <Content Include="resource\preview.jpg" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>

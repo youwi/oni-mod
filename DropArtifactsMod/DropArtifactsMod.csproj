@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.jpg" />
-    <Content Include="resource\scre.jpg" />
+    <Content Include="scre.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

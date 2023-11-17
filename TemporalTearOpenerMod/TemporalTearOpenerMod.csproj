@@ -67,7 +67,7 @@
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\sc1.jpg" />
+    <Content Include="sc1.jpg" />
     <Content Include="resource\preview.jpg" />
     <None Include="README.md" />
   </ItemGroup>

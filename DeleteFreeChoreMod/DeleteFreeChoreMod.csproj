@@ -67,7 +67,7 @@
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\scr1.jpg" />
+    <Content Include="scr1.jpg" />
     <Content Include="resource\preview.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

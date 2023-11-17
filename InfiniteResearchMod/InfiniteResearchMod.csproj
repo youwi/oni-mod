@@ -72,9 +72,9 @@
     <Compile Include="Util\STRINGS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\preview3.png" />
+    <Content Include="preview3.png" />
     <Content Include="resource\preview.png" />
-    <Content Include="resource\preview2.png" />
+    <Content Include="preview2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
