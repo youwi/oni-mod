@@ -241,7 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.jpg" />
-    <Content Include="resource\scr.jpg" />
+    <Content Include="scr2.jpg" />
+    <Content Include="scr3.jpg" />
+    <Content Include="scr.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
