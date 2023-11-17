@@ -19,10 +19,11 @@ namespace NotificationsPauseI18nMod
     {
         static string ModPath = null;
         public static string ModConfigName = "";
+        public static string ModConfigJsonName = "";
         public override void OnLoad(Harmony harmony)
         {
             ModPath = mod.ContentPath;
-            // string fileName = mod.ContentPath + "/../../NotificationsPauseI18n.json";
+            ModConfigJsonName = mod.ContentPath + "/../../NotificationsPauseI18n.json";
             ModConfigName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
             base.OnLoad(harmony);
         }
@@ -43,14 +44,13 @@ namespace NotificationsPauseI18nMod
             public  void addKeyAndSave(string keyString)
             {
                 PauseOnNotification.Add(keyString, false);
-                YamlIO.Save(PauseOnNotification, InitConfig.ModConfigName);
+                File.WriteAllText(InitConfig.ModConfigJsonName, JsonConvert.SerializeObject(PauseOnNotification, Formatting.Indented));
+               // YamlIO.Save(PauseOnNotification, InitConfig.ModConfigName);
             }
             public static void loadSett()
             {
-
-
-                string fileNamePlanB = InitConfig.ModConfigName;
-                if (!File.Exists(fileNamePlanB))
+                if(!File.Exists(InitConfig.ModConfigJsonName))
+               // if (!File.Exists(InitConfig.ModConfigName))
                 {
                     //  翻译表:
                     //  STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME 战斗!
@@ -73,25 +73,28 @@ namespace NotificationsPauseI18nMod
 
                     // kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
 
-
-                    NotificationsPause.settings.PauseOnNotification = kv;
-                    YamlIO.Save(kv, fileNamePlanB);
-                    //  File.Create(fileName).Close();
-                    //  File.WriteAllText(fileName, JsonConvert.SerializeObject(sett));
-
+                    //方案A: YAML
+                    //NotificationsPause.settings.PauseOnNotification = kv;
+                    //YamlIO.Save(kv, fileNamePlanB);
+                    //方案B: JSON
+                    File.Create(InitConfig.ModConfigJsonName).Close();
+                    File.WriteAllText(InitConfig.ModConfigJsonName, JsonConvert.SerializeObject(kv, Formatting.Indented));
                 };
                 try
                 {
-                    //var config = JsonConvert.DeserializeObject<SettingsFile>(fileName);
-                    //NotificationsPause.settings = config;
-                    var configPlanB = YamlIO.LoadFile<SortedDictionary<string, bool>>(fileNamePlanB);
-                    lastLoadTick=System.DateTime.Now.Ticks;
-                    NotificationsPause.settings.PauseOnNotification = configPlanB;
+                    //方案A:YAML
+                    //var config = YamlIO.LoadFile<SortedDictionary<string, bool>>(fileNamePlanB);
+                    //NotificationsPause.settings.PauseOnNotification = config;
+                    //方案B: JSON
+                    var config = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(InitConfig.ModConfigJsonName);
+                    NotificationsPause.settings.PauseOnNotification = config;
+
+                    lastLoadTick = System.DateTime.Now.Ticks;
+
                 }
                 catch (System.Exception ex)
                 {
                     Debug.LogError(ex.Message);
-                    // File.Delete(fileName);
                 }
             }
         }
