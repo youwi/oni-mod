@@ -78,7 +78,8 @@ namespace NotificationsPauseI18nMod
                     //YamlIO.Save(kv, fileNamePlanB);
                     //方案B: JSON
                     File.Create(InitConfig.ModConfigJsonName).Close();
-                    File.WriteAllText(InitConfig.ModConfigJsonName, JsonConvert.SerializeObject(kv, Formatting.Indented));
+                    File.WriteAllText(InitConfig.ModConfigJsonName, 
+                        JsonConvert.SerializeObject(kv, Formatting.Indented));
                 };
                 try
                 {
@@ -86,11 +87,11 @@ namespace NotificationsPauseI18nMod
                     //var config = YamlIO.LoadFile<SortedDictionary<string, bool>>(fileNamePlanB);
                     //NotificationsPause.settings.PauseOnNotification = config;
                     //方案B: JSON
-                    var config = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(InitConfig.ModConfigJsonName);
+                    var config = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(
+                        File.ReadAllText(InitConfig.ModConfigJsonName));
                     NotificationsPause.settings.PauseOnNotification = config;
 
                     lastLoadTick = System.DateTime.Now.Ticks;
-
                 }
                 catch (System.Exception ex)
                 {

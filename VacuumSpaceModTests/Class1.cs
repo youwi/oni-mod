@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ClusterGridEntity;
 
 namespace NotificationsPauseI18nMod
 {
@@ -35,6 +36,10 @@ namespace NotificationsPauseI18nMod
             Console.WriteLine(str);
 
             File.WriteAllText(fileName, str);
+
+            var config = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>( File.ReadAllText(fileName ))
+             ;
+
         }
 
     }
