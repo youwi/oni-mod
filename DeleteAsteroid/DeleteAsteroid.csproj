@@ -63,8 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\preview.png" />
-    <Content Include="resource\TextFile1.txt" />
+    <Content Include="scr1.png" />
+    <Content Include="TextFile1.txt" />
+    <Content Include="resource\preview.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
