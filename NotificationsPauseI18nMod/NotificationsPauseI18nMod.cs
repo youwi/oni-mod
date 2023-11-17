@@ -18,13 +18,13 @@ namespace NotificationsPauseI18nMod
     public class InitConfig : KMod.UserMod2 
     {
         static string ModPath = null;
-        public static string ModConfigName = "";
+      //  public static string ModConfigName = "";
         public static string ModConfigJsonName = "";
         public override void OnLoad(Harmony harmony)
         {
             ModPath = mod.ContentPath;
             ModConfigJsonName = mod.ContentPath + "/../../NotificationsPauseI18n.json";
-            ModConfigName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
+          //  ModConfigName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
             base.OnLoad(harmony);
         }
     }
@@ -154,10 +154,10 @@ namespace NotificationsPauseI18nMod
                      
                     if (tickPoo  >  5) //1秒刷新一次
                     {
-                        var tickOff = (File.GetLastWriteTime(InitConfig.ModConfigName).Ticks - lastLoadTick)/ 10000 / 1000 ;
+                        var tickOff = (File.GetLastWriteTime(InitConfig.ModConfigJsonName).Ticks - lastLoadTick)/ 10000 / 1000 ;
                         if (tickOff > 5)
                         {
-                            Debug.LogWarning($"read::::{InitConfig.ModConfigName}  /{tickPoo}/{tickOff}");
+                            Debug.LogWarning($"read::::{InitConfig.ModConfigJsonName}  /{tickPoo}/{tickOff}");
                             SettingsFile.loadSett();
                         }
                         tryWriteOnceTick =System.DateTime.Now.Ticks;
