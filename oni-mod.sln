@@ -11,8 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarpConduitPartnerMod", "Wa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{3C551837-7C5F-4FEF-8F73-193191B7C84B}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
 		auto_version.mjs = auto_version.mjs
+		AfterBuild.bat = AfterBuild.bat
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleporterBuildingMod", "TeleporterBuildingMod\TeleporterBuildingMod.csproj", "{A72C572F-0112-4B93-9D38-5F1AD37A8678}"
