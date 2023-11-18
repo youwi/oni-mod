@@ -9,68 +9,68 @@ namespace PoiAddResource
 {
 
     // [HarmonyPatch(typeof(HarvestablePOIConfig), "GenerateConfigs", new Type[] { })]
-    public class PoiAddResourcePatch
-    {
-        public static List<HarvestablePOIParams> patchList(List<HarvestablePOIParams> list)
-        {
-            foreach (var tmp in list)
-            {
-                if (tmp.anim == "radioactive_gas_cloud")
-                {
-                    //  tmp.HarvestablePOIType
-                    tmp.poiType.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
-                    tmp.poiType.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
-                    tmp.poiType.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
-                    tmp.poiType.harvestableElements.Add(SimHashes.SolidMercury, 0.5f);//汞固体
-                    tmp.poiType.harvestableElements.Add(SimHashes.SolidNaphtha, 0.5f);//石脑油 固体
+    //public class PoiAddResourcePatch
+    //{
+    //    public static List<HarvestablePOIParams> patchList(List<HarvestablePOIParams> list)
+    //    {
+    //        foreach (var tmp in list)
+    //        {
+    //            if (tmp.anim == "radioactive_gas_cloud")
+    //            {
+    //                //  tmp.HarvestablePOIType
+    //                tmp.poiType.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
+    //                tmp.poiType.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
+    //                tmp.poiType.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
+    //                tmp.poiType.harvestableElements.Add(SimHashes.SolidMercury, 0.5f);//汞固体
+    //                tmp.poiType.harvestableElements.Add(SimHashes.SolidNaphtha, 0.5f);//石脑油 固体
 
-                    tmp.poiType.harvestableElements.Add(SimHashes.SolidResin, 0.1f);//树脂 固体
-                    tmp.poiType.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞矿 固体
-                    tmp.poiType.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
+    //                tmp.poiType.harvestableElements.Add(SimHashes.SolidResin, 0.1f);//树脂 固体
+    //                tmp.poiType.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞矿 固体
+    //                tmp.poiType.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
 
-                    break;
-                }
-                //List<HarvestablePOIConfig.HarvestablePOIParams> list = new List<HarvestablePOIConfig.HarvestablePOIParams>();
+    //                break;
+    //            }
+    //            //List<HarvestablePOIConfig.HarvestablePOIParams> list = new List<HarvestablePOIConfig.HarvestablePOIParams>();
 
-                //list.Add(new HarvestablePOIConfig.HarvestablePOIParams(
-                //    "satellite_field",
-                //    new HarvestablePOIConfigurator.HarvestablePOIType(
-                //        "SatelliteField",
-                //        new Dictionary<SimHashes, float>{
-                //            { SimHashes.Sand,3f},
-                //            { SimHashes.IronOre,3f },
-                //            { SimHashes.MoltenCopper,2.67f },
-                //            { SimHashes.Glass, 1.33f}
-                //        },
-                //        30000f,
-                //        45000f,
-                //        30000f,
-                //        60000f,
-                //        true,
-                //        HarvestablePOIConfig.AsteroidFieldOrbit, 20, "EXPANSION1_ID")));
+    //            //list.Add(new HarvestablePOIConfig.HarvestablePOIParams(
+    //            //    "satellite_field",
+    //            //    new HarvestablePOIConfigurator.HarvestablePOIType(
+    //            //        "SatelliteField",
+    //            //        new Dictionary<SimHashes, float>{
+    //            //            { SimHashes.Sand,3f},
+    //            //            { SimHashes.IronOre,3f },
+    //            //            { SimHashes.MoltenCopper,2.67f },
+    //            //            { SimHashes.Glass, 1.33f}
+    //            //        },
+    //            //        30000f,
+    //            //        45000f,
+    //            //        30000f,
+    //            //        60000f,
+    //            //        true,
+    //            //        HarvestablePOIConfig.AsteroidFieldOrbit, 20, "EXPANSION1_ID")));
 
-            }
-            return list;
-        }
+    //        }
+    //        return list;
+    //    }
         //public static List<HarvestablePOIParams> Postfix(HarvestablePOIConfig __instance)
         //{
         //    List<HarvestablePOIParams> list = __instance;
         //    list = patchList(list);
         //    return list;
         //}
-        public static void Postfix(HarvestablePOIConfig __instance, ref List<HarvestablePOIParams> __result)
-        {
+        //public static void Postfix(HarvestablePOIConfig __instance, ref List<HarvestablePOIParams> __result)
+        //{
 
-            // IEnumerable
-            // HarvestablePOIConfig.GenerateConfigs()
-            if (__result == null)
-            {
-                return;
-            }
-            Debug.LogWarning("HarvestablePOIConfig.GenerateConfigs()---->");
-            patchList(__result);
-        }
-    }
+        //    // IEnumerable
+        //    // HarvestablePOIConfig.GenerateConfigs()
+        //    if (__result == null)
+        //    {
+        //        return;
+        //    }
+        //    Debug.LogWarning("HarvestablePOIConfig.GenerateConfigs()---->");
+        //    patchList(__result);
+        //}
+   
 
     [HarmonyPatch(typeof(HarvestablePOIInstanceConfiguration), "GetElementsWithWeights")]
     public class HarvestablePOIInstanceConfigurationConPatch
@@ -89,6 +89,7 @@ namespace PoiAddResource
 
                 foreach (var tt in list)
                 {
+                    //SimHashes;
                     //HarvestablePOIConfig.gen
                     if (tt.id == "RadioactiveGasCloud") //辐射星
                     {
@@ -142,6 +143,7 @@ namespace PoiAddResource
                     }
                     if (tt.id == "IceAsteroidField")  //爆炸的冰巨星
                     {
+                        tt.harvestableElements.Remove(SimHashes.SolidMethane);// 需要删除先.
                         tt.harvestableElements.Add(SimHashes.SolidMethane, 2f);// 添加大量天然气
                     }
                     //Debug.LogWarning("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
@@ -154,5 +156,5 @@ namespace PoiAddResource
         }
     }
 
-
 }
+

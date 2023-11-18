@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static ClusterGridEntity;
@@ -54,5 +55,37 @@ namespace NotificationsPauseI18nMod
             Console.WriteLine(cyleString);
         }
 
+        [TestMethod()]
+        public void testHashString()
+        {
+            MemberInfo[] memberInfos =
+            typeof(SimHashes).GetMembers(BindingFlags.Public | BindingFlags.Static);
+            string alerta = "";
+            for (int i = 0; i < memberInfos.Length; i++)
+            {
+                alerta += memberInfos[i].Name + " - ";
+                alerta += memberInfos[i].GetType().Name + " ";
+               // alerta +=  + "\n";
+                ;
+                typeof(SimHashes).GetEnumValues();
+            }
+            //Console.WriteLine(alerta);
+
+            System.Type enumType = typeof(SimHashes);
+            System.Type enumUnderlyingType = System.Enum.GetUnderlyingType(enumType);
+            System.Array enumValues = System.Enum.GetValues(enumType);
+
+            for (int i = 0; i < enumValues.Length; i++)
+            {
+                // Retrieve the value of the ith enum item.
+                object value = enumValues.GetValue(i);
+
+                // Convert the value to its underlying type (int, byte, long, ...)
+                object underlyingValue = System.Convert.ChangeType(value, enumUnderlyingType);
+
+                System.Console.Write(value);
+                System.Console.WriteLine(underlyingValue);
+            }
+        }
     }
 }

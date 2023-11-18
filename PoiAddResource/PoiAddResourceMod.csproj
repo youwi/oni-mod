@@ -81,6 +81,7 @@
   <ItemGroup>
     <Content Include="resource\preview.jpg" />
     <Content Include="src.jpg" />
+    <None Include="config_exmple.json" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

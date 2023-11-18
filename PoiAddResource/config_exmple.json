@@ -1,0 +1,14 @@
+﻿//配置文件太难做:
+{
+
+	"RadioactiveGasCloud": {
+		"Katairite": 1,
+		"Fossil": 1,
+		"Radium": 1,
+		"GoldAmalgam": 1,
+		"Niobium": 1,
+		"Resin": 1,
+		"Mercury": 1,
+		"Naphtha": 1
+	}
+} 
