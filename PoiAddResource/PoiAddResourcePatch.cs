@@ -94,21 +94,22 @@ namespace PoiAddResource
                     {
                         tt.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
                         tt.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
-                        tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
-                        tt.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞矿 固体
+                       // tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
+                        tt.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞齐 固体
                         tt.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
                         tt.harvestableElements.Add(SimHashes.Resin, 0.1f);//树脂  solid
-                                                                          //  Debug.LogWarning("HarvestablePOIInstanceConfiguration O00000");
-                        inited = true;
+                         //  Debug.LogWarning("HarvestablePOIInstanceConfiguration O00000");
+                     
                     }
                     if (tt.id == "OilyAsteroidField") //油星
                     {
-                        tt.harvestableElements.Add(SimHashes.Mercury, 0.5f);//液体汞   solid
+                    
                         tt.harvestableElements.Add(SimHashes.Naphtha, 0.5f);//石脑油 固体
 
                     }
                     if (tt.id == "GildedAsteroidField") //金质小行星
                     {
+                        tt.harvestableElements.Add(SimHashes.Mercury, 0.5f);//液体汞   solid
                         tt.harvestableElements.Add(SimHashes.Lead, 0.5f);//铅 固体
                         tt.harvestableElements.Add(SimHashes.DepletedUranium, 0.5f);//贫铀 
                     }
@@ -122,7 +123,7 @@ namespace PoiAddResource
                     {
                         tt.harvestableElements.Add(SimHashes.Fertilizer, 0.5f);//肥料
                         tt.harvestableElements.Add(SimHashes.Ethanol, 0.5f);//乙醇
-
+                        tt.harvestableElements.Add(SimHashes.Clay, 0.5f);//粘土
                     }
                     if (tt.id == "RockyAsteroidField") //岩石小行星
                     {
@@ -139,11 +140,15 @@ namespace PoiAddResource
                     {
                         tt.harvestableElements.Add(SimHashes.Ceramic, 0.5f);// 添加陶瓷 
                     }
-
+                    if (tt.id == "IceAsteroidField")  //爆炸的冰巨星
+                    {
+                        tt.harvestableElements.Add(SimHashes.SolidMethane, 2f);// 添加大量天然气
+                    }
                     //Debug.LogWarning("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
                 }
-
+                inited = true;
             }
+          
             // Debug.LogWarning("HarvestablePOIInstanceConfiguration ---->");
 
         }

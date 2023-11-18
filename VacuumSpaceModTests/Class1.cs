@@ -41,6 +41,18 @@ namespace NotificationsPauseI18nMod
              ;
 
         }
+        [TestMethod()]
+        public void formatStringTest()
+        {
+           // Console.WriteLine("周期{0}的报告就绪","ssss");
+            string tmp = STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE.ToString();//好像不能写死
+            Console.WriteLine(tmp);
+            Console.WriteLine(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE.text);
+            ;
+            Console.WriteLine(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE);
+            var cyleString = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, 50+"");
+            Console.WriteLine(cyleString);
+        }
 
     }
 }

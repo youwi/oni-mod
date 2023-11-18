@@ -43,6 +43,16 @@ namespace NotificationsPauseI18nMod
             public SortedDictionary<string, bool> PauseOnNotification;
             public  void addKeyAndSave(string keyString)
             {
+                //  STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE 周期{0}的报告就绪  这个消息需要过滤
+                //  STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE;// 不能写toString()
+                var cyleStringN= String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle()-1);
+                var cyleString0 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle());
+                var cyleString1 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle()+1);
+
+               // Debug.LogWarning("---->>>>>>>>>" + keyString+" == "+ cyleString+">>>");
+                if (keyString == cyleStringN|| keyString==cyleString0|| keyString==cyleString1)
+                    return;
+              
                 PauseOnNotification.Add(keyString, false);
                 File.WriteAllText(InitConfig.ModConfigJsonName, JsonConvert.SerializeObject(PauseOnNotification, Formatting.Indented));
                // YamlIO.Save(PauseOnNotification, InitConfig.ModConfigName);
