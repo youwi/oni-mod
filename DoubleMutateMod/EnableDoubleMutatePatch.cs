@@ -83,7 +83,7 @@ namespace DoubleMutantMod
                 {
                     //注释看看能不能加性能
 
-                    global::Debug.LogWarning("二次变异率为80%,变异未触发");
+                  //  global::Debug.LogWarning("二次变异率为80%,变异未触发");
                     return;
                 }
                 //添加一轮变异,按25%概率添加.
@@ -162,7 +162,7 @@ namespace DoubleMutantMod
         {
 
             string ot = blickList[randA.Next(0, blickList.Length)];
-            global::Debug.LogWarning("双重变异为:" + ot);
+          //  global::Debug.LogWarning("双重变异为:" + ot);
             return ot;
         }
     }
