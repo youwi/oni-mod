@@ -224,7 +224,20 @@ namespace NotificationsPauseI18nMod
                 st.Elapsed += (object data2, ElapsedEventArgs ss) =>
                 {
 
-                   if (__instance.IsNullOrDestroyed()) return;//防消息没了再暂停.
+                   if (__instance.IsNullOrDestroyed())
+                        return;//防消息没了再暂停.
+                    //if(NotificationManager.Instance.Re)
+                    //     NotificationManager.Instance.RemoveNotification(this);
+                    // __instance.expires;
+                    List<Notification> notifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
+                            .Field("notifications").GetValue();
+                    if (!notifications.Contains(__instance))
+                    {
+                       // Debug.LogWarning($"=-------已经消失,不再暂停");
+                        return;
+                    }
+
+                  //  __instance.
 
                    if ((!(SpeedControlScreen.Instance.IsPaused))
                    && settings != null
