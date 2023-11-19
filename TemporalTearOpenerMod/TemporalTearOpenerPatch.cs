@@ -134,8 +134,8 @@ namespace TemporalTearOpenerPatch
             //内部自动延时.
             // var sm=Traverse.Create(__instance).Field("charging").GetValue() as TemporalTearOpener.ChargingState;
             var hps = __instance.GetComponent<HighEnergyParticleStorage>();
-            // OnParticleStorageChanged= - 1837862626
-            hps.Subscribe(-1837862626, new Action<object>((o) =>
+            // GameHashes.OnParticleStorageChanged= - 1837862626
+            hps.Subscribe((int)GameHashes.OnParticleStorageChanged  , new Action<object>((o) =>
             {
                 if (hps.IsFull()
                     && ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())

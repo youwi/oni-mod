@@ -1,5 +1,8 @@
 ﻿
 
+添加延迟:
+当消息出现5秒以后,再暂停.
+
 Critical Notification Pauser
 原mod:
 https://steamcommunity.com/sharedfiles/filedetails/?id=1708809748

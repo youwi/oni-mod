@@ -11,6 +11,8 @@ using UnityEngine;
 using HarmonyLib;
 using Klei;
 using static NotificationsPauseI18nMod.NotificationsPause;
+using static DeserializeWarnings;
+using System.Timers;
 
 namespace NotificationsPauseI18nMod
 {
@@ -38,8 +40,9 @@ namespace NotificationsPauseI18nMod
         public static float lastPause = 0f;
         public class SettingsFile
         {
-            public string fileversion="0.1";
+            public string fileversion="0.2";
             public float cooldown=10;
+            public float delaySecond=3;
             public SortedDictionary<string, bool> PauseOnNotification;
             public  void addKeyAndSave(string keyString)
             {
@@ -54,12 +57,14 @@ namespace NotificationsPauseI18nMod
                     return;
               
                 PauseOnNotification.Add(keyString, false);
-                File.WriteAllText(InitConfig.ModConfigJsonName, JsonConvert.SerializeObject(PauseOnNotification, Formatting.Indented));
+                File.WriteAllText(InitConfig.ModConfigJsonName,
+                    JsonConvert.SerializeObject(settings, Formatting.Indented));
                // YamlIO.Save(PauseOnNotification, InitConfig.ModConfigName);
             }
             public static void loadSett()
             {
-                if(!File.Exists(InitConfig.ModConfigJsonName))
+                if(!File.Exists(InitConfig.ModConfigJsonName) 
+                  ) 
                // if (!File.Exists(InitConfig.ModConfigName))
                 {
                     //  翻译表:
@@ -81,31 +86,46 @@ namespace NotificationsPauseI18nMod
 
                     kv.Add(STRINGS.BUILDINGS.PREFABS.STATERPILLARGENERATOR.MODIFIERS.HUNGRY, true); // 饥饿!
 
+                    //  kv.Add("delaySecond", 3); // 饥饿!
                     // kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
 
                     //方案A: YAML
                     //NotificationsPause.settings.PauseOnNotification = kv;
                     //YamlIO.Save(kv, fileNamePlanB);
                     //方案B: JSON
+                    settings = new SettingsFile();
                     File.Create(InitConfig.ModConfigJsonName).Close();
                     File.WriteAllText(InitConfig.ModConfigJsonName, 
-                        JsonConvert.SerializeObject(kv, Formatting.Indented));
+                        JsonConvert.SerializeObject(settings, Formatting.Indented));
                 };
+
                 try
                 {
+
+                    if (  tryReadOnce&& !File.ReadAllText(InitConfig.ModConfigJsonName).Contains("delaySecond"))
+                    {
+                        //处理旧版本.读取旧的并写入新的.
+                        var kv=JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(
+                                File.ReadAllText(InitConfig.ModConfigJsonName));
+                        settings = new SettingsFile();
+                        settings.PauseOnNotification = kv;
+                        File.WriteAllText(InitConfig.ModConfigJsonName,
+                                JsonConvert.SerializeObject(settings, Formatting.Indented));
+                    };
                     //方案A:YAML
                     //var config = YamlIO.LoadFile<SortedDictionary<string, bool>>(fileNamePlanB);
                     //NotificationsPause.settings.PauseOnNotification = config;
                     //方案B: JSON
-                    var config = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(
+                    var config = JsonConvert.DeserializeObject<NotificationsPause.SettingsFile>(
                         File.ReadAllText(InitConfig.ModConfigJsonName));
-                    NotificationsPause.settings.PauseOnNotification = config;
+                    settings= config;
 
                     lastLoadTick = System.DateTime.Now.Ticks;
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogError(ex.Message);
+                    File.Move(InitConfig.ModConfigJsonName, InitConfig.ModConfigJsonName+""+(int)UnityEngine.Time.time);
+                    Debug.LogWarning(ex.Message);
                 }
             }
         }
@@ -154,8 +174,9 @@ namespace NotificationsPauseI18nMod
                 }
                 return false;
             }
-            public static void Postfix(ref Notification __instance)
+            public static void Postfix( Notification __instance)
             {
+              
 
                 if (tryReadOnce == false) //第二次
                 {
@@ -184,46 +205,72 @@ namespace NotificationsPauseI18nMod
                 { //如果key没有的话就保存它
                     settings.addKeyAndSave(__instance.titleText);
                 }
-            
- 
-                if ((!(SpeedControlScreen.Instance.IsPaused)) 
-                    && settings != null 
-                    && settings.PauseOnNotification != null 
-                    && settings.PauseOnNotification.ContainsKey(__instance.titleText))
-                {
-                    if (Time.time - lastPause > settings.cooldown)
-                    {
-                        //If the title is set in the settings, use that
-                       
-                        if (isConkey(settings.PauseOnNotification,__instance.titleText) )
-                        {
-                            SpeedControlScreen.Instance.Pause();
-                          //  Debug.LogWarning($"暂停:  {__instance.titleText} ");
+                //方案1 :调用时判断时间:
+                //还需要时间判定:  GameTime好像是 创建消息的时间. UnityEngine.Time秒为单位
+                //if (UnityEngine.Time.time < __instance.GameTime + __instance.Delay + settings.delaySecond)
+                //{
+                //    //[12:59:37.246] [1] [WARNING] 暂停延迟3秒: 319.1956  319.1956
+                //    //[12:59:37.246][1][WARNING] 暂停延迟3秒: 319.1956  319.1956
+                //    // 时间为秒,UnityEngine.Time.time是游戏开始的时间 
+                //    Debug.LogWarning($"暂停延迟3秒: {Time.time}  {__instance.GameTime} ");
+                //    return;
+                //   // SpeedControlScreen.Instance.TogglePause(false);
+                //};
 
-                            lastPause = Time.time;
-                        }
-                    }
-                }
-                else
+                //方案2: 设置一个定时器:
+                var st = new System.Timers.Timer(settings.delaySecond*1000); //延迟
+                st.AutoReset = false;
+                st.Enabled = true;
+                st.Elapsed += (object data2, ElapsedEventArgs ss) =>
                 {
-                    //... otherwise use default behaviour
-                    if (__instance.Type == NotificationType.Bad || __instance.Type == NotificationType.DuplicantThreatening)
+
+                   if (__instance.IsNullOrDestroyed()) return;//防消息没了再暂停.
+
+                   if ((!(SpeedControlScreen.Instance.IsPaused))
+                   && settings != null
+                   && settings.PauseOnNotification != null
+                   && settings.PauseOnNotification.ContainsKey(__instance.titleText)
+
+                )
                     {
-                        if (!((__instance.titleText == "Combat!") 
-                            || (__instance.titleText == "Missing Research Station") 
-                            || (__instance.titleText == "No Researchers assigned") 
-                            || (__instance.titleText == "Yellow Alert") 
-                            || (__instance.titleText == "Red Alert")))
+                        if (Time.time - lastPause > settings.cooldown)
                         {
-                            if (Time.time - lastPause > 1.0)
+                            //If the title is set in the settings, use that
+
+                            if (isConkey(settings.PauseOnNotification, __instance.titleText))
                             {
                                 SpeedControlScreen.Instance.Pause();
-                                Debug.LogWarning($"暂停PlanB:  {__instance.titleText} ");
+                                //  Debug.LogWarning($"暂停:  {__instance.titleText} ");
+
                                 lastPause = Time.time;
                             }
                         }
                     }
-                }
+                    else
+                    {
+                        //... otherwise use default behaviour
+                        if (__instance.Type == NotificationType.Bad || __instance.Type == NotificationType.DuplicantThreatening)
+                        {
+                            if (!((__instance.titleText == "Combat!")
+                                || (__instance.titleText == "Missing Research Station")
+                                || (__instance.titleText == "No Researchers assigned")
+                                || (__instance.titleText == "Yellow Alert")
+                                || (__instance.titleText == "Red Alert")))
+                            {
+                                if (Time.time - lastPause > 1.0)
+                                {
+                                    SpeedControlScreen.Instance.Pause();
+                                    Debug.LogWarning($"暂停PlanB:  {__instance.titleText} ");
+                                    lastPause = Time.time;
+                                }
+                            }
+                        }
+                    }
+
+                };
+                st.Start();
+
+               
             }
         }
     }

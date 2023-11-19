@@ -13,10 +13,10 @@ using static ClusterGridEntity;
 namespace NotificationsPauseI18nMod
 {
     [TestClass()]
-    public  class Class1
+    public  class NotificatioPauseTest
     {
         [TestMethod()]
-        public void ssfefTest()
+        public void JsonTest()
         {
             var fileName  = "../../test.json";
             //var configPlanB = YamlIO.LoadFile<SortedDictionary<string, bool>>(fileName);
@@ -24,21 +24,19 @@ namespace NotificationsPauseI18nMod
             SortedDictionary<string, bool> kv = new SortedDictionary<string, bool>();
             kv.Add(STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME, false);
             kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.STRESSFULLYEMPTYINGBLADDER.NOTIFICATION_NAME, false);
-            kv.Add(STRINGS.BUILDING.STATUSITEMS.NORESEARCHORDESTINATIONSELECTED.NOTIFICATION_NAME, false);
-            kv.Add(STRINGS.DUPLICANTS.MODIFIERS.REDALERT.NAME, false);
-            kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
-            kv.Add(STRINGS.BUILDING.STATUSITEMS.TOP_PRIORITY_CHORE.NAME, false);
 
-            kv.Add(STRINGS.BUILDINGS.PREFABS.STATERPILLARGENERATOR.MODIFIERS.HUNGRY, true); // 饥饿!
 
             // kv.Add(STRINGS.DUPLICANTS.STATUSITEMS.SUFFOCATING.NAME, true);
+            var configS=new NotificationsPause.SettingsFile();
 
-            var str = JsonConvert.SerializeObject(kv, Formatting.Indented);
+            configS.PauseOnNotification = kv;
+
+             var str = JsonConvert.SerializeObject(configS, Formatting.Indented);
             Console.WriteLine(str);
 
             File.WriteAllText(fileName, str);
 
-            var config = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>( File.ReadAllText(fileName ))
+            var config = JsonConvert.DeserializeObject<NotificationsPause.SettingsFile>( File.ReadAllText(fileName))
              ;
 
         }
@@ -53,6 +51,14 @@ namespace NotificationsPauseI18nMod
             Console.WriteLine(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE);
             var cyleString = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, 50+"");
             Console.WriteLine(cyleString);
+        }
+        [TestMethod()]
+        public void jsonTestObj()
+        {
+
+          //  File.Create("abc.json").Close();
+          //ll  File.WriteAllText(InitConfig.ModConfigJsonName,
+          //     JsonConvert.SerializeObject(kv, Formatting.Indented));
         }
 
         [TestMethod()]
