@@ -64,7 +64,6 @@
   <ItemGroup>
     <Compile Include="InfiniteModeToggleButton.cs" />
     <Compile Include="InfiniteResearchCenterButtonPatch.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="InfiniteResearchCenterPatch.cs" />
     <Compile Include="InfiniteWorkable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

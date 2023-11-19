@@ -14,40 +14,38 @@ namespace InfiniteResearch
                 return ins.isInfiniteMode;
             return false;
         }
+         
+        //[HarmonyPatch(typeof(ResearchCenter), "UpdateWorkingState")]
+        //static class InfiniteResearch_Patch
+        //{
+        //    public static void Postfix(ResearchCenter __instance, Chore ___chore)
+        //    {
+        //        AccessTools.Method(typeof(InfiniteResearchCenterPatch), nameof(InfiniteResearchCenterPatch.IsEndlessWorking));
+        //        global::Debug.LogWarning("InfiniteResearch_UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
+        //        // var button=__instance.GetComponent<InfiniteResearchCenterButton>();
+        //        // button.isInfiniteMode=true;
+        //    }
 
-        [HarmonyPatch(typeof(ResearchCenter), "UpdateWorkingState")]
-        static class InfiniteResearch_Patch
-        {
-            public static void Postfix(ResearchCenter __instance, Chore ___chore)
-            {
-                AccessTools.Method(typeof(InfiniteResearchCenterPatch), nameof(InfiniteResearchCenterPatch.IsEndlessWorking));
-                global::Debug.LogWarning("InfiniteResearch_UpdateWorkingState_patch: " + IsEndlessWorking(__instance));
-                // var button=__instance.GetComponent<InfiniteResearchCenterButton>();
-                // button.isInfiniteMode=true;
-
-
-
-            }
-
-            /*  static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-            {
-                int counter = 1;
+        //    /*  static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        //    {
+        //        int counter = 1;
                 
 
-                              foreach (CodeInstruction i in instructions)
-                                {
-                                    if (counter <= 2 && i.OpCodeIs(OpCodes.Ldc_I4_0))
-                                    {
-                                        counter++;
-                                        yield return new CodeInstruction(OpCodes.Ldarg_0);
-                                        yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(InfiniteResearchCenter), nameof(InfiniteResearchCenter.IsEndlessWorking)));
-                                    }
-                                    else
-                                        yield return i;
-                                }*/
+        //                      foreach (CodeInstruction i in instructions)
+        //                        {
+        //                            if (counter <= 2 && i.OpCodeIs(OpCodes.Ldc_I4_0))
+        //                            {
+        //                                counter++;
+        //                                yield return new CodeInstruction(OpCodes.Ldarg_0);
+        //                                yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(InfiniteResearchCenter), nameof(InfiniteResearchCenter.IsEndlessWorking)));
+        //                            }
+        //                            else
+        //                                yield return i;
+        //                        }*/
 
 
-        }
+        //}
+   
 
         [HarmonyPatch(typeof(ResearchCenter), nameof(ResearchCenter.GetPercentComplete))]
         static class ProgressBar_Patch

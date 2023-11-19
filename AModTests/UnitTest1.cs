@@ -8,7 +8,7 @@ using System.Threading;
 using System.Timers;
 using UnityEngine;
 
-namespace ModTests
+namespace ModTests.Tests
 {
     /// <summary>
     /// UnitTest1 的摘要说明
@@ -188,11 +188,19 @@ namespace ModTests
         }
         public static void timerCallbackFun2(object data)
         {
-
             Console.WriteLine("测试22");
-
         }
 
-       
+        [TestMethod()]
+        public   void DDDDDDDDDDDDcellTest()
+        {
+            Grid.WidthInCells = 137;
+            Grid.HeightInCells = 140;
+            Grid.CellSizeInMeters = 50;
+           var pos= Grid.CellToPos(8241, 0, 0, 0);
+            Console.WriteLine(pos);
+        }
+
     }
+   
 }
