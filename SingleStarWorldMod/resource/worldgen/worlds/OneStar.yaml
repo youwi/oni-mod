@@ -6,8 +6,8 @@ asteroidIcon: asteroid_swamp_rocket_kanim
 
 worldTraitScale: 0.12
 worldsize:
-  X: 100
-  Y: 140
+  X: 80
+  Y: 100
 layoutMethod: PowerTree
 
 defaultsOverrides:

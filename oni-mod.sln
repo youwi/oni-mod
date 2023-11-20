@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AModTests", "AModTests\AMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoOverlayFixMod", "InfoOverlayFixMod\InfoOverlayFixMod.csproj", "{0409EA56-20D1-4362-A226-398AD492232D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBase", "MiniBaseT4Mod\MiniBase.csproj", "{F4FF2774-AD08-4369-AA33-B0611B8AA06E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +144,10 @@ Global
 		{0409EA56-20D1-4362-A226-398AD492232D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0409EA56-20D1-4362-A226-398AD492232D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0409EA56-20D1-4362-A226-398AD492232D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4FF2774-AD08-4369-AA33-B0611B8AA06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4FF2774-AD08-4369-AA33-B0611B8AA06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4FF2774-AD08-4369-AA33-B0611B8AA06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4FF2774-AD08-4369-AA33-B0611B8AA06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

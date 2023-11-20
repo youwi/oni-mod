@@ -1,0 +1,15 @@
+﻿{
+	"General": {
+		"InputAssemblies": [
+			"PLib.dll"
+			
+
+		],
+		"OutputFile": "$(TargetDir)MiniBase-merged.dll"
+	},
+	"Advanced": {
+		"AllowDuplicateType": null,
+		"AllowMultipleAssemblyLevelAttributes": true,
+		"DeleteCopiesOverwriteTarget": true
+	}
+	}
