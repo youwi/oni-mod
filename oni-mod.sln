@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AModTests", "AModTests\AMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoOverlayFixMod", "InfoOverlayFixMod\InfoOverlayFixMod.csproj", "{0409EA56-20D1-4362-A226-398AD492232D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBase", "MiniBaseT4Mod\MiniBase.csproj", "{F4FF2774-AD08-4369-AA33-B0611B8AA06E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBaseT4", "MiniBaseT4Mod\MiniBaseT4.csproj", "{F4FF2774-AD08-4369-AA33-B0611B8AA06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
