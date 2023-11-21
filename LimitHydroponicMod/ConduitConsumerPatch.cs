@@ -32,9 +32,15 @@ namespace LimitHydroponicMod
 
                 //__instance.storage.items.
                 //__instance.storage;//如果存量还很多.
-                if (calcLiquidMass(__instance) > 1) //固体,液体都要计算.
+                if (calcLiquidMass(__instance) < 1    // 手动计算液体  1kg
+                   || __instance.storage.MassStored()<1) //固体,液体都会计算.
                 {
-                   // Debug.LogWarning("------>修改了kg.B  -----"+__instance.name);
+                    // Debug.LogWarning("------>修改了kg.B  -----"+__instance.name);
+                   // __instance.storage.UnitsStored();
+                    return true;
+                }
+                else
+                {
                     return false;
                 }
                 //判定.
@@ -56,17 +62,18 @@ namespace LimitHydroponicMod
                 if (!(items[i] == null))
                 {
                     PrimaryElement component = items[i].GetComponent<PrimaryElement>();
-
-                    if (component.HasTag(GameTags.Liquid)||
-                        component.ElementID == SimHashes.Water
+                  //  Debug.LogWarning($"------->>>{__instance}{component.HasTag(GameTags.Liquid)}--<<<<<");
+                    if (component.HasTag(GameTags.Liquid)
+                      || component.ElementID == SimHashes.Water
                       || component.ElementID == SimHashes.DirtyWater
                       || component.ElementID == SimHashes.SaltWater)
                     {
-                        num += component.Units;
+                        num += component.Units * component.MassPerUnit;
+                       // Debug.LogWarning($"------->>>{__instance}{component.HasTag(GameTags.Liquid)} {num}--<<<<<");
                     };
                 }
             }
-            return (float)Mathf.RoundToInt(num * 1000f) / 1000f;
+            return num;
         }
     }
     //ConfigureBuildingTemplate
