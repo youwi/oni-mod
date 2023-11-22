@@ -164,10 +164,10 @@ namespace PerformanceLogMod
         public static void DumpGCCacheList()
         {
             Directory.CreateDirectory("./memory");
-            if (!File.Exists("./memory/GcTick.txt"))
-            {
-                File.Create("./memory/GcTick.txt").Close();
-            }
+            //if (!File.Exists("./memory/GcTick.txt"))
+            //{
+            //    File.Create("./memory/GcTick.txt").Close();
+            //}
             using (StreamWriter streamWriter4 = new StreamWriter("./memory/GcTick.txt", true))
             {
                 //GCPatch.cache.ToArray;
