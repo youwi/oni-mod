@@ -60,11 +60,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Memory allocator customization - Unity 手册.mhtml" />
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.jpg" />
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
