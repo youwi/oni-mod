@@ -4,6 +4,8 @@
 job-worker-count=5
 gc-max-time-slice=3
 
+# 在任务管理器中,  内存(提交大小>8.9G时 会卡屯)
+
 gfx-enable-gfx-jobs=1
 gfx-enable-native-gfx-jobs=1
 gfx-disable-mt-rendering=1

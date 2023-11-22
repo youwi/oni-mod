@@ -1,0 +1,9 @@
+{
+  "fileversion": "0.1",
+  "cooldown": 10.0,
+  "delaySecond": 3.0,
+  "PauseOnNotification": {
+    "Combat!": false,
+    "Made a mess": false
+  }
+}

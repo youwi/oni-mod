@@ -73,7 +73,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="TestClass1FF.cs" />
     <Compile Include="NotificatioPauseTest.cs" />
     <Compile Include="GetCenterPointFunctionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +114,10 @@
     <ProjectReference Include="..\NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj">
       <Project>{edf31b01-685f-47ca-b06b-0a4add821105}</Project>
       <Name>NotificationsPauseI18nMod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PerformanceLogMod\PerformanceLogMod.csproj">
+      <Project>{b229340d-0e73-4493-816f-2065a253c0fa}</Project>
+      <Name>PerformanceLogMod</Name>
     </ProjectReference>
     <ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj">
       <Project>{B69904B6-0FD5-4AEC-BA34-03E305387E87}</Project>

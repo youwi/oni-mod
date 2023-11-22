@@ -64,7 +64,17 @@ namespace PerformanceLogMod
                 GenericGameSettings.instance.performanceCapture.gcStats = true;
                 ondoing = 2;
                 PauseScreen.Instance.RefreshButtons();
-            } else{
+            }else if (ondoing==2) {
+                timer.Stop();
+                GenericGameSettings.instance.performanceCapture.gcStats = false;
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >Dump GC tick<";
+                ondoing = 3;
+                PauseScreen.Instance.RefreshButtons();
+                DumpGCCacheList();
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >Dump GC tick OK<";
+                PauseScreen.Instance.RefreshButtons();
+            }
+            else {
                 timer.Stop();
                 ondoing = 0;
                 PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture";
@@ -141,16 +151,44 @@ namespace PerformanceLogMod
             {
                 using (StreamWriter streamWriter3 = new StreamWriter(csvFileName))
                 {
-                    streamWriter3.WriteLine( "Version,Date,Time,SaveGame,GCDuration,FPS");
+                    streamWriter3.WriteLine( "Version,Date,Time,SaveGame,GCDuration,GCCount,FPS");
                 }
             }
             
             using (StreamWriter streamWriter4 = new StreamWriter(csvFileName, true))
             {
-       
-                streamWriter4.WriteLine($"{versionNum},{dateText},{timeText},{savefileName},{gcTime},{fps}");
+                streamWriter4.WriteLine($"{versionNum},{dateText},{timeText},{savefileName},{gcTime},{GCPatch.cache.Count},{fps}");
             }
             //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
+        }
+        public static void DumpGCCacheList()
+        {
+            Directory.CreateDirectory("./memory");
+            if (!File.Exists("./memory/GcTick.txt"))
+            {
+                File.Create("./memory/GcTick.txt").Close();
+            }
+            using (StreamWriter streamWriter4 = new StreamWriter("./memory/GcTick.txt", true))
+            {
+                //GCPatch.cache.ToArray;
+                streamWriter4.WriteLine(String.Join("\n", GCPatch.cache));
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(System.GC), "Collect", new Type[] { })]
+    public class  GCPatch
+    {
+        public static List<string> cache = new System.Collections.Generic.List<string>();
+        public static void Postfix()
+        {
+            if(cache.Count > 100000)
+            {  //消耗太大,重置.
+                cache = new System.Collections.Generic.List<string>();
+            }
+            cache.Add(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
+          
+            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... ");
         }
     }
 }
