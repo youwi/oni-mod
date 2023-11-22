@@ -131,9 +131,9 @@ namespace PerformanceLogMod
             if (File.Exists(csvFileName))
             {
                 long length = new System.IO.FileInfo(csvFileName).Length;
-                if (length > 1000 * 1000)
+                if (length > 10 * 1024 * 1024)  //大于10M ,1024K
                 {
-                    File.Move(csvFileName, Time.time + csvFileName);
+                    File.Move(csvFileName, csvFileName+"."+(long)System.DateTime.Now.Ticks / 10000 );
                 }
             }
            
