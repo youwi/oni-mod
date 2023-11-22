@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.Events;
 using static Klei.GenericGameSettings;
@@ -17,30 +18,67 @@ namespace PerformanceLogMod
     [HarmonyPatch(typeof(PauseScreen), "OnPrefabInit")]
     public static class PauseScreen_OnPrefabInit_Patch
     {
-        private static readonly KButtonMenu.ButtonInfo logButtonInfo = new KButtonMenu.ButtonInfo(
+        public static readonly KButtonMenu.ButtonInfo logButtonInfo = new KButtonMenu.ButtonInfo(
             "PerformanceCapture",
             Action.NumActions,
-           new UnityAction(PerformanceCapturePatch.MyPerformanceCapture));
+           new UnityAction(PerformanceCapturePatch.delayAction));
         private static void Postfix(ref IList<KButtonMenu.ButtonInfo> ___buttons)
         {
             List<KButtonMenu.ButtonInfo> list = ___buttons.ToList<KButtonMenu.ButtonInfo>();
             logButtonInfo.isEnabled = true;
-            list.Insert(1, logButtonInfo);
+            
+            list.Insert(0, logButtonInfo);
             ___buttons = (IList<KButtonMenu.ButtonInfo>)list;
         }
     }
     public  class PerformanceCapturePatch
     {
+        static int ondoing=0;
+        static  System.Timers.Timer timer=null;
+        public static void delayAction()
+        {
+            if (timer == null)
+            {
+                timer = new System.Timers.Timer(3000); //延迟
+                timer.AutoReset = true;
+                timer.Enabled = true;
+                timer.Elapsed += (object data2, ElapsedEventArgs ss) =>
+                {
+                    MyPerformanceCapture();
+            
+                };
+                
+            }
+            if (ondoing == 0)
+            {
+                timer.Start();
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >ing<";
+                GenericGameSettings.instance.performanceCapture.gcStats = false;
+
+                ondoing = 1;
+                PauseScreen.Instance.RefreshButtons();
+            }else if (ondoing == 1)
+            {
+                timer.Start();
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >ing+ GC<";
+                GenericGameSettings.instance.performanceCapture.gcStats = true;
+                ondoing = 2;
+                PauseScreen.Instance.RefreshButtons();
+            } else{
+                timer.Stop();
+                ondoing = 0;
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture";
+                GenericGameSettings.instance.performanceCapture.gcStats = false;
+                PauseScreen.Instance.RefreshButtons();
+            }
+        }
         public static void MyPerformanceCapture()
         {   //Game.PerformanceCapture 从复制
-            if (SpeedControlScreen.Instance != null)
+            if (SpeedControlScreen.Instance.IsPaused )
             {
                 SpeedControlScreen.Instance.Unpause(true);
             }
-            if (Time.timeSinceLevelLoad < GenericGameSettings.instance.performanceCapture.waitTime)
-            {
-                return;
-            }
+       
             uint num = 581979U;
             string text = System.DateTime.Now.ToShortDateString();
             string text2 = System.DateTime.Now.ToShortTimeString();
@@ -53,7 +91,7 @@ namespace PerformanceLogMod
                 text2,
                 fileName
             });
-            float num2 = 0.1f;
+            float num2 = 0f;
             if (GenericGameSettings.instance.performanceCapture.gcStats)
             {
                 global::Debug.Log("Begin GC profiling...");
@@ -61,7 +99,7 @@ namespace PerformanceLogMod
                 GC.Collect();
                 num2 = Time.realtimeSinceStartup - realtimeSinceStartup;
                 global::Debug.Log("\tGC.Collect() took " + num2.ToString() + " seconds");
-                MemorySnapshot memorySnapshot = new MemorySnapshot();
+               // MemorySnapshot memorySnapshot = new MemorySnapshot();
                 string format = "{0},{1},{2},{3}";
                 string path = "./memory/GCTypeMetrics.csv";
                 if (!File.Exists(path))
@@ -79,16 +117,16 @@ namespace PerformanceLogMod
                 }
                 using (StreamWriter streamWriter2 = new StreamWriter(path, true))
                 {
-                    foreach (MemorySnapshot.TypeData typeData in memorySnapshot.types.Values)
-                    {
-                        streamWriter2.WriteLine(string.Format(format, new object[]
-                        {
-                        text4,
-                        "\"" + typeData.type.ToString() + "\"",
-                        typeData.instanceCount,
-                        typeData.refCount
-                        }));
-                    }
+                    //foreach (MemorySnapshot.TypeData typeData in memorySnapshot.types.Values)
+                    //{
+                    //    streamWriter2.WriteLine(string.Format(format, new object[]
+                    //    {
+                    //    text4,
+                    //    "\"" + typeData.type.ToString() + "\"",
+                    //    typeData.instanceCount,
+                    //    typeData.refCount
+                    //    }));
+                    //}
                 }
                 global::Debug.Log("...end GC profiling");
             }
@@ -107,7 +145,7 @@ namespace PerformanceLogMod
             {
                 streamWriter4.WriteLine(string.Format(format2, text4, num2, fps));
             }
-            GenericGameSettings.instance.performanceCapture.waitTime = 0f;
+            //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
         }
     }
 }

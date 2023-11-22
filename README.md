@@ -28,6 +28,10 @@
 		 ReturnSuitWorkable
 		 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
 		 SuitLocker.ReturnSuitWorkable.CreateChore()
+
+	* 10 性能分析工具,减少卡顿
+		对GC进行拦截.
+		G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
 # 反射:
 	Traverse.Create
 # 性能
