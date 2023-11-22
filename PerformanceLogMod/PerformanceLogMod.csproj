@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1103F5FB-2E5A-4E89-98C6-7D08B308053F}</ProjectGuid>
+    <ProjectGuid>{B229340D-0E73-4493-816F-2065A253C0FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LimitHydroponicMod</RootNamespace>
-    <AssemblyName>LimitHydroponicMod</AssemblyName>
+    <RootNamespace>PerformanceLogMod</RootNamespace>
+    <AssemblyName>PerformanceLogMod</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,16 +56,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConduitConsumerPatch.cs" />
+    <Compile Include="PerformanceCaptureClassPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="resource\preview.jpg" />
-    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resource\preview.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

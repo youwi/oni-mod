@@ -30,8 +30,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropArtifactsMod", "DropArt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteAsteroid", "DeleteAsteroid\DeleteAsteroid.csproj", "{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeMapMod", "ChangeMapMod\ChangeMapMod.csproj", "{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForceMutateMod", "ForceMutateButton\ForceMutateMod.csproj", "{7ABA2402-ED8D-443D-A615-E36E66D2D7E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColdWheatSeedDropMod", "ColdWheatSeedDropMod\ColdWheatSeedDropMod.csproj", "{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}"
@@ -55,6 +53,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBaseT4", "MiniBaseT4Mod\MiniBaseT4.csproj", "{F4FF2774-AD08-4369-AA33-B0611B8AA06E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimitHydroponicMod", "LimitHydroponicMod\LimitHydroponicMod.csproj", "{1103F5FB-2E5A-4E89-98C6-7D08B308053F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceLogMod", "PerformanceLogMod\PerformanceLogMod.csproj", "{B229340D-0E73-4493-816F-2065A253C0FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,10 +102,6 @@ Global
 		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51FA70D5-A1C0-4A57-963C-9D87259DAFDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7ABA2402-ED8D-443D-A615-E36E66D2D7E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7ABA2402-ED8D-443D-A615-E36E66D2D7E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ABA2402-ED8D-443D-A615-E36E66D2D7E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -154,6 +150,10 @@ Global
 		{1103F5FB-2E5A-4E89-98C6-7D08B308053F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1103F5FB-2E5A-4E89-98C6-7D08B308053F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1103F5FB-2E5A-4E89-98C6-7D08B308053F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B229340D-0E73-4493-816F-2065A253C0FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B229340D-0E73-4493-816F-2065A253C0FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B229340D-0E73-4493-816F-2065A253C0FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B229340D-0E73-4493-816F-2065A253C0FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

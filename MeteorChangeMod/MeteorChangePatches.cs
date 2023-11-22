@@ -220,7 +220,6 @@ namespace MeteorChangeMod
 
         private static void OnCustomMenuButtonPressed()
         {
-
             toggleMyBtn(PauseScreen.Instance);
             PauseScreen.Instance.RefreshButtons();
             // CustomSettingsController.ShowWindow();

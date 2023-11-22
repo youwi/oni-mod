@@ -86,10 +86,6 @@
     <None Include="test.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChangeMapMod\ChangeMapMod.csproj">
-      <Project>{51fa70d5-a1c0-4a57-963c-9d87259dafda}</Project>
-      <Name>ChangeMapMod</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DeleteAsteroid\DeleteAsteroid.csproj">
       <Project>{10780224-fe59-434e-b8cf-7ff7b4c1b9be}</Project>
       <Name>DeleteAsteroid</Name>

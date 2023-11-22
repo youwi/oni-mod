@@ -1,7 +1,9 @@
 ﻿using HarmonyLib;
+using Klei;
 using STRINGS;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,9 +85,11 @@ namespace LimitHydroponicMod
     {
         public static void Postfix(GameObject go)
         {
-            ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
+           ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
            conduitConsumer.consumptionRate = 5f;
         }
     }
+
+   
 
 }

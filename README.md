@@ -30,7 +30,10 @@
 		 SuitLocker.ReturnSuitWorkable.CreateChore()
 # 反射:
 	Traverse.Create
-
+# 性能
+	内置性能表,可能有点用
+	Global.Instance.GetComponent<PerformanceMonitor>().FPS;
+	string fileName = Path.GetFileName(GenericGameSettings.instance.performanceCapture.saveGame);
 # oni-mod 备注
 说明:
 	StampTool 图章工具
