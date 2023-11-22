@@ -2,7 +2,7 @@
 设置boot.config
 以下2个参数比较重要
 job-worker-count=5
-gc-max-time-slice=10
+gc-max-time-slice=3
 
 gfx-enable-gfx-jobs=1
 gfx-enable-native-gfx-jobs=1

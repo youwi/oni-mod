@@ -79,43 +79,37 @@ namespace PerformanceLogMod
                 SpeedControlScreen.Instance.Unpause(true);
             }
        
-            uint num = 581979U;
-            string text = System.DateTime.Now.ToShortDateString();
-            string text2 = System.DateTime.Now.ToShortTimeString();
-            string fileName = Path.GetFileName(GenericGameSettings.instance.performanceCapture.saveGame);
-            string text3 = "Version,Date,Time,SaveGame";
-            string text4 = string.Format("{0},{1},{2},{3}", new object[]
-            {
-                num,
-                text,
-                text2,
-                fileName
-            });
-            float num2 = 0f;
+            uint versionNum = 581979U;
+            string dateText = System.DateTime.Now.ToShortDateString();
+            string timeText = System.DateTime.Now.ToShortTimeString();
+            string savefileName = Path.GetFileName(GenericGameSettings.instance.performanceCapture.saveGame);
+            float gcTime = 0f;
+
             if (GenericGameSettings.instance.performanceCapture.gcStats)
             {
+                string gcHeadText = "Version,Date,Time,SaveGame";
                 global::Debug.Log("Begin GC profiling...");
                 float realtimeSinceStartup = Time.realtimeSinceStartup;
                 GC.Collect();
-                num2 = Time.realtimeSinceStartup - realtimeSinceStartup;
-                global::Debug.Log("\tGC.Collect() took " + num2.ToString() + " seconds");
+                gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
+                global::Debug.Log("\tGC.Collect() took " + gcTime.ToString() + " seconds");
                // MemorySnapshot memorySnapshot = new MemorySnapshot();
                 string format = "{0},{1},{2},{3}";
-                string path = "./memory/GCTypeMetrics.csv";
-                if (!File.Exists(path))
+                string gcCsvFilepath = "./memory/GCTypeMetrics.csv";
+                if (!File.Exists(gcCsvFilepath))
                 {
-                    using (StreamWriter streamWriter = new StreamWriter(path))
+                    using (StreamWriter streamWriter = new StreamWriter(gcCsvFilepath))
                     {
                         streamWriter.WriteLine(string.Format(format, new object[]
                         {
-                        text3,
+                        gcHeadText,
                         "Type",
                         "Instances",
                         "References"
                         }));
                     }
                 }
-                using (StreamWriter streamWriter2 = new StreamWriter(path, true))
+                using (StreamWriter streamWriter2 = new StreamWriter(gcCsvFilepath, true))
                 {
                     //foreach (MemorySnapshot.TypeData typeData in memorySnapshot.types.Values)
                     //{
@@ -132,18 +126,29 @@ namespace PerformanceLogMod
             }
             float fps = Global.Instance.GetComponent<PerformanceMonitor>().FPS;
             Directory.CreateDirectory("./memory");
-            string format2 = "{0},{1},{2}";
-            string path2 = "./memory/GeneralMetrics.csv";
-            if (!File.Exists(path2))
+        
+            string csvFileName = "./memory/GeneralMetrics.csv";
+            if (File.Exists(csvFileName))
             {
-                using (StreamWriter streamWriter3 = new StreamWriter(path2))
+                long length = new System.IO.FileInfo(csvFileName).Length;
+                if (length > 1000 * 1000)
                 {
-                    streamWriter3.WriteLine(string.Format(format2, text3, "GCDuration", "FPS"));
+                    File.Move(csvFileName, Time.time + csvFileName);
                 }
             }
-            using (StreamWriter streamWriter4 = new StreamWriter(path2, true))
+           
+            if (!File.Exists(csvFileName))
             {
-                streamWriter4.WriteLine(string.Format(format2, text4, num2, fps));
+                using (StreamWriter streamWriter3 = new StreamWriter(csvFileName))
+                {
+                    streamWriter3.WriteLine( "Version,Date,Time,SaveGame,GCDuration,FPS");
+                }
+            }
+            
+            using (StreamWriter streamWriter4 = new StreamWriter(csvFileName, true))
+            {
+       
+                streamWriter4.WriteLine($"{versionNum},{dateText},{timeText},{savefileName},{gcTime},{fps}");
             }
             //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
         }
