@@ -15,6 +15,7 @@ hdr-display-enabled=0
 gc-max-time-slice=10
 job-worker-count=5
 single-instance=
+memorysetup-main-allocator-block-size=33554432
 
 
 "memorysetup-bucket-allocator-granularity=16"

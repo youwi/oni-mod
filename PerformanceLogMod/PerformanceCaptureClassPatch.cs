@@ -214,7 +214,8 @@ namespace PerformanceLogMod
             //}
             using (StreamWriter streamWriter4 = new StreamWriter("./memory/GcTick.txt", true))
             {
-                //GCPatch.cache.ToArray;
+                //  GCPatch.cache.ToArray;
+                //  MemorySetup.
                 streamWriter4.WriteLine(String.Join("\n", GCAllMyPatches.cache));
             }
         }
