@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.jpg" />
-    <Content Include="TextFile1.txt" />
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />

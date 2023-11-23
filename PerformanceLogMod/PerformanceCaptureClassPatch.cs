@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Profiling;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
 using static Klei.GenericGameSettings;
@@ -41,16 +43,34 @@ namespace PerformanceLogMod
     }
     public  class PerformanceCapturePatch
     {
+        
         public static void doCollect()
         {
+            string gcMode = "...";
+            if (GarbageCollector.GCMode== GarbageCollector.Mode.Enabled)
+            {
+                GarbageCollector.GCMode = GarbageCollector.Mode.Manual;
+                gcMode = "Stoped";
+            }
+            else
+            {
+                GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
+                gcMode = "enabled";
+            }
+          
             Process proc = Process.GetCurrentProcess();
-            var mem=proc.PrivateMemorySize64 / 1024 / 1024;
-
+            //var mem=proc.PrivateMemorySize64 / 1024 / 1024;
+            var mem = GC.GetTotalMemory(true) / 1024 / 1024;
             float realtimeSinceStartup = Time.realtimeSinceStartup;
             GC.Collect();
             var gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
-            // GC.GetTotalMemory(true) / 1024 / 1024;
-            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery {gcTime:0.0}s {mem}M";
+            var mem2 = GC.GetTotalMemory(true) / 1024 / 1024;
+  
+            //long memP = Profiler.GetMonoUsedSizeLong();
+            var mem3= Profiler.GetMonoUsedSizeLong() / 1024 / 1024;
+            var mem4= Profiler.GetTotalAllocatedMemoryLong() / 1024 / 1024;
+            //腐烂物
+            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery {gcTime:0.0}s {mem3}M GC:{gcMode}";
             PauseScreen.Instance.RefreshButtons();
         }
         static int ondoing=0;
@@ -71,7 +91,7 @@ namespace PerformanceLogMod
             }
             if (ondoing == 0)
             {
-                GarbageCollector.GCMode = GarbageCollector.Mode.Manual;
+             
                 timer.Start();
                 PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >ing<";
                 GenericGameSettings.instance.performanceCapture.gcStats = false;
@@ -80,7 +100,7 @@ namespace PerformanceLogMod
             }else if (ondoing == 1)
             {
                 timer.Start();
-                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = " GC.Collect() >ing<";
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture with GC >ing<";
                 GenericGameSettings.instance.performanceCapture.gcStats = true;
                 ondoing = 2;
                 PauseScreen.Instance.RefreshButtons();
@@ -95,7 +115,7 @@ namespace PerformanceLogMod
                 PauseScreen.Instance.RefreshButtons();
             }
             else {
-                GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
+        
                 timer.Stop();
                 ondoing = 0;
                 PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture";
@@ -111,8 +131,8 @@ namespace PerformanceLogMod
             }
        
             uint versionNum = 581979U;
-            string dateText = System.DateTime.Now.ToShortDateString();
-            string timeText = System.DateTime.Now.ToShortTimeString();
+         
+            string timeText = System.DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss.fff");
             string savefileName = Path.GetFileName(GenericGameSettings.instance.performanceCapture.saveGame);
             float gcTime = 0f;
 
@@ -172,15 +192,16 @@ namespace PerformanceLogMod
             {
                 using (StreamWriter streamWriter3 = new StreamWriter(csvFileName))
                 {
-                    streamWriter3.WriteLine( "Version,Date,Time,SaveGame,GCDuration,GCCount,FPS");
+                    streamWriter3.WriteLine( "Version,DateTime,Memory,GCDuration,GCCount,FPS");
                 }
             }
             
             using (StreamWriter streamWriter4 = new StreamWriter(csvFileName, true))
             {
-                ; // GarbageCollector.CollectIncremental
+               var memSizeM= GC.GetTotalMemory(false) / 1024 / 1024;
+               ; // GarbageCollector.CollectIncremental
                   // GarbageCollector.incrementalTimeSliceNanoseconds
-                streamWriter4.WriteLine($"{versionNum},{dateText},{timeText},{savefileName},{gcTime},{GCPatch.cache.Count},{fps}");
+                streamWriter4.WriteLine($"{versionNum},{timeText},{memSizeM},{gcTime:0.00},{GCAllMyPatches.cache.Count},{fps:0.0}");
             }
             //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
         }
@@ -194,28 +215,71 @@ namespace PerformanceLogMod
             using (StreamWriter streamWriter4 = new StreamWriter("./memory/GcTick.txt", true))
             {
                 //GCPatch.cache.ToArray;
-                streamWriter4.WriteLine(String.Join("\n", GCPatch.cache));
+                streamWriter4.WriteLine(String.Join("\n", GCAllMyPatches.cache));
             }
         }
     }
 
-    [HarmonyPatch(typeof(System.GC), "Collect", new Type[] { })]
-    public class  GCPatch
+    [HarmonyPatch] // make sure Harmony inspects the class
+    public class GCAllMyPatches
     {
         public static List<string> cache = new System.Collections.Generic.List<string>();
+
+        static IEnumerable<MethodBase> TargetMethods()
+        {
+            return typeof(System.GC).GetMethods()
+                .Where(method => method.Name.StartsWith("Collect"))
+                .Cast<MethodBase>();
+        }
         public static void Postfix()
         {
-            if(cache.Count > 100000)
+            if (cache.Count > 100000)
             {  //消耗太大,重置.
                 cache = new System.Collections.Generic.List<string>();
             }
-             
             cache.Add(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
-           // 
-            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... " 
-                + GC.GetTotalMemory(true)/1024/1024 +"M /"
+            // 
+            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... "
+                + GC.GetTotalMemory(true) / 1024 / 1024 + "M /"
                 + GarbageCollector.incrementalTimeSliceNanoseconds
                 );
+        }
+    }
+
+
+   //[HarmonyPatch(typeof(System.GC), "Collect", new Type[] { })]
+   // public class  GCPatch
+   // {
+      
+   // }
+    //[HarmonyPatch(typeof(System.GC), "Collect", new Type[] { typeof(int) })]
+    //public class GCIntPatch
+    //{
+    //    public static List<string> cache = new System.Collections.Generic.List<string>();
+    //    public static void Postfix()
+    //    {
+    //        if (cache.Count > 100000)
+    //        {  //消耗太大,重置.
+    //            cache = new System.Collections.Generic.List<string>();
+    //        }
+
+    //        cache.Add(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
+    //        // 
+    //        Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... "
+    //            + GC.GetTotalMemory(true) / 1024 / 1024 + "M /"
+    //            + GarbageCollector.incrementalTimeSliceNanoseconds
+    //            );
+    //    }
+    //}
+
+    //禁止 腐烂物的消息,可能有助于减少内存. 功能测试中,好像有点用...
+
+    [HarmonyPatch(typeof(RotPile), "TryCreateNotification" )]
+    public class OplefPatch
+    {
+        public static bool Prefix()
+        {
+            return false;
         }
     }
 }

@@ -35,12 +35,12 @@ namespace ModTests
         [TestMethod()]
         public void listToFileTest()
         {
-            GCPatch.cache.Add("abc");
-            GCPatch.cache.Add("abc");
-            GCPatch.cache.Add("abc");
-            GCPatch.cache.Add("abc");
-            GCPatch.cache.Add("abc");
-            GCPatch.cache.Add("abc");
+            GCAllMyPatches.cache.Add("abc");
+            GCAllMyPatches.cache.Add("abc");
+            GCAllMyPatches.cache.Add("abc");
+            GCAllMyPatches.cache.Add("abc");
+            GCAllMyPatches.cache.Add("abc");
+            GCAllMyPatches.cache.Add("abc");
             PerformanceCapturePatch. DumpGCCacheList();
         }
 
