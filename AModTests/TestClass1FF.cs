@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PerformanceLogMod;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,9 +13,24 @@ using System.Threading.Tasks;
 
 namespace ModTests
 {
+
+
+
     [TestClass()]
     public class TestClassMore
     {
+
+        [TestMethod()]
+        public void lprocTest()
+        {
+            Process proc = Process.GetCurrentProcess();
+            Console.WriteLine( proc.PrivateMemorySize64/1024/1024);
+            Console.WriteLine(proc.WorkingSet64 / 1024 / 1024);
+
+            float sss = 1223.455123f;
+            Console.WriteLine(sss.ToString("0.00"));
+            Console.WriteLine($"sfasfsdfsdf{sss:0.00}");
+        }
 
         [TestMethod()]
         public void listToFileTest()

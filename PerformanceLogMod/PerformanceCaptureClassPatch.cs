@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Klei;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,10 +43,14 @@ namespace PerformanceLogMod
     {
         public static void doCollect()
         {
+            Process proc = Process.GetCurrentProcess();
+            var mem=proc.PrivateMemorySize64 / 1024 / 1024;
+
             float realtimeSinceStartup = Time.realtimeSinceStartup;
             GC.Collect();
             var gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
-            PauseScreen_OnPrefabInit_Patch.gcButton.text = "Clean Memery " + gcTime.ToString();
+            // GC.GetTotalMemory(true) / 1024 / 1024;
+            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery {gcTime:0.0}s {mem}M";
             PauseScreen.Instance.RefreshButtons();
         }
         static int ondoing=0;
@@ -204,9 +209,13 @@ namespace PerformanceLogMod
             {  //消耗太大,重置.
                 cache = new System.Collections.Generic.List<string>();
             }
+             
             cache.Add(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
            // 
-            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... " + GC.GetTotalMemory(true)/1000/1000 +"M /"+ GarbageCollector.incrementalTimeSliceNanoseconds);
+            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... " 
+                + GC.GetTotalMemory(true)/1024/1024 +"M /"
+                + GarbageCollector.incrementalTimeSliceNanoseconds
+                );
         }
     }
 }
