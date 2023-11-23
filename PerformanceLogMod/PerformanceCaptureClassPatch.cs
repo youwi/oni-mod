@@ -11,6 +11,7 @@ using System.Timers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Scripting;
+using UnityEngine.UI;
 using static Klei.GenericGameSettings;
 
 namespace PerformanceLogMod
@@ -23,17 +24,30 @@ namespace PerformanceLogMod
             "PerformanceCapture",
             Action.NumActions,
            new UnityAction(PerformanceCapturePatch.delayAction));
+        public static readonly KButtonMenu.ButtonInfo gcButton = new KButtonMenu.ButtonInfo(
+           "Clean Memery >GC.Collect<",
+           Action.NumActions,
+          new UnityAction(PerformanceCapturePatch.doCollect));
         private static void Postfix(ref IList<KButtonMenu.ButtonInfo> ___buttons)
         {
             List<KButtonMenu.ButtonInfo> list = ___buttons.ToList<KButtonMenu.ButtonInfo>();
             logButtonInfo.isEnabled = true;
             
             list.Insert(0, logButtonInfo);
+            list.Insert(0, gcButton);
             ___buttons = (IList<KButtonMenu.ButtonInfo>)list;
         }
     }
     public  class PerformanceCapturePatch
     {
+        public static void doCollect()
+        {
+            float realtimeSinceStartup = Time.realtimeSinceStartup;
+            GC.Collect();
+            var gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
+            PauseScreen_OnPrefabInit_Patch.gcButton.text = "Clean Memery " + gcTime.ToString();
+            PauseScreen.Instance.RefreshButtons();
+        }
         static int ondoing=0;
         static  System.Timers.Timer timer=null;
         public static void delayAction()
