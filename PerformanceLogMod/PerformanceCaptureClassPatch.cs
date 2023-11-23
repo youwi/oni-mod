@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Scripting;
 using static Klei.GenericGameSettings;
 
 namespace PerformanceLogMod
@@ -51,30 +52,31 @@ namespace PerformanceLogMod
             }
             if (ondoing == 0)
             {
+                GarbageCollector.GCMode = GarbageCollector.Mode.Manual;
                 timer.Start();
                 PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >ing<";
                 GenericGameSettings.instance.performanceCapture.gcStats = false;
-
                 ondoing = 1;
                 PauseScreen.Instance.RefreshButtons();
             }else if (ondoing == 1)
             {
                 timer.Start();
-                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >ing+ GC<";
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = " GC.Collect() >ing<";
                 GenericGameSettings.instance.performanceCapture.gcStats = true;
                 ondoing = 2;
                 PauseScreen.Instance.RefreshButtons();
             }else if (ondoing==2) {
                 timer.Stop();
                 GenericGameSettings.instance.performanceCapture.gcStats = false;
-                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >Dump GC tick<";
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = " Dump GC  >ing<";
                 ondoing = 3;
                 PauseScreen.Instance.RefreshButtons();
                 DumpGCCacheList();
-                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture >Dump GC tick OK<";
+                PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = " Dump GcTicks >ing<";
                 PauseScreen.Instance.RefreshButtons();
             }
             else {
+                GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
                 timer.Stop();
                 ondoing = 0;
                 PauseScreen_OnPrefabInit_Patch.logButtonInfo.text = "PerformanceCapture";
@@ -97,42 +99,42 @@ namespace PerformanceLogMod
 
             if (GenericGameSettings.instance.performanceCapture.gcStats)
             {
-                string gcHeadText = "Version,Date,Time,SaveGame";
-                global::Debug.Log("Begin GC profiling...");
+               //  string gcHeadText = "Version,Date,Time,SaveGame";
+               // global::Debug.Log("Begin GC profiling...");
                 float realtimeSinceStartup = Time.realtimeSinceStartup;
                 GC.Collect();
                 gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
                 global::Debug.Log("\tGC.Collect() took " + gcTime.ToString() + " seconds");
                // MemorySnapshot memorySnapshot = new MemorySnapshot();
-                string format = "{0},{1},{2},{3}";
-                string gcCsvFilepath = "./memory/GCTypeMetrics.csv";
-                if (!File.Exists(gcCsvFilepath))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(gcCsvFilepath))
-                    {
-                        streamWriter.WriteLine(string.Format(format, new object[]
-                        {
-                        gcHeadText,
-                        "Type",
-                        "Instances",
-                        "References"
-                        }));
-                    }
-                }
-                using (StreamWriter streamWriter2 = new StreamWriter(gcCsvFilepath, true))
-                {
-                    //foreach (MemorySnapshot.TypeData typeData in memorySnapshot.types.Values)
-                    //{
-                    //    streamWriter2.WriteLine(string.Format(format, new object[]
-                    //    {
-                    //    text4,
-                    //    "\"" + typeData.type.ToString() + "\"",
-                    //    typeData.instanceCount,
-                    //    typeData.refCount
-                    //    }));
-                    //}
-                }
-                global::Debug.Log("...end GC profiling");
+                //string format = "{0},{1},{2},{3}";
+                //string gcCsvFilepath = "./memory/GCTypeMetrics.csv";
+                //if (!File.Exists(gcCsvFilepath))
+                //{
+                //    using (StreamWriter streamWriter = new StreamWriter(gcCsvFilepath))
+                //    {
+                //        streamWriter.WriteLine(string.Format(format, new object[]
+                //        {
+                //        gcHeadText,
+                //        "Type",
+                //        "Instances",
+                //        "References"
+                //        }));
+                //    }
+                //}
+                //using (StreamWriter streamWriter2 = new StreamWriter(gcCsvFilepath, true))
+                //{
+                //    //foreach (MemorySnapshot.TypeData typeData in memorySnapshot.types.Values)
+                //    //{
+                //    //    streamWriter2.WriteLine(string.Format(format, new object[]
+                //    //    {
+                //    //    text4,
+                //    //    "\"" + typeData.type.ToString() + "\"",
+                //    //    typeData.instanceCount,
+                //    //    typeData.refCount
+                //    //    }));
+                //    //}
+                //}
+               // global::Debug.Log("...end GC profiling");
             }
             float fps = Global.Instance.GetComponent<PerformanceMonitor>().FPS;
             Directory.CreateDirectory("./memory");
@@ -157,6 +159,8 @@ namespace PerformanceLogMod
             
             using (StreamWriter streamWriter4 = new StreamWriter(csvFileName, true))
             {
+                ; // GarbageCollector.CollectIncremental
+                  // GarbageCollector.incrementalTimeSliceNanoseconds
                 streamWriter4.WriteLine($"{versionNum},{dateText},{timeText},{savefileName},{gcTime},{GCPatch.cache.Count},{fps}");
             }
             //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
@@ -187,8 +191,8 @@ namespace PerformanceLogMod
                 cache = new System.Collections.Generic.List<string>();
             }
             cache.Add(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
-          
-            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... ");
+           // 
+            Debug.Log("PerformanceLogMod.GCPatch:>>>>>>给GC打补丁: ....... " + GC.GetTotalMemory(true)/1000/1000 +"M /"+ GarbageCollector.incrementalTimeSliceNanoseconds);
         }
     }
 }
