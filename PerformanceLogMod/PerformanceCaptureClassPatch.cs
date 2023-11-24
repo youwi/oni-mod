@@ -49,7 +49,7 @@ namespace PerformanceLogMod
                .Field("notifications").GetValue();
             List<Notification> pendingNotifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
               .Field("pendingNotifications").GetValue();
-            Debug.LogWarning($"--Memory Aall High.>>>>remvoe messages:{notifications.Count}  {pendingNotifications.Count}");
+            Debug.LogWarning($"-- Memory allocation High.>>>>remvoe messages:{notifications.Count} {pendingNotifications.Count}");
             int count=notifications.Count+pendingNotifications.Count;
             notifications.Clear();
             pendingNotifications.Clear();
