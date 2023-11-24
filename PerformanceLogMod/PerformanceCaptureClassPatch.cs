@@ -67,16 +67,19 @@ namespace PerformanceLogMod
         }
         public static void doCollect()
         {
+            // PauseScreen.Instance.FindOrAdd<GCManualControlS>();
+            SpeedControlScreen.Instance.gameObject.AddOrGet<GCManualControlS>();//初始化.
+
             string gcMode = "...";
             if (GarbageCollector.GCMode== GarbageCollector.Mode.Enabled)
             {
                 GarbageCollector.GCMode = GarbageCollector.Mode.Manual;
-                gcMode = "Stoped";
+                gcMode = "Large";
             }
             else
             {
                 GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
-                gcMode = "Enabled";
+                gcMode = "Original";
             }
           
             // Process proc = Process.GetCurrentProcess();
@@ -91,7 +94,7 @@ namespace PerformanceLogMod
             var mem3= Profiler.GetMonoUsedSizeLong() / 1024 / 1024;
             var mem4= Profiler.GetTotalAllocatedMemoryLong() / 1024 / 1024;
             //腐烂物
-            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery ({gcTime:0.0}s {mem3}M GC:{gcMode})";
+            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery ({gcTime:0.0}s {mem2-mem}M,ALL:{mem3}M GC:{gcMode})";
             PauseScreen.Instance.RefreshButtons();
             clearMessage();
         }
@@ -100,6 +103,7 @@ namespace PerformanceLogMod
         static long lastMemSizeM = 0;
         public static void delayAction()
         {
+          
             if (timer == null)
             {
                 timer = new System.Timers.Timer(3000); //延迟
@@ -287,13 +291,24 @@ namespace PerformanceLogMod
                 );
         }
     }
+    //[HarmonyPatch(typeof(GarbageCollector), "CollectIncremental")]
+    //public class GCPatch
+    //{
+    //    public static void Postfix()
+    //    {
+    //        //GarbageCollector.CollectIncremental();
+    //        GCAllMyPatches.Postfix();
+    //    }
+    //}
 
 
-   //[HarmonyPatch(typeof(System.GC), "Collect", new Type[] { })]
-   // public class  GCPatch
-   // {
-      
-   // }
+
+
+    //[HarmonyPatch(typeof(System.GC), "Collect", new Type[] { })]
+    // public class  GCPatch
+    // {
+
+    // }
     //[HarmonyPatch(typeof(System.GC), "Collect", new Type[] { typeof(int) })]
     //public class GCIntPatch
     //{

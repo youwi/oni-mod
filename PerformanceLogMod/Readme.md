@@ -58,3 +58,11 @@ wait-for-native-debugger=0
 hdr-display-enabled=0
 gc-max-time-slice=3
 build-guid=89ed41df3faa40c7b96dd60845653084
+
+Exception while loading mod Yu.PerformanceCapturePatch at D:/Doc/Klei/OxygenNotIncluded/mods/Local/PerformanceLogMod. 
+HarmonyLib.HarmonyException: Patching exception in method static System.Boolean 
+UnityEngine.Scripting.GarbageCollector::CollectIncremental(System.UInt64 nanoseconds) ---> System.FormatException:
+Method static System.Boolean UnityEngine.Scripting.GarbageCollector::CollectIncremental(System.UInt64 nanoseconds) cannot be patched. Reason: 
+Invalid IL code in (wrapper dynamic-method) UnityEngine.Scripting.GarbageCollector:UnityEngine.Scripting.GarbageCollector.CollectIncremental_Patch1 (ulong): IL_000b: unused42  
+
+ 

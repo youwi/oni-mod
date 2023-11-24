@@ -331,6 +331,7 @@ namespace TemporalTearOpenerPatch
                      msList[UnityEngine.Random.Range(0, msList.Count)], worldId,
                      new Action<StateMachine.Instance>(callbackInfo));
                  ttm.StartEvent();
+                 
                // GameplayEventManager.Instance
                // ttm.disa
             }
@@ -339,7 +340,7 @@ namespace TemporalTearOpenerPatch
         }
         public static void callbackInfo(StateMachine.Instance st)
         {
-            Debug.Log($"randomMeterPlanD回调事件触发");
+            Debug.Log($"randomMeterPlanD 陨石事件event开始<回调事件>");
         }
     }
 
