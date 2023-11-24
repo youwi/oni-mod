@@ -43,7 +43,18 @@ namespace PerformanceLogMod
     }
     public  class PerformanceCapturePatch
     {
-        
+        public static int clearMessage()
+        {
+            List<Notification> notifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
+               .Field("notifications").GetValue();
+            List<Notification> pendingNotifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
+              .Field("pendingNotifications").GetValue();
+            Debug.LogWarning($"--Memory Aall High.>>>>remvoe messages:{notifications.Count}  {pendingNotifications.Count}");
+            int count=notifications.Count+pendingNotifications.Count;
+            notifications.Clear();
+            pendingNotifications.Clear();
+            return count; 
+        }
         public static void doCollect()
         {
             string gcMode = "...";
@@ -72,9 +83,11 @@ namespace PerformanceLogMod
             //腐烂物
             PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery {gcTime:0.0}s {mem3}M GC:{gcMode}";
             PauseScreen.Instance.RefreshButtons();
+            clearMessage();
         }
         static int ondoing=0;
         static  System.Timers.Timer timer=null;
+        static long lastMemSizeM = 0;
         public static void delayAction()
         {
             if (timer == null)
@@ -132,6 +145,8 @@ namespace PerformanceLogMod
             }
             if (Global.Instance.GetComponent<PerformanceMonitor>().FPS < 3)
             { return; }
+           //  ClusterManager.Instance.ge
+
 
              uint versionNum = 581979U;
          
@@ -195,16 +210,29 @@ namespace PerformanceLogMod
             {
                 using (StreamWriter streamWriter3 = new StreamWriter(csvFileName))
                 {
-                    streamWriter3.WriteLine( "Version,DateTime,Memory,GCDuration,GCCount,FPS");
+                    streamWriter3.WriteLine( "Version,DateTime,Memory,GCDuration,msg_count,GCCount,FPS");
                 }
             }
-            
+            int msgCount = 0;
+
+
             using (StreamWriter streamWriter4 = new StreamWriter(csvFileName, true))
             {
-               var memSizeM= GC.GetTotalMemory(false) / 1024 / 1024;
-               ; // GarbageCollector.CollectIncremental
-                  // GarbageCollector.incrementalTimeSliceNanoseconds
-                streamWriter4.WriteLine($"{versionNum},{timeText},{memSizeM},{gcTime:0.00},{GCAllMyPatches.cache.Count},{fps:0.0}");
+                var memSizeM= GC.GetTotalMemory(false) / 1024 / 1024;
+                // GarbageCollector.CollectIncremental
+                // GarbageCollector.incrementalTimeSliceNanoseconds
+                if (memSizeM > lastMemSizeM + 128)
+                {
+                    //内存突然升高
+                    //NotificationManager.Instance.
+                    //Unity.Profiling.ProfilerRecorder
+                    msgCount = clearMessage();
+                     
+                     
+                }
+                 
+                streamWriter4.WriteLine($"{versionNum},{timeText},{memSizeM},{gcTime:0.00},{msgCount},{GCAllMyPatches.cache.Count},{fps:0.0}");
+                lastMemSizeM= (memSizeM+ lastMemSizeM)/2;//累计平均.
             }
             //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
         }
