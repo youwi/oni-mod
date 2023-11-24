@@ -28,7 +28,7 @@ namespace PerformanceLogMod
             Action.NumActions,
            new UnityAction(PerformanceCapturePatch.delayAction));
         public static readonly KButtonMenu.ButtonInfo gcButton = new KButtonMenu.ButtonInfo(
-           "Clean Memery >GC.Collect<",
+           "Clean Memery",
            Action.NumActions,
           new UnityAction(PerformanceCapturePatch.doCollect));
         private static void Postfix(ref IList<KButtonMenu.ButtonInfo> ___buttons)
@@ -76,12 +76,12 @@ namespace PerformanceLogMod
             else
             {
                 GarbageCollector.GCMode = GarbageCollector.Mode.Enabled;
-                gcMode = "enabled";
+                gcMode = "Enabled";
             }
           
-            Process proc = Process.GetCurrentProcess();
+            // Process proc = Process.GetCurrentProcess();
             //var mem=proc.PrivateMemorySize64 / 1024 / 1024;
-            var mem = GC.GetTotalMemory(true) / 1024 / 1024;
+            var mem = GC.GetTotalMemory(false) / 1024 / 1024;
             float realtimeSinceStartup = Time.realtimeSinceStartup;
             GC.Collect();
             var gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
@@ -91,7 +91,7 @@ namespace PerformanceLogMod
             var mem3= Profiler.GetMonoUsedSizeLong() / 1024 / 1024;
             var mem4= Profiler.GetTotalAllocatedMemoryLong() / 1024 / 1024;
             //腐烂物
-            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery {gcTime:0.0}s {mem3}M GC:{gcMode}";
+            PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery ({gcTime:0.0}s {mem3}M GC:{gcMode})";
             PauseScreen.Instance.RefreshButtons();
             clearMessage();
         }
@@ -151,13 +151,14 @@ namespace PerformanceLogMod
         {   //Game.PerformanceCapture 从复制
             if (SpeedControlScreen.Instance.IsPaused )
             {
+                return;//暂停时不记录.
               //  SpeedControlScreen.Instance.Unpause(true);
             }
             if (Global.Instance.GetComponent<PerformanceMonitor>().FPS < 3)
-            { return; }
-           //  ClusterManager.Instance.ge
-
-
+            { 
+                return;//太卡了也不记录.
+            }
+ 
              uint versionNum = 581979U;
          
             string timeText = System.DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss.fff");
