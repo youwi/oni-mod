@@ -28,9 +28,13 @@ public class GCManualControlS : MonoBehaviour
         GarbageCollector.GCMode = GarbageCollector.Mode.Manual;
         Debug.Log("----> GCManualControlS 手动处理垃圾init  --<");
 
+        //方案1:
+        InvokeRepeating("UpdateMy", 2, 60);//2秒后,每60秒执行. 
+        //方案2:直接使用update
     }
+    void Update() { }
 
-    void Update()
+    void UpdateMy()
     {
         if (GarbageCollector.GCMode == GarbageCollector.Mode.Enabled )
         {
