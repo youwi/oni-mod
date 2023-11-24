@@ -110,10 +110,11 @@ namespace PoiAddResource
                     }
                     if (tt.id == "OilyAsteroidField") //油星
                     {
+                        // 
+                        tt.harvestableElements.Remove(SimHashes.SolidNaphtha);
+                        tt.harvestableElements.Remove(SimHashes.SolidCarbonDioxide);//删除CO2.
 
-                        tt.harvestableElements.Remove(SimHashes.Naphtha); 
-              
-                        tt.harvestableElements.Add(SimHashes.Naphtha, 0.5f);//石脑油 固体
+                        tt.harvestableElements.Add(SimHashes.SolidNaphtha, 0.5f);//石脑油 固体
 
                     }
                     if (tt.id == "GildedAsteroidField") //金质小行星
@@ -164,6 +165,11 @@ namespace PoiAddResource
                     {
                         tt.harvestableElements.Remove(SimHashes.Lime);
                         tt.harvestableElements.Add(SimHashes.Lime, 0.5f);// 添加石灰 
+                    }
+                    if (tt.id == "ChlorineCloud")  //氯气云
+                    {
+                        tt.harvestableElements.Remove(SimHashes.SolidChlorine);
+                        tt.harvestableElements.Add(SimHashes.SolidChlorine, 0.5f);// 添加固态氯 
                     }
                     if (tt.id == "CarbonAsteroidField")  //碳质小行星
                     {
