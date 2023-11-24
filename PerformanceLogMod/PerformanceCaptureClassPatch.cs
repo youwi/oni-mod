@@ -43,17 +43,27 @@ namespace PerformanceLogMod
     }
     public  class PerformanceCapturePatch
     {
-        public static int clearMessage()
+        static List<Notification> notifications =null;
+        static List<Notification> pendingNotifications = null;
+        public static void clearMessage()
         {
-            List<Notification> notifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
-               .Field("notifications").GetValue();
-            List<Notification> pendingNotifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
-              .Field("pendingNotifications").GetValue();
+            msgCount();
             Debug.LogWarning($"-- Memory allocation High.>>>>remvoe messages:{notifications.Count} {pendingNotifications.Count}");
-            int count=notifications.Count+pendingNotifications.Count;
             notifications.Clear();
             pendingNotifications.Clear();
-            return count; 
+            return;
+        }
+        public static int msgCount()
+        {
+            if(notifications == null)
+            {
+               notifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
+                .Field("notifications").GetValue();
+               pendingNotifications = (List<Notification>)Traverse.Create(NotificationManager.Instance)
+                  .Field("pendingNotifications").GetValue();
+            }
+            int count = notifications.Count + pendingNotifications.Count;
+            return count;
         }
         public static void doCollect()
         {
@@ -213,7 +223,7 @@ namespace PerformanceLogMod
                     streamWriter3.WriteLine( "Version,DateTime,Memory,GCDuration,msg_count,GCCount,FPS");
                 }
             }
-            int msgCount = 0;
+            int msgCt = msgCount();
 
 
             using (StreamWriter streamWriter4 = new StreamWriter(csvFileName, true))
@@ -226,12 +236,11 @@ namespace PerformanceLogMod
                     //内存突然升高
                     //NotificationManager.Instance.
                     //Unity.Profiling.ProfilerRecorder
-                    msgCount = clearMessage();
-                     
-                     
+                    clearMessage();
+
                 }
                  
-                streamWriter4.WriteLine($"{versionNum},{timeText},{memSizeM},{gcTime:0.00},{msgCount},{GCAllMyPatches.cache.Count},{fps:0.0}");
+                streamWriter4.WriteLine($"{versionNum},{timeText},{memSizeM},{gcTime:0.00},{msgCt},{GCAllMyPatches.cache.Count},{fps:0.0}");
                 lastMemSizeM= (memSizeM+ lastMemSizeM)/2;//累计平均.
             }
             //GenericGameSettings.instance.performanceCapture.waitTime = 0f;
