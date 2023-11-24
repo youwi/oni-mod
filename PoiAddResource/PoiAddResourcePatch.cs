@@ -67,7 +67,7 @@ namespace PoiAddResource
         //    {
         //        return;
         //    }
-        //    Debug.LogWarning("HarvestablePOIConfig.GenerateConfigs()---->");
+        //    Debug.Log("HarvestablePOIConfig.GenerateConfigs()---->");
         //    patchList(__result);
         //}
    
@@ -99,7 +99,7 @@ namespace PoiAddResource
                         tt.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞齐 固体
                         tt.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
                         tt.harvestableElements.Add(SimHashes.Resin, 0.1f);//树脂  solid
-                         //  Debug.LogWarning("HarvestablePOIInstanceConfiguration O00000");
+                         //  Debug.Log("HarvestablePOIInstanceConfiguration O00000");
                      
                     }
                     if (tt.id == "OilyAsteroidField") //油星
@@ -146,12 +146,12 @@ namespace PoiAddResource
                         tt.harvestableElements.Remove(SimHashes.SolidMethane);// 需要删除先.
                         tt.harvestableElements.Add(SimHashes.SolidMethane, 2f);// 添加大量天然气
                     }
-                    //Debug.LogWarning("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
+                    //Debug.Log("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
                 }
                 inited = true;
             }
           
-            // Debug.LogWarning("HarvestablePOIInstanceConfiguration ---->");
+            // Debug.Log("HarvestablePOIInstanceConfiguration ---->");
 
         }
     }

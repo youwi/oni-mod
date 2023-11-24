@@ -210,8 +210,8 @@ namespace MeteorChangeMod
                     meteorShowersBtnList.Add(tmp);
                 }
             }
-            Debug.LogWarning("buildButtonList菜单大小:" + fieldList.Length);
-            // Debug.LogWarning("buildButtonList菜单大小:" + listOut.Count);
+            Debug.Log("buildButtonList菜单大小:" + fieldList.Length);
+            // Debug.Log("buildButtonList菜单大小:" + listOut.Count);
             //var fun = Database.GameplaySeasons.class.get ;
             // Database.GameplaySeasons
             // ClusterManager.Instance.me
@@ -271,7 +271,7 @@ namespace MeteorChangeMod
                 showMoreButton = true;
                 //  toggleButtonInfo.text = "++++";
                 __instance.SetButtons(buttonCache);
-                Debug.LogWarning("---showMoreButton--->" + showMoreButton);
+                Debug.Log("---showMoreButton--->" + showMoreButton);
             }
             else
             {
@@ -279,7 +279,7 @@ namespace MeteorChangeMod
                 showMoreButton = false;
                 __instance.SetButtons(buttonOri);
                 // toggleButtonInfo.text = "---";
-                Debug.LogWarning("---showMoreButton--->" + showMoreButton);
+                Debug.Log("---showMoreButton--->" + showMoreButton);
 
             }
 

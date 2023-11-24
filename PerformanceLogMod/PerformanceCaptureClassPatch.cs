@@ -48,7 +48,7 @@ namespace PerformanceLogMod
         public static void clearMessage()
         {
             msgCount();
-            Debug.LogWarning($"-- Memory allocation High.{lastMemSizeM}M >>>>remvoe messages:{notifications.Count} {pendingNotifications.Count}");
+            Debug.Log($"-- Memory allocation High.{lastMemSizeM}M >>>>remvoe messages:{notifications.Count} {pendingNotifications.Count}");
             notifications.Clear();
             pendingNotifications.Clear();
             return;

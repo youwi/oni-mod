@@ -139,13 +139,13 @@ namespace ModTests.Tests
                 // Database.GameplaySeasons;
                 if (field.Name.EndsWith("MeteorShowers"))
                 {
-                    //  Debug.LogWarning(field.Name);
+                    //  Debug.Log(field.Name);
                     Console.WriteLine("\"" + field.Name + "\",");
                 }
 
             }
-            Debug.LogWarning(fieldList.Length);
-            Debug.LogWarning(fieldList);
+            Debug.Log(fieldList.Length);
+            Debug.Log(fieldList);
 
         }
 

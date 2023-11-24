@@ -17,8 +17,8 @@ namespace ColdWheatSeedDropMod
                 // 挖开时触发SeedProducer.ProduceSeed方法
                 if (seedId == "ColdWheatSeed" || seedId.Contains("ColdWheat"))
                 {
-                 //   Debug.LogWarning(new System.Diagnostics.StackTrace().ToString());
-                    Debug.LogWarning(">>>>>>>>小麦变异出来了:" + seedId + " ,canMutate:" + canMutate);
+                 //   Debug.Log(new System.Diagnostics.StackTrace().ToString());
+                    Debug.Log(">>>>>>>>小麦变异出来了:" + seedId + " ,canMutate:" + canMutate);
 
                 }
 
@@ -34,7 +34,7 @@ namespace ColdWheatSeedDropMod
 
             if (productionType == SeedProducer.ProductionType.DigOnly)
             {    //经过测试改变类型有效.
-                Debug.LogWarning(">>>>>>>>小麦,小吃豆类型改变");
+                Debug.Log(">>>>>>>>小麦,小吃豆类型改变");
                 productionType = SeedProducer.ProductionType.Harvest;
             }
             if (SeedID.Contains("ColdWheat"))

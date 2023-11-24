@@ -85,7 +85,7 @@ namespace ForceMuate
                 mp.Analyze();
             }
 
-            //Debug.LogWarning($"UpdateState  _---> ssssssss.......{plant} ..{mp}");
+            //Debug.Log($"UpdateState  _---> ssssssss.......{plant} ..{mp}");
 
             //暂时不做any
         }

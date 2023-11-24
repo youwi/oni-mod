@@ -73,7 +73,7 @@ namespace MeteorChangeMod
             var instance = CustomGameSettings.Instance;
             if (instance == null)
             {
-                Debug.LogWarning(" CustomGameSettings.Instance null");
+                Debug.Log(" CustomGameSettings.Instance null");
                 return;
             }
             bool isNoSweat = instance.customGameMode == CustomGameMode.Nosweat;

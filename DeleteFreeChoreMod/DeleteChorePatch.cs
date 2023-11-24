@@ -19,7 +19,7 @@ namespace DeleteFreeChoreMod
                 }
 
             }
-            //Debug.LogWarning("取消任务：ReturnSuitWorkable CancelChore---->>>");
+            //Debug.Log("取消任务：ReturnSuitWorkable CancelChore---->>>");
         }
 
     }

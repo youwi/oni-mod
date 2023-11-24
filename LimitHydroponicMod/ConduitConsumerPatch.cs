@@ -28,8 +28,8 @@ namespace LimitHydroponicMod
                 //__instance.gameObject.i
                 // __instance.storage.
 
-                // Debug.LogWarning($"------>.storage A -----{__instance.name} {__instance.storage} {__instance.storage.name} ");
-                // Debug.LogWarning($"------>.storage mass -----{__instance.storage.capacityKg} {__instance.storage.MassStored()}"); 
+                // Debug.Log($"------>.storage A -----{__instance.name} {__instance.storage} {__instance.storage.name} ");
+                // Debug.Log($"------>.storage mass -----{__instance.storage.capacityKg} {__instance.storage.MassStored()}"); 
                // __instance.storage.MassStored;
 
                 //__instance.storage.items.
@@ -37,7 +37,7 @@ namespace LimitHydroponicMod
                 if (calcLiquidMass(__instance) < 1    // 手动计算液体  1kg
                    || __instance.storage.MassStored()<1) //固体,液体都会计算.
                 {
-                    // Debug.LogWarning("------>修改了kg.B  -----"+__instance.name);
+                    // Debug.Log("------>修改了kg.B  -----"+__instance.name);
                    // __instance.storage.UnitsStored();
                     return true;
                 }
@@ -64,14 +64,14 @@ namespace LimitHydroponicMod
                 if (!(items[i] == null))
                 {
                     PrimaryElement component = items[i].GetComponent<PrimaryElement>();
-                  //  Debug.LogWarning($"------->>>{__instance}{component.HasTag(GameTags.Liquid)}--<<<<<");
+                  //  Debug.Log($"------->>>{__instance}{component.HasTag(GameTags.Liquid)}--<<<<<");
                     if (component.HasTag(GameTags.Liquid)
                       || component.ElementID == SimHashes.Water
                       || component.ElementID == SimHashes.DirtyWater
                       || component.ElementID == SimHashes.SaltWater)
                     {
                         num += component.Units * component.MassPerUnit;
-                       // Debug.LogWarning($"------->>>{__instance}{component.HasTag(GameTags.Liquid)} {num}--<<<<<");
+                       // Debug.Log($"------->>>{__instance}{component.HasTag(GameTags.Liquid)} {num}--<<<<<");
                     };
                 }
             }

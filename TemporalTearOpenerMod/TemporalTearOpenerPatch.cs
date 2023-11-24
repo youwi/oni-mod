@@ -140,13 +140,13 @@ namespace TemporalTearOpenerPatch
                 if (hps.IsFull()
                     && ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
                 { //防误触发
-                    Debug.LogWarning("<<<<<触发陨石>>>>>>>>");
+                    Debug.Log("<<<<<触发陨石>>>>>>>>");
                     SidescreenButtonInteractablePatch.autoFire(__instance);
                 }
             }));
             // 充能会无限触发.
             // 加载时会触发一次.
-            // Debug.LogWarning("<<<<<UpdateMeter 充能>>>>>>>>>>");
+            // Debug.Log("<<<<<UpdateMeter 充能>>>>>>>>>>");
         }
     }
 
@@ -195,12 +195,12 @@ namespace TemporalTearOpenerPatch
 
                 //不为空:
                 //var ct = gsi.activeSeasons.Count;
-                // Debug.LogWarning($"<<<<<AutoFire---on-> Count:{ct}>>>");//tt.Id和Name一样
-                //Debug.LogWarning($"<<<<<AutoFire--end-on->world:{worldId}>>>{gameplaySeason.Name}:{dlcFlag}");//tt.Id和Name一样
+                // Debug.Log($"<<<<<AutoFire---on-> Count:{ct}>>>");//tt.Id和Name一样
+                //Debug.Log($"<<<<<AutoFire--end-on->world:{worldId}>>>{gameplaySeason.Name}:{dlcFlag}");//tt.Id和Name一样
 
             };
             st.Start();
-            Debug.LogWarning("<<<<<autoFire--10s-will-->>>>>>>>>>");
+            Debug.Log("<<<<<autoFire--10s-will-->>>>>>>>>>");
             //默认为标准陨石.
 
             // Db.Get().GameplaySeasons  
@@ -233,7 +233,7 @@ namespace TemporalTearOpenerPatch
                         countA++;
                     };
                 };
-                Debug.LogWarning($"--------->buildMsList:{countA}");
+                Debug.Log($"--------->buildMsList:{countA}");
             }
         }
         public static GameplaySeason randomMeterPlanA()
@@ -339,7 +339,7 @@ namespace TemporalTearOpenerPatch
         }
         public static void callbackInfo(StateMachine.Instance st)
         {
-            Debug.LogWarning($"randomMeterPlanD回调事件触发");
+            Debug.Log($"randomMeterPlanD回调事件触发");
         }
     }
 
@@ -352,11 +352,11 @@ namespace TemporalTearOpenerPatch
             //清理多余的陨石,以前的陨石要删除.
             if (__instance.activeSeasons.Count() > 1)
             {
-                Debug.LogWarning("--GameplaySeasonManager.Instance.Update()--前置删除前:activeSeasons:Count>>>>>" + __instance.activeSeasons.Count);
+                Debug.Log("--GameplaySeasonManager.Instance.Update()--前置删除前:activeSeasons:Count>>>>>" + __instance.activeSeasons.Count);
 
                 var obj = __instance.activeSeasons.Last();
                 // __instance.activeSeasons.Clear();
-                Debug.LogWarning("--GameplaySeasonManager.Instance.Update()----前置删除后:activeSeasons:Count>>>>>" + __instance.activeSeasons.Count);
+                Debug.Log("--GameplaySeasonManager.Instance.Update()----前置删除后:activeSeasons:Count>>>>>" + __instance.activeSeasons.Count);
                 // __instance.activeSeasons.Add(obj);  //前置删除试试.
             }
         }

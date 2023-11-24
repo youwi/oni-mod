@@ -39,7 +39,7 @@ namespace ShowDestinationPOIFixMod
                     // sprite = Assets.GetSprite(m_Anim);//获取不到的
                     //Assets.GetAnim("harvestable_space_poi_kanim");
                     sprite = Def.GetUISpriteFromMultiObjectAnim(animConfigs[0].animFile, m_Anim, false, "");
-                   // Debug.LogWarning(m_Anim + " ---ICON---" + sprite);
+                   // Debug.Log(m_Anim + " ---ICON---" + sprite);
                 }
                 if(cg is TemporalTear)
                 {
@@ -62,11 +62,11 @@ namespace ShowDestinationPOIFixMod
                 //}
                 //测试:
                 //sprite = cg.GetUISprite();
-                //Debug.LogWarning("-----GetUISprite>:   " + sprite);
+                //Debug.Log("-----GetUISprite>:   " + sprite);
 
                 //sprite = Assets.GetSprite("space_race");
                 ////Assets.GetAnim();
-                //Debug.LogWarning("-----space_race>:   "+sprite);
+                //Debug.Log("-----space_race>:   "+sprite);
                 return false;
             }
             return true;

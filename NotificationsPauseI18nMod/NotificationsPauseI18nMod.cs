@@ -52,7 +52,7 @@ namespace NotificationsPauseI18nMod
                 var cyleString0 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle());
                 var cyleString1 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle()+1);
 
-               // Debug.LogWarning("---->>>>>>>>>" + keyString+" == "+ cyleString+">>>");
+               // Debug.Log("---->>>>>>>>>" + keyString+" == "+ cyleString+">>>");
                 if (keyString == cyleStringN|| keyString==cyleString0|| keyString==cyleString1)
                     return;
               
@@ -125,7 +125,7 @@ namespace NotificationsPauseI18nMod
                 catch (System.Exception ex)
                 {
                     File.Move(InitConfig.ModConfigJsonName, InitConfig.ModConfigJsonName+""+(int)UnityEngine.Time.time);
-                    Debug.LogWarning(ex.Message);
+                    Debug.Log(ex.Message);
                 }
             }
         }
@@ -188,7 +188,7 @@ namespace NotificationsPauseI18nMod
                         var tickOff = (File.GetLastWriteTime(InitConfig.ModConfigJsonName).Ticks - lastLoadTick)/ 10000 / 1000 ;
                         if (tickOff > 5)
                         {
-                            Debug.LogWarning($"read::::{InitConfig.ModConfigJsonName}  /{tickPoo}/{tickOff}");
+                            Debug.Log($"read::::{InitConfig.ModConfigJsonName}  /{tickPoo}/{tickOff}");
                             SettingsFile.loadSett();
                         }
                         tryWriteOnceTick =System.DateTime.Now.Ticks;
@@ -212,7 +212,7 @@ namespace NotificationsPauseI18nMod
                 //    //[12:59:37.246] [1] [WARNING] 暂停延迟3秒: 319.1956  319.1956
                 //    //[12:59:37.246][1][WARNING] 暂停延迟3秒: 319.1956  319.1956
                 //    // 时间为秒,UnityEngine.Time.time是游戏开始的时间 
-                //    Debug.LogWarning($"暂停延迟3秒: {Time.time}  {__instance.GameTime} ");
+                //    Debug.Log($"暂停延迟3秒: {Time.time}  {__instance.GameTime} ");
                 //    return;
                 //   // SpeedControlScreen.Instance.TogglePause(false);
                 //};
@@ -233,7 +233,7 @@ namespace NotificationsPauseI18nMod
                             .Field("notifications").GetValue();
                     if (!notifications.Contains(__instance))
                     {
-                       // Debug.LogWarning($"=-------已经消失,不再暂停");
+                       // Debug.Log($"=-------已经消失,不再暂停");
                         return;
                     }
 
@@ -253,7 +253,7 @@ namespace NotificationsPauseI18nMod
                             if (isConkey(settings.PauseOnNotification, __instance.titleText))
                             {
                                 SpeedControlScreen.Instance.Pause();
-                                //  Debug.LogWarning($"暂停:  {__instance.titleText} ");
+                                //  Debug.Log($"暂停:  {__instance.titleText} ");
 
                                 lastPause = Time.time;
                             }
@@ -273,7 +273,7 @@ namespace NotificationsPauseI18nMod
                                 if (Time.time - lastPause > 1.0)
                                 {
                                     SpeedControlScreen.Instance.Pause();
-                                    Debug.LogWarning($"暂停PlanB:  {__instance.titleText} ");
+                                    Debug.Log($"暂停PlanB:  {__instance.titleText} ");
                                     lastPause = Time.time;
                                 }
                             }

@@ -83,7 +83,7 @@ namespace ModTests
     {
         public static void Postfix()
         {
-            Debug.LogWarning("给GC打补丁... Postfix:do gc ");
+            Debug.Log("给GC打补丁... Postfix:do gc ");
             Console.WriteLine("Postfix B"); //字节 Byte
         }
     }
