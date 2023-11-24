@@ -84,8 +84,9 @@ namespace PerformanceLogMod
                 timer.Enabled = true;
                 timer.Elapsed += (object data2, ElapsedEventArgs ss) =>
                 {
-                    MyPerformanceCapture();
-            
+                   
+                        MyPerformanceCapture();
+                    
                 };
                 
             }
@@ -127,10 +128,12 @@ namespace PerformanceLogMod
         {   //Game.PerformanceCapture 从复制
             if (SpeedControlScreen.Instance.IsPaused )
             {
-                SpeedControlScreen.Instance.Unpause(true);
+              //  SpeedControlScreen.Instance.Unpause(true);
             }
-       
-            uint versionNum = 581979U;
+            if (Global.Instance.GetComponent<PerformanceMonitor>().FPS < 3)
+            { return; }
+
+             uint versionNum = 581979U;
          
             string timeText = System.DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss.fff");
             string savefileName = Path.GetFileName(GenericGameSettings.instance.performanceCapture.saveGame);
