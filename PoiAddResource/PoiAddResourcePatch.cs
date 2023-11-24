@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using static HarvestablePOIConfig;
 using static HarvestablePOIConfigurator;
+using static STRINGS.ELEMENTS;
 
 namespace PoiAddResource
 {
@@ -110,11 +111,15 @@ namespace PoiAddResource
                     }
                     if (tt.id == "OilyAsteroidField") //油星
                     {
-                        // 
-                        tt.harvestableElements.Remove(SimHashes.SolidNaphtha);
                         tt.harvestableElements.Remove(SimHashes.SolidCarbonDioxide);//删除CO2.
 
+                        tt.harvestableElements.Remove(SimHashes.CrudeOil); //原油
+                        tt.harvestableElements.Remove(SimHashes.SolidNaphtha);// 石脑油固体
+                        tt.harvestableElements.Remove(SimHashes.SolidCrudeOil); //固体原油.
+
+                        tt.harvestableElements.Add(SimHashes.CrudeOil,7.5f); //原油
                         tt.harvestableElements.Add(SimHashes.SolidNaphtha, 0.5f);//石脑油 固体
+                        tt.harvestableElements.Add(SimHashes.SolidCrudeOil, 2f);// 固体原油
 
                     }
                     if (tt.id == "GildedAsteroidField") //金质小行星
