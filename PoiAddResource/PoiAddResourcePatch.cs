@@ -93,6 +93,12 @@ namespace PoiAddResource
                     //HarvestablePOIConfig.gen
                     if (tt.id == "RadioactiveGasCloud") //辐射星
                     {
+                        tt.harvestableElements.Remove(SimHashes.Katairite);
+                        tt.harvestableElements.Remove(SimHashes.Fossil);
+                        tt.harvestableElements.Remove(SimHashes.GoldAmalgam);
+                        tt.harvestableElements.Remove(SimHashes.Niobium);
+                        tt.harvestableElements.Remove(SimHashes.Resin);
+
                         tt.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
                         tt.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
                        // tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
@@ -104,30 +110,51 @@ namespace PoiAddResource
                     }
                     if (tt.id == "OilyAsteroidField") //油星
                     {
-                    
+
+                        tt.harvestableElements.Remove(SimHashes.Naphtha); 
+              
                         tt.harvestableElements.Add(SimHashes.Naphtha, 0.5f);//石脑油 固体
 
                     }
                     if (tt.id == "GildedAsteroidField") //金质小行星
                     {
+                        tt.harvestableElements.Remove(SimHashes.Mercury);
+                        tt.harvestableElements.Remove(SimHashes.Lead);
+                        tt.harvestableElements.Remove(SimHashes.DepletedUranium);
+
                         tt.harvestableElements.Add(SimHashes.Mercury, 0.5f);//液体汞   solid
                         tt.harvestableElements.Add(SimHashes.Lead, 0.5f);//铅 固体
                         tt.harvestableElements.Add(SimHashes.DepletedUranium, 0.5f);//贫铀 
                     }
                     if (tt.id == "ForestyOreField") //森林小行星
                     {
+                        tt.harvestableElements.Remove(SimHashes.Steel);
+                        tt.harvestableElements.Remove(SimHashes.Phosphorite);
+                        tt.harvestableElements.Remove(SimHashes.Phosphorus);
+
                         tt.harvestableElements.Add(SimHashes.Steel, 0.5f);//钢 固体
                         tt.harvestableElements.Add(SimHashes.Phosphorite, 0.05f);// 磷矿 固体
                         tt.harvestableElements.Add(SimHashes.Phosphorus, 0.1f);// 精炼磷 固体
                     }
                     if (tt.id == "SwampyOreField") //沼泽矿带
                     {
+                        tt.harvestableElements.Remove(SimHashes.Fertilizer);
+                        tt.harvestableElements.Remove(SimHashes.Ethanol);
+                        tt.harvestableElements.Remove(SimHashes.Clay);
+
                         tt.harvestableElements.Add(SimHashes.Fertilizer, 0.5f);//肥料
                         tt.harvestableElements.Add(SimHashes.Ethanol, 0.5f);//乙醇
                         tt.harvestableElements.Add(SimHashes.Clay, 0.5f);//粘土
                     }
                     if (tt.id == "RockyAsteroidField") //岩石小行星
                     {
+                        tt.harvestableElements.Remove(SimHashes.Katairite);
+                        tt.harvestableElements.Remove(SimHashes.Obsidian);
+                        tt.harvestableElements.Remove(SimHashes.Granite);
+                        tt.harvestableElements.Remove(SimHashes.Lime);
+                        tt.harvestableElements.Remove(SimHashes.MaficRock);
+
+                        tt.harvestableElements.Add(SimHashes.Katairite, 0.1f);//深渊晶石
                         tt.harvestableElements.Add(SimHashes.Obsidian, 0.5f);//黑曜石
                         tt.harvestableElements.Add(SimHashes.Granite, 0.5f);// 花岗岩
                         tt.harvestableElements.Add(SimHashes.Lime, 0.01f);// 石灰 
@@ -135,10 +162,12 @@ namespace PoiAddResource
                     }
                     if(tt.id== "HeliumCloud")  //氦气云
                     {
+                        tt.harvestableElements.Remove(SimHashes.Lime);
                         tt.harvestableElements.Add(SimHashes.Lime, 0.5f);// 添加石灰 
                     }
                     if (tt.id == "CarbonAsteroidField")  //碳质小行星
                     {
+                        tt.harvestableElements.Remove(SimHashes.Ceramic);
                         tt.harvestableElements.Add(SimHashes.Ceramic, 0.5f);// 添加陶瓷 
                     }
                     if (tt.id == "IceAsteroidField")  //爆炸的冰巨星
