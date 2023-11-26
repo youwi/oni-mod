@@ -235,16 +235,20 @@ namespace PoiAddResource
                     // REFC.Field("Katairite").GetValue<SimHashes>();
 
                     var kv= configEntityMy[tt.id];//配置文件可以直接读取.
-                    foreach(var nameInt in kv)
+                    if (kv != null)
                     {
-                        var field = REFC.Field(nameInt.Key);
-                        if (field != null)
+                        foreach (var nameInt in kv)
                         {
-                            var hash = field.GetValue<SimHashes>();
-                            tt.harvestableElements.Remove(hash);
-                            tt.harvestableElements.Add(hash, nameInt.Value);//
+                            var field = REFC.Field(nameInt.Key);
+                            if (field != null) //防止乱写配置文件
+                            {
+                                var hash = field.GetValue<SimHashes>();
+                                tt.harvestableElements.Remove(hash);
+                                tt.harvestableElements.Add(hash, nameInt.Value);//
+                            }
                         }
                     }
+                   
                 }
                 
                 // 现在设置为初始代码.
