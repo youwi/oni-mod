@@ -1,7 +1,11 @@
 ﻿using HarmonyLib;
-
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
 using static HarvestablePOIConfigurator;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace PoiAddResource
 {
@@ -73,18 +77,12 @@ namespace PoiAddResource
     [HarmonyPatch(typeof(HarvestablePOIInstanceConfiguration), "GetElementsWithWeights")]
     public class HarvestablePOIInstanceConfigurationConPatch
     {
-        static bool inited = false;
-        public static void Postfix(HarvestablePOIConfigurator __instance)
+        public static void initConfigFile(string configFileName, List<HarvestablePOIType> list)
         {
-            if (!inited)
-            {
-                //HarvestablePOIConfigurator._poiTypes;
-                var list = Traverse.CreateWithType("HarvestablePOIConfigurator")
-                  .Field("_poiTypes")
-                  .GetValue<List<HarvestablePOIType>>();
-                if (list == null)
-                    return;
+            SortedDictionary<string, SortedDictionary<string, float>> configEntity = new SortedDictionary<string, SortedDictionary<string, float>>();
 
+            if (!File.Exists(configFileName))
+            {
                 foreach (var tt in list)
                 {
                     //SimHashes;
@@ -171,7 +169,18 @@ namespace PoiAddResource
                     if (tt.id == "ChlorineCloud")  //氯气云
                     {
                         tt.harvestableElements.Remove(SimHashes.SolidChlorine);
-                        tt.harvestableElements.Add(SimHashes.SolidChlorine, 0.5f);// 添加固态氯 
+                        // tt.harvestableElements.Add(SimHashes.SolidChlorine, 0.5f);// 添加固态氯 
+                    }
+                    if (tt.id == "MetallicAsteroidField") //金属小行星带
+                    {
+
+                    }
+                    if (tt.id == "OrganicMassField") //有机质带
+                    {
+                        tt.harvestableElements.Remove(SimHashes.Fertilizer);
+                        tt.harvestableElements.Remove(SimHashes.Clay);
+                        tt.harvestableElements.Add(SimHashes.Fertilizer, 0.5f);//肥料
+                        tt.harvestableElements.Add(SimHashes.Clay, 0.5f);//粘土
                     }
                     if (tt.id == "CarbonAsteroidField")  //碳质小行星
                     {
@@ -185,10 +194,66 @@ namespace PoiAddResource
                     }
                     //Debug.Log("HarvestablePOIInstanceConfiguration 11111000000"+ tt.id);
                 }
+                foreach (var tt in list)
+                {
+                    SortedDictionary<string, float> keyValuePairs = new SortedDictionary<string, float>();
+
+                    foreach (var kv in tt.harvestableElements)
+                    {
+                        keyValuePairs.Add(kv.Key.ToString(), kv.Value);
+                    }
+                    configEntity.Add(tt.id, keyValuePairs);
+                }
+                Debug.Log("Dump:HarvestablePOIInstanceConfiguration ---->:" + configFileName);
+                File.WriteAllText(configFileName, JsonConvert.SerializeObject(configEntity, Formatting.Indented));
+            }
+        }
+        static bool inited = false;
+        public static void Postfix(HarvestablePOIConfigurator __instance)
+        {
+            if (!inited)
+            {
+                //HarvestablePOIConfigurator._poiTypes;
+                var list = Traverse.CreateWithType("HarvestablePOIConfigurator")
+                  .Field("_poiTypes")
+                  .GetValue<List<HarvestablePOIType>>();
+                if (list == null)
+                    return;
+
+                var configFileName = KMod.Manager.GetDirectory() + "/HarvestablePOIConfig.json";
+
+                if (!File.Exists(configFileName))  
+                    initConfigFile(configFileName,list);
+
+                SortedDictionary<string, SortedDictionary<string, float>> configEntityMy 
+                    = Newtonsoft.Json.JsonConvert.DeserializeObject<SortedDictionary<string, SortedDictionary<string, float>>>(File.ReadAllText(configFileName));
+
+
+                foreach (var tt in list)
+                {
+                    var REFC = Traverse.CreateWithType("SimHashes");
+                    // REFC.Field("Katairite").GetValue<SimHashes>();
+
+                    var kv= configEntityMy[tt.id];//配置文件可以直接读取.
+                    foreach(var nameInt in kv)
+                    {
+                        var field = REFC.Field(nameInt.Key);
+                        if (field != null)
+                        {
+                            var hash = field.GetValue<SimHashes>();
+                            tt.harvestableElements.Remove(hash);
+                            tt.harvestableElements.Add(hash, nameInt.Value);//
+                        }
+                    }
+                }
+                
+                // 现在设置为初始代码.
+               
                 inited = true;
             }
 
-            // Debug.Log("HarvestablePOIInstanceConfiguration ---->");
+
+      
 
         }
     }
