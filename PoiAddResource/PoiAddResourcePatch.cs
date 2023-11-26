@@ -173,7 +173,13 @@ namespace PoiAddResource
                     }
                     if (tt.id == "MetallicAsteroidField") //金属小行星带
                     {
-
+                        tt.harvestableElements.Remove(SimHashes.GoldAmalgam);
+                        tt.harvestableElements.Add(SimHashes.GoldAmalgam, 2f);//
+                    }
+                    if(tt.id== "SaltyAsteroidField")
+                    {
+                        tt.harvestableElements.Remove(SimHashes.Salt);
+                        tt.harvestableElements.Add(SimHashes.Salt, 4f);//
                     }
                     if (tt.id == "OrganicMassField") //有机质带
                     {

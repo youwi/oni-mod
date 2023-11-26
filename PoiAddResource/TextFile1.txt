@@ -14,11 +14,6 @@
 
 FileNotFoundException: Could not find file "D:\Doc\Klei\OxygenNotIncluded\mods\tmm.json"
 
-System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) (at <695d1cc93cca45069c528c15c9fdd749>:0)
- ArgumentException: An item with the same key has already been added. Key: [CarbonAsteroidField, ]
-
-System.Collections.Generic.TreeSet`1[T].AddIfNotPresent (T item) (at <0463b2ef957545c0a51b42f372cd4fbb>:0)
-System.Collections.Generic.SortedSet`1[T].Add (T item) (at <0463b2ef957545c0a51b42f372cd4fbb>:0)
  
 
 Build: U50-583005-SD
