@@ -1,10 +1,7 @@
 ﻿using HarmonyLib;
 
 using System.Collections.Generic;
-
-using static HarvestablePOIConfig;
 using static HarvestablePOIConfigurator;
-using static STRINGS.ELEMENTS;
 
 namespace PoiAddResource
 {
@@ -53,25 +50,25 @@ namespace PoiAddResource
     //        }
     //        return list;
     //    }
-        //public static List<HarvestablePOIParams> Postfix(HarvestablePOIConfig __instance)
-        //{
-        //    List<HarvestablePOIParams> list = __instance;
-        //    list = patchList(list);
-        //    return list;
-        //}
-        //public static void Postfix(HarvestablePOIConfig __instance, ref List<HarvestablePOIParams> __result)
-        //{
+    //public static List<HarvestablePOIParams> Postfix(HarvestablePOIConfig __instance)
+    //{
+    //    List<HarvestablePOIParams> list = __instance;
+    //    list = patchList(list);
+    //    return list;
+    //}
+    //public static void Postfix(HarvestablePOIConfig __instance, ref List<HarvestablePOIParams> __result)
+    //{
 
-        //    // IEnumerable
-        //    // HarvestablePOIConfig.GenerateConfigs()
-        //    if (__result == null)
-        //    {
-        //        return;
-        //    }
-        //    Debug.Log("HarvestablePOIConfig.GenerateConfigs()---->");
-        //    patchList(__result);
-        //}
-   
+    //    // IEnumerable
+    //    // HarvestablePOIConfig.GenerateConfigs()
+    //    if (__result == null)
+    //    {
+    //        return;
+    //    }
+    //    Debug.Log("HarvestablePOIConfig.GenerateConfigs()---->");
+    //    patchList(__result);
+    //}
+
 
     [HarmonyPatch(typeof(HarvestablePOIInstanceConfiguration), "GetElementsWithWeights")]
     public class HarvestablePOIInstanceConfigurationConPatch
@@ -102,12 +99,12 @@ namespace PoiAddResource
 
                         tt.harvestableElements.Add(SimHashes.Katairite, 1f);//深渊晶石
                         tt.harvestableElements.Add(SimHashes.Fossil, 0.5f);//化石
-                       // tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
+                                                                           // tt.harvestableElements.Add(SimHashes.Radium, 0.5f);//镭
                         tt.harvestableElements.Add(SimHashes.GoldAmalgam, 1f);//金汞齐 固体
                         tt.harvestableElements.Add(SimHashes.Niobium, 0.1f);//铌 固体
                         tt.harvestableElements.Add(SimHashes.Resin, 0.1f);//树脂  solid
-                         //  Debug.Log("HarvestablePOIInstanceConfiguration O00000");
-                     
+                                                                          //  Debug.Log("HarvestablePOIInstanceConfiguration O00000");
+
                     }
                     if (tt.id == "OilyAsteroidField") //油星
                     {
@@ -117,7 +114,7 @@ namespace PoiAddResource
                         tt.harvestableElements.Remove(SimHashes.SolidNaphtha);// 石脑油固体
                         tt.harvestableElements.Remove(SimHashes.SolidCrudeOil); //固体原油.
 
-                        tt.harvestableElements.Add(SimHashes.CrudeOil,7.5f); //原油
+                        tt.harvestableElements.Add(SimHashes.CrudeOil, 7.5f); //原油
                         tt.harvestableElements.Add(SimHashes.SolidNaphtha, 0.5f);//石脑油 固体
                         tt.harvestableElements.Add(SimHashes.SolidCrudeOil, 2f);// 固体原油
 
@@ -166,7 +163,7 @@ namespace PoiAddResource
                         tt.harvestableElements.Add(SimHashes.Lime, 0.01f);// 石灰 
                         tt.harvestableElements.Add(SimHashes.MaficRock, 1f);// 镁铁岩
                     }
-                    if(tt.id== "HeliumCloud")  //氦气云
+                    if (tt.id == "HeliumCloud")  //氦气云
                     {
                         tt.harvestableElements.Remove(SimHashes.Lime);
                         tt.harvestableElements.Add(SimHashes.Lime, 0.5f);// 添加石灰 
@@ -190,7 +187,7 @@ namespace PoiAddResource
                 }
                 inited = true;
             }
-          
+
             // Debug.Log("HarvestablePOIInstanceConfiguration ---->");
 
         }

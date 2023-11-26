@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
 using PeterHan.PLib.Options;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Activation;
-using TUNING;
 using static MiniBase.Profiles.MiniBaseBiomeProfiles;
 using static MiniBase.Profiles.MiniBaseCoreBiomeProfiles;
-using static STRINGS.RESEARCH.TECHS;
-using static STRINGS.UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS;
 
 namespace MiniBase
 {
@@ -40,7 +36,7 @@ namespace MiniBase
         [Option("Southern Biome", "The small biome at the bottom of the map\nProtected by a layer of abyssalite", WorldGenCategory)]
         [JsonProperty]
         public CoreType CoreBiome { get; set; }
-        
+
         [Option("Resource Density", "Modifies the density of available resources", WorldGenCategory)]
         [JsonProperty]
         public ResourceModifier ResourceMod { get; set; }
@@ -213,7 +209,7 @@ namespace MiniBase
 
         public float GetResourceModifier()
         {
-            switch(ResourceMod)
+            switch (ResourceMod)
             {
                 case ResourceModifier.Poor: return 0.5f;
                 case ResourceModifier.Normal: return 1.0f;

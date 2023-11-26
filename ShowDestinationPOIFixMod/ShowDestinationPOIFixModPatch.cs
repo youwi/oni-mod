@@ -1,15 +1,10 @@
 ﻿using HarmonyLib;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using static KAnim;
 
 namespace ShowDestinationPOIFixMod
 {
- 
+
     [HarmonyPatch(typeof(ClusterGrid), "GetLocationDescription")]
     public static class ClusterGrid_GetLocationDescription_Patch
     {
@@ -17,7 +12,7 @@ namespace ShowDestinationPOIFixMod
         [HarmonyPrefix]
         public static bool Prefix(ClusterGrid __instance, AxialI location, ref Sprite sprite, ref string label, ref string sublabel)
         {
-          
+
             ClusterGridEntity cg = __instance.GetVisibleEntityOfLayerAtCell(location, EntityLayer.POI);
 
             if (null != cg)
@@ -33,15 +28,15 @@ namespace ShowDestinationPOIFixMod
                 // HarvestablePOIClusterGridEntity.m_Anim
                 // 都有属性 m_Anim
                 List<ClusterGridEntity.AnimConfig> animConfigs = cg.AnimConfigs;
-                if (cg is HarvestablePOIClusterGridEntity|| cg is ArtifactPOIClusterGridEntity) //时空裂口直接得到UI
+                if (cg is HarvestablePOIClusterGridEntity || cg is ArtifactPOIClusterGridEntity) //时空裂口直接得到UI
                 {
                     var m_Anim = Traverse.Create(cg).Field("m_Anim").GetValue().ToString();
                     // sprite = Assets.GetSprite(m_Anim);//获取不到的
                     //Assets.GetAnim("harvestable_space_poi_kanim");
                     sprite = Def.GetUISpriteFromMultiObjectAnim(animConfigs[0].animFile, m_Anim, false, "");
-                   // Debug.Log(m_Anim + " ---ICON---" + sprite);
+                    // Debug.Log(m_Anim + " ---ICON---" + sprite);
                 }
-                if(cg is TemporalTear)
+                if (cg is TemporalTear)
                 {
                     // open_loop, closed_loop 他有多个动画.
                     sprite = Def.GetUISpriteFromMultiObjectAnim(animConfigs[0].animFile, "open_loop", false, "");
@@ -71,14 +66,14 @@ namespace ShowDestinationPOIFixMod
             }
             return true;
         }
-        public static void buildSpriteInMem(Sprite sprite,string name)
+        public static void buildSpriteInMem(Sprite sprite, string name)
         {
             //内存中重置UI
             //sprite.sym
             // Def.GetUISprite( ).first ;
             //sprite.first
             Assets.GetSprite("ui_elements_classes");
-        
+
             //radioactive_asteroid_field
         }
     }

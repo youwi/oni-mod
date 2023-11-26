@@ -22,26 +22,20 @@
 	SOFTWARE.
 */
 
-using System;
+using Database;
 using HarmonyLib;
+using Klei;
+using Klei.AI;
+using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 using ProcGen;
 using ProcGenGame;
-using PeterHan.PLib.Options;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using TUNING;
 using static MiniBase.MiniBaseConfig;
 using static MiniBase.MiniBaseUtils;
-using UnityEngine;
-using System.IO;
-using PeterHan.PLib.Core;
-using System.Collections.Generic;
-using static Klei.ClusterLayoutSave;
-using Klei;
-using YamlDotNet.RepresentationModel;
-using Klei.AI;
-using Database;
-using TUNING;
-using static STRINGS.DUPLICANTS.PERSONALITIES;
-using static STRINGS.NAMEGEN;
 
 namespace MiniBase
 {
@@ -131,7 +125,7 @@ namespace MiniBase
                 Traverse.Create(niobium_minibase_world).Property("worldsize").SetValue(new Vector2I(colonizable_base_size.x + 2 * BORDER_SIZE, colonizable_base_size.y + 2 * BORDER_SIZE + TOP_MARGIN + COLONIZABLE_EXTRA_MARGIN));
 
                 minibase_world.seasons.Clear();
-                
+
                 switch (MiniBaseOptions.Instance.SpaceRads)
                 {
                     case MiniBaseOptions.Intensity.VERY_VERY_LOW: minibase_world.fixedTraits.Add(TUNING.FIXEDTRAITS.COSMICRADIATION.NAME.VERY_VERY_LOW); break;
@@ -209,9 +203,9 @@ namespace MiniBase
                     AddPOI("HarvestableSpacePOI_NiobiumAsteroidField", MiniBaseOptions.Instance.NiobiumPOIDistance);
                 }
 
-                foreach(var poi_placement in minibase_layout.poiPlacements)
+                foreach (var poi_placement in minibase_layout.poiPlacements)
                 {
-                    if(poi_placement.pois.Count == 1 && poi_placement.pois[0] == "HarvestableSpacePOI_GildedAsteroidField")
+                    if (poi_placement.pois.Count == 1 && poi_placement.pois[0] == "HarvestableSpacePOI_GildedAsteroidField")
                     {
                         poi_placement.allowedRings = new MinMaxI(MiniBaseOptions.Instance.GildedAsteroidDistance, MiniBaseOptions.Instance.GildedAsteroidDistance);
                         break;
@@ -247,7 +241,7 @@ namespace MiniBase
         }
 
 
-        
+
         [HarmonyPatch(typeof(ClusterPOIManager), "RegisterTemporalTear")]
         public static class ClusterPOIManager_RegisterTemporalTear_Patch
         {
@@ -396,7 +390,7 @@ namespace MiniBase
             public static bool IsMiniBaseWorld(WorldGen instance)
             {
                 if (instance.Settings.world.filePath == "worlds/MiniBase") return true;
-                if(instance.Settings.world.filePath == "worlds/BabyOilyMoonlet") return true;
+                if (instance.Settings.world.filePath == "worlds/BabyOilyMoonlet") return true;
                 if (instance.Settings.world.filePath == "worlds/BabyMarshyMoonlet") return true;
                 if (instance.Settings.world.filePath == "worlds/BabyNiobiumMoonlet") return true;
                 return false;

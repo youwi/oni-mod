@@ -265,15 +265,15 @@ namespace DeleteAsteroid
             // global::Debug.Log("KInstantiate:gameObject:对象相等：" + gameObject.Equals(gameObject2));
             // global::Debug.Log("Asteroid:gameObject:对象相等：" + Assets.GetPrefab("Asteroid").Equals(Assets.GetPrefab("Asteroid")));
             // GameObject go = Assets.GetPrefab("Asteroid");//好像只初始化一个星球.
-                                                         //好像是空对象.
-                                                         //===> Asteroid(KPrefabID)
-                                                         //===> Asteroid(KSelectable)
-                                                         //===> Asteroid(SaveLoadRoot)
-                                                         //===> Asteroid(WorldInventory)
-                                                         //===> Asteroid(WorldContainer)
-                                                         //===> Asteroid(AsteroidGridEntity)
-                                                         //===> Asteroid(OrbitalMechanics)
-                                                         //===> Asteroid(StateMachineController)
+            //好像是空对象.
+            //===> Asteroid(KPrefabID)
+            //===> Asteroid(KSelectable)
+            //===> Asteroid(SaveLoadRoot)
+            //===> Asteroid(WorldInventory)
+            //===> Asteroid(WorldContainer)
+            //===> Asteroid(AsteroidGridEntity)
+            //===> Asteroid(OrbitalMechanics)
+            //===> Asteroid(StateMachineController)
             //global::Debug.Log("Asteroid GameObject :" + go);
             ////go.RemoveTag("");
             //var s = go.GetComponents<KMonoBehaviour>();

@@ -7,7 +7,7 @@ namespace WarpConduitPartnerMod
     public class DeconstructionReceiverPatch
     {
         //添加可拆 接口器
-      
+
         public static void Postfix(GameObject go)
         {
             go.GetComponent<Deconstructable>().allowDeconstruction = true;
@@ -27,7 +27,7 @@ namespace WarpConduitPartnerMod
 
     //添加2建筑到菜单中
     [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
-   
+
     public class GeneratedBuildingsPatch
     {
         private static void Prefix()

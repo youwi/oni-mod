@@ -1,71 +1,65 @@
-﻿ 
-﻿using System;
+﻿
+using HarmonyLib;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Reflection;
-using Newtonsoft;
-using Newtonsoft.Json;
- 
-using UnityEngine;
-using HarmonyLib;
-using Klei;
-using static NotificationsPauseI18nMod.NotificationsPause;
-using static DeserializeWarnings;
 using System.Timers;
+using UnityEngine;
 
 namespace NotificationsPauseI18nMod
 {
-   
-    public class InitConfig : KMod.UserMod2 
+
+    public class InitConfig : KMod.UserMod2
     {
         static string ModPath = null;
-      //  public static string ModConfigName = "";
+        //  public static string ModConfigName = "";
         public static string ModConfigJsonName = "";
         public override void OnLoad(Harmony harmony)
         {
             ModPath = mod.ContentPath;
             ModConfigJsonName = mod.ContentPath + "/../../NotificationsPauseI18n.json";
-          //  ModConfigName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
+            //  ModConfigName = mod.ContentPath + "/../../NotificationsPauseI18n.yaml";
             base.OnLoad(harmony);
         }
     }
 
     public static class NotificationsPause
     {
-        public static SettingsFile settings=new SettingsFile();
+        public static SettingsFile settings = new SettingsFile();
         public static bool tryReadOnce = true;
         public static long tryWriteOnceTick = 0;//打算每几分钟自动刷新
         public static long lastLoadTick = 0;// 
         public static float lastPause = 0f;
         public class SettingsFile
         {
-            public string fileversion="0.2";
-            public float cooldown=10;
-            public float delaySecond=3;
+            public string fileversion = "0.2";
+            public float cooldown = 10;
+            public float delaySecond = 3;
             public SortedDictionary<string, bool> PauseOnNotification;
-            public  void addKeyAndSave(string keyString)
+            public void addKeyAndSave(string keyString)
             {
                 //  STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE 周期{0}的报告就绪  这个消息需要过滤
                 //  STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE;// 不能写toString()
-                var cyleStringN= String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle()-1);
+                var cyleStringN = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle() - 1);
                 var cyleString0 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle());
-                var cyleString1 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle()+1);
+                var cyleString1 = String.Format(STRINGS.UI.ENDOFDAYREPORT.NOTIFICATION_TITLE, GameClock.Instance.GetCycle() + 1);
 
-               // Debug.Log("---->>>>>>>>>" + keyString+" == "+ cyleString+">>>");
-                if (keyString == cyleStringN|| keyString==cyleString0|| keyString==cyleString1)
+                // Debug.Log("---->>>>>>>>>" + keyString+" == "+ cyleString+">>>");
+                if (keyString == cyleStringN || keyString == cyleString0 || keyString == cyleString1)
                     return;
-              
+
                 PauseOnNotification.Add(keyString, false);
                 File.WriteAllText(InitConfig.ModConfigJsonName,
                     JsonConvert.SerializeObject(settings, Formatting.Indented));
-               // YamlIO.Save(PauseOnNotification, InitConfig.ModConfigName);
+                // YamlIO.Save(PauseOnNotification, InitConfig.ModConfigName);
             }
             public static void loadSett()
             {
-                if(!File.Exists(InitConfig.ModConfigJsonName) 
-                  ) 
-               // if (!File.Exists(InitConfig.ModConfigName))
+                if (!File.Exists(InitConfig.ModConfigJsonName)
+                  )
+                // if (!File.Exists(InitConfig.ModConfigName))
                 {
                     //  翻译表:
                     //  STRINGS.CREATURES.STATUSITEMS.ATTACK.NAME 战斗!
@@ -95,17 +89,17 @@ namespace NotificationsPauseI18nMod
                     //方案B: JSON
                     settings = new SettingsFile();
                     File.Create(InitConfig.ModConfigJsonName).Close();
-                    File.WriteAllText(InitConfig.ModConfigJsonName, 
+                    File.WriteAllText(InitConfig.ModConfigJsonName,
                         JsonConvert.SerializeObject(settings, Formatting.Indented));
                 };
 
                 try
                 {
 
-                    if (  tryReadOnce&& !File.ReadAllText(InitConfig.ModConfigJsonName).Contains("delaySecond"))
+                    if (tryReadOnce && !File.ReadAllText(InitConfig.ModConfigJsonName).Contains("delaySecond"))
                     {
                         //处理旧版本.读取旧的并写入新的.
-                        var kv=JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(
+                        var kv = JsonConvert.DeserializeObject<SortedDictionary<string, bool>>(
                                 File.ReadAllText(InitConfig.ModConfigJsonName));
                         settings = new SettingsFile();
                         settings.PauseOnNotification = kv;
@@ -118,13 +112,13 @@ namespace NotificationsPauseI18nMod
                     //方案B: JSON
                     var config = JsonConvert.DeserializeObject<NotificationsPause.SettingsFile>(
                         File.ReadAllText(InitConfig.ModConfigJsonName));
-                    settings= config;
+                    settings = config;
 
                     lastLoadTick = System.DateTime.Now.Ticks;
                 }
                 catch (System.Exception ex)
                 {
-                    File.Move(InitConfig.ModConfigJsonName, InitConfig.ModConfigJsonName+""+(int)UnityEngine.Time.time);
+                    File.Move(InitConfig.ModConfigJsonName, InitConfig.ModConfigJsonName + "" + (int)UnityEngine.Time.time);
                     Debug.Log(ex.Message);
                 }
             }
@@ -153,7 +147,7 @@ namespace NotificationsPauseI18nMod
                 {
                     sr.Close();
                     sr.Dispose();
-                    Debug.Log("Critical Notification Pauser: Error reading Json :"+e.Message);
+                    Debug.Log("Critical Notification Pauser: Error reading Json :" + e.Message);
                 }
                 sr.Close();
                 sr.Dispose();
@@ -161,44 +155,44 @@ namespace NotificationsPauseI18nMod
 
             public static bool isConkey(SortedDictionary<string, bool> kv, string searchKey)
             {
-                if(kv.ContainsKey(searchKey))
+                if (kv.ContainsKey(searchKey))
                 {
                     return kv[searchKey];
                 }
-                foreach(var key in kv.Keys)
+                foreach (var key in kv.Keys)
                 {
-                    if(key.Contains(searchKey))
+                    if (key.Contains(searchKey))
                     {
                         return kv[key];
                     }
                 }
                 return false;
             }
-            public static void Postfix( Notification __instance)
+            public static void Postfix(Notification __instance)
             {
-              
+
 
                 if (tryReadOnce == false) //第二次
                 {
                     // System.DateTime.now  /10000/1000 秒
-                    var tickPoo = (System.DateTime.Now.Ticks - tryWriteOnceTick)/ 10000 / 1000 ;
-                     
-                    if (tickPoo  >  5) //1秒刷新一次
+                    var tickPoo = (System.DateTime.Now.Ticks - tryWriteOnceTick) / 10000 / 1000;
+
+                    if (tickPoo > 5) //1秒刷新一次
                     {
-                        var tickOff = (File.GetLastWriteTime(InitConfig.ModConfigJsonName).Ticks - lastLoadTick)/ 10000 / 1000 ;
+                        var tickOff = (File.GetLastWriteTime(InitConfig.ModConfigJsonName).Ticks - lastLoadTick) / 10000 / 1000;
                         if (tickOff > 5)
                         {
                             Debug.Log($"read::::{InitConfig.ModConfigJsonName}  /{tickPoo}/{tickOff}");
                             SettingsFile.loadSett();
                         }
-                        tryWriteOnceTick =System.DateTime.Now.Ticks;
+                        tryWriteOnceTick = System.DateTime.Now.Ticks;
                     }
                 }
                 else
                 {
                     SettingsFile.loadSett();
                     tryReadOnce = false;
-                    tryWriteOnceTick = System.DateTime.Now.Ticks    ;
+                    tryWriteOnceTick = System.DateTime.Now.Ticks;
                 }
 
                 if (!settings.PauseOnNotification.ContainsKey(__instance.titleText))
@@ -218,13 +212,13 @@ namespace NotificationsPauseI18nMod
                 //};
 
                 //方案2: 设置一个定时器:
-                var st = new System.Timers.Timer(settings.delaySecond*1000); //延迟
+                var st = new System.Timers.Timer(settings.delaySecond * 1000); //延迟
                 st.AutoReset = false;
                 st.Enabled = true;
                 st.Elapsed += (object data2, ElapsedEventArgs ss) =>
                 {
 
-                   if (__instance.IsNullOrDestroyed())
+                    if (__instance.IsNullOrDestroyed())
                         return;//防消息没了再暂停.
                     //if(NotificationManager.Instance.Re)
                     //     NotificationManager.Instance.RemoveNotification(this);
@@ -233,18 +227,18 @@ namespace NotificationsPauseI18nMod
                             .Field("notifications").GetValue();
                     if (!notifications.Contains(__instance))
                     {
-                       // Debug.Log($"=-------已经消失,不再暂停");
+                        // Debug.Log($"=-------已经消失,不再暂停");
                         return;
                     }
 
-                  //  __instance.
+                    //  __instance.
 
-                   if ((!(SpeedControlScreen.Instance.IsPaused))
-                   && settings != null
-                   && settings.PauseOnNotification != null
-                   && settings.PauseOnNotification.ContainsKey(__instance.titleText)
+                    if ((!(SpeedControlScreen.Instance.IsPaused))
+                    && settings != null
+                    && settings.PauseOnNotification != null
+                    && settings.PauseOnNotification.ContainsKey(__instance.titleText)
 
-                )
+                 )
                     {
                         if (Time.time - lastPause > settings.cooldown)
                         {
@@ -283,7 +277,7 @@ namespace NotificationsPauseI18nMod
                 };
                 st.Start();
 
-               
+
             }
         }
     }

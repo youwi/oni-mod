@@ -50,7 +50,7 @@ namespace MiniBase
                     return bandProfile[i];
             return bandProfile[bandProfile.Length - 1];
         }
-        
+
         public Sim.PhysicsData GetPhysicsData(BandInfo band, float modifier = 1f)
         {
             float temperature = (band.temperature < 0 && defaultTemperature > 0) ? defaultTemperature : band.temperature;

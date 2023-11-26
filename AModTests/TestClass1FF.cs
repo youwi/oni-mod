@@ -2,14 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PerformanceLogMod;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
- 
+
 
 namespace ModTests
 {
@@ -24,7 +19,7 @@ namespace ModTests
         public void lprocTest()
         {
             Process proc = Process.GetCurrentProcess();
-            Console.WriteLine( proc.PrivateMemorySize64/1024/1024);
+            Console.WriteLine(proc.PrivateMemorySize64 / 1024 / 1024);
             Console.WriteLine(proc.WorkingSet64 / 1024 / 1024);
 
             float sss = 1223.455123f;
@@ -41,7 +36,7 @@ namespace ModTests
             GCAllMyPatches.cache.Add("abc");
             GCAllMyPatches.cache.Add("abc");
             GCAllMyPatches.cache.Add("abc");
-            PerformanceCapturePatch. DumpGCCacheList();
+            PerformanceCapturePatch.DumpGCCacheList();
         }
 
         [TestMethod()]
@@ -55,13 +50,13 @@ namespace ModTests
             long length = new System.IO.FileInfo("../../app.config").Length;
             string fileName = "../../test.json";
             Console.WriteLine(length); //字节 Byte
-           // if (length > 10 * 1000 * 1024)
-             
-                string newFileName = fileName + "." + (long)System.DateTime.Now.Ticks / 10000;
-                File.Move(fileName, newFileName);
-                File.Move(newFileName,fileName );
-          
-            File.Copy(fileName, newFileName );
+                                       // if (length > 10 * 1000 * 1024)
+
+            string newFileName = fileName + "." + (long)System.DateTime.Now.Ticks / 10000;
+            File.Move(fileName, newFileName);
+            File.Move(newFileName, fileName);
+
+            File.Copy(fileName, newFileName);
             // System.GC.CancelFullGCNotification();
 
             //var assembly = Assembly.GetExecutingAssembly();
@@ -98,7 +93,7 @@ namespace ModTests
     }
 
     [HarmonyPatch(typeof(OriginalCode), nameof(OriginalCode.GetName))]
-    public  class Patch
+    public class Patch
     {
         public static void Postfix(ref string __result)
         {

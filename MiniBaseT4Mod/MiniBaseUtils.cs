@@ -1,10 +1,8 @@
-﻿using System;
-using UnityEngine;
-using Klei.CustomSettings;
-using static MiniBase.MiniBaseConfig;
-using System.Linq;
+﻿using Klei.CustomSettings;
 using ProcGen;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace MiniBase
 {
@@ -26,7 +24,7 @@ namespace MiniBase
         }
 
         #region Debug
-        
+
         public static void TestNoiseMaps()
         {
             int NumTests = 20;
@@ -50,14 +48,14 @@ namespace MiniBase
                         outliersLow++;
                     else if (f >= 1)
                         outliersHigh++;
-                    int index = Math.Max(0, Math.Min(numBuckets - 1, (int) (f * numBuckets))); // Clamp
+                    int index = Math.Max(0, Math.Min(numBuckets - 1, (int)(f * numBuckets))); // Clamp
                     buckets[index]++;
                     total += f;
                 }
             string div = "\n----------------------------------------------------------------------------------------\n";
             string str = div + $"NoiseMap   average: {total / map.Length}   low: {outliersLow}   high: {outliersHigh}\n";
             for (int i = 0; i < numBuckets; i++)
-                str += (int) Mathf.RoundToInt(buckets[i] * 100f / map.Length) + (i == numBuckets / 2 ? "*" : "") + " ";
+                str += (int)Mathf.RoundToInt(buckets[i] * 100f / map.Length) + (i == numBuckets / 2 ? "*" : "") + " ";
             str += div;
             Log(str);
         }

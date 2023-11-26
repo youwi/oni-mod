@@ -14,7 +14,7 @@ namespace InfiniteResearch
                 return ins.isInfiniteMode;
             return false;
         }
-         
+
         //[HarmonyPatch(typeof(ResearchCenter), "UpdateWorkingState")]
         //static class InfiniteResearch_Patch
         //{
@@ -29,7 +29,7 @@ namespace InfiniteResearch
         //    /*  static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         //    {
         //        int counter = 1;
-                
+
 
         //                      foreach (CodeInstruction i in instructions)
         //                        {
@@ -45,7 +45,7 @@ namespace InfiniteResearch
 
 
         //}
-   
+
 
         [HarmonyPatch(typeof(ResearchCenter), nameof(ResearchCenter.GetPercentComplete))]
         static class ProgressBar_Patch

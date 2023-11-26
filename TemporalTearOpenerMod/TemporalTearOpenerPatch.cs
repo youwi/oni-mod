@@ -135,7 +135,7 @@ namespace TemporalTearOpenerPatch
             // var sm=Traverse.Create(__instance).Field("charging").GetValue() as TemporalTearOpener.ChargingState;
             var hps = __instance.GetComponent<HighEnergyParticleStorage>();
             // GameHashes.OnParticleStorageChanged= - 1837862626
-            hps.Subscribe((int)GameHashes.OnParticleStorageChanged  , new Action<object>((o) =>
+            hps.Subscribe((int)GameHashes.OnParticleStorageChanged, new Action<object>((o) =>
             {
                 if (hps.IsFull()
                     && ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
@@ -222,9 +222,9 @@ namespace TemporalTearOpenerPatch
                 foreach (var field in fieldList)
                 {
                     if (field.DeclaringType == typeof(MeteorShowerEvent)
-                        ||field.Name.EndsWith("Shower")
-                        ||field.Name.StartsWith("MeteorShower")
-                       // ||field.Name== "GassyMooteorEvent" //海牛
+                        || field.Name.EndsWith("Shower")
+                        || field.Name.StartsWith("MeteorShower")
+                        // ||field.Name== "GassyMooteorEvent" //海牛
                         )
                     {
                         nameList.Add(field.Name);
@@ -325,17 +325,17 @@ namespace TemporalTearOpenerPatch
         {  // D方案直接用调用event ID,不用GameplaySeason
             //GameplaySeasonManager
             buildMsList();
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {  //循环3次
                 var ttm = GameplayEventManager.Instance.StartNewEvent(
                      msList[UnityEngine.Random.Range(0, msList.Count)], worldId,
                      new Action<StateMachine.Instance>(callbackInfo));
-                 ttm.StartEvent();
-                 
-               // GameplayEventManager.Instance
-               // ttm.disa
+                ttm.StartEvent();
+
+                // GameplayEventManager.Instance
+                // ttm.disa
             }
-             
+
             return null;
         }
         public static void callbackInfo(StateMachine.Instance st)

@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Delaunay.Geo;
 using HarmonyLib;
 using Klei;
+using MiniBase.Profiles;
 using ProcGen;
 using ProcGenGame;
 using STRINGS;
-using UnityEngine;
-using Delaunay.Geo;
-using VoronoiTree;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TemplateClasses;
+using UnityEngine;
+using VoronoiTree;
 using static MiniBase.MiniBaseConfig;
+using static MiniBase.MiniBaseOptions;
 using static MiniBase.MiniBaseUtils;
 using static ProcGenGame.TemplateSpawning;
-using MiniBase.Profiles;
-using static MiniBase.MiniBaseOptions;
-using static STRINGS.UI.CLUSTERMAP;
-using static WorldGenSpawner;
 
 namespace MiniBase
 {
@@ -87,7 +85,7 @@ namespace MiniBase
                 }
             }
             moonlet.size = new Vector2I(moonlet.world_size.x - 2 * BORDER_SIZE, moonlet.world_size.y - 2 * BORDER_SIZE - TOP_MARGIN - moonlet.extra_top_margin);
-            
+
 
             Log($"World Size : {moonlet.world_size.x},{moonlet.world_size.y}");
             Log($"Base Size : {moonlet.size.x},{moonlet.size.y}");
@@ -168,8 +166,8 @@ namespace MiniBase
                 }
                 Log("Done Looking for starting Terrain Cell");
                 startingBaseTemplate.cells.RemoveAll((c) => (c.location_x == -8) || (c.location_x == 9)); // Trim the starting base area
-                templateSpawnTargets.Add(new TemplateSpawner(startPos,startingBaseTemplate.GetTemplateBounds(), startingBaseTemplate, terrainCell));
-            
+                templateSpawnTargets.Add(new TemplateSpawner(startPos, startingBaseTemplate.GetTemplateBounds(), startingBaseTemplate, terrainCell));
+
                 // Geysers
                 Log("Placing features");
                 int GeyserMinX = Left() + CORNER_SIZE + 2;
@@ -191,10 +189,10 @@ namespace MiniBase
                 foreach (var prefab in geyserPrefabs)
                     prefab.GetComponent<PrimaryElement>().SetElement(SimHashes.Katairite);
 
-                if(moonlet.has_core && moonlet.core_biome == MiniBaseCoreBiomeProfiles.RadioactiveCoreProfile)
+                if (moonlet.has_core && moonlet.core_biome == MiniBaseCoreBiomeProfiles.RadioactiveCoreProfile)
                 {
                     // Add a single viable beeta in the radioactive core
-                    if(bottom_geyser_pos.x > Left() + Width() / 2)
+                    if (bottom_geyser_pos.x > Left() + Width() / 2)
                         bottom_geyser_pos.x -= 12;
                     else
                         bottom_geyser_pos.x += 12;
@@ -203,20 +201,20 @@ namespace MiniBase
                     coverElement = ElementLoader.FindElementByHash(SimHashes.Wolframite);
 
                     cells[Grid.XYToCell(bottom_geyser_pos.x, bottom_geyser_pos.y)].SetValues(coverElement, GetPhysicsData(coverElement, 1f, moonlet.biome.defaultTemperature), ElementLoader.elements);
-                    cells[Grid.XYToCell(bottom_geyser_pos.x+1, bottom_geyser_pos.y)].SetValues(coverElement, GetPhysicsData(coverElement, 1f, moonlet.biome.defaultTemperature), ElementLoader.elements);
+                    cells[Grid.XYToCell(bottom_geyser_pos.x + 1, bottom_geyser_pos.y)].SetValues(coverElement, GetPhysicsData(coverElement, 1f, moonlet.biome.defaultTemperature), ElementLoader.elements);
 
                     coverElement = ElementLoader.FindElementByHash(SimHashes.CarbonDioxide);
-                    for (int xx = 0; xx<2; xx++)
+                    for (int xx = 0; xx < 2; xx++)
                         for (int yy = 0; yy < 3; yy++)
                             cells[Grid.XYToCell(bottom_geyser_pos.x + xx, bottom_geyser_pos.y + 1 + yy)].SetValues(coverElement, GetPhysicsData(coverElement, 1f, moonlet.biome.defaultTemperature), ElementLoader.elements);
 
-                    data.gameSpawnData.pickupables.Add(new Prefab("BeeHive", Prefab.Type.Pickupable, bottom_geyser_pos.x, bottom_geyser_pos.y+1, (SimHashes)0));
+                    data.gameSpawnData.pickupables.Add(new Prefab("BeeHive", Prefab.Type.Pickupable, bottom_geyser_pos.x, bottom_geyser_pos.y + 1, (SimHashes)0));
                 }
 
             }
             else if (is_tree)
             {
-                var startPos = Vec(Left() + (2*Width() / 3) - 1, Bottom() + (Height() / 2) + 2);
+                var startPos = Vec(Left() + (2 * Width() / 3) - 1, Bottom() + (Height() / 2) + 2);
                 TemplateContainer template = TemplateCache.GetTemplate("expansion1::poi/sap_tree_room");
                 TerrainCell terrainCell = data.overworldCells.Find((Predicate<TerrainCell>)(tc => tc.node.tags.Contains(WorldGenTags.AtSurface)));
                 if (terrainCell == null)
@@ -250,7 +248,7 @@ namespace MiniBase
                 coverElement = ElementLoader.FindElementByHash(SimHashes.Obsidian);
                 for (int x = Left(); x <= Right(); x++)
                 {
-                    for(int y = Top(); y >= (Top() - (3*Height()/4)); y--)
+                    for (int y = Top(); y >= (Top() - (3 * Height() / 4)); y--)
                     {
                         if (ElementLoader.elements[cells[Grid.XYToCell(x, y)].elementIdx].id == SimHashes.Niobium)
                         {
@@ -336,16 +334,16 @@ namespace MiniBase
             // Liveable cell
             tags = new TagSet();
 
-            if (moonlet.type ==MoonletData.Moonlet.Start)
+            if (moonlet.type == MoonletData.Moonlet.Start)
             {
                 tags.Add(WorldGenTags.AtStart);
                 tags.Add(WorldGenTags.StartWorld);
                 tags.Add(WorldGenTags.StartLocation);
             }
-           /* else
-            {
-                tags.Add(WorldGenTags.AtSurface);
-            }*/
+            /* else
+             {
+                 tags.Add(WorldGenTags.AtSurface);
+             }*/
             vertices = new List<Vector2>()
             {
                 BottomLeftSE,
@@ -459,7 +457,7 @@ namespace MiniBase
                 {
                     var pos = Vec(x, y);
                     int extra = (int)(noiseMap[pos.x, pos.y] * 8f);
-                    if (moonlet.type != MoonletData.Moonlet.Start && y > Bottom() + extra + (2 * Height() / 3)) continue; 
+                    if (moonlet.type != MoonletData.Moonlet.Start && y > Bottom() + extra + (2 * Height() / 3)) continue;
 
                     if (InLiveableArea(pos))
                         biomeCells.Add(pos);
@@ -519,17 +517,17 @@ namespace MiniBase
                     cells[cell].SetValues(e, ElementLoader.elements);
                 }
             }
-           
+
             Element borderMat = WorldGen.unobtaniumElement;
             for (int x = 0; x < moonlet.world_size.x; x++)
             {
                 // Top border
                 for (int y = Top(false); y < Top(true); y++)
                 {
-                    if(moonlet.type == MoonletData.Moonlet.Start || x < (Left() + CORNER_SIZE) || x > (Right() - CORNER_SIZE))
+                    if (moonlet.type == MoonletData.Moonlet.Start || x < (Left() + CORNER_SIZE) || x > (Right() - CORNER_SIZE))
                         AddBorderCell(x, y, borderMat);
                 }
-                
+
                 // Bottom border
                 for (int y = Bottom(true); y < Bottom(false); y++)
                     AddBorderCell(x, y, borderMat);
@@ -564,7 +562,7 @@ namespace MiniBase
                     AddBorderCell(leftCenterX - i, bottomY, borderMat);
                     AddBorderCell(rightCenterX + i, bottomY, borderMat);
                     AddBorderCell(rightCenterX - i, bottomY, borderMat);
-                   // if (moonlet.is_starting_asteroid)
+                    // if (moonlet.is_starting_asteroid)
                     {
                         AddBorderCell(leftCenterX + i, topY, borderMat);
                         AddBorderCell(leftCenterX - i, topY, borderMat);

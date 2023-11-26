@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Timers;
-using UnityEngine;
 
 namespace ModTests.Tests
 {
@@ -107,12 +106,12 @@ namespace ModTests.Tests
         {
             var configPlanB = YamlIO.LoadFile<SortedDictionary<string, bool>>("../../exp.yaml");
 
-            var tflot=File.GetLastWriteTime("../../exp.yaml").Ticks;
+            var tflot = File.GetLastWriteTime("../../exp.yaml").Ticks;
             ;// 6383574106505 99408
-            var dd =   System.DateTime.Now.Ticks;
-            Console.WriteLine(""+ tflot+ " ");
+            var dd = System.DateTime.Now.Ticks;
+            Console.WriteLine("" + tflot + " ");
             Console.WriteLine("" + dd + " ");
-            Console.WriteLine((dd-tflot)/10000/1000);
+            Console.WriteLine((dd - tflot) / 10000 / 1000);
             // Time.time
         }
 
@@ -192,15 +191,15 @@ namespace ModTests.Tests
         }
 
         [TestMethod()]
-        public   void DDDDDDDDDDDDcellTest()
+        public void DDDDDDDDDDDDcellTest()
         {
             Grid.WidthInCells = 137;
             Grid.HeightInCells = 140;
             Grid.CellSizeInMeters = 50;
-           var pos= Grid.CellToPos(8241, 0, 0, 0);
+            var pos = Grid.CellToPos(8241, 0, 0, 0);
             Console.WriteLine(pos);
         }
 
     }
-   
+
 }

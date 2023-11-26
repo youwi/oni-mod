@@ -20,7 +20,7 @@ namespace SquareLib
                 ImageConversion.LoadImage(texture2D, array);
                 textureAtlas = ScriptableObject.CreateInstance<TextureAtlas>();
                 textureAtlas.texture = texture2D;
-              //  textureAtlas.vertexScale = ModAssets.TileAtlas.vertexScale; //注释这个
+                //  textureAtlas.vertexScale = ModAssets.TileAtlas.vertexScale; //注释这个
                 textureAtlas.items = ModAssets.TileAtlas.items;
             }
             catch

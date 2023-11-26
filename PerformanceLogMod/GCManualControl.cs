@@ -1,7 +1,6 @@
 ﻿using PerformanceLogMod;
 using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.Profiling;
 using UnityEngine.Scripting;
 
@@ -19,7 +18,7 @@ public class GCManualControlS : MonoBehaviour
     void Awake()
     {
         Debug.Log("---> GCManualControlS Awake");
-        
+
     }
 
     void Start()
@@ -36,7 +35,7 @@ public class GCManualControlS : MonoBehaviour
 
     void UpdateMy()
     {
-        if (GarbageCollector.GCMode == GarbageCollector.Mode.Enabled )
+        if (GarbageCollector.GCMode == GarbageCollector.Mode.Enabled)
         {
             return;
         }
@@ -49,12 +48,12 @@ public class GCManualControlS : MonoBehaviour
         if (mem > kHighWater)
         {
             // Trigger immediate GC
+            Debug.Log($"----> GCManualControlS {mem}M {GC.GetTotalMemory(false)}M >4096M 标记回收垃圾 --<");
             System.GC.Collect(0);
-            Debug.Log("----> GCManualControlS 4096M 标记回收垃圾 --<");
         }
         else if (mem >= nextCollectAt)
         {
-            if(Time.time> lastGCTime +60) //最多60秒执行一次.
+            if (Time.time > lastGCTime + 60) //最多60秒执行一次.
             {
                 // Trigger incremental GC
                 UnityEngine.Scripting.GarbageCollector.CollectIncremental();
@@ -63,10 +62,10 @@ public class GCManualControlS : MonoBehaviour
                 lastFrameMemory = mem + kCollectAfterAllocating;
                 lastGCTime = (long)Time.time;
             }
-           
+
         }
         //Debug.Log("----> GCManualControlS ....update .... --<");
         lastFrameMemory = mem;
-       
+
     }
 }
