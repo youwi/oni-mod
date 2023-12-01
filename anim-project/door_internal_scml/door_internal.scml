@@ -780,7 +780,7 @@
                     <object_ref id="0" timeline="6" key="4" z_index="0"/>
                     <object_ref id="1" timeline="5" key="4" z_index="1"/>
                     <object_ref id="2" timeline="4" key="4" z_index="2"/>
-                    <object_ref id="3" timeline="2" key="6" z_index="3"/>
+                    <object_ref id="3" timeline="2" key="7" z_index="3"/>
                     <object_ref id="4" timeline="1" key="4" z_index="4"/>
                 </key>
             </mainline>
@@ -808,13 +808,13 @@
                 <key id="3" time="99" spin="-1">
                     <object folder="0" file="11" x="32.75" y="59.900002" angle="15.761897" scale_x="0.999988" scale_y="0.999988"/>
                 </key>
-                <key id="4" time="132">
-                    <object folder="0" file="11" x="1.75" y="73.900002" angle="358.251754" scale_x="0.999988" scale_y="0.999988"/>
+                <key id="4" time="132" spin="0">
+                    <object folder="0" file="11" y="80" angle="0" scale_y="1"/>
                 </key>
             </timeline>
             <timeline id="2" name="lock_2">
                 <key id="0">
-                    <object folder="0" file="12" x="-13.987666" y="106.828831" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
+                    <object folder="0" file="12" x="0.975518" y="111.863027" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
                 </key>
                 <key id="1">
                     <object folder="0" file="12" y="114" pivot_x="0.513639" pivot_y="0.481897" angle="0"/>
@@ -831,8 +831,11 @@
                 <key id="5" time="99" spin="-1">
                     <object folder="0" file="12" x="11.025" y="81.025002" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
-                <key id="6" time="132">
-                    <object folder="0" file="12" x="-13.975" y="102.025002" angle="357.374785" scale_x="0.999987" scale_y="0.999987"/>
+                <key id="6" time="132" spin="-1">
+                    <object folder="0" file="12" x="-14.963184" y="102.025002" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
+                </key>
+                <key id="7" time="132" spin="0">
+                    <object folder="0" file="12" y="107.059199" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
                 </key>
             </timeline>
             <timeline id="3" name="lock_3">

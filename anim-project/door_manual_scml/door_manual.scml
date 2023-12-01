@@ -13837,7 +13837,7 @@
                     <object_ref id="25" timeline="5" key="3" z_index="25"/>
                     <object_ref id="26" timeline="4" key="3" z_index="26"/>
                     <object_ref id="27" timeline="3" key="3" z_index="27"/>
-                    <object_ref id="28" timeline="2" key="5" z_index="28"/>
+                    <object_ref id="28" timeline="2" key="6" z_index="28"/>
                     <object_ref id="29" timeline="1" key="4" z_index="29"/>
                     <object_ref id="30" timeline="0" key="2" z_index="30"/>
                 </key>
@@ -13869,7 +13869,7 @@
                     <object_ref id="24" timeline="6" key="4" z_index="24"/>
                     <object_ref id="25" timeline="5" key="4" z_index="25"/>
                     <object_ref id="26" timeline="4" key="4" z_index="26"/>
-                    <object_ref id="27" timeline="2" key="7" z_index="27"/>
+                    <object_ref id="27" timeline="2" key="8" z_index="27"/>
                     <object_ref id="28" timeline="1" key="6" z_index="28"/>
                 </key>
             </mainline>
@@ -13897,14 +13897,14 @@
                 <key id="3" time="66" spin="-1">
                     <object folder="0" file="15" x="32.75" y="52.900002" angle="15.761897" scale_x="0.999988" scale_y="0.999988"/>
                 </key>
-                <key id="4" time="99">
+                <key id="4" time="99" spin="-1">
                     <object folder="0" file="15" x="-1.25" y="87.900002" angle="0.085196" scale_x="0.999988" scale_y="0.999988"/>
                 </key>
-                <key id="5" time="132">
-                    <object folder="0" file="15" x="-1.338807" y="85.739035" pivot_x="0.49375" pivot_y="0.508398" angle="1.987458" scale_x="0.999988" scale_y="0.999988"/>
+                <key id="5" time="132" spin="-1">
+                    <object folder="0" file="15" x="-3.241172" y="81.831808" pivot_x="0.49375" pivot_y="0.508398" angle="0" scale_y="1"/>
                 </key>
-                <key id="6" time="132" spin="-1">
-                    <object folder="0" file="15" x="1.963904" y="84.020756" pivot_x="0.536397" pivot_y="0.479776" angle="1.987458" scale_x="0.999988" scale_y="0.999988"/>
+                <key id="6" time="132" spin="0">
+                    <object folder="0" file="15" y="80" pivot_x="0.536397" pivot_y="0.479776" angle="0" scale_y="1"/>
                 </key>
             </timeline>
             <timeline id="2" name="lock_2">
@@ -13924,13 +13924,16 @@
                     <object folder="0" file="16" x="11.025" y="74.025002" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
                 <key id="5" time="99" spin="-1">
-                    <object folder="0" file="16" x="-16.975" y="117.025002" angle="359.096215" scale_x="0.999987" scale_y="0.999987"/>
+                    <object folder="0" file="16" x="-16.975" y="117.025002" pivot_x="0.301705" pivot_y="0.34399" angle="359.096215" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
-                <key id="6" time="132" spin="-1">
-                    <object folder="0" file="16" x="-16.490625" y="107.761671" pivot_x="0.301705" pivot_y="0.34399" angle="358.840577" scale_x="0.950677" scale_y="0.999987"/>
+                <key id="6" time="99">
+                    <object folder="0" file="16" x="1.076389" y="120.769352" pivot_x="0.574286" pivot_y="0.421464" angle="359.096215" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
                 <key id="7" time="132">
-                    <object folder="0" file="16" x="-2.025371" y="114.032678" pivot_x="0.530177" pivot_y="0.470192" angle="358.840577" scale_x="0.950677" scale_y="0.999987"/>
+                    <object folder="0" file="16" x="2.911164" y="107.466164" pivot_x="0.574286" pivot_y="0.421464" angle="0"/>
+                </key>
+                <key id="8" time="132" spin="0">
+                    <object folder="0" file="16" y="110" pivot_x="0.530177" pivot_y="0.470192" angle="0"/>
                 </key>
             </timeline>
             <timeline id="3" name="lock_3">

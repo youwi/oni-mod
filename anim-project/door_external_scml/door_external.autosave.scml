@@ -4042,8 +4042,8 @@
                 <key id="5" time="99" spin="-1">
                     <object folder="0" file="29" x="34.75" y="54.400002" angle="15.761897" scale_x="0.999988" scale_y="0.999988"/>
                 </key>
-                <key id="6" time="132">
-                    <object folder="0" file="29" x="1.75" y="84.400002" angle="358.731998" scale_x="0.999988" scale_y="0.999988"/>
+                <key id="6" time="132" spin="-1">
+                    <object folder="0" file="29" y="80" angle="0" scale_y="1"/>
                 </key>
             </timeline>
             <timeline id="2" name="lock_2">
