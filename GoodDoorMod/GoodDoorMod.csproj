@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net471</TargetFramework>
+    <BaseOutputPath></BaseOutputPath>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)&#xD;&#xA;" />
+    <Exec Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_external_scml/door_external.scml -o resource/anim\assets/door_external_beauty&#xD;&#xA;.\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_manual_scml/door_manual.scml -o  resource/anim\assets/door_manual_beauty&#xD;&#xA;.\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_internal_scml/door_internal.scml -o  resource/anim\assets/door_internal_beauty&#xD;&#xA;&#xD;&#xA;node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)&#xD;&#xA;" />
   </Target>
 
   <ItemGroup>
@@ -16,6 +15,27 @@
 
   <ItemGroup>
     <Content Include="resource\preview.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
