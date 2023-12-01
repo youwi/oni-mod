@@ -4,3 +4,7 @@
 
 ./kanimal-cli.exe scml doors/door_external_0.png  doors/door_external_anim.bytes doors/door_external_build.bytes -o door_external_scml
 
+
+./kanimal-cli.exe kanim door_external_scml/door_external.scml -o door_external_out
+
+copy door_external_out/* ../

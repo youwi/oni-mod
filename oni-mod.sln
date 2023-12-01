@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimitHydroponicMod", "Limit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceLogMod", "PerformanceLogMod\PerformanceLogMod.csproj", "{B229340D-0E73-4493-816F-2065A253C0FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodDoorMod", "GoodDoorMod\GoodDoorMod.csproj", "{115D89D7-1F62-4BA2-8C6A-8998252B70D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,10 @@ Global
 		{B229340D-0E73-4493-816F-2065A253C0FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B229340D-0E73-4493-816F-2065A253C0FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B229340D-0E73-4493-816F-2065A253C0FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115D89D7-1F62-4BA2-8C6A-8998252B70D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115D89D7-1F62-4BA2-8C6A-8998252B70D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115D89D7-1F62-4BA2-8C6A-8998252B70D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115D89D7-1F62-4BA2-8C6A-8998252B70D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

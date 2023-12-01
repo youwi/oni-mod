@@ -69,18 +69,9 @@
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj">
-      <Project>{084191cf-9a65-448d-ade8-9ad89593cae5}</Project>
-      <Name>VacuumSpaceMod</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>node ../../../auto_version.mjs
-mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
-copy /y $(TargetPath)  $(ONI_MOD_LOCAL)\$(ProjectName)\
-copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
-xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\</PostBuildEvent>
+    <PostBuildEvent>node ../../../AfterBuild.mjs $(TargetPath)  $(ProjectName)
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

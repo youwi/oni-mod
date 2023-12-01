@@ -62,6 +62,11 @@ PoissonDisk 不规则圆区?
 
 设置环境 :ONI_MOD_LOCAL   文档\Klei\OxygenNotIncluded\mods\local
 ```
+node ../../../AfterBuild.mjs $(TargetPath)  $(ProjectName)
+
+```
+
+``` 这是vs脚本,现在改成了nodejs脚本.
 node ../../../auto_version.mjs
 mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
 copy /y $(TargetPath)  $(ONI_MOD_LOCAL)\$(ProjectName)\
