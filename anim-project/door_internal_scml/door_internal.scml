@@ -832,10 +832,10 @@
                     <object folder="0" file="12" x="11.025" y="81.025002" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
                 <key id="6" time="132" spin="-1">
-                    <object folder="0" file="12" x="-14.963184" y="102.025002" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
+                    <object folder="0" file="12" x="-29.963184" y="99.965803" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
                 </key>
                 <key id="7" time="132" spin="0">
-                    <object folder="0" file="12" y="107.059199" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
+                    <object folder="0" file="12" x="-15" y="105" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
                 </key>
             </timeline>
             <timeline id="3" name="lock_3">

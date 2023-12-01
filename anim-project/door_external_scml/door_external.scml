@@ -4044,7 +4044,7 @@
             </timeline>
             <timeline id="2" name="lock_2">
                 <key id="0">
-                    <object folder="0" file="30" x="-0.757969" y="115.089935" pivot_x="0.512526" pivot_y="0.498985" angle="357.397438"/>
+                    <object folder="0" file="30" x="-0.814846" y="114.11038" pivot_x="0.512339" pivot_y="0.480117" angle="357.397438"/>
                 </key>
                 <key id="1">
                     <object folder="0" file="30" x="4" y="110" pivot_x="0.588043" pivot_y="0.405357" angle="357.397438"/>
@@ -4062,10 +4062,10 @@
                     <object folder="0" file="30" x="13.025" y="74.525002" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
                 <key id="6" time="132" spin="-1">
-                    <object folder="0" file="30" x="-17.926679" y="104.941273" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
+                    <object folder="0" file="30" x="-28.901815" y="97.921385" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
                 </key>
                 <key id="7" time="132" spin="-1">
-                    <object folder="0" file="30" x="-4.012526" y="113.001015" pivot_x="0.512526" pivot_y="0.498985" angle="0"/>
+                    <object folder="0" file="30" x="-15" y="105" pivot_x="0.512339" pivot_y="0.480117" angle="0"/>
                 </key>
             </timeline>
             <timeline id="3" name="trim_0">
