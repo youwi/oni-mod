@@ -37,8 +37,8 @@ namespace GoodDoorMod
         }
     }
 
-    [HarmonyPatch("BunkerDoorConfig", "DoPostConfigureComplete")]
-    public class BunkerDoorConfig_DoPostConfigureCompletePatch
+    [HarmonyPatch("DoorConfig", "DoPostConfigureComplete")]
+    public class DoorConfig_DoPostConfigureCompletePatch
     {
 
         public static void Postfix(GameObject go)
