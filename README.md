@@ -83,6 +83,7 @@ https://github.com/skairunner/kanimal-SE
 	动画太麻烦了
 	AssetStudio 批量提取文件
 	得到 TextAsset,Texture2D文件夹
+	SCML编辑器
 ```
 cd TextAsset && rename *.prefab *.bytes 
 kanimal-cli batch-convert -o .

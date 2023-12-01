@@ -20,7 +20,7 @@ namespace ModTests
         [TestMethod()]
         public void haskEnumTest()
         {
-
+            var t=STRINGS.DUPLICANTS.TRAITS.GREENTHUMB.NAME;
             Console.WriteLine( SimHashes.Katairite.ToString());
             var tmp=Traverse.CreateWithType("SimHashes")
                  .Field("Katairite")

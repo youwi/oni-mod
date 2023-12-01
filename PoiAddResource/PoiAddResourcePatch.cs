@@ -79,6 +79,7 @@ namespace PoiAddResource
     {
         public static void initConfigFile(string configFileName, List<HarvestablePOIType> list)
         {
+          
             SortedDictionary<string, SortedDictionary<string, float>> configEntity = new SortedDictionary<string, SortedDictionary<string, float>>();
 
             if (!File.Exists(configFileName))
@@ -210,7 +211,7 @@ namespace PoiAddResource
                     }
                     configEntity.Add(tt.id, keyValuePairs);
                 }
-                Debug.Log("Dump:HarvestablePOIInstanceConfiguration ---->:" + configFileName);
+                Debug.Log(" Dump:HarvestablePOIInstanceConfiguration ---->:" + configFileName);
                 File.WriteAllText(configFileName, JsonConvert.SerializeObject(configEntity, Formatting.Indented));
             }
         }

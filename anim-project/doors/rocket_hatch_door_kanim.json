@@ -1,0 +1,27 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": 6584333728849015533
+  },
+  "m_Name": "rocket_hatch_door_kanim",
+  "animFile": {
+    "m_FileID": 0,
+    "m_PathID": -822114351363598136
+  },
+  "buildFile": {
+    "m_FileID": 0,
+    "m_PathID": 2661152894895062092
+  },
+  "textures": [
+    {
+      "m_FileID": 0,
+      "m_PathID": 4943294818065815972
+    }
+  ],
+  "homedirectory": "Assets/anim/expansion1/buildings/rocket_hatch_door"
+}

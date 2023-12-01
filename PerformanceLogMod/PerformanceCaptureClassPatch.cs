@@ -91,6 +91,9 @@ namespace PerformanceLogMod
             PauseScreen_OnPrefabInit_Patch.gcButton.text = $"Clean Memery ({gcTime:0.0}s {mem2 - mem}M,ALL:{mem3}M GC:{gcMode})";
             PauseScreen.Instance.RefreshButtons();
             clearMessage();
+
+            //翻译测试:
+            Debug.Log("---->" + STRINGS.DUPLICANTS.TRAITS.GREENTHUMB.NAME);
         }
         static int ondoing = 0;
         static System.Timers.Timer timer = null;

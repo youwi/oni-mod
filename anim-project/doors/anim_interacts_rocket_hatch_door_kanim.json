@@ -1,0 +1,22 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": 6584333728849015533
+  },
+  "m_Name": "anim_interacts_rocket_hatch_door_kanim",
+  "animFile": {
+    "m_FileID": 0,
+    "m_PathID": 252170737218957324
+  },
+  "buildFile": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "textures": [],
+  "homedirectory": "Assets/anim/expansion1/human/anim_interacts_rocket_hatch_door"
+}
