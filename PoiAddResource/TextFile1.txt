@@ -14,7 +14,8 @@
 
 FileNotFoundException: Could not find file "D:\Doc\Klei\OxygenNotIncluded\mods\tmm.json"
 
- 
+ NiobiumAsteroidField  这是MiniBase添加的POI
+ ResinAsteroidField
 
 Build: U50-583005-SD
 

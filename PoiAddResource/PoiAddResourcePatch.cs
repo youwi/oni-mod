@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -235,29 +237,41 @@ namespace PoiAddResource
                 SortedDictionary<string, SortedDictionary<string, float>> configEntityMy 
                     = Newtonsoft.Json.JsonConvert.DeserializeObject<SortedDictionary<string, SortedDictionary<string, float>>>(File.ReadAllText(configFileName));
 
-
-                foreach (var tt in list)
+                try
                 {
-                    var REFC = Traverse.CreateWithType("SimHashes");
-                    // REFC.Field("Katairite").GetValue<SimHashes>();
-
-                    var kv= configEntityMy[tt.id];//配置文件可以直接读取.
-                    if (kv != null)
+                    foreach (var oriPoi in list)
                     {
-                        foreach (var nameInt in kv)
+                        var REFC = Traverse.CreateWithType("SimHashes");
+                        // REFC.Field("Katairite").GetValue<SimHashes>();
+                        if(!configEntityMy.ContainsKey(oriPoi.id))
+                        {  // 有的mod会添加POI.
+                            Debug.LogWarning(" ---->>>PoiAddResource: Key not exist:" + oriPoi.id);
+                            continue;
+                        }
+                        var kv = configEntityMy[oriPoi.id];//配置文件可以直接读取.
+                        if (kv != null)
                         {
-                            var field = REFC.Field(nameInt.Key);
-                            if (field != null) //防止乱写配置文件
+                            foreach (var nameInt in kv)
                             {
-                                var hash = field.GetValue<SimHashes>();
-                                tt.harvestableElements.Remove(hash);
-                                tt.harvestableElements.Add(hash, nameInt.Value);//
+                                var field = REFC.Field(nameInt.Key);
+                                if (field != null) //防止乱写配置文件
+                                {
+                                    var hash = field.GetValue<SimHashes>();
+                                    if (oriPoi.harvestableElements.ContainsKey(hash))
+                                        oriPoi.harvestableElements.Remove(hash);
+                                    oriPoi.harvestableElements.Add(hash, nameInt.Value);
+
+                                }
                             }
                         }
+
                     }
-                   
                 }
-                
+                catch (Exception ex)
+                {
+                    Debug.LogWarning("--->HarvestablePOIInstanceConfigurationConPatchA:>>>" + ex.Message);
+                }
+
                 // 现在设置为初始代码.
                
                 inited = true;
@@ -267,7 +281,22 @@ namespace PoiAddResource
       
 
         }
+        public static int GetLineNumber(Exception ex)
+        {
+            var lineNumber = 0;
+            const string lineSearch = ":line ";
+            var index = ex.StackTrace.LastIndexOf(lineSearch);
+            if (index != -1)
+            {
+                var lineNumberText = ex.StackTrace.Substring(index + lineSearch.Length);
+                if (int.TryParse(lineNumberText, out lineNumber))
+                {
+                }
+            }
+            return lineNumber;
+        }
     }
+    
 
 }
 

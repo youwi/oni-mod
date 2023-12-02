@@ -20,6 +20,22 @@ namespace GoodDoorMod
     //    }
     //}
 
+    [HarmonyPatch("ManualPressureDoorConfig", "DoPostConfigureComplete")]
+    public class ManualPressureDoorConfig_DoPostConfigureCompletePatch
+    {
+
+        public static void Postfix(GameObject go)
+        {
+            go.GetComponent<KBatchedAnimController>().AnimFiles = new KAnimFile[]
+            {
+                Assets.GetAnim("door_manual_beauty_kanim")
+            };
+            go.GetComponent<KBatchedAnimController>().initialAnim = "closed";
+            Debug.Log("---->DoPostConfigureComplete: door_manual_beauty_kanim");
+
+        }
+    }
+
     [HarmonyPatch("PressureDoorConfig", "DoPostConfigureComplete")]
     public class PressureDoorConfig_DoPostConfigureCompletePatch
     {
@@ -53,21 +69,6 @@ namespace GoodDoorMod
         }
     }
 
-    [HarmonyPatch("ManualPressureDoorConfig", "DoPostConfigureComplete")]
-    public class ManualPressureDoorConfig_DoPostConfigureCompletePatch
-    {
-
-        public static void Postfix(GameObject go)
-        {
-            go.GetComponent<KBatchedAnimController>().AnimFiles = new KAnimFile[]
-            {
-                Assets.GetAnim("door_manual_beauty_kanim")
-            };
-            go.GetComponent<KBatchedAnimController>().initialAnim = "closed";
-            Debug.Log("---->DoPostConfigureComplete: door_manual_beauty_kanim");
-
-        }
-    }
 }
 
  
