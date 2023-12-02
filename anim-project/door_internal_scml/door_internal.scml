@@ -365,7 +365,7 @@
             </mainline>
             <timeline id="0" name="trim_0">
                 <key id="0" spin="0">
-                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
+                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0" a="0.52414"/>
                 </key>
                 <key id="1" time="33" spin="0">
                     <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
@@ -377,7 +377,7 @@
                     <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
                 </key>
                 <key id="4" time="132" spin="0">
-                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
+                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0" a="0.42759"/>
                 </key>
             </timeline>
             <timeline id="1" name="backwall_fg_0">
@@ -797,7 +797,7 @@
             </timeline>
             <timeline id="1" name="lock_1">
                 <key id="0">
-                    <object folder="0" file="11" y="80" angle="0" scale_y="1"/>
+                    <object folder="0" file="11" y="80" angle="0"/>
                 </key>
                 <key id="1" time="33" spin="0">
                     <object folder="0" file="11" x="32.75" y="59.900002" angle="15.761897" scale_x="0.999988" scale_y="0.999988"/>
@@ -809,18 +809,18 @@
                     <object folder="0" file="11" x="32.75" y="59.900002" angle="15.761897" scale_x="0.999988" scale_y="0.999988"/>
                 </key>
                 <key id="4" time="132" spin="0">
-                    <object folder="0" file="11" y="80" angle="0" scale_y="1"/>
+                    <object folder="0" file="11" y="80" angle="0"/>
                 </key>
             </timeline>
             <timeline id="2" name="lock_2">
                 <key id="0">
-                    <object folder="0" file="12" x="0.975518" y="111.863027" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
+                    <object folder="0" file="12" x="0.975546" y="111.863008" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
                 </key>
                 <key id="1">
                     <object folder="0" file="12" y="114" pivot_x="0.513639" pivot_y="0.481897" angle="0"/>
                 </key>
                 <key id="2" time="33">
-                    <object folder="0" file="12" x="23.338675" y="90.794724" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
+                    <object folder="0" file="12" x="23.338654" y="90.794714" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
                 <key id="3" time="33" spin="0">
                     <object folder="0" file="12" x="11.025" y="81.025002" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
@@ -832,7 +832,7 @@
                     <object folder="0" file="12" x="11.025" y="81.025002" angle="11.285414" scale_x="0.999987" scale_y="0.999987"/>
                 </key>
                 <key id="6" time="132" spin="-1">
-                    <object folder="0" file="12" x="-29.963184" y="99.965803" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
+                    <object folder="0" file="12" x="-29.96319" y="99.965828" pivot_x="0.301705" pivot_y="0.34399" angle="0"/>
                 </key>
                 <key id="7" time="132" spin="0">
                     <object folder="0" file="12" x="-15" y="105" pivot_x="0.52842" pivot_y="0.440801" angle="0"/>
@@ -1105,7 +1105,7 @@
                     <object folder="0" file="12" y="112" pivot_x="0.551068" pivot_y="0.46679" angle="0"/>
                 </key>
                 <key id="1" time="33">
-                    <object folder="0" file="12" x="25.997083" y="89.881803" angle="11.275412" scale_x="0.979914" scale_y="1.039356"/>
+                    <object folder="0" file="12" x="25.997069" y="89.881803" angle="11.275412" scale_x="0.979914" scale_y="1.039356"/>
                 </key>
                 <key id="2" time="33" spin="-1">
                     <object folder="0" file="12" x="11.47865" y="80.219681" angle="11.275412" scale_x="0.979914" scale_y="1.039356"/>

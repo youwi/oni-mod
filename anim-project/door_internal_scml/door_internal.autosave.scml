@@ -365,7 +365,7 @@
             </mainline>
             <timeline id="0" name="trim_0">
                 <key id="0" spin="0">
-                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
+                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0" a="0.52414"/>
                 </key>
                 <key id="1" time="33" spin="0">
                     <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
@@ -377,7 +377,7 @@
                     <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
                 </key>
                 <key id="4" time="132" spin="0">
-                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0"/>
+                    <object folder="0" file="15" x="-1.45" y="-1.125" angle="0" a="0.42759"/>
                 </key>
             </timeline>
             <timeline id="1" name="backwall_fg_0">

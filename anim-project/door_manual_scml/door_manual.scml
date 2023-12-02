@@ -12150,7 +12150,7 @@
             </timeline>
             <timeline id="4" name="wall_piece_fg_0">
                 <key id="0" spin="0">
-                    <object folder="0" file="28" x="-0.95" y="149.25" angle="0"/>
+                    <object folder="0" file="28" x="-0.95" y="149.25" angle="0" a="0.44138"/>
                 </key>
                 <key id="1" time="33" spin="0">
                     <object folder="0" file="28" x="-0.95" y="149.25" angle="0"/>
@@ -12162,7 +12162,7 @@
                     <object folder="0" file="28" x="-0.95" y="149.25" angle="0"/>
                 </key>
                 <key id="4" time="132" spin="0">
-                    <object folder="0" file="28" x="-0.95" y="149.25" angle="0"/>
+                    <object folder="0" file="28" x="-0.95" y="149.25" angle="0" a="0.4"/>
                 </key>
             </timeline>
         </animation>
