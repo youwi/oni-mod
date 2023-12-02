@@ -1,14 +1,15 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DeleteAsteroid")]
+[assembly: AssemblyTitle("SuitCheckpointStorgeMod")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DeleteAsteroid")]
+[assembly: AssemblyProduct("SuitCheckpointStorgeMod")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("10780224-fe59-434e-b8cf-7ff7b4c1b9be")]
+[assembly: Guid("aace7db9-4ca4-4d68-b9a1-70367e498ce9")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
@@ -31,5 +32,5 @@ using System.Runtime.InteropServices;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2023.12.2.1")]
+[assembly: AssemblyVersion("2023.12.2.3")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

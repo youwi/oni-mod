@@ -3,6 +3,7 @@
   <PropertyGroup>
 	  <TargetFramework>net471</TargetFramework>
     <BaseOutputPath></BaseOutputPath>
+    <AssemblyVersion>2023.12.2.1</AssemblyVersion>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
