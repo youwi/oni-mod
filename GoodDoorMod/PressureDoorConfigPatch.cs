@@ -10,17 +10,43 @@ namespace GoodDoorMod
 {
     
 
-    //[HarmonyPatch(typeof(Door), "SetWorldState")]
+    [HarmonyPatch(typeof(Door), "SetWorldState")]
     public class DoorPatch
     {
 
         public static void Postfix(Door __instance)
         {
+            var aim = __instance.GetComponent<KBatchedAnimController>();
 
-            var anim=__instance.GetAnimController();
-            Debug.Log("----->Door.layer: "+anim.fgLayer+ " "+__instance.gameObject.transform.position.z);
-            //anim.SetLayer(1);
-           // anim.
+            if (__instance.doorType == Door.DoorType.ManualPressure || __instance.doorType == Door.DoorType.Pressure)
+            {
+                bool is_door_open = __instance.IsOpen();
+                //var pp=__instance.transform.position;
+
+                //var pos = Grid.PosToXY(__instance.transform.position);
+                //var newLayPos = new Vector3 (pos.X , pos.Y , Grid.GetLayerZ(Grid.SceneLayer.Building) );
+                //var newLayTilePost= new Vector3(pos.X, pos.Y, Grid.GetLayerZ(Grid.SceneLayer.TileMain));
+                if (is_door_open)
+                {
+                    // pp.z = Grid.GetLayerZ(Grid.SceneLayer.Building);
+                    // __instance.transform.position = pp;
+                   // Debug.Log("----->Door.layer: " + anim.fgLayer + " " + pp.z);
+                    aim.SetSceneLayer(Grid.SceneLayer.Building);
+                    //__instance.gameObject.transform.SetPosition(newLayPos);
+                }
+                else
+                {
+                   // Debug.Log("----->Door.layer: " + anim.fgLayer + " " + pp.z);
+                    aim.SetSceneLayer(Grid.SceneLayer.TileMain);
+                   // pp.z = Grid.GetLayerZ(Grid.SceneLayer.TileMain);
+                   // __instance.transform.position = pp;
+                    //__instance.gameObject.transform.SetPosition(newLayTilePost);
+                }
+                //buildingDef.SceneLayer = Grid.SceneLayer.TileMain;
+                //打补丁...
+            }
+            // anim.SetLayer(1);
+            // anim.
             // anim.onLayerChanged(); 
         }
      }
@@ -35,7 +61,7 @@ namespace GoodDoorMod
             //    Assets.GetAnim("door_external_beauty_kanim")
             //};
             __result.AnimFiles[0] = Assets.GetAnim("door_external_beauty_kanim");
-            __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级.
+            //__result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级.
             //__result.TileLayer= ObjectLayer.FoundationTile;
             Debug.Log("---->CreateBuildingDefPatch: door_external_beauty_kanim");
             //obj.TileLayer = ObjectLayer.FoundationTile;
@@ -75,7 +101,7 @@ namespace GoodDoorMod
         public static void Postfix(BuildingDef __result)
         {
             __result.AnimFiles[0] = Assets.GetAnim("door_manual_beauty_kanim");
-            __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级.
+          //  __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级.
         }
 
         public static void Postfix_BackUp(GameObject go)  // DoPostConfigureComplete
