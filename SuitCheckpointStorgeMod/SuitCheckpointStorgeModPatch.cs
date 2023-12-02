@@ -25,12 +25,14 @@ namespace SuitCheckpointStorgeMod
             Storage storage = BuildingTemplates.CreateDefaultStorage(go, false);
             storage.showInUI = true;
             storage.allowItemRemoval = true;
-            storage.capacityKg = 50f;
+            storage.capacityKg = 5f;
             storage.SetDefaultStoredItemModifiers(Storage.StandardSealedStorage);
+            storage.showCapacityStatusItem = true;
+            storage.showCapacityAsMainStatus = true;
             ManualDeliveryKG manualDeliveryKG = go.AddOrGet<ManualDeliveryKG>();
             manualDeliveryKG.SetStorage(storage);
             manualDeliveryKG.RequestedItemTag = GameTags.AtmoSuit;
-            manualDeliveryKG.capacity = 50f;
+            manualDeliveryKG.capacity = 5f;
             manualDeliveryKG.refillMass = 5f;
             manualDeliveryKG.choreTypeIDHash = Db.Get().ChoreTypes.FetchCritical.IdHash;
             /*
