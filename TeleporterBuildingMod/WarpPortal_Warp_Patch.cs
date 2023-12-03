@@ -7,8 +7,8 @@ namespace TeleporterBuildingMod
     {
         public static bool Prefix(WarpPortal __instance)
         {
-
-            return true;
+            WarpNew(__instance);
+            return false;
         }
         public static void WarpNew(WarpPortal __instance)
         {
@@ -19,11 +19,13 @@ namespace TeleporterBuildingMod
 
             WarpReceiver warpReceiver = null;
             WarpReceiver[] array = UnityEngine.Object.FindObjectsOfType<WarpReceiver>();
-            foreach (WarpReceiver warpReceiver2 in array)
+            var cid= __instance.GetMyWorldId();
+            foreach (WarpReceiver tmp in array)
             {
-                if (warpReceiver2.GetMyWorldId() != __instance.GetMyWorldId())
+                if (tmp.GetMyWorldId() == cid+1)
                 {
-                    warpReceiver = warpReceiver2;
+                    warpReceiver = tmp;
+                    //原理是break; 实际是要找最近一个ID
                     break;
                 }
             }
