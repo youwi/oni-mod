@@ -1,15 +1,12 @@
-﻿
+
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>AModTests</ModTitle>
-	<Description>AModTests</Description>
+	<ModTitle>WarpConduitReceiverMod</ModTitle>
+	<Description>WarpConduitReceiverMod</Description>
     <BaseOutputPath></BaseOutputPath>
     <AssemblyVersion>2023.12.3.32</AssemblyVersion>
     <FileVersion>1.0.0.31</FileVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
-  </ItemGroup>
 
 </Project>
     

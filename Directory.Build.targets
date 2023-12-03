@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
- 
-	
+
+<Target Name="CopyAllFileToDir" AfterTargets="PostBuildEvent" Condition="  '$(ModTitle)' != ''">
+	<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)" />
+</Target>
   <Target Name="SetPlatform" BeforeTargets="CoreCompile">
     <PropertyGroup>
       <PlatformTarget>AnyCPU</PlatformTarget>

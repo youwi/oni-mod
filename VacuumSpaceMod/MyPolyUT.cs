@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VacuumSpaceMod
 {
 
-    public class PolyUT
+    public class MyPolyUT
     {
 
         /// <summary>

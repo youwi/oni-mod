@@ -26,9 +26,9 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
             new Vector2(114.10679626464844f, 198.60479736328125f),
              };
 
-            object value = PolyUT.GetCenterOfGravityPoint(mPoints);
+            object value = MyPolyUT.GetCenterOfGravityPoint(mPoints);
             global::Debug.Log(value);
-            global::Debug.Log(PolyUT.GetMaxY(mPoints));
+            global::Debug.Log(MyPolyUT.GetMaxY(mPoints));
 
         }
         [TestMethod()]

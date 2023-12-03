@@ -14,19 +14,22 @@ function updateAll(){
     <AssemblyVersion>2023.12.3.30</AssemblyVersion>
     <FileVersion>1.0.0.29</FileVersion>
   </PropertyGroup>
-	<Target Name="CopyAllFileToDir" AfterTargets="PostBuildEvent">
-		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)" />
-	</Target>
+
 </Project>
     `
  
     FS.readdirSync(".").forEach(dir => {
         if(FS.lstatSync(dir).isDirectory()) {
-            var filename=dir+"/"+dir+".csproj";
-            if(FS.existsSync(filename)){
-                //var strOrigal=FS.readFileSync(filename);
-                FS.writeFileSync(filename,templateFull.replace("AAAAAAAAA",dir).replace("BBBBBBBBBB",dir))
-            }
+            var assName=dir;
+            var dirsLevelB= FS.readdirSync(dir).forEach(dirb=>{
+                var filename=dir+"/"+dirb;
+                var filenameNew=dir+"/"+dir+".csproj";
+                if(dirb.endsWith("csproj")){
+                  console.log("---"+filename)
+                  FS.writeFileSync(filename,templateFull.replace("AAAAAAAAA",assName).replace("BBBBBBBBBB",assName))
+                  FS.renameSync(filename,filenameNew)
+                }
+            });
         }
       });
 }

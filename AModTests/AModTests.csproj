@@ -1,43 +1,20 @@
 ﻿
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>AModTests</ModTitle>
-	<Description>AModTests</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.36</AssemblyVersion>
-    <FileVersion>1.0.0.35</FileVersion>
+    <AssemblyVersion>2023.12.3.35</AssemblyVersion>
+    <FileVersion>1.0.0.34</FileVersion>
   </PropertyGroup>
-	<Target Name="CopyAllFileToDir" AfterTargets="PostBuildEvent">
-		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)" />
-	</Target>
-	<ItemGroup>
-	  <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\ColdWheatSeedDropMod\ColdWheatSeedDropMod.csproj" />
-	  <ProjectReference Include="..\DeleteAsteroid\DeleteAsteroid.csproj" />
-	  <ProjectReference Include="..\DeleteFreeChoreMod\DeleteFreeChoreMod.csproj" />
-	  <ProjectReference Include="..\DoubleMutateMod\DoubleMutateMod.csproj" />
-	  <ProjectReference Include="..\DropArtifactsMod\DropArtifactsMod.csproj" />
-	  <ProjectReference Include="..\ForceEruption\ForceEruptionMod.csproj" />
-	  <ProjectReference Include="..\ForceMutateButton\ForceMutateMod.csproj" />
-	  <ProjectReference Include="..\ForestTreeMutateMod\ForestTreeMutateMod.csproj" />
-	  <ProjectReference Include="..\GoodDoorMod\GoodDoorMod.csproj" />
-	  <ProjectReference Include="..\InfiniteResearchMod\InfiniteResearchMod.csproj" />
-	  <ProjectReference Include="..\InfoOverlayFixMod\InfoOverlayFixMod.csproj" />
-	  <ProjectReference Include="..\LimitHydroponicMod\LimitHydroponicMod.csproj" />
-	  <ProjectReference Include="..\MeteorChangeMod\MeteorChangeMod.csproj" />
-	  <ProjectReference Include="..\MiniBaseT4Mod\MiniBaseT4.csproj" />
-	  <ProjectReference Include="..\NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj" />
-	  <ProjectReference Include="..\PerformanceLogMod\PerformanceLogMod.csproj" />
-	  <ProjectReference Include="..\PoiAddResource\PoiAddResourceMod.csproj" />
-	  <ProjectReference Include="..\ShowDestinationPOIFixMod\ShowDestinationPOIFixMod.csproj" />
-	  <ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj" />
-	  <ProjectReference Include="..\SuitCheckpointStorgeMod\SuitCheckpointStorgeMod.csproj" />
-	  <ProjectReference Include="..\TeleporterBuildingMod\TeleporterBuildingMod.csproj" />
-	  <ProjectReference Include="..\TemporalTearOpenerMod\TemporalTearOpenerMod.csproj" />
-	  <ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj" />
-	  <ProjectReference Include="..\WarpConduitReceiverMod\WarpConduitPartnerMod.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DoubleMutateMod\DoubleMutateMod.csproj" />
+    <ProjectReference Include="..\NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj" />
+    <ProjectReference Include="..\PerformanceLogMod\PerformanceLogMod.csproj" />
+    <ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj" />
+    <ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj" />
+  </ItemGroup>
+
 </Project>
     

@@ -1,8 +1,8 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>PerformanceLogMod</ModTitle>
-	<Description>PerformanceLogMod</Description>
+	<ModTitle>PoiAddResource</ModTitle>
+	<Description>PoiAddResource</Description>
     <BaseOutputPath></BaseOutputPath>
     <AssemblyVersion>2023.12.3.31</AssemblyVersion>
     <FileVersion>1.0.0.30</FileVersion>
