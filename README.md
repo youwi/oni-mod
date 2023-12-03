@@ -1,27 +1,19 @@
 # TODO
-	* 打算做一个修改地图大小的mod.
-	* 并不删除垃圾.
-	* 
-	* 1. 修改地图大小 直接修改
+ 
+	* 1. 修改地图大小 直接修改. 打算做一个修改地图大小的mod. 并不删除垃圾. 失败了.
 	*         world.WidthInCells HeightInCells 会崩溃
-	* 2. 修改流星 。召唤流星
+	* 2. [完成] 修改流星 。召唤流星
 	*        已经有mod了: Meteor Migration /Modify Difficulty Settings
 	*        mod 好像没用...
-	*		 完成
-	*       
-	* 3. 修改技能点和存档  不太需要
-	*   
+	* 3. 修改技能点和存档 不太需要
 	* 4. 修改小行星位置  
-	* 
 	*    修改光照强度和辐射强度. 不太需要
-	*
-	* 5. 强制种子变异. //已经完成 
-	* 6. 添加变异小麦也能变异.  //完成
-	* 7. 泉水强制喷发 //完成部分，不完美
-	* 8  给小行星带添加 深渊晶石,等需要的东西. //完成
+	* 5. [完成] 强制种子变异.  
+	* 6. [完成] 添加变异小麦也能变异.   
+	* 7. [完成] 泉水强制喷发 //完成部分，不完美
+	* 8  [完成] 给小行星带添加 深渊晶石,等需要的东西. 
 	*    HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
-	*	 
-	* 9  复制人空闲时不去检查站 // 完成.
+	* 9  [完成] 复制人空闲时不去检查站  
 	*	 已经有同样的mod:Idle Suits
 	*	 https://steamcommunity.com/sharedfiles/filedetails/?id=1748408711&searchtext=idle
 	*     参考:
@@ -30,10 +22,10 @@
 	*	 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
 	*	 SuitLocker.ReturnSuitWorkable.CreateChore()
 	*
-	* 10 性能分析工具,减少卡顿
-	*	对GC进行拦截.
-	*	G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
-	* 崩溃修复:TeleporterBuild 传送器可建造
+	* 10 [完成] 性能分析工具,减少卡顿
+	*	 对GC进行拦截.
+	*	 G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
+	* 11 [完成] 崩溃修复:TeleporterBuild 传送器可建造
 # 反射和JSON笔记:
 	Traverse.Create 
     Newtonsoft.Json.JsonConvert.DeserializeObject<SettingsFile>(string);
