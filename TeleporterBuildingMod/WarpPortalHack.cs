@@ -85,8 +85,6 @@ namespace TeleporterBuildingMod
             component.SetElement(SimHashes.Copper, true);
             component.Temperature = 294.15f;
             //go.get
-
-
             // TemporalTearOpener.Def def;= go.AddOrGetDef<WarpPortal.Def>();
 
         }

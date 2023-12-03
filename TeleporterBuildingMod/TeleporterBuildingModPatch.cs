@@ -34,6 +34,37 @@ namespace TeleporterBuildingMod
         }*/
     //可拆可建
 
+    [HarmonyPatch(typeof(Deconstructable), "OnCompleteWork")]
+    public class Deconstructable_OnCompleteWork_Patch
+    {
+        //预判出错的代码.  
+        //手动拆除.
+
+        public static bool Prefix(Deconstructable __instance) {
+            Building component = __instance.GetComponent<Building>();
+            // WarpReceiverConfig ,它不是building 所以会出错.
+            if (__instance.GetComponent<WarpPortal>() != null)
+            {
+                __instance.gameObject.DeleteObject();
+                Debug.LogWarning("------>WarpPortal:OnCompleteWork:..");
+               // SimCellOccupier component2 = __instance.GetComponent<SimCellOccupier>();
+                return false;
+            };
+            if (__instance.GetComponent<WarpReceiver>() != null)
+            {
+                __instance.gameObject.DeleteObject();
+                Debug.LogWarning("------>WarpReceiver:OnCompleteWork:..");
+                return false;
+            };
+            // GameHashes
+            if (component == null)
+            {
+                return false;
+            }
+            return true; 
+        }
+    }
+
     [HarmonyPatch(typeof(WarpPortal), "Discover")]
     public class WarpPortal_GetTargetWorldID_Patch
     {
@@ -113,6 +144,7 @@ namespace TeleporterBuildingMod
             var obj = inst.GetComponent<Deconstructable>();
             if (obj != null)
                 obj.allowDeconstruction = true;
+             
         }
     }
 
