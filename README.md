@@ -60,27 +60,23 @@
 	https://github.com/fgc0109/OxygenNotIncludedDev/tree/master
 	Space exposure  STATUSITEMS.SPACE  太空暴露  MISC.STATUSITEMS.SPACE
 # 动画 脚本:
-	https://github.com/skairunner/kanimal-SE
-	动画太麻烦了
-	AssetStudio 批量提取文件
-	得到 TextAsset,Texture2D文件夹
-	SCML编辑器
-```
+	kanimal-SE: 脚本工具:https://github.com/skairunner/kanimal-SE
+	AssetStudio: 批量提取文件,得到 TextAsset,Texture2D文件夹
+	Sprite Pro: SCML编辑器
+    批量转换成SCML:
 	cd TextAsset && rename *.prefab *.bytes 
 	kanimal-cli batch-convert -o .
- 
+	手动转换成SCML:
 	kanimal-cli.exe scml warp_portal_sender_0.png warp_portal_sender_anim.bytes warp_portal_sender_build.bytes -o warp_portal_sender_scml
 	kanimal-cli.exe scml warp_portal_receiver_0.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes -o warp_portal_receiver_scml
 	kanimal-cli.exe scml temporal_tear_opener_0.png temporal_tear_opener_anim.bytes temporal_tear_opener_build.bytes -o temporal_tear_opener_scml
-
+	SCML转换成anim
 	kanimal-cli.exe kanim warp_portal_sender/warp_portal_sender.scml -o warp_portal_sender_new
-	copy warp_portal_receiver.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes ../
-
 	kanimal-cli.exe kanim warp_portal_receiver/warp_portal_receiver.scml -o warp_portal_receiver_new
 	kanimal-cli.exe kanim bomb_build_s/bomb_build_s.scml -o bomb_build_s_new
 	kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
-```
-# 动画说明:建筑的动画必须有以下分组:
+ 
+# SCML动画说明:建筑的动画必须有以下分组:
 	printing_pre
 	printing_loop
 	printing_pst
