@@ -145,7 +145,13 @@ namespace TeleporterBuildingMod
             var obj = inst.GetComponent<Deconstructable>();
             if (obj != null)
                 obj.allowDeconstruction = true;
-
+            var warpPortal= inst.GetComponent<WarpPortal>();
+            // 直接设置为发现.绕过Discover
+            if(warpPortal != null) {
+                Traverse.Create(warpPortal).Field("discovered").SetValue(true);
+            }
+            
+            //warpPortal.discovered = true;
         }
     }
 
