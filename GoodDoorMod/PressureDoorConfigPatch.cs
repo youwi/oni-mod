@@ -1,14 +1,9 @@
 ﻿using HarmonyLib;
-using System.Collections.Generic;
-using TUNING;
 using UnityEngine;
-using static KAnim;
-using static STRINGS.BUILDINGS.PREFABS;
-using static STRINGS.UI.CLUSTERMAP;
 
 namespace GoodDoorMod
 {
-    
+
 
     [HarmonyPatch(typeof(Door), "SetWorldState")]
     public class DoorPatch
@@ -30,16 +25,16 @@ namespace GoodDoorMod
                 {
                     // pp.z = Grid.GetLayerZ(Grid.SceneLayer.Building);
                     // __instance.transform.position = pp;
-                   // Debug.Log("----->Door.layer: " + anim.fgLayer + " " + pp.z);
+                    // Debug.Log("----->Door.layer: " + anim.fgLayer + " " + pp.z);
                     aim.SetSceneLayer(Grid.SceneLayer.Building);
                     //__instance.gameObject.transform.SetPosition(newLayPos);
                 }
                 else
                 {
-                   // Debug.Log("----->Door.layer: " + anim.fgLayer + " " + pp.z);
+                    // Debug.Log("----->Door.layer: " + anim.fgLayer + " " + pp.z);
                     aim.SetSceneLayer(Grid.SceneLayer.TileMain);
-                   // pp.z = Grid.GetLayerZ(Grid.SceneLayer.TileMain);
-                   // __instance.transform.position = pp;
+                    // pp.z = Grid.GetLayerZ(Grid.SceneLayer.TileMain);
+                    // __instance.transform.position = pp;
                     //__instance.gameObject.transform.SetPosition(newLayTilePost);
                 }
                 //buildingDef.SceneLayer = Grid.SceneLayer.TileMain;
@@ -49,7 +44,7 @@ namespace GoodDoorMod
             // anim.
             // anim.onLayerChanged(); 
         }
-     }
+    }
     [HarmonyPatch(typeof(PressureDoorConfig), "CreateBuildingDef")]
     public class PressureDoorConfigPatch
     {
@@ -70,7 +65,7 @@ namespace GoodDoorMod
             //obj.SceneLayer = Grid.SceneLayer.TileMain;
             //obj.ForegroundLayer = Grid.SceneLayer.InteriorWall;
             //obj.LogicInputPorts = DoorConfig.CreateSingleInputPortList(new CellOffset(0, 0));
- 
+
         }
 
         public static void Postfix_backup(GameObject go)
@@ -94,31 +89,31 @@ namespace GoodDoorMod
             Debug.Log("---->DoPostConfigureComplete: door_external_beauty_kanim " + aim.GetLayer() + " " + aim.GetLayering());
         }
     }
-    
+
     [HarmonyPatch(typeof(ManualPressureDoorConfig), "CreateBuildingDef")] //DoPostConfigureComplete
     public class ManualPressureDoorConfig_DoPostConfigureCompletePatch
     {
         public static void Postfix(BuildingDef __result)
         {
             __result.AnimFiles[0] = Assets.GetAnim("door_manual_beauty_kanim");
-          //  __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级.
+            //  __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级.
         }
 
         public static void Postfix_BackUp(GameObject go)  // DoPostConfigureComplete
         {
             var aim = go.GetComponent<KBatchedAnimController>();
-           aim.AnimFiles = new KAnimFile[]
-            {
+            aim.AnimFiles = new KAnimFile[]
+             {
                 Assets.GetAnim("door_manual_beauty_kanim")
-            };
-           aim.initialAnim = "closed";
-           
-          //  go.transform.
-            Debug.Log("---->DoPostConfigureComplete: door_manual_beauty_kanim " +aim.GetLayer());
+             };
+            aim.initialAnim = "closed";
+
+            //  go.transform.
+            Debug.Log("---->DoPostConfigureComplete: door_manual_beauty_kanim " + aim.GetLayer());
         }
     }
 
-  
+
 
     [HarmonyPatch(typeof(DoorConfig), "CreateBuildingDef")] //DoPostConfigureComplete
     public class DoorConfig_DoPostConfigureCompletePatch
@@ -126,7 +121,7 @@ namespace GoodDoorMod
         public static void Postfix(BuildingDef __result)
         {
             __result.AnimFiles[0] = Assets.GetAnim("door_internal_beauty_kanim");
-           // __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级. 
+            // __result.SceneLayer = Grid.SceneLayer.BuildingFront;//这个影响层级. 
         }
 
         public static void Postfix_backup(GameObject go)
@@ -138,10 +133,9 @@ namespace GoodDoorMod
                 Assets.GetAnim("door_internal_beauty_kanim")
             };
             aim.initialAnim = "closed";
-            Debug.Log("---->DoPostConfigureComplete: door_internal_beauty_kanim "+ aim.GetLayer());
+            Debug.Log("---->DoPostConfigureComplete: door_internal_beauty_kanim " + aim.GetLayer());
         }
     }
 
 }
 
- 

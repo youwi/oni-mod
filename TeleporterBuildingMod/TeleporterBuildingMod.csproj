@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <Compile Include="WarpPortal_Warp_Patch.cs" />
     <Compile Include="WarpReceiverHack.cs" />
     <Compile Include="WarpPortalHack.cs" />
     <Compile Include="TeleporterBuildingModPatch.cs" />

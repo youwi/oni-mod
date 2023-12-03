@@ -2,10 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Xml;
 using static HarvestablePOIConfigurator;
 using Formatting = Newtonsoft.Json.Formatting;
 
@@ -81,7 +78,7 @@ namespace PoiAddResource
     {
         public static void initConfigFile(string configFileName, List<HarvestablePOIType> list)
         {
-          
+
             SortedDictionary<string, SortedDictionary<string, float>> configEntity = new SortedDictionary<string, SortedDictionary<string, float>>();
 
             if (!File.Exists(configFileName))
@@ -179,7 +176,7 @@ namespace PoiAddResource
                         tt.harvestableElements.Remove(SimHashes.GoldAmalgam);
                         tt.harvestableElements.Add(SimHashes.GoldAmalgam, 2f);//
                     }
-                    if(tt.id== "SaltyAsteroidField")
+                    if (tt.id == "SaltyAsteroidField")
                     {
                         tt.harvestableElements.Remove(SimHashes.Salt);
                         tt.harvestableElements.Add(SimHashes.Salt, 4f);//
@@ -231,10 +228,10 @@ namespace PoiAddResource
 
                 var configFileName = KMod.Manager.GetDirectory() + "/HarvestablePOIConfig.json";
 
-                if (!File.Exists(configFileName))  
-                    initConfigFile(configFileName,list);
+                if (!File.Exists(configFileName))
+                    initConfigFile(configFileName, list);
 
-                SortedDictionary<string, SortedDictionary<string, float>> configEntityMy 
+                SortedDictionary<string, SortedDictionary<string, float>> configEntityMy
                     = Newtonsoft.Json.JsonConvert.DeserializeObject<SortedDictionary<string, SortedDictionary<string, float>>>(File.ReadAllText(configFileName));
 
                 try
@@ -243,7 +240,7 @@ namespace PoiAddResource
                     {
                         var REFC = Traverse.CreateWithType("SimHashes");
                         // REFC.Field("Katairite").GetValue<SimHashes>();
-                        if(!configEntityMy.ContainsKey(oriPoi.id))
+                        if (!configEntityMy.ContainsKey(oriPoi.id))
                         {  // 有的mod会添加POI.
                             Debug.LogWarning(" ---->>>PoiAddResource: Key not exist:" + oriPoi.id);
                             continue;
@@ -273,12 +270,12 @@ namespace PoiAddResource
                 }
 
                 // 现在设置为初始代码.
-               
+
                 inited = true;
             }
 
 
-      
+
 
         }
         public static int GetLineNumber(Exception ex)
@@ -296,7 +293,7 @@ namespace PoiAddResource
             return lineNumber;
         }
     }
-    
+
 
 }
 

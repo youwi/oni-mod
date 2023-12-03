@@ -40,14 +40,15 @@ namespace TeleporterBuildingMod
         //预判出错的代码.  
         //手动拆除.
 
-        public static bool Prefix(Deconstructable __instance) {
+        public static bool Prefix(Deconstructable __instance)
+        {
             Building component = __instance.GetComponent<Building>();
             // WarpReceiverConfig ,它不是building 所以会出错.
             if (__instance.GetComponent<WarpPortal>() != null)
             {
                 __instance.gameObject.DeleteObject();
                 Debug.LogWarning("------>WarpPortal:OnCompleteWork:..");
-               // SimCellOccupier component2 = __instance.GetComponent<SimCellOccupier>();
+                // SimCellOccupier component2 = __instance.GetComponent<SimCellOccupier>();
                 return false;
             };
             if (__instance.GetComponent<WarpReceiver>() != null)
@@ -61,7 +62,7 @@ namespace TeleporterBuildingMod
             {
                 return false;
             }
-            return true; 
+            return true;
         }
     }
 
@@ -107,10 +108,10 @@ namespace TeleporterBuildingMod
         //这里有报错bug,所以打了个补丁.
         public static bool Prefix(ConduitSecondaryOutput __instance)
         {
-             
+
             if (__instance.portInfo == null)
             {
-                __instance.portInfo=new ConduitPortInfo(ConduitType.Solid,new CellOffset(0,0));
+                __instance.portInfo = new ConduitPortInfo(ConduitType.Solid, new CellOffset(0, 0));
                 return true;
             }
             return false;
@@ -144,13 +145,13 @@ namespace TeleporterBuildingMod
             var obj = inst.GetComponent<Deconstructable>();
             if (obj != null)
                 obj.allowDeconstruction = true;
-             
+
         }
     }
 
     //添加建筑到菜单中
     [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
-  
+
     public class GeneratedBuildingsPatch
     {
         private static void Prefix()

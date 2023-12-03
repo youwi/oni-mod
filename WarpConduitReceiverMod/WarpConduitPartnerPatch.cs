@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WarpConduitPartnerMod
 {
-  
+
     [HarmonyPatch(typeof(WarpConduitReceiverConfig), "DoPostConfigureComplete")]
     public class DeconstructionReceiverPatch
     {

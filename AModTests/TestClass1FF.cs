@@ -1,9 +1,7 @@
 ﻿using HarmonyLib;
-using KMod;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PerformanceLogMod;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -20,16 +18,16 @@ namespace ModTests
         [TestMethod()]
         public void haskEnumTest()
         {
-            var t=STRINGS.DUPLICANTS.TRAITS.GREENTHUMB.NAME;
-            Console.WriteLine( SimHashes.Katairite.ToString());
-            var tmp=Traverse.CreateWithType("SimHashes")
+            var t = STRINGS.DUPLICANTS.TRAITS.GREENTHUMB.NAME;
+            Console.WriteLine(SimHashes.Katairite.ToString());
+            var tmp = Traverse.CreateWithType("SimHashes")
                  .Field("Katairite")
                  .GetValue<SimHashes>();
 
-           ;
-          //  Console.WriteLine(KMod.Manager.GetDirectory());
+            ;
+            //  Console.WriteLine(KMod.Manager.GetDirectory());
             Console.WriteLine(SimHashes.Katairite.ToString());
-            File.WriteAllText("test标杆e.json","SDFSDFSDFSD");
+            File.WriteAllText("test标杆e.json", "SDFSDFSDFSD");
         }
 
         [TestMethod()]
