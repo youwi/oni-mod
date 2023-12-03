@@ -26,12 +26,8 @@ Worker.CompleteWork () (at <e519dd73da9048a8894ab7f073f3ead7>:0)
 (wrapper dynamic-method) Game.Game.Update_Patch2(Game)
 
 No receiver world found for warp portal sender
-
-  at UnityEngine.Debug.LogError (System.Object message) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
-  at Debug.LogError (System.Object obj) [0x00000] in <1e2b7d5db95c4d6b84eabb7ca0270927>:0 
+ 
   at WarpPortal.GetTargetWorldID () [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
   at WarpPortal.WarpPortal.Discover_Patch1 (WarpPortal ) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
-  at WarpPortal.OnObjectSelected (System.Object data) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
-  at EventSystem.Trigger (UnityEngine.GameObject go, System.Int32 hash, System.Object data) [0x00000] in <1e2b7d5db95c4d6b84eabb7ca0270927>:0 
- 
+   
 Build: U50-583750-SD

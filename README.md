@@ -1,3 +1,4 @@
+# TODO
 	* 打算做一个修改地图大小的mod.
 	* 并不删除垃圾.
 	* 
@@ -18,94 +19,76 @@
 	* 6. 添加变异小麦也能变异.  //完成
 	* 7. 泉水强制喷发 //完成部分，不完美
 	* 8  给小行星带添加 深渊晶石,等需要的东西. //完成
-	     HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
-		 
+	*    HarvestableSpacePOI_ChlorineCloud  	 HarvestablePOIConfig.GenerateConfigs()
+	*	 
 	* 9  复制人空闲时不去检查站 // 完成.
-		 已经有同样的mod:Idle Suits
-		 https://steamcommunity.com/sharedfiles/filedetails/?id=1748408711&searchtext=idle
-	     参考:
-		 IdleChore
-		 ReturnSuitWorkable
-		 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
-		 SuitLocker.ReturnSuitWorkable.CreateChore()
-
+	*	 已经有同样的mod:Idle Suits
+	*	 https://steamcommunity.com/sharedfiles/filedetails/?id=1748408711&searchtext=idle
+	*     参考:
+	*	 IdleChore
+	*	 ReturnSuitWorkable
+	*	 this.idleChore.Cancel("ReturnSuitWorkable.CancelChore");
+	*	 SuitLocker.ReturnSuitWorkable.CreateChore()
+	*
 	* 10 性能分析工具,减少卡顿
-		对GC进行拦截.
-		G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
-# 反射:
-	Traverse.Create
+	*	对GC进行拦截.
+	*	G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
+	* 崩溃修复:TeleporterBuild 传送器可建造
+# 反射和JSON笔记:
+	Traverse.Create 
+    Newtonsoft.Json.JsonConvert.DeserializeObject<SettingsFile>(string);
+	StampTool 图章工具
+	TemplateCache  Yaml处理工具
 # 性能
 	内置性能表,可能有点用
 	Global.Instance.GetComponent<PerformanceMonitor>().FPS;
 	string fileName = Path.GetFileName(GenericGameSettings.instance.performanceCapture.saveGame);
-# oni-mod 备注
-说明:
-	StampTool 图章工具
-	TemplateCache  Yaml处理工具
-
 # 其它
-
 	https://code.ecool.dev/ONI-Mods/BuildableNaturalTile
 	https://bbs.3dmgame.com/thread-6226681-1-2.html
 	https://robophred.github.io/oni-duplicity/#/raw  存档修改器.
 	https://steamcommunity.com/sharedfiles/filedetails/?id=1883272681
 
-## TODO
-	真空变太空
-	粒子满了以自动发陨石
+# 设置环境变量
+	ONI_MOD_LOCAL   文档\Klei\OxygenNotIncluded\mods\local
 
-## 翻译
-PoissonDisk 不规则圆区?
-	CreateChore
+# VS脚本
+	node ../../../AfterBuild.mjs $(TargetPath)  $(ProjectName)
 
-# 脚本
-
-设置环境 :ONI_MOD_LOCAL   文档\Klei\OxygenNotIncluded\mods\local
-```
-node ../../../AfterBuild.mjs $(TargetPath)  $(ProjectName)
-
-```
-
-``` 这是vs脚本,现在改成了nodejs脚本.
-node ../../../auto_version.mjs
-mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
-copy /y $(TargetPath)  $(ONI_MOD_LOCAL)\$(ProjectName)\
-copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
-xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
-```
-TeleporterBuild 传送器可建造
-
-资源查看器 (解包)
-assetstudio https://github.com/Perfare/AssetStudio/releases
-https://www.bilibili.com/read/cv4265805/
-解包软件:
-https://github.com/fgc0109/OxygenNotIncludedDev/tree/master
-
-Space exposure  STATUSITEMS.SPACE  太空暴露  MISC.STATUSITEMS.SPACE
-
-# 动画
-https://github.com/skairunner/kanimal-SE
+# VS脚本(旧的).
+	node ../../../auto_version.mjs
+	mkdir  $(ONI_MOD_LOCAL)\$(ProjectName)
+	copy /y $(TargetPath)  $(ONI_MOD_LOCAL)\$(ProjectName)\
+	copy /y $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+	xcopy /y /s $(ProjectDir)resource\*  $(ONI_MOD_LOCAL)\$(ProjectName)\
+# 资源查看器 (解包)
+	assetstudio https://github.com/Perfare/AssetStudio/releases
+	https://www.bilibili.com/read/cv4265805/
+	解包软件:
+	https://github.com/fgc0109/OxygenNotIncludedDev/tree/master
+	Space exposure  STATUSITEMS.SPACE  太空暴露  MISC.STATUSITEMS.SPACE
+# 动画 脚本:
+	https://github.com/skairunner/kanimal-SE
 	动画太麻烦了
 	AssetStudio 批量提取文件
 	得到 TextAsset,Texture2D文件夹
 	SCML编辑器
 ```
-cd TextAsset && rename *.prefab *.bytes 
-kanimal-cli batch-convert -o .
+	cd TextAsset && rename *.prefab *.bytes 
+	kanimal-cli batch-convert -o .
  
-kanimal-cli.exe scml warp_portal_sender_0.png warp_portal_sender_anim.bytes warp_portal_sender_build.bytes -o warp_portal_sender_scml
-kanimal-cli.exe scml warp_portal_receiver_0.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes -o warp_portal_receiver_scml
-kanimal-cli.exe scml temporal_tear_opener_0.png temporal_tear_opener_anim.bytes temporal_tear_opener_build.bytes -o temporal_tear_opener_scml
+	kanimal-cli.exe scml warp_portal_sender_0.png warp_portal_sender_anim.bytes warp_portal_sender_build.bytes -o warp_portal_sender_scml
+	kanimal-cli.exe scml warp_portal_receiver_0.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes -o warp_portal_receiver_scml
+	kanimal-cli.exe scml temporal_tear_opener_0.png temporal_tear_opener_anim.bytes temporal_tear_opener_build.bytes -o temporal_tear_opener_scml
 
-kanimal-cli.exe kanim warp_portal_sender/warp_portal_sender.scml -o warp_portal_sender_new
-copy warp_portal_receiver.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes ../
+	kanimal-cli.exe kanim warp_portal_sender/warp_portal_sender.scml -o warp_portal_sender_new
+	copy warp_portal_receiver.png warp_portal_receiver_anim.bytes warp_portal_receiver_build.bytes ../
 
-kanimal-cli.exe kanim warp_portal_receiver/warp_portal_receiver.scml -o warp_portal_receiver_new
-kanimal-cli.exe kanim bomb_build_s/bomb_build_s.scml -o bomb_build_s_new
-kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
-
-
+	kanimal-cli.exe kanim warp_portal_receiver/warp_portal_receiver.scml -o warp_portal_receiver_new
+	kanimal-cli.exe kanim bomb_build_s/bomb_build_s.scml -o bomb_build_s_new
+	kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 ```
+# 动画说明:建筑的动画必须有以下分组:
 	printing_pre
 	printing_loop
 	printing_pst
@@ -113,38 +96,32 @@ kanimal-cli.exe kanim bomb_build/bomb_build.scml -o bomb_build_new
 	off
 	place
 	ui
-# json:
-     Newtonsoft.Json.JsonConvert.DeserializeObject<SettingsFile>(string);
 
-## ClipperLib 
-使用这个库切割多边形,太麻烦不搞了.
-自带: Voronoi lib可以使用.
-PoissonDisk  6边形 圆盘
+# Steam语法说明
+	https://steamcommunity.com/comment/Recommendation/formattinghelp
+# ClipperLib 
+	使用这个库切割多边形,太麻烦不搞了.
+	自带: Voronoi lib可以使用.
+	PoissonDisk  6边形 圆盘
 
-通知消息
-Notification
-logical armsidescreen
-
- 
- 
-clusterCategory:1/2 小行星风格群 (经典和眼冒金星)
- 
- AssignClusterLocations 创建星图位置
-
- DistanceFromTag 这种Tag标记好像在生成世界时按结构走 在标记的相对位置生成
-
- WorldBorderThickness 生成的中子物质边界大小
-
- TemplateRules: Tag命令和list对应. 
- 位置坐标
-
- StartMedium
- StartFar
- NearEdge
- NearSurface
- NearDepths 
- AtStart   在开始区生成
- AtSurface 在上层生成
- AtDepths  在下层生成
- AtEdge   在边缘生成(是区块边还是地图边不清)
+# 其它笔记:
+	通知消息
+	Notification
+	logical armsidescreen
+	clusterCategory:1/2 小行星风格群 (经典和眼冒金星)
+	 AssignClusterLocations 创建星图位置
+	 DistanceFromTag 这种Tag标记好像在生成世界时按结构走 在标记的相对位置生成
+	 WorldBorderThickness 生成的中子物质边界大小
+	 TemplateRules: Tag命令和list对应. 
+	 位置坐标
+	 PoissonDisk 不规则圆区?
+	 StartMedium
+	 StartFar
+	 NearEdge
+	 NearSurface
+	 NearDepths 
+	 AtStart   在开始区生成
+	 AtSurface 在上层生成
+	 AtDepths  在下层生成
+	 AtEdge   在边缘生成(是区块边还是地图边不清)
  

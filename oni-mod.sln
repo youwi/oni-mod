@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 		AfterBuild.bat = AfterBuild.bat
 		auto_version.mjs = auto_version.mjs
 		README.md = README.md
+		Steam语法.txt = Steam语法.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleporterBuildingMod", "TeleporterBuildingMod\TeleporterBuildingMod.csproj", "{A72C572F-0112-4B93-9D38-5F1AD37A8678}"
