@@ -1,8 +1,8 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>Info Overlay fix</ModTitle>
-	<Description>Info Overlay fix</Description>
+	<ModTitle>Force Mutate 手动添加变异</ModTitle>
+	<Description>ForceMutateMod.Force Mutate 手动添加变异</Description>
     <BaseOutputPath></BaseOutputPath>
     <AssemblyVersion>2023.12.3.37</AssemblyVersion>
     <FileVersion>1.0.0.36</FileVersion>

@@ -16,7 +16,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="WriteModInfoFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true' ">
+  <Target Name="WriteModInfoFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true'  ">
     <PropertyGroup>
       <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
       <ModInfoFileContent>

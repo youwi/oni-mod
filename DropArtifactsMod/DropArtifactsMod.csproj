@@ -1,11 +1,11 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>DropArtifactsMod</ModTitle>
-	<Description>DropArtifactsMod</Description>
+	<ModTitle>Rocket Drop Artifacts火箭自动释放工艺品</ModTitle>
+	<Description>Rocket Drop Artifacts火箭自动释放工艺品.DropArtifactsMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.31</AssemblyVersion>
-    <FileVersion>1.0.0.30</FileVersion>
+    <AssemblyVersion>2023.12.3.37</AssemblyVersion>
+    <FileVersion>1.0.0.36</FileVersion>
   </PropertyGroup>
 
 </Project>

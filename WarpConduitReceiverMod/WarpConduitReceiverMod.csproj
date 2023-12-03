@@ -1,11 +1,11 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>WarpConduitReceiverMod</ModTitle>
-	<Description>WarpConduitReceiverMod</Description>
+	<ModTitle>Teleporter Buildable 传送器可建造</ModTitle>
+	<Description>Teleporter Buildable 传送器可建造.WarpConduitReceiverMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.32</AssemblyVersion>
-    <FileVersion>1.0.0.31</FileVersion>
+    <AssemblyVersion>2023.12.3.38</AssemblyVersion>
+    <FileVersion>1.0.0.37</FileVersion>
   </PropertyGroup>
 
 </Project>

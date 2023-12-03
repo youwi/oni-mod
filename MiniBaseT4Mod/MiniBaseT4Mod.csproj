@@ -1,12 +1,15 @@
-
+﻿
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>MiniBaseT4Mod</ModTitle>
-	<Description>MiniBaseT4Mod</Description>
+	<ModTitle>MiniBase SpaceOut fix T4</ModTitle>
+	<Description>MiniBase SpaceOut fix T4</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.31</AssemblyVersion>
-    <FileVersion>1.0.0.30</FileVersion>
+    <AssemblyVersion>2023.12.3.44</AssemblyVersion>
+    <FileVersion>1.0.0.43</FileVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="OldUtils.cs.txt" />
+  </ItemGroup>
 
 </Project>
     

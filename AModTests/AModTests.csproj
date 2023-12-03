@@ -1,9 +1,10 @@
 ﻿
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+	  <DistributeMod>false</DistributeMod>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.35</AssemblyVersion>
-    <FileVersion>1.0.0.34</FileVersion>
+    <AssemblyVersion>2023.12.3.41</AssemblyVersion>
+    <FileVersion>1.0.0.40</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
@@ -17,4 +18,5 @@
   </ItemGroup>
 
 </Project>
+
     

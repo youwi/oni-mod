@@ -1,11 +1,11 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>PerformanceLogMod</ModTitle>
-	<Description>PerformanceLogMod</Description>
+	<ModTitle>Clean Memory  Performance Capture 性能监视</ModTitle>
+	<Description>Clean Memory  Performance Capture 性能监视</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.31</AssemblyVersion>
-    <FileVersion>1.0.0.30</FileVersion>
+    <AssemblyVersion>2023.12.3.37</AssemblyVersion>
+    <FileVersion>1.0.0.36</FileVersion>
   </PropertyGroup>
 
 </Project>

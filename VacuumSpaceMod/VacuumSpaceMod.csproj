@@ -1,11 +1,11 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>VacuumSpaceMod</ModTitle>
-	<Description>VacuumSpaceMod</Description>
+	<ModTitle>Bomb Space 真空炸弹</ModTitle>
+	<Description>Bomb Space 真空炸弹.VacuumSpaceMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.33</AssemblyVersion>
-    <FileVersion>1.0.0.32</FileVersion>
+    <AssemblyVersion>2023.12.3.39</AssemblyVersion>
+    <FileVersion>1.0.0.38</FileVersion>
   </PropertyGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>Info Overlay fix</ModTitle>
-	<Description>Info Overlay fix</Description>
+	<ModTitle>Asteroid add Rare Resources.小行星增加稀有资源</ModTitle>
+	<Description>Asteroid add Rare Resources.小行星增加稀有资源.PoiAddResource</Description>
     <BaseOutputPath></BaseOutputPath>
     <AssemblyVersion>2023.12.3.37</AssemblyVersion>
     <FileVersion>1.0.0.36</FileVersion>

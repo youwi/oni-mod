@@ -1,11 +1,11 @@
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<ModTitle>ForestTreeMutateMod</ModTitle>
-	<Description>ForestTreeMutateMod</Description>
+	<ModTitle>Forest Tree(Arbor Tree) Mutation 乔木变异</ModTitle>
+	<Description>Forest Tree(Arbor Tree) Mutation 乔木变异.ForestTreeMutateMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.31</AssemblyVersion>
-    <FileVersion>1.0.0.30</FileVersion>
+    <AssemblyVersion>2023.12.3.36</AssemblyVersion>
+    <FileVersion>1.0.0.35</FileVersion>
   </PropertyGroup>
 
 </Project>
