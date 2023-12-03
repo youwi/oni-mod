@@ -62,6 +62,7 @@
 # 动画 脚本:
 	kanimal-SE: 脚本工具:https://github.com/skairunner/kanimal-SE
 	AssetStudio: 批量提取文件,得到 TextAsset,Texture2D文件夹
+	kanim-explorer:https://github.com/romen-h/kanim-explorer
 	Sprite Pro: SCML编辑器
     批量转换成SCML:
 	cd TextAsset && rename *.prefab *.bytes 

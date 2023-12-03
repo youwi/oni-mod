@@ -12,7 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{3C551837-7C5F-4FEF-8F73-193191B7C84B}"
 	ProjectSection(SolutionItems) = preProject
 		AfterBuild.bat = AfterBuild.bat
-		auto_version.mjs = auto_version.mjs
+		AfterBuild.mjs = AfterBuild.mjs
 		README.md = README.md
 		Steam语法.txt = Steam语法.txt
 	EndProjectSection
@@ -60,6 +60,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodDoorMod", "GoodDoorMod\GoodDoorMod.csproj", "{115D89D7-1F62-4BA2-8C6A-8998252B70D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuitCheckpointStorgeMod", "SuitCheckpointStorgeMod\SuitCheckpointStorgeMod.csproj", "{AACE7DB9-4CA4-4D68-B9A1-70367E498CE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C21F138-7D3D-43FE-92E5-1FA8498E4EDC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

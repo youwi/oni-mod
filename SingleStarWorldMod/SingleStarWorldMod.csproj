@@ -40,9 +40,6 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -238,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="resource\dlc-BACKUP\expansion1\worldgen\clusters\DlcExample.yaml" />
     <None Include="resource\dlc-BACKUP\expansion1\worldgen\worlds\DlcExample.yaml" />
     <None Include="resource\mod.yaml" />

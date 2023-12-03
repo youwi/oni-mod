@@ -32,8 +32,8 @@ namespace MeteorChangeMod
         {
             public static bool Prefix(KButtonEvent e)
             {
-                if (__CustomSettingsController.Instance != null && __CustomSettingsController.Instance.CurrentlyActive)
-                    return false;
+                //if (__CustomSettingsController.Instance != null && __CustomSettingsController.Instance.CurrentlyActive)
+                //    return false;
                 return true;
             }
         }

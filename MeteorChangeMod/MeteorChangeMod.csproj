@@ -79,9 +79,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="__ChangeXXMenuScreen.cs" />
+    <None Include="__ChangeXXMenuScreen.cs.bak" />
     <Compile Include="RenameBase.cs" />
-    <Compile Include="__CustomSettingsController.cs" />
+    <None Include="__CustomSettingsController.cs.bak" />
     <Compile Include="MeteorChangePatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
