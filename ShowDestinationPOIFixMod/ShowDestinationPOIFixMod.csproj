@@ -1,62 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B78141C-58D9-496A-8E64-450EB18F4094}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ShowDestinationPOIFixMod</RootNamespace>
-    <AssemblyName>ShowDestinationPOIFixMod</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ShowDestinationPOIFixModPatch.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="resource\preview.jpg" />
-    <Content Include="TextFile1.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resource\mod.yaml" />
-    <None Include="resource\mod_info.yaml" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PostBuildEvent>node ../../../AfterBuild.mjs $(TargetPath)  $(ProjectName)</PostBuildEvent>
+	<ModTitle>ShowDestinationPOIFixMod</ModTitle>
+	<Description>ShowDestinationPOIFixMod</Description>
+    <BaseOutputPath></BaseOutputPath>
+    <AssemblyVersion>2023.12.3.35</AssemblyVersion>
+    <FileVersion>1.0.0.34</FileVersion>
   </PropertyGroup>
+	<Target Name="CopyAllFileToDir" AfterTargets="PostBuildEvent">
+		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)" />
+	</Target>
 </Project>
+    

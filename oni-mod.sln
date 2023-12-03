@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemporalTearOpenerMod", "TemporalTearOpenerMod\TemporalTearOpenerMod.csproj", "{EA8165CA-1E72-47EA-AF47-9D692494B37C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemporalTearOpenerMod", "TemporalTearOpenerMod\TemporalTearOpenerMod.csproj", "{EA8165CA-1E72-47EA-AF47-9D692494B37C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForestTreeMutateMod", "ForestTreeMutateMod\ForestTreeMutateMod.csproj", "{40349E3D-44E2-4004-8D85-627F2CCD3EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForestTreeMutateMod", "ForestTreeMutateMod\ForestTreeMutateMod.csproj", "{40349E3D-44E2-4004-8D85-627F2CCD3EAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarpConduitPartnerMod", "WarpConduitReceiverMod\WarpConduitPartnerMod.csproj", "{1F98832C-AB28-4CE7-AF9D-05C8D5365190}"
 EndProject
@@ -13,57 +13,83 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 	ProjectSection(SolutionItems) = preProject
 		AfterBuild.bat = AfterBuild.bat
 		AfterBuild.mjs = AfterBuild.mjs
-		Directory.Build.props = Directory.Build.props
 		build.backup.xml = build.backup.xml
+		Directory.Build.props = Directory.Build.props
 		Directory.Build.props.default = Directory.Build.props.default
 		Directory.Build.targets = Directory.Build.targets
 		README.md = README.md
 		Steam语法.txt = Steam语法.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleporterBuildingMod", "TeleporterBuildingMod\TeleporterBuildingMod.csproj", "{A72C572F-0112-4B93-9D38-5F1AD37A8678}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeleporterBuildingMod", "TeleporterBuildingMod\TeleporterBuildingMod.csproj", "{A72C572F-0112-4B93-9D38-5F1AD37A8678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacuumSpaceMod", "VacuumSpaceMod\VacuumSpaceMod.csproj", "{084191CF-9A65-448D-ADE8-9AD89593CAE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacuumSpaceMod", "VacuumSpaceMod\VacuumSpaceMod.csproj", "{084191CF-9A65-448D-ADE8-9AD89593CAE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleStarWorldMod", "SingleStarWorldMod\SingleStarWorldMod.csproj", "{B69904B6-0FD5-4AEC-BA34-03E305387E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingleStarWorldMod", "SingleStarWorldMod\SingleStarWorldMod.csproj", "{B69904B6-0FD5-4AEC-BA34-03E305387E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleMutateMod", "DoubleMutateMod\DoubleMutateMod.csproj", "{68646D03-FF3C-4BC0-AF34-F20D0FC98247}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoubleMutateMod", "DoubleMutateMod\DoubleMutateMod.csproj", "{68646D03-FF3C-4BC0-AF34-F20D0FC98247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfiniteResearchMod", "InfiniteResearchMod\InfiniteResearchMod.csproj", "{55ABDAF1-B224-4446-995B-FE26DCEF6E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfiniteResearchMod", "InfiniteResearchMod\InfiniteResearchMod.csproj", "{55ABDAF1-B224-4446-995B-FE26DCEF6E58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropArtifactsMod", "DropArtifactsMod\DropArtifactsMod.csproj", "{6DBF9F5D-E293-4B64-958D-8620183192B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropArtifactsMod", "DropArtifactsMod\DropArtifactsMod.csproj", "{6DBF9F5D-E293-4B64-958D-8620183192B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteAsteroid", "DeleteAsteroid\DeleteAsteroid.csproj", "{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteAsteroid", "DeleteAsteroid\DeleteAsteroid.csproj", "{10780224-FE59-434E-B8CF-7FF7B4C1B9BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForceMutateMod", "ForceMutateButton\ForceMutateMod.csproj", "{7ABA2402-ED8D-443D-A615-E36E66D2D7E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColdWheatSeedDropMod", "ColdWheatSeedDropMod\ColdWheatSeedDropMod.csproj", "{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColdWheatSeedDropMod", "ColdWheatSeedDropMod\ColdWheatSeedDropMod.csproj", "{409643AB-8E49-4D96-A384-BB2FC2C6D8F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteorChangeMod", "MeteorChangeMod\MeteorChangeMod.csproj", "{64BA700D-B959-454D-8DA3-F2BE9761585C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteorChangeMod", "MeteorChangeMod\MeteorChangeMod.csproj", "{64BA700D-B959-454D-8DA3-F2BE9761585C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForceEruptionMod", "ForceEruption\ForceEruptionMod.csproj", "{59779F2E-CCD1-4449-ADAB-A692889EE333}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoiAddResourceMod", "PoiAddResource\PoiAddResourceMod.csproj", "{19038E9F-2DD2-45C8-A01C-450CDEEE2130}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteFreeChoreMod", "DeleteFreeChoreMod\DeleteFreeChoreMod.csproj", "{FD25DCEB-B49D-4AF9-8734-E85AB85E0A21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteFreeChoreMod", "DeleteFreeChoreMod\DeleteFreeChoreMod.csproj", "{FD25DCEB-B49D-4AF9-8734-E85AB85E0A21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowDestinationPOIFixMod", "ShowDestinationPOIFixMod\ShowDestinationPOIFixMod.csproj", "{5B78141C-58D9-496A-8E64-450EB18F4094}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowDestinationPOIFixMod", "ShowDestinationPOIFixMod\ShowDestinationPOIFixMod.csproj", "{5B78141C-58D9-496A-8E64-450EB18F4094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationsPauseI18nMod", "NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj", "{EDF31B01-685F-47CA-B06B-0A4ADD821105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationsPauseI18nMod", "NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj", "{EDF31B01-685F-47CA-B06B-0A4ADD821105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AModTests", "AModTests\AModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AModTests", "AModTests\AModTests.csproj", "{0DEDD116-F90A-4350-8C93-B031C2F41F41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0409EA56-20D1-4362-A226-398AD492232D} = {0409EA56-20D1-4362-A226-398AD492232D}
+		{084191CF-9A65-448D-ADE8-9AD89593CAE5} = {084191CF-9A65-448D-ADE8-9AD89593CAE5}
+		{10780224-FE59-434E-B8CF-7FF7B4C1B9BE} = {10780224-FE59-434E-B8CF-7FF7B4C1B9BE}
+		{1103F5FB-2E5A-4E89-98C6-7D08B308053F} = {1103F5FB-2E5A-4E89-98C6-7D08B308053F}
+		{115D89D7-1F62-4BA2-8C6A-8998252B70D4} = {115D89D7-1F62-4BA2-8C6A-8998252B70D4}
+		{19038E9F-2DD2-45C8-A01C-450CDEEE2130} = {19038E9F-2DD2-45C8-A01C-450CDEEE2130}
+		{1F98832C-AB28-4CE7-AF9D-05C8D5365190} = {1F98832C-AB28-4CE7-AF9D-05C8D5365190}
+		{40349E3D-44E2-4004-8D85-627F2CCD3EAE} = {40349E3D-44E2-4004-8D85-627F2CCD3EAE}
+		{409643AB-8E49-4D96-A384-BB2FC2C6D8F9} = {409643AB-8E49-4D96-A384-BB2FC2C6D8F9}
+		{55ABDAF1-B224-4446-995B-FE26DCEF6E58} = {55ABDAF1-B224-4446-995B-FE26DCEF6E58}
+		{59779F2E-CCD1-4449-ADAB-A692889EE333} = {59779F2E-CCD1-4449-ADAB-A692889EE333}
+		{5B78141C-58D9-496A-8E64-450EB18F4094} = {5B78141C-58D9-496A-8E64-450EB18F4094}
+		{64BA700D-B959-454D-8DA3-F2BE9761585C} = {64BA700D-B959-454D-8DA3-F2BE9761585C}
+		{68646D03-FF3C-4BC0-AF34-F20D0FC98247} = {68646D03-FF3C-4BC0-AF34-F20D0FC98247}
+		{6DBF9F5D-E293-4B64-958D-8620183192B1} = {6DBF9F5D-E293-4B64-958D-8620183192B1}
+		{7ABA2402-ED8D-443D-A615-E36E66D2D7E6} = {7ABA2402-ED8D-443D-A615-E36E66D2D7E6}
+		{A72C572F-0112-4B93-9D38-5F1AD37A8678} = {A72C572F-0112-4B93-9D38-5F1AD37A8678}
+		{AACE7DB9-4CA4-4D68-B9A1-70367E498CE9} = {AACE7DB9-4CA4-4D68-B9A1-70367E498CE9}
+		{B229340D-0E73-4493-816F-2065A253C0FA} = {B229340D-0E73-4493-816F-2065A253C0FA}
+		{B69904B6-0FD5-4AEC-BA34-03E305387E87} = {B69904B6-0FD5-4AEC-BA34-03E305387E87}
+		{EA8165CA-1E72-47EA-AF47-9D692494B37C} = {EA8165CA-1E72-47EA-AF47-9D692494B37C}
+		{EDF31B01-685F-47CA-B06B-0A4ADD821105} = {EDF31B01-685F-47CA-B06B-0A4ADD821105}
+		{F4FF2774-AD08-4369-AA33-B0611B8AA06E} = {F4FF2774-AD08-4369-AA33-B0611B8AA06E}
+		{FD25DCEB-B49D-4AF9-8734-E85AB85E0A21} = {FD25DCEB-B49D-4AF9-8734-E85AB85E0A21}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoOverlayFixMod", "InfoOverlayFixMod\InfoOverlayFixMod.csproj", "{0409EA56-20D1-4362-A226-398AD492232D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoOverlayFixMod", "InfoOverlayFixMod\InfoOverlayFixMod.csproj", "{0409EA56-20D1-4362-A226-398AD492232D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBaseT4", "MiniBaseT4Mod\MiniBaseT4.csproj", "{F4FF2774-AD08-4369-AA33-B0611B8AA06E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimitHydroponicMod", "LimitHydroponicMod\LimitHydroponicMod.csproj", "{1103F5FB-2E5A-4E89-98C6-7D08B308053F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimitHydroponicMod", "LimitHydroponicMod\LimitHydroponicMod.csproj", "{1103F5FB-2E5A-4E89-98C6-7D08B308053F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceLogMod", "PerformanceLogMod\PerformanceLogMod.csproj", "{B229340D-0E73-4493-816F-2065A253C0FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformanceLogMod", "PerformanceLogMod\PerformanceLogMod.csproj", "{B229340D-0E73-4493-816F-2065A253C0FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodDoorMod", "GoodDoorMod\GoodDoorMod.csproj", "{115D89D7-1F62-4BA2-8C6A-8998252B70D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuitCheckpointStorgeMod", "SuitCheckpointStorgeMod\SuitCheckpointStorgeMod.csproj", "{AACE7DB9-4CA4-4D68-B9A1-70367E498CE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuitCheckpointStorgeMod", "SuitCheckpointStorgeMod\SuitCheckpointStorgeMod.csproj", "{AACE7DB9-4CA4-4D68-B9A1-70367E498CE9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C21F138-7D3D-43FE-92E5-1FA8498E4EDC}"
 	ProjectSection(SolutionItems) = preProject

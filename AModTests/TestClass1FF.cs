@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PerformanceLogMod;
+ 
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -45,13 +45,13 @@ namespace ModTests
         [TestMethod()]
         public void listToFileTest()
         {
-            GCAllMyPatches.cache.Add("abc");
-            GCAllMyPatches.cache.Add("abc");
-            GCAllMyPatches.cache.Add("abc");
-            GCAllMyPatches.cache.Add("abc");
-            GCAllMyPatches.cache.Add("abc");
-            GCAllMyPatches.cache.Add("abc");
-            PerformanceCapturePatch.DumpGCCacheList();
+            PerformanceLogMod.GCAllMyPatches.cache.Add("abc");
+            PerformanceLogMod. GCAllMyPatches.cache.Add("abc");
+            PerformanceLogMod.GCAllMyPatches.cache.Add("abc");
+            PerformanceLogMod. GCAllMyPatches.cache.Add("abc");
+            PerformanceLogMod.GCAllMyPatches.cache.Add("abc");
+            PerformanceLogMod.GCAllMyPatches.cache.Add("abc");
+            PerformanceLogMod. PerformanceCapturePatch.DumpGCCacheList();
         }
 
         [TestMethod()]

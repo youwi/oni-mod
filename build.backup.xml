@@ -20,4 +20,6 @@
         WorkingDirectory="$(GameFolderActive)" />
   </Target>
 
- 
+<Target Name="CopyAllFileToDir" AfterTargets="PostBuildEvent">
+	<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)" />
+</Target>
