@@ -1,0 +1,23 @@
+ 
+ 
+ 
+ <Target Name="ILRepack" AfterTargets="Build">
+    <PropertyGroup>
+      <Internalize>true</Internalize>
+    </PropertyGroup>
+    <ItemGroup>
+      <InputAssemblies Include="$(TargetDir)PLib*.dll" />
+    </ItemGroup>
+    <ILRepack
+        TargetPlatformVersion="v4"
+        OutputType="SameAsPrimaryAssembly"
+        MainAssembly="$(TargetPath)"
+        OutputAssembly="$(TargetPath)"
+        InputAssemblies="@(InputAssemblies)"
+        XmlDocumentation="true"
+        Internalize="$(Internalize)"
+        WilcardInputAssemblies="true"
+        WorkingDirectory="$(GameFolderActive)" />
+  </Target>
+
+ 

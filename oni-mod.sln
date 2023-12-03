@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 	ProjectSection(SolutionItems) = preProject
 		AfterBuild.bat = AfterBuild.bat
 		AfterBuild.mjs = AfterBuild.mjs
+		Directory.Build.props = Directory.Build.props
+		build.backup.xml = build.backup.xml
+		Directory.Build.props.default = Directory.Build.props.default
+		Directory.Build.targets = Directory.Build.targets
 		README.md = README.md
 		Steam语法.txt = Steam语法.txt
 	EndProjectSection

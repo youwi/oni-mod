@@ -19,16 +19,16 @@ namespace TeleporterBuildingMod
 
             WarpReceiver warpReceiver = null;
             WarpReceiver[] array = UnityEngine.Object.FindObjectsOfType<WarpReceiver>();
-            
-            var cid= __instance.GetMyWorldId();
+
+            var cid = __instance.GetMyWorldId();
             string recStr = "";
             WarpReceiver minReceiver = null;
-            if(array.Length>0)
-                minReceiver=array[0];
+            if (array.Length > 0)
+                minReceiver = array[0];
             //找最小的
-            foreach (WarpReceiver tmp in array) 
+            foreach (WarpReceiver tmp in array)
             {
-                if(minReceiver.GetMyWorldId()> tmp.GetMyWorldId())
+                if (minReceiver.GetMyWorldId() > tmp.GetMyWorldId())
                 {
                     minReceiver = tmp;
                 };
@@ -37,7 +37,7 @@ namespace TeleporterBuildingMod
             //找下一个
             foreach (WarpReceiver tmp in array)
             {
-                if (tmp.GetMyWorldId() == cid+1)  //最大数量 ClusterManager.Instance.worldCount;
+                if (tmp.GetMyWorldId() == cid + 1)  //最大数量 ClusterManager.Instance.worldCount;
                 {
                     warpReceiver = tmp;//  实际是要找最近一个ID
                     break;
@@ -48,8 +48,8 @@ namespace TeleporterBuildingMod
             {
                 warpReceiver = minReceiver;
             }
-           
-            if(warpReceiver != null)
+
+            if (warpReceiver != null)
             {
                 Debug.Log($"---->发送器world:{cid} 接收器worlds:{recStr} 选中:{warpReceiver.GetMyWorldId()}<---");
             }

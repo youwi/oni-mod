@@ -9,9 +9,9 @@ namespace InfiniteResearch
 {
     class InfiniteResearchCenterButtonPatch : InfiniteModeToggleButton
     {
-        #pragma warning disable CS0649  
+#pragma warning disable CS0649
         [MyCmpGet] ResearchCenter researchCenter;
-        #pragma warning restore CS0649  
+#pragma warning restore CS0649
         static bool IsEndlessWorking(Workable instance)
         {
             var ins = instance.GetComponent<InfiniteModeToggleButton>();

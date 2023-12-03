@@ -1,35 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net471</TargetFramework>
+	<ModTitle>Beautiful Door 好看的门</ModTitle>
+	<Description>Beautiful Door 好看的门</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.9</AssemblyVersion>
-    <FileVersion>1.0.0.8</FileVersion>
+    <AssemblyVersion>2023.12.3.28</AssemblyVersion>
+    <FileVersion>1.0.0.27</FileVersion>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_external_scml/door_external.scml -o resource/anim\assets/door_external_beauty&#xD;&#xA;.\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_manual_scml/door_manual.scml -o  resource/anim\assets/door_manual_beauty&#xD;&#xA;.\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_internal_scml/door_internal.scml -o  resource/anim\assets/door_internal_beauty&#xD;&#xA;&#xD;&#xA;node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)&#xD;&#xA;" />
+  <Target Name="生成动画A" AfterTargets="PostBuildEvent">
+    <Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_manual_scml/door_manual.scml -o  resource/anim\assets/door_manual_beauty" />
   </Target>
-
-  <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>G:\Steam\steamapps\Common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.UI.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
+	<Target Name="生成动画B" AfterTargets="生成动画A">
+		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_external_scml/door_external.scml -o resource/anim\assets/door_external_beauty" />
+	</Target>
+	<Target Name="复制文件" AfterTargets="PostBuildEvent">
+		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName)" />
+	</Target>
 </Project>
