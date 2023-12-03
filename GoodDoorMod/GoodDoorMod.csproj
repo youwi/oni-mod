@@ -4,8 +4,8 @@
 	<ModTitle>Beautiful Door 好看的门</ModTitle>
 	<Description>Beautiful Door 好看的门</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.29</AssemblyVersion>
-    <FileVersion>1.0.0.28</FileVersion>
+    <AssemblyVersion>2023.12.3.30</AssemblyVersion>
+    <FileVersion>1.0.0.29</FileVersion>
   </PropertyGroup>
 
   <Target Name="生成动画A" AfterTargets="PostBuildEvent">
