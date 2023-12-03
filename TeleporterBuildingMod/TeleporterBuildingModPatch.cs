@@ -34,7 +34,41 @@ namespace TeleporterBuildingMod
         }*/
     //可拆可建
 
+    [HarmonyPatch(typeof(WarpPortal), "Discover")]
+    public class WarpPortal_GetTargetWorldID_Patch
+    {
+        //预判出错的代码.
 
+        public static bool Prefix(WarpPortal __instance)
+        {
+            //  WarpPortal.GetTargetWorldID();
+            SaveGame.Instance.GetComponent<WorldGenSpawner>().SpawnTag(WarpReceiverConfig.ID);
+            WarpReceiver[] array = Object.FindObjectsOfType<WarpReceiver>();
+            bool found = false;//没有找到接收器.
+            foreach (WarpReceiver component in array)
+            {
+                if (component.GetMyWorldId() != __instance.GetMyWorldId())
+                {
+                    found = true;
+                    return true;// component.GetMyWorldId();
+                }
+            }
+            if (found)
+            {
+                return false;
+            }
+            if (array.Length == 1) //仅有一个,并且不是当前星的.
+            {
+                //没有就不要了.
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+    }
     [HarmonyPatch(typeof(ConduitSecondaryOutput), nameof(ConduitSecondaryOutput.HasSecondaryConduitType))]
 
     public class ConduitSecondaryOutputPatch
@@ -89,13 +123,13 @@ namespace TeleporterBuildingMod
     {
         private static void Prefix()
         {
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpPortalHack.DESC", "WarpPortal" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpPortalHack.EFFECT", "WarpPortal" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpPortalHack.NAME", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTALHACK.DESC", STRINGS.BUILDINGS.PREFABS.WARPPORTAL.DESC });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTALHACK.EFFECT", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTALHACK.NAME", STRINGS.BUILDINGS.PREFABS.WARPPORTAL.NAME });
 
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpReceiverHack.DESC", "WarpReceiverHack" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpReceiverHack.EFFECT", "WarpReceiverHack" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpReceiverHack.NAME", "WarpReceiverHack" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVERHACK.DESC", STRINGS.BUILDINGS.PREFABS.WARPRECEIVER.DESC });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVERHACK.EFFECT", "WarpReceiver" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVERHACK.NAME", STRINGS.BUILDINGS.PREFABS.WARPRECEIVER.NAME });
             //ModUtil.AddBuildingToPlanScreen("Base", "TeleportalPad"); //传送台没什么用.
             ModUtil.AddBuildingToPlanScreen("Base", "WarpPortalHack"); //使用了模样
             ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiverHack");//使用了模样
