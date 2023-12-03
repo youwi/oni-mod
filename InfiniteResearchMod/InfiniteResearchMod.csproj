@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="preview3.png" />
-    <Content Include="resource\preview.png" />
+    <Content Include="resource\preview.jpg" />
     <Content Include="preview2.png" />
   </ItemGroup>
   <ItemGroup>

@@ -63,7 +63,8 @@
     <Compile Include="TreeBudPatch.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\preview.png" />
+    <Content Include="resource\preview.jpg" />
+    <Content Include="preview.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\mod.yaml" />
