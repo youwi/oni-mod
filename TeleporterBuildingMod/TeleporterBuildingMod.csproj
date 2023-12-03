@@ -68,18 +68,19 @@
   <ItemGroup>
     <None Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new_anim.bytes" />
     <None Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new_build.bytes" />
+    <None Include="resource\anim\assets\warp_portal_sender_new\warp_portal_sender_new_anim.bytes" />
+    <None Include="resource\anim\assets\warp_portal_sender_new\warp_portal_sender_new_build.bytes" />
     <None Include="resource\mod.yaml" />
     <None Include="resource\mod_info.yaml" />
-    <None Include="resource\templates\WarpReceiver1Complete.yaml" />
-    <None Include="resource\templates\WarpPortal1Complete.yaml" />
+    <None Include="resource\templates\WarpReceiverHackComplete.yaml" />
+    <None Include="resource\templates\WarpPortalHackComplete.yaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\anim\assets\warp_portal_receiver_new\warp_portal_receiver_new.png" />
+    <Content Include="resource\anim\assets\warp_portal_sender_new\warp_portal_sender_new.png" />
     <Content Include="resource\preview.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="resource\anim\assets\warp_portal_sender_new\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>node ../../../AfterBuild.mjs $(TargetPath)  $(ProjectName)</PostBuildEvent>

@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource\preview.png" />
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

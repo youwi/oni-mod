@@ -8,11 +8,12 @@ namespace TeleporterBuildingMod
 
         public override BuildingDef CreateBuildingDef()
         {
-            string id = "WarpReceiver1";
+            string id = "WarpReceiverHack";
 
             int width = 3;
             int height = 3;
-            string anim = "warp_portal_receiver_new_kanim";//动画有bug,使用修改后的动画
+            string anim = "warp_portal_receiver_new_kanim";//动画有bug,原动画没有UI卡.使用修改后的动画
+            //string anim = "warp_portal_receiver_kanim";// 
             int hitpoints = 100;
             float construction_time = 120f;
             float[] tais1 = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER5;

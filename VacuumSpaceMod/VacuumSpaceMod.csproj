@@ -65,8 +65,8 @@
     <Compile Include="BomBuilding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\anim\assets\bomb_build\bomb_build_anim.bytes" />
-    <None Include="resource\anim\assets\bomb_build\bomb_build_build.bytes" />
+    <None Include="bomb_build\bomb_build_anim.bytes" />
+    <None Include="bomb_build\bomb_build_build.bytes" />
     <None Include="resource\anim\assets\bomb_build_s\bomb_build_s_anim.bytes" />
     <None Include="resource\anim\assets\bomb_build_s\bomb_build_s_build.bytes" />
     <None Include="resource\mod.yaml" />
@@ -75,9 +75,10 @@
     <None Include="resource\translations\zh.po" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\anim\assets\bomb_build\bomb_build.png" />
+    <Content Include="bomb_build\bomb_build.png" />
     <Content Include="resource\anim\assets\bomb_build_s\bomb_build_s.png" />
-    <Content Include="resource\preview.png" />
+    <Content Include="preview.png" />
+    <Content Include="resource\preivew.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

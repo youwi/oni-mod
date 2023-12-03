@@ -34,6 +34,24 @@ namespace TeleporterBuildingMod
         }*/
     //可拆可建
 
+
+    [HarmonyPatch(typeof(ConduitSecondaryOutput), nameof(ConduitSecondaryOutput.HasSecondaryConduitType))]
+
+    public class ConduitSecondaryOutputPatch
+    {
+        //这里有报错bug,所以打了个补丁.
+        public static bool Prefix(ConduitSecondaryOutput __instance)
+        {
+             
+            if (__instance.portInfo == null)
+            {
+                __instance.portInfo=new ConduitPortInfo(ConduitType.Solid,new CellOffset(0,0));
+                return true;
+            }
+            return false;
+        }
+
+    }
     [HarmonyPatch(typeof(WarpReceiverConfig), "OnSpawn")]
     public class WarpReceiverConfigDeconstructionPatch
     {
@@ -65,26 +83,26 @@ namespace TeleporterBuildingMod
     }
 
     //添加建筑到菜单中
-    [HarmonyPatch(typeof(GeneratedBuildings))]
-    [HarmonyPatch("LoadGeneratedBuildings")]
+    [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
+  
     public class GeneratedBuildingsPatch
     {
         private static void Prefix()
         {
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTAL1.DESC", "WarpPortal" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTAL1.EFFECT", "WarpPortal" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPPORTAL1.NAME", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpPortalHack.DESC", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpPortalHack.EFFECT", "WarpPortal" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpPortalHack.NAME", "WarpPortal" });
 
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVER1.DESC", "WarpReceiver1" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVER1.EFFECT", "WarpReceiver1" });
-            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WARPRECEIVER1.NAME", "WarpReceiver1" });
-            //    ModUtil.AddBuildingToPlanScreen("Base", "TeleportalPad"); //传送台没什么用.
-            ModUtil.AddBuildingToPlanScreen("Base", "WarpPortal1");
-            ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver1");
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpReceiverHack.DESC", "WarpReceiverHack" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpReceiverHack.EFFECT", "WarpReceiverHack" });
+            Strings.Add(new string[] { "STRINGS.BUILDINGS.PREFABS.WarpReceiverHack.NAME", "WarpReceiverHack" });
+            //ModUtil.AddBuildingToPlanScreen("Base", "TeleportalPad"); //传送台没什么用.
+            ModUtil.AddBuildingToPlanScreen("Base", "WarpPortalHack"); //使用了模样
+            ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiverHack");//使用了模样
 
-            //    ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver");//原生不支持
-            //    ModUtil.AddBuildingToPlanScreen("Base", "TeleporterTransmitter");//可能的翻译
-            //    ModUtil.AddBuildingToPlanScreen("Base", "TeleporterReceiver");//可能的翻译
+            //ModUtil.AddBuildingToPlanScreen("Base", "WarpReceiver");//原生不支持
+            //ModUtil.AddBuildingToPlanScreen("Base", "TeleporterTransmitter");//可能的翻译
+            //ModUtil.AddBuildingToPlanScreen("Base", "TeleporterReceiver");//可能的翻译
         }
 
     }
@@ -96,10 +114,10 @@ namespace TeleporterBuildingMod
         public static void Postfix(BuildingComplete __instance)
         {
             GameObject go = __instance.gameObject;
-            if (__instance.name == "WarpPortal1"
-                || __instance.name == "WarpPortal1Complete"
-                || __instance.name == "WarpReceiver1Complete" //这里和配置的模板名一样.
-                || __instance.name == "WarpReceiver1"
+            if (__instance.name == "WarpPortalHack"
+                || __instance.name == "WarpPortalHackComplete"
+                || __instance.name == "WarpReceiverHackComplete" //这里和配置的模板名一样.
+                || __instance.name == "WarpReceiverHack"
 
                 )
             {
