@@ -7,6 +7,11 @@
     <AssemblyVersion>2023.12.3.37</AssemblyVersion>
     <FileVersion>1.0.0.36</FileVersion>
   </PropertyGroup>
-
+	<Target Name="生成动画A" AfterTargets="PostBuildEvent">
+		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_manual_scml/door_manual.scml -o  resource/anim\assets/door_manual_beauty" />
+	</Target>
+	<Target Name="生成动画B" AfterTargets="生成动画A">
+		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_external_scml/door_external.scml -o resource/anim\assets/door_external_beauty" />
+	</Target>
 </Project>
     

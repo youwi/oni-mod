@@ -1,23 +1,7 @@
 
 //自动更新版本号 的脚本
 import FS from 'fs';
-
-process.argv
-let replaceFile = function (filePath, sourceRegx, targetStr) {
-
-    FS.readFile(filePath,function(err,data){
-        if (err) {
-            console.log(err);
-            return;
-        }
-        let str = data.toString();
-        str = str.replace(sourceRegx,targetStr);
-        FS.writeFile(filePath, str, function (err) {
-            console.log(err);
-            return;
-        });
-    });
-}
+ 
 let replaceFileSync=function( filePath, sourceRegx, targetStr){
     var fillText= FS.readFileSync(filePath).toString();
     fillText = fillText.replace(sourceRegx,targetStr);
@@ -44,7 +28,7 @@ if (FS.existsSync("resource/mod_info.yaml")) {
 }
 
 replaceFileSync(sourceDir+"/mod_info.yaml", /version.*/, dayVersion())
-console.log(projectName+"-----Version Update 版本号已经修改\n: ");
+console.log(projectName + "-----Version Update 版本号已经修改" + dayVersion());
 
 //复制resource(创建了文件夹)
 FS.cpSync(sourceDir, process.env.ONI_MOD_LOCAL+"/"+projectName,{recursive: true})
