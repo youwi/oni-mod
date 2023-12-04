@@ -15,6 +15,7 @@
   <ItemGroup>
 	<PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" Private="True" PrivateAssets="all" />
 	<PackageReference Include="PLib" Version="4.13.0" Private="True" PrivateAssets="all" />
+	  
 	<Reference Include="Assembly-CSharp" HintPath="$(GameFolderActive)/Assembly-CSharp.dll" />
 	<Reference Include="Assembly-CSharp-firstpass" HintPath="$(GameFolderActive)/Assembly-CSharp-firstpass.dll" />
     <Reference Include="0Harmony" HintPath="$(GameFolderActive)/0Harmony.dll" />
@@ -28,10 +29,8 @@
     <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(GameFolderActive)/UnityEngine.TextRenderingModule.dll" />
     <Reference Include="UnityEngine.UI" HintPath="$(GameFolderActive)/UnityEngine.UI.dll" />
     <Reference Include="UnityEngine.UIModule" HintPath="$(GameFolderActive)/UnityEngine.UIModule.dll" />
-
-	 <Reference Include="UnityEngine.UIModule" HintPath="$(GameFolderActive)/UnityEngine.UIModule.dll" />
-
-	  <Reference Include="System" />
+ 
+	<Reference Include="System" />
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="System.Data.DataSetExtensions" />

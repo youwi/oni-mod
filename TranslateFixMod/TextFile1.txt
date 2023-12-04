@@ -1,0 +1,22 @@
+﻿Exception while loading mod Yu.TranslateFixMod at D:/Doc/Klei/OxygenNotIncluded/mods/Local/TranslateFixMod. 
+HarmonyLib.HarmonyException: Patching exception in method null --->
+System.ArgumentException: 
+Undefined target method for patch method static System.Void TranslateFixMod.TestTranslatePath::Postfix()
+   
+Build: U50-583750-SD
+
+UNEXPECTED!
+
+  at UnityEngine.Debug.LogError (System.Object message) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
+  at Debug.LogError (System.Object obj) [0x00000] in <1e2b7d5db95c4d6b84eabb7ca0270927>:0 
+  at Game.UnsafeSim200ms (System.Single dt) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Game.SimEveryTick (System.Single dt) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Game.Game.Update_Patch2 (Game ) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+UNEXPECTED!
+
+  at UnityEngine.Debug.LogError (System.Object message) [0x00000] in <72b60a3dd8cd4f12a155b761a1af9144>:0 
+  at Debug.LogError (System.Object obj) [0x00000] in <1e2b7d5db95c4d6b84eabb7ca0270927>:0 
+  at Game.UnsafeSim200ms (System.Single dt) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Game.SimEveryTick (System.Single dt) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Game.Update () [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+Build: U50-583750-SD

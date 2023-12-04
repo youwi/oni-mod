@@ -18,7 +18,8 @@ function dayVersion() {
 var args = process.argv.slice(2);
 var sourceDir="resource";
 var projectName=args[1];
-var projectDll=args[0];
+var projectDll = args[0];
+ 
 var modConfigName=process.env.ONI_MOD_LOCAL+"/../mods.json";
 
 if (FS.existsSync("resource/mod_info.yaml")) {
@@ -38,11 +39,14 @@ console.log(projectName+"-----Resource Files 文件已经复制");
 try{
     FS.copyFileSync(projectDll,process.env.ONI_MOD_LOCAL+"/"+projectName+"/"+projectName+".dll")
     console.log(projectName+"-----Mod DLL 文件已经复制");
-}catch(e){
-    console.log(projectName+"-----Error dll copy fail, Oni Running???---");
-    process.exitCode=1;
+} catch (e) {
+    console.log(projectName + "-----Error dll copy fail, Oni Running???---");
+    //判断单元测试时要忽略.
+    if (!projectName.includes("Test")) {
+        process.exitCode = 1;
+    }
 }
-
+ 
 /*
 const ModConfig=JSON.parse(FS.readFileSync(modConfigName).toString());
 ModConfig.mods.forEach(element => {

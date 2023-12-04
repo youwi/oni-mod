@@ -1,22 +1,23 @@
-﻿
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-	  <DistributeMod>false</DistributeMod>
-    <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.41</AssemblyVersion>
-    <FileVersion>1.0.0.40</FileVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DoubleMutateMod\DoubleMutateMod.csproj" />
-    <ProjectReference Include="..\NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj" />
-    <ProjectReference Include="..\PerformanceLogMod\PerformanceLogMod.csproj" />
-    <ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj" />
-    <ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj" />
-  </ItemGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<DistributeMod>false</DistributeMod>
+		<BaseOutputPath></BaseOutputPath>
+		<AssemblyVersion>2023.12.4.70</AssemblyVersion>
+		<FileVersion>1.0.0.69</FileVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DoubleMutateMod\DoubleMutateMod.csproj" />
+		<ProjectReference Include="..\NotificationsPauseI18nMod\NotificationsPauseI18nMod.csproj" />
+		<ProjectReference Include="..\PerformanceLogMod\PerformanceLogMod.csproj" />
+		<ProjectReference Include="..\SingleStarWorldMod\SingleStarWorldMod.csproj" />
+		<ProjectReference Include="..\TranslateFixMod\TranslateFixMod.csproj" />
+		<ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj" />
+	</ItemGroup>
+ 
+	 
 </Project>
 
-    

@@ -4,8 +4,8 @@
 	<ModTitle>Meteor Comets modify 修改陨石雨</ModTitle>
 	<Description>Meteor Comets modify 修改陨石雨.MeteorChangeMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.3.37</AssemblyVersion>
-    <FileVersion>1.0.0.36</FileVersion>
+    <AssemblyVersion>2023.12.4.49</AssemblyVersion>
+    <FileVersion>1.0.0.48</FileVersion>
   </PropertyGroup>
 
 </Project>

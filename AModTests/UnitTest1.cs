@@ -4,8 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Timers;
+using TranslateFixMod;
 
 namespace ModTests.Tests
 {
@@ -198,6 +200,20 @@ namespace ModTests.Tests
             Grid.CellSizeInMeters = 50;
             var pos = Grid.CellToPos(8241, 0, 0, 0);
             Console.WriteLine(pos);
+        }
+
+        [TestMethod()]
+        public void TestLocs()
+        {
+
+            Console.WriteLine("DFSDFSD>FSDFSDF");
+            var stringDir = "G:/Steam/steamapps/common/OxygenNotIncluded/OxygenNotIncluded_Data/StreamingAssets/strings/strings_preinstalled_zh_klei.po";
+
+            //var dic = Localization.LoadStringsFile(stringDir, true);
+            var dic = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(stringDir, Encoding.UTF8));
+
+            dic.TryGetValue("Stinkiness", out var loc);
+            Console.WriteLine("DFSDF" + loc);
         }
 
     }

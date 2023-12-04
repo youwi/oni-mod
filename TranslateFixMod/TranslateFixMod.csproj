@@ -2,11 +2,11 @@
 
   <PropertyGroup>
 
-	  <ModTitle>翻译修正</ModTitle>
+	  <ModTitle>Translate Fix 翻译修正(部分)</ModTitle>
 	  <Description>翻译修正</Description>
 	  <BaseOutputPath></BaseOutputPath>
-	  <AssemblyVersion>2023.12.4.40</AssemblyVersion>
-	  <FileVersion>1.0.0.39</FileVersion>
+	  <AssemblyVersion>2023.12.4.90</AssemblyVersion>
+	  <FileVersion>1.0.0.89</FileVersion>
   </PropertyGroup>
 
 </Project>
