@@ -1,10 +1,13 @@
-﻿using Klei;
+﻿using HarmonyLib;
+using Klei;
 using Klei.AI;
 using Klei.CustomSettings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using STRINGS;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Timers;
@@ -240,18 +243,93 @@ namespace ModTests.Tests
             var tb = RoomConstraints.NO_COTS;
             var tc = RoomConstraints.MAXIMUM_SIZE_96;
 
-         //   var bb = CustomGameSettingConfigs.MeteorShowers;
+           // DlcManager.IsPureVanilla();//给打补丁禁止
+        
+            //CustomGameSettingConfigs.cctor();
             Strings.TryGet(new StringKey(text), out entry);
-              
-            Console.WriteLine(entry);
-               
-         
+
+            //Console.WriteLine(entry);
+            BindingFlags staticflags =
+                BindingFlags.Instance
+                | BindingFlags.Public 
+                | BindingFlags.Static
+                | BindingFlags.SetField
+                | BindingFlags.NonPublic
+                | BindingFlags.SetProperty;
+            var harmony = new Harmony("ModTests.Tests");
+            harmony.PatchAll();
+             SettingConfig StressBreaks = new ToggleSettingConfig("StressBreaks", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.TOOLTIP, new SettingLevel("Disabled", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.TOOLTIP, 1L), new SettingLevel("Default", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L), "Default", "Default", 262144L, 5L);
+            SettingConfig StressBreaks2 = new ToggleSettingConfig("StressBreaks","汉字测试A", "汉字测试B",
+                new SettingLevel("Disabled",
+                "汉字测试C", "汉字测试D", 1L), 
+                new SettingLevel("Default",
+                UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME,
+                UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L),
+                "Default", "Default", 262144L, 5L);
+            Traverse.Create(StressBreaks2).Field("<label>k__BackingField").SetValue("---sss---");
+            var ttt=Traverse.Create(StressBreaks2).Fields(); 
+            var tt1 = Traverse.Create(StressBreaks2).Methods();
+            var tt2 = typeof(ToggleSettingConfig ).GetProperties();
+            Traverse.Create(StressBreaks2).Method("set_label", "sfsdfsdfsdf");// 失败忽略了.
+           
+            var met = typeof(ToggleSettingConfig).GetMethod("set_label", staticflags);//找不到.
+            var ttB = Traverse.Create(StressBreaks2).Properties();
+            var bbc = typeof(ToggleSettingConfig).GetFields(staticflags);
+            var bbm =  typeof(ToggleSettingConfig).GetMembers();
+
+            var mes = typeof(SettingConfig).GetMember("label")[0];//能找到,但是无法利用.
+
+            var mmm=typeof(ToggleSettingConfig).GetProperty("label");// 可以找到,但是无法设值.SetValue(StressBreaks2,"xxxxxx");
+                                                                     // mmm.SetValue(StressBreaks2, "-------", null);
+                                                                     //mes.set(StressBreaks2, "--");
+                                                                     // PatchSSS.SetPrivatePropertyValue<string>(StressBreaks2, "label", "ssssss");
+            var field = typeof(SettingConfig).GetField("<label>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic);
+            field.SetValue(StressBreaks2, "---xdfsdfsdf---");
+            Console.WriteLine(StressBreaks2.label);
+            // var bbt = CustomGameSettingConfigs.StressBreaks;
         }
+       
         public void getBykey(string name)
         {
 
         }
+ 
+    }
+    [HarmonyPatch(typeof(DlcManager), nameof(DlcManager.IsPureVanilla))]
+    public static class PatchSSS
+    {
+        static BindingFlags staticflags =
+                BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.Static
+                | BindingFlags.SetField
+                | BindingFlags.SetProperty;
+        public static void SetPrivatePropertyValue<T>(this object obj, string propName, T val)
+        {
+            Type t = obj.GetType();
+            if (t.GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) == null)
+                throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            t.InvokeMember(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty | BindingFlags.Instance, null, obj, new object[] { val });
+        }
+        public static void SetPrivateFieldValue<T>(this object obj, string propName, T val)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type t = obj.GetType();
+            FieldInfo fi = null;
+            while (fi == null && t != null)
+            {
+                fi = t.GetField(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                t = t.BaseType;
+            }
+            if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            fi.SetValue(obj, val);
+        }
 
+        public static bool Prefix(bool __result)
+        {
+            __result=true;
+            return false;
+        }
     }
 
 }

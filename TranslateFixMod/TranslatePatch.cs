@@ -22,18 +22,61 @@ namespace TranslateFixMod
         {
             var fieldsOrigal = typeof(CustomGameSettingConfigs).GetFields(staticflags);
             int count = 0;
+            int nullCount=0;
+            int scCount = 0;
             foreach (var fieldOri in fieldsOrigal)
             {
-                var name = fieldOri.Name;
-                var tmp = typeof(MockCustomGameSettingConfigs).GetField(name, staticflags);
-                if (tmp != null)
-                {
-                    fieldOri.SetValue(null, tmp.GetValue(null));
+                //方案A:
+                var obj= fieldOri.GetValue(null);
+                if (obj is SettingConfig) {
+                    scCount++;
+                    var objb = (SettingConfig)obj;
+                    if(translateDictionary.TryGetValue(objb.label,out var str))
+                    {   //这里有特殊语法: 没有setter的反射很麻烦.
+                        Traverse.Create(objb).Field("<label>k__BackingField").SetValue(str);
+                    }
+                    else
+                    {
+                        nullCount++;
+                    };
+                    if (translateDictionary.TryGetValue(objb.tooltip, out var str2))
+                    {
+                        Traverse.Create(objb).Field("<tooltip>k__BackingField").SetValue(str2);
+                    };
+                    Debug.Log($"--->   GameSetting :{objb.label} {str} {str2}  ---- ");
+                    if(obj is ToggleSettingConfig)
+                    {
+                        var objc= (ToggleSettingConfig)obj;
+                        translateDictionary.TryGetValue(objb.tooltip, out var onleveLabel);
+                        translateDictionary.TryGetValue(objb.tooltip, out var onleveTooltip);
+                        onleveTooltip += objc.on_level.tooltip;
+                        Traverse.Create(objc.on_level).Field("<label>k__BackingField").SetValue(onleveLabel);
+                        Traverse.Create(objc.on_level).Field("<tooltip>k__BackingField").SetValue(onleveTooltip);
+                    }
+                    if (obj is ListSettingConfig)
+                    {
+                         var objd= (ListSettingConfig)obj;
+                         var list=objd.GetLevels();
+                         foreach(var tmp in list)
+                        {
+                            translateDictionary.TryGetValue(objb.tooltip, out var onleveLabel);
+                            translateDictionary.TryGetValue(objb.tooltip, out var onleveTooltip);
+                            Traverse.Create(tmp).Field("<label>k__BackingField").SetValue(onleveLabel);
+                            onleveTooltip += tmp.tooltip ;
+                            Traverse.Create(tmp).Field("<tooltip>k__BackingField").SetValue(onleveTooltip);
+                        }
+                    }
                 }
-
+                //方案B:
+                //var name = fieldOri.Name;
+                //var tmp = typeof(MockCustomGameSettingConfigs).GetField(name, staticflags);
+                //if (tmp != null)
+                //{
+                //    fieldOri.SetValue(null, tmp.GetValue(null));
+                //}
                 count++;
             }
-            Debug.Log("--->GameSetting 统计翻译次数:" + count);
+            Debug.Log($"--->GameSetting 统计翻译次数:{count} {nullCount} {scCount}");
 
         }
 
@@ -89,10 +132,6 @@ namespace TranslateFixMod
         }
         public static void fixTraitTranslate()
         {
-            var langKey = Localization.GetCurrentLanguageCode();
-            var langFilename = $"{Application.dataPath}/StreamingAssets/strings/strings_preinstalled_{langKey}.po";
-            if (!File.Exists(langFilename)) { return; }
-            translateDictionary = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(langFilename, Encoding.UTF8));
 
             //var dic = Localization.LoadStringsFile(stringDir, false);
             //STRINGS.UI.FRONTEND.COLONYDESTINATIONSCREEN.CUSTOMIZE
@@ -126,6 +165,11 @@ namespace TranslateFixMod
         {
             if (inited) { return; }
             inited = true;
+            var langKey = Localization.GetCurrentLanguageCode();
+            var langFilename = $"{Application.dataPath}/StreamingAssets/strings/strings_preinstalled_{langKey}.po";
+            if (!File.Exists(langFilename)) { return; }
+            translateDictionary = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(langFilename, Encoding.UTF8));
+
 
             var example = STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME;
             //铁石胃肠 S: [STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME] H: [-1000142653] Value: [铁石胃肠]
