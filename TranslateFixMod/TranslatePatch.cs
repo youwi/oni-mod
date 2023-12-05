@@ -3,6 +3,7 @@
 using HarmonyLib;
 using Klei.CustomSettings;
 using STRINGS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -18,54 +19,73 @@ namespace TranslateFixMod
         public static bool inited = false;
         public static Dictionary<string, string> translateDictionary = null;
         public static BindingFlags staticflags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static;
+
+        public static void updateLabelAndTooltip<T>(T obj)
+        {
+            //SettingLevel  都有这2个属性.
+            //SettingConfig
+            var labelField = Traverse.Create(obj).Field("<label>k__BackingField"); 
+            var tooltipField = Traverse.Create(obj).Field("<tooltip>k__BackingField");
+         
+            if (translateDictionary.ContainsKey((string)labelField.GetValue())
+                && translateDictionary.ContainsKey((string)tooltipField.GetValue()))
+            {
+                translateDictionary.TryGetValue((string)labelField.GetValue(), out var str);
+                translateDictionary.TryGetValue((string)tooltipField.GetValue(), out var str2);
+
+                if (str != null && str2 != null)
+                {   //这里有特殊语法: 没有setter的反射很麻烦.
+                    labelField.SetValue(str);
+                    tooltipField.SetValue(str2);
+                }
+                //Debug.Log($"--->    {obj} {labelField} {str} {str2}  ---- ");
+            }
+            else
+            {
+                Debug.LogWarning($"--->   无翻译 {obj} {labelField}  ");
+            }
+
+        }
         public static void fixGameSettingTranslate()
         {
             var fieldsOrigal = typeof(CustomGameSettingConfigs).GetFields(staticflags);
             int count = 0;
-            int nullCount=0;
             int scCount = 0;
             foreach (var fieldOri in fieldsOrigal)
             {
+                count++;
                 //方案A:
-                var obj= fieldOri.GetValue(null);
-                if (obj is SettingConfig) {
-                    scCount++;
-                    var objb = (SettingConfig)obj;
-                    if(translateDictionary.TryGetValue(objb.label,out var str))
-                    {   //这里有特殊语法: 没有setter的反射很麻烦.
-                        Traverse.Create(objb).Field("<label>k__BackingField").SetValue(str);
+                try
+                {
+                    var obj = fieldOri.GetValue(null);
+                    if (obj == null) continue;
+                    if (obj is SettingConfig)
+                    {
+                        scCount++;
+                        var objb = (SettingConfig)obj;
+                        updateLabelAndTooltip(objb);
                     }
-                    else
+                    if (obj is ToggleSettingConfig)
                     {
-                        nullCount++;
-                    };
-                    if (translateDictionary.TryGetValue(objb.tooltip, out var str2))
-                    {
-                        Traverse.Create(objb).Field("<tooltip>k__BackingField").SetValue(str2);
-                    };
-                    Debug.Log($"--->   GameSetting :{objb.label} {str} {str2}  ---- ");
-                    if(obj is ToggleSettingConfig)
-                    {
-                        var objc= (ToggleSettingConfig)obj;
-                        translateDictionary.TryGetValue(objb.tooltip, out var onleveLabel);
-                        translateDictionary.TryGetValue(objb.tooltip, out var onleveTooltip);
-                        onleveTooltip += objc.on_level.tooltip;
-                        Traverse.Create(objc.on_level).Field("<label>k__BackingField").SetValue(onleveLabel);
-                        Traverse.Create(objc.on_level).Field("<tooltip>k__BackingField").SetValue(onleveTooltip);
+                        var objc = (ToggleSettingConfig)obj;
+                        updateLabelAndTooltip(objc.on_level);
+                        updateLabelAndTooltip(objc.off_level);
                     }
                     if (obj is ListSettingConfig)
                     {
-                         var objd= (ListSettingConfig)obj;
-                         var list=objd.GetLevels();
-                         foreach(var tmp in list)
+                        var objd = (ListSettingConfig)obj;
+                        var list = objd.GetLevels();
+                        if(list == null) continue;
+                        foreach (var tmp in list)
                         {
-                            translateDictionary.TryGetValue(objb.tooltip, out var onleveLabel);
-                            translateDictionary.TryGetValue(objb.tooltip, out var onleveTooltip);
-                            Traverse.Create(tmp).Field("<label>k__BackingField").SetValue(onleveLabel);
-                            onleveTooltip += tmp.tooltip ;
-                            Traverse.Create(tmp).Field("<tooltip>k__BackingField").SetValue(onleveTooltip);
+                            if(tmp==null) continue;
+                            updateLabelAndTooltip(tmp);
                         }
                     }
+                }catch(Exception ex)
+                {
+                    Debug.LogWarning("----->--出了一异常 --<"+ fieldOri);
+                    Debug.LogWarning(ex);
                 }
                 //方案B:
                 //var name = fieldOri.Name;
@@ -74,9 +94,9 @@ namespace TranslateFixMod
                 //{
                 //    fieldOri.SetValue(null, tmp.GetValue(null));
                 //}
-                count++;
+            
             }
-            Debug.Log($"--->GameSetting 统计翻译次数:{count} {nullCount} {scCount}");
+            Debug.Log($"--->统计翻译次数 GameSetting :{count} {scCount}");
 
         }
 
@@ -124,7 +144,7 @@ namespace TranslateFixMod
                     count++;
                 }
             }
-            Debug.Log($"--->RoomConstraints 统计翻译次数:{count}  {countUn} {countNull}");
+            Debug.Log($"--->统计翻译次数 RoomConstraints :{count}  {countUn} {countNull}");
 
             //   RoomConstraints.
             //   STRINGS.ROOMS.
@@ -159,7 +179,7 @@ namespace TranslateFixMod
             //翻译
             //Strings.Get(key).String;
             var sk = STRINGS.CODEX.STORY_TRAITS.MORB_ROVER_MAKER.STATUSITEMS.GERM_COLLECTION_PROGRESS.TOOLTIP;
-            Debug.Log("--->Trait 统计翻译次数:"  + count);
+            Debug.Log("--->统计翻译次数 Trait :" + count);
         }
         public static void Postfix()
         {
@@ -173,7 +193,7 @@ namespace TranslateFixMod
 
             var example = STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME;
             //铁石胃肠 S: [STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME] H: [-1000142653] Value: [铁石胃肠]
-            Debug.Log($"--->验证翻译{Localization.GetCurrentLanguageCode()} {example.text}/{example.key}");
+            Debug.Log($"---> 验证翻译 {Localization.GetCurrentLanguageCode()} {example.text}/{example.key}");
 
             fixGameSettingTranslate();
 

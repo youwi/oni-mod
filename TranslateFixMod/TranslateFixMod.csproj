@@ -5,8 +5,8 @@
 	  <ModTitle>Translate Fix 翻译修正(部分)</ModTitle>
 	  <Description>翻译修正</Description>
 	  <BaseOutputPath></BaseOutputPath>
-	  <AssemblyVersion>2023.12.5.115</AssemblyVersion>
-	  <FileVersion>1.0.0.114</FileVersion>
+	  <AssemblyVersion>2023.12.5.132</AssemblyVersion>
+	  <FileVersion>1.0.0.131</FileVersion>
   </PropertyGroup>
 
 </Project>

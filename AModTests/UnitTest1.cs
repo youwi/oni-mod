@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Timers;
@@ -258,8 +259,8 @@ namespace ModTests.Tests
                 | BindingFlags.SetProperty;
             var harmony = new Harmony("ModTests.Tests");
             harmony.PatchAll();
-             SettingConfig StressBreaks = new ToggleSettingConfig("StressBreaks", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.TOOLTIP, new SettingLevel("Disabled", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.TOOLTIP, 1L), new SettingLevel("Default", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L), "Default", "Default", 262144L, 5L);
-            SettingConfig StressBreaks2 = new ToggleSettingConfig("StressBreaks","汉字测试A", "汉字测试B",
+            ToggleSettingConfig StressBreaks = new ToggleSettingConfig("StressBreaks", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.TOOLTIP, new SettingLevel("Disabled", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.TOOLTIP, 1L), new SettingLevel("Default", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L), "Default", "Default", 262144L, 5L);
+            ToggleSettingConfig StressBreaks2 = new ToggleSettingConfig("StressBreaks","汉字测试A", "汉字测试B",
                 new SettingLevel("Disabled",
                 "汉字测试C", "汉字测试D", 1L), 
                 new SettingLevel("Default",
@@ -267,7 +268,10 @@ namespace ModTests.Tests
                 UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L),
                 "Default", "Default", 262144L, 5L);
             Traverse.Create(StressBreaks2).Field("<label>k__BackingField").SetValue("---sss---");
-            var ttt=Traverse.Create(StressBreaks2).Fields(); 
+
+            Traverse.Create(StressBreaks2.on_level).Field("<label>k__BackingField").SetValue("dsdfsdfsdf");
+
+            var ttt =Traverse.Create(StressBreaks2).Fields(); 
             var tt1 = Traverse.Create(StressBreaks2).Methods();
             var tt2 = typeof(ToggleSettingConfig ).GetProperties();
             Traverse.Create(StressBreaks2).Method("set_label", "sfsdfsdfsdf");// 失败忽略了.
@@ -285,7 +289,15 @@ namespace ModTests.Tests
                                                                      // PatchSSS.SetPrivatePropertyValue<string>(StressBreaks2, "label", "ssssss");
             var field = typeof(SettingConfig).GetField("<label>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic);
             field.SetValue(StressBreaks2, "---xdfsdfsdf---");
-            Console.WriteLine(StressBreaks2.label);
+
+            ListSettingConfig ClusterLayout = new ListSettingConfig("ClusterLayout", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.TOOLTIP, null, null, null, -1L, -1L, debug_only: false, triggers_custom_game: false, "", "", editor_only: true);
+
+            var langFilename = $"G:/Steam/steamapps/common/OxygenNotIncluded/OxygenNotIncluded_Data/StreamingAssets/strings/strings_preinstalled_zh_klei.po";
+             
+            TestTranslatePath.translateDictionary = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(langFilename, Encoding.UTF8));
+            TestTranslatePath.updateLabelAndTooltip(ClusterLayout);
+
+        Console.WriteLine(StressBreaks2.label);
             // var bbt = CustomGameSettingConfigs.StressBreaks;
         }
        

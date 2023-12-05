@@ -20,3 +20,18 @@ UNEXPECTED!
   at Game.SimEveryTick (System.Single dt) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
   at Game.Update () [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
 Build: U50-583750-SD
+[12:47:39.408] [1] [INFO] --->   GameSetting :创世种子 创世种子 这些数字反映了创造独特地图的程序参数
+
+创世种子可以复制粘贴，所以其他人也能玩到跟你一样的世界配置  ---- 
+[12:47:39.408] [1] [INFO] --->   GameSetting :小行星带 小行星带 由模组添加的新小行星带可以在这里选择  ---- 
+[12:47:39.408] [1] [WARNING] ----->--出了一异常 --<
+[12:47:39.408] [1] [WARNING] System.NullReferenceException: Object reference not set to an instance of an object
+  at TranslateFixMod.TestTranslatePath.fixGameSettingTranslate () [0x000c7] in <c4204f9766a2434582654c2bc17b80aa>:0 
+[12:47:39.411] [1] [INFO] --->   GameSetting :沙盒模式 沙盒模式 允许使用忽略游戏规则的工具控制模拟器  ---- 
+[12:47:39.411] [1] [INFO] --->   GameSetting :启用 启用 选中：沙盒模式开启  ---- 
+[12:55:53.236] [1] [WARNING] ----->--出了一异常 --<Klei.CustomSettings.ListSettingConfig ClusterLayout
+[12:55:53.236] [1] [WARNING] System.NullReferenceException: Object reference not set to an instance of an object
+  at TranslateFixMod.TestTranslatePath.fixGameSettingTranslate () [0x000c7] in <a41f240532dd44d3a5349d8a67c70b69>:0 
+[12:55:53.239] [1] [INFO] --->   GameSetting :Klei.CustomSettings.ToggleSettingConfig 沙盒模式 沙盒模式 允许使用忽略游戏规则的工具控制模拟器  ---- 
+
+Build: U50-583750-SD
