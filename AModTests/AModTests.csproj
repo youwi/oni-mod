@@ -2,8 +2,8 @@
 	<PropertyGroup>
 		<DistributeMod>false</DistributeMod>
 		<BaseOutputPath></BaseOutputPath>
-		<AssemblyVersion>2023.12.4.70</AssemblyVersion>
-		<FileVersion>1.0.0.69</FileVersion>
+		<AssemblyVersion>2023.12.5.84</AssemblyVersion>
+		<FileVersion>1.0.0.83</FileVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
@@ -17,7 +17,10 @@
 		<ProjectReference Include="..\TranslateFixMod\TranslateFixMod.csproj" />
 		<ProjectReference Include="..\VacuumSpaceMod\VacuumSpaceMod.csproj" />
 	</ItemGroup>
- 
+	<ItemDefinitionGroup>
+		<Reference Private="True" />
+		<ProjectReference Private="True" />
+	</ItemDefinitionGroup>
 	 
 </Project>
 

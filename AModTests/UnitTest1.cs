@@ -1,5 +1,6 @@
 ﻿using Klei;
 using Klei.AI;
+using Klei.CustomSettings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 using TranslateFixMod;
+using static STRINGS.ROOMS.CRITERIA;
 
 namespace ModTests.Tests
 {
@@ -214,6 +216,40 @@ namespace ModTests.Tests
 
             dic.TryGetValue("Stinkiness", out var loc);
             Console.WriteLine("DFSDF" + loc);
+        }
+
+        [TestMethod()]
+        public void TestStringKey()
+        {
+       
+
+            StringEntry entry = null;
+            string name = "DECORATION";
+            string text = "STRINGS.ROOMS.CRITERIA." + name.ToUpper() + ".NAME";
+            var keyObj = STRINGS.ROOMS.CRITERIA.DECORATION.NAME;
+            keyObj.SetKey("BAAAA");
+            Console.WriteLine(keyObj);
+
+            string keyObjstr = keyObj;
+            Console.WriteLine(keyObjstr);
+
+            LocString bbk = keyObjstr;
+            Console.WriteLine(bbk);
+
+            var tt= RoomConstraints.NO_MESS_STATION;
+            var tb = RoomConstraints.NO_COTS;
+            var tc = RoomConstraints.MAXIMUM_SIZE_96;
+
+         //   var bb = CustomGameSettingConfigs.MeteorShowers;
+            Strings.TryGet(new StringKey(text), out entry);
+              
+            Console.WriteLine(entry);
+               
+         
+        }
+        public void getBykey(string name)
+        {
+
         }
 
     }

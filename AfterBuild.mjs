@@ -43,7 +43,7 @@ try{
     console.log(projectName + "-----Error dll copy fail, Oni Running???---");
     //判断单元测试时要忽略.
     if (!projectName.includes("Test")) {
-        process.exitCode = 1;
+       // process.exitCode = 1;
     }
 }
  

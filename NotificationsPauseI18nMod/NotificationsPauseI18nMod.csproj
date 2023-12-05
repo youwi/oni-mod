@@ -4,8 +4,8 @@
 	<ModTitle>Critical Notification Pauser i18n 遇险暂停</ModTitle>
 	<Description>Critical Notification Pauser i18n 遇险暂停</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.4.49</AssemblyVersion>
-    <FileVersion>1.0.0.48</FileVersion>
+    <AssemblyVersion>2023.12.5.51</AssemblyVersion>
+    <FileVersion>1.0.0.50</FileVersion>
   </PropertyGroup>
 
 </Project>

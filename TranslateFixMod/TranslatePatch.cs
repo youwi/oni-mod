@@ -16,50 +16,101 @@ namespace TranslateFixMod
     public class TestTranslatePath
     {
         public static bool inited = false;
+        public static Dictionary<string, string> translateDictionary = null;
+        public static BindingFlags staticflags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static;
         public static void fixGameSettingTranslate()
         {
-            var fieldsOrigal = typeof(CustomGameSettingConfigs).GetFields(BindingFlags.Instance | BindingFlags.Public|BindingFlags.Static);
+            var fieldsOrigal = typeof(CustomGameSettingConfigs).GetFields(staticflags);
             int count = 0;
             foreach (var fieldOri in fieldsOrigal)
             {
                 var name = fieldOri.Name;
-                var mockV=typeof(MockCustomGameSettingConfigs)
-                    .GetField(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static)
-                    .GetValue(null );
-                fieldOri.SetValue(null, mockV);
+                var tmp = typeof(MockCustomGameSettingConfigs).GetField(name, staticflags);
+                if (tmp != null)
+                {
+                    fieldOri.SetValue(null, tmp.GetValue(null));
+                }
+
                 count++;
             }
-            Debug.Log("---->fixGameSettingTranslate补丁数量:" + count);
+            Debug.Log("--->GameSetting 统计翻译次数:" + count);
 
         }
-        public static void Postfix()
-        {
-            if (inited) { return; }
-            inited = true;
-            fixGameSettingTranslate();
 
+        public static void fixRoomTranslate()
+        {
+            //var s=  STRINGS.UI.OVERLAYS.ROOMS.NOROOM.TOO_BIG;
+            //var tt = RoomConstraints.NO_MESS_STATION;
+            var fieldsOrigal = typeof(RoomConstraints).GetFields(staticflags);
+            int count = 0;
+            int countUn= 0;
+            int countNull = 0;
+            foreach (var fieldOri in fieldsOrigal)
+            {
+                var obj=fieldOri.GetValue(null);
+                if(obj is RoomConstraints.Constraint)
+                {
+                    RoomConstraints.Constraint obja = (RoomConstraints.Constraint)obj;
+                     ;
+                    if(translateDictionary.TryGetValue(obja.name,out var nameZh))
+                    {
+                        obja.name = nameZh;
+                    }
+                    else
+                    {
+                        //未找到的翻译 {0} 包含了这些
+                        var tmp = typeof(MockRoomConstraints).GetField(fieldOri.Name, staticflags);
+                        if(tmp != null)
+                        {
+                            // ROOMS.CRITERIA.CEILING_HEIGHT.DESCRIPTION
+                            // ROOMS.CRITERIA.MINIMUM_SIZE.DESCRIPTION
+                            // fieldOri.SetValue(null, tmp.GetValue(null));
+                            RoomConstraints.Constraint objb = (RoomConstraints.Constraint)tmp.GetValue(null);
+                            //Debug.Log($" ---  {fieldOri.Name}  {objb.name}---");
+                            obja.name = objb.name;
+                            obja.description = objb.description;
+                        }
+                        if (tmp == null)
+                            countNull++;
+                        countUn++;
+                    }
+                    if (translateDictionary.TryGetValue(obja.description, out var descZh))
+                    {
+                        obja.description = descZh;
+                    }
+                    count++;
+                }
+            }
+            Debug.Log($"--->RoomConstraints 统计翻译次数:{count}  {countUn} {countNull}");
+
+            //   RoomConstraints.
+            //   STRINGS.ROOMS.
+            //  SelectToolHoverTextCard.UpdateHoverElements();//
+        }
+        public static void fixTraitTranslate()
+        {
             var langKey = Localization.GetCurrentLanguageCode();
             var langFilename = $"{Application.dataPath}/StreamingAssets/strings/strings_preinstalled_{langKey}.po";
             if (!File.Exists(langFilename)) { return; }
-            var dic = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(langFilename, Encoding.UTF8));
+            translateDictionary = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(langFilename, Encoding.UTF8));
 
             //var dic = Localization.LoadStringsFile(stringDir, false);
             //STRINGS.UI.FRONTEND.COLONYDESTINATIONSCREEN.CUSTOMIZE
             var traits = Db.Get().traits;
             int count = 0;
-            string outString = "";
+         
             foreach (var trait in traits.resources)
             {
                 //LocString name = trait.Name;//无效.这里是功能阉割了. Stinkiness S: [] H: [0] Value: [MISSING.]
                 //if (name.text == name.key.String) //怎么判断没有翻译? 
 
                 // dic.
-                var found = dic.TryGetValue(trait.Name, out var ss);
+                var found = translateDictionary.TryGetValue(trait.Name, out var ss);
                 if (found)
                 {
                     //Debug.LogWarning("--->修正翻译 :" + trait.Name );
                     trait.Name = ss + "(" + trait.Name + ")";
-                    trait.description = dic[trait.description] + " " + trait.description;
+                    trait.description = translateDictionary[trait.description] + " " + trait.description;
                     count++;
                 }
                 //  trait.Name=dic[trait.Name];
@@ -69,11 +120,22 @@ namespace TranslateFixMod
             //翻译
             //Strings.Get(key).String;
             var sk = STRINGS.CODEX.STORY_TRAITS.MORB_ROVER_MAKER.STATUSITEMS.GERM_COLLECTION_PROGRESS.TOOLTIP;
-            Debug.Log("--->统计翻译次数:" + outString + count);
+            Debug.Log("--->Trait 统计翻译次数:"  + count);
+        }
+        public static void Postfix()
+        {
+            if (inited) { return; }
+            inited = true;
+
             var example = STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME;
-            //[14:31:48.556] [1] [WARNING] --->正在判断翻译B :铁石胃肠 S: [STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME] H: [-1000142653] Value: [铁石胃肠]
+            //铁石胃肠 S: [STRINGS.DUPLICANTS.TRAITS.IRONGUT.NAME] H: [-1000142653] Value: [铁石胃肠]
             Debug.Log($"--->验证翻译{Localization.GetCurrentLanguageCode()} {example.text}/{example.key}");
 
+            fixGameSettingTranslate();
+
+            fixTraitTranslate();
+
+            fixRoomTranslate();
             // Localization.OverloadStrings(dic);
 
             //G:\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\StreamingAssets\strings
@@ -223,7 +285,30 @@ namespace TranslateFixMod
         }
     }
 
+    public class MockRoomConstraints
+    {
+        public static RoomConstraints.Constraint CEILING_HEIGHT_4 = new RoomConstraints.Constraint(null, (Room room) => 1 + room.cavity.maxY - room.cavity.minY >= 4, 1, string.Format(ROOMS.CRITERIA.CEILING_HEIGHT.NAME, "4"), string.Format(ROOMS.CRITERIA.CEILING_HEIGHT.DESCRIPTION, "4"), null);
+ 
+        public static RoomConstraints.Constraint CEILING_HEIGHT_6 = new RoomConstraints.Constraint(null, (Room room) => 1 + room.cavity.maxY - room.cavity.minY >= 6, 1, string.Format(ROOMS.CRITERIA.CEILING_HEIGHT.NAME, "6"), string.Format(ROOMS.CRITERIA.CEILING_HEIGHT.DESCRIPTION, "6"), null);
+ 
+        public static RoomConstraints.Constraint MINIMUM_SIZE_12 = new RoomConstraints.Constraint(null, (Room room) => room.cavity.numCells >= 12, 1, string.Format(ROOMS.CRITERIA.MINIMUM_SIZE.NAME, "12"), string.Format(ROOMS.CRITERIA.MINIMUM_SIZE.DESCRIPTION, "12"), null);
+ 
+        public static RoomConstraints.Constraint MINIMUM_SIZE_24 = new RoomConstraints.Constraint(null, (Room room) => room.cavity.numCells >= 24, 1, string.Format(ROOMS.CRITERIA.MINIMUM_SIZE.NAME, "24"), string.Format(ROOMS.CRITERIA.MINIMUM_SIZE.DESCRIPTION, "24"), null);
+ 
+        public static RoomConstraints.Constraint MINIMUM_SIZE_32 = new RoomConstraints.Constraint(null, (Room room) => room.cavity.numCells >= 32, 1, string.Format(ROOMS.CRITERIA.MINIMUM_SIZE.NAME, "32"), string.Format(ROOMS.CRITERIA.MINIMUM_SIZE.DESCRIPTION, "32"), null);
+ 
+        public static RoomConstraints.Constraint MAXIMUM_SIZE_64 = new RoomConstraints.Constraint(null, (Room room) => room.cavity.numCells <= 64, 1, string.Format(ROOMS.CRITERIA.MAXIMUM_SIZE.NAME, "64"), string.Format(ROOMS.CRITERIA.MAXIMUM_SIZE.DESCRIPTION, "64"), null);
+ 
+        public static RoomConstraints.Constraint MAXIMUM_SIZE_96 = new RoomConstraints.Constraint(null, (Room room) => room.cavity.numCells <= 96, 1, string.Format(ROOMS.CRITERIA.MAXIMUM_SIZE.NAME, "96"), string.Format(ROOMS.CRITERIA.MAXIMUM_SIZE.DESCRIPTION, "96"), null);
+ 
+        public static RoomConstraints.Constraint MAXIMUM_SIZE_120 = new RoomConstraints.Constraint(null, (Room room) => room.cavity.numCells <= 120, 1, string.Format(ROOMS.CRITERIA.MAXIMUM_SIZE.NAME, "120"), string.Format(ROOMS.CRITERIA.MAXIMUM_SIZE.DESCRIPTION, "120"), null);
+        public static RoomConstraints.Constraint DECORATIVE_ITEM = new RoomConstraints.Constraint((KPrefabID bc) => bc.HasTag(GameTags.Decoration), null, 1, string.Format(ROOMS.CRITERIA.DECORATIVE_ITEM.NAME, 1), string.Format(ROOMS.CRITERIA.DECORATIVE_ITEM.DESCRIPTION, 1), null);
+ 
+        public static RoomConstraints.Constraint DECORATIVE_ITEM_2 = new RoomConstraints.Constraint((KPrefabID bc) => bc.HasTag(GameTags.Decoration), null, 2, string.Format(ROOMS.CRITERIA.DECORATIVE_ITEM.NAME, 2), string.Format(ROOMS.CRITERIA.DECORATIVE_ITEM.DESCRIPTION, 2), null);
+ 
+        public static RoomConstraints.Constraint DECORATIVE_ITEM_SCORE_20 = new RoomConstraints.Constraint((KPrefabID bc) => bc.HasTag(GameTags.Decoration) && bc.HasTag(RoomConstraints.ConstraintTags.Decor20), null, 1, string.Format(ROOMS.CRITERIA.DECOR20.NAME, "20"), string.Format(ROOMS.CRITERIA.DECOR20.DESCRIPTION, "20"), null);
 
+    }
     //直接复制源代码来操作...
     public class MockCustomGameSettingConfigs
     {

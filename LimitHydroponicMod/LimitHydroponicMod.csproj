@@ -4,8 +4,8 @@
 	<ModTitle>Hydroponic Farm Limit frame 液培砖限速</ModTitle>
 	<Description>Hydroponic Farm Limit frame 液培砖限速.LimitHydroponicMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.4.49</AssemblyVersion>
-    <FileVersion>1.0.0.48</FileVersion>
+    <AssemblyVersion>2023.12.5.51</AssemblyVersion>
+    <FileVersion>1.0.0.50</FileVersion>
   </PropertyGroup>
 
 </Project>
