@@ -27,8 +27,8 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
              };
 
             object value = MyPolyUT.GetCenterOfGravityPoint(mPoints);
-            global::Debug.Log(value);
-            global::Debug.Log(MyPolyUT.GetMaxY(mPoints));
+            Debug.Log(value);
+            Debug.Log(MyPolyUT.GetMaxY(mPoints));
 
         }
         [TestMethod()]
@@ -52,7 +52,7 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
         public void RandTest()
         {
             SeededRandom rnd = new SeededRandom(2123121);
-            global::Debug.Log(rnd.RandomRange(2, 5));
+            Debug.Log(rnd.RandomRange(2, 5));
         }
 
         [TestMethod()]
@@ -89,7 +89,7 @@ namespace VacuumSpaceMod.DebugViewClassPath.Tests
                   "  location_x: {1}\n", value, i * 2 + 1);
 
             }
-            global::Debug.Log(outStr);
+            Debug.Log(outStr);
 
         }
     }

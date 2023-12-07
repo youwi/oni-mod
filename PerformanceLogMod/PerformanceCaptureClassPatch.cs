@@ -173,11 +173,11 @@ namespace PerformanceLogMod
             if (GenericGameSettings.instance.performanceCapture.gcStats)
             {
                 //  string gcHeadText = "Version,Date,Time,SaveGame";
-                // global::Debug.Log("Begin GC profiling...");
+                // Debug.Log("Begin GC profiling...");
                 float realtimeSinceStartup = Time.realtimeSinceStartup;
                 GC.Collect();
                 gcTime = Time.realtimeSinceStartup - realtimeSinceStartup;
-                global::Debug.Log("\tGC.Collect() took " + gcTime.ToString() + " seconds");
+                Debug.Log("\tGC.Collect() took " + gcTime.ToString() + " seconds");
                 // MemorySnapshot memorySnapshot = new MemorySnapshot();
                 //string format = "{0},{1},{2},{3}";
                 //string gcCsvFilepath = "./memory/GCTypeMetrics.csv";
@@ -207,7 +207,7 @@ namespace PerformanceLogMod
                 //    //    }));
                 //    //}
                 //}
-                // global::Debug.Log("...end GC profiling");
+                // Debug.Log("...end GC profiling");
             }
             float fps = Global.Instance.GetComponent<PerformanceMonitor>().FPS;
             Directory.CreateDirectory("./memory");

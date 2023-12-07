@@ -71,19 +71,19 @@ namespace DoubleMutantMod
                 }
                 if (list == null)
                 {
-                    // global::Debug.Log("变异listNull:" + list);
+                    // Debug.Log("变异listNull:" + list);
                     list = new List<string>();
                 }
                 if (list.Count > 2)
                 {   //已经双重变异就不需要了.
-                    global::Debug.Log("变异已经大于2:" + list);
+                    Debug.Log("变异已经大于2:" + list);
                     return;
                 }
                 if (rand100() > 80) //注意双重随机数会重叠.
                 {
                     //注释看看能不能加性能
 
-                    //  global::Debug.Log("二次变异率为80%,变异未触发");
+                    //  Debug.Log("二次变异率为80%,变异未触发");
                     return;
                 }
                 //添加一轮变异,按25%概率添加.
@@ -95,7 +95,7 @@ namespace DoubleMutantMod
                 string name2 = Db.Get().PlantMutations.GetRandomMutation(__instance.PrefabID().Name).Id;
                 string nameTmp = name + "_" + name2;//
 
-                global::Debug.Log("变异目标:" + nameTmp + ",匹配:" + blickList.Contains(nameTmp));
+                Debug.Log("变异目标:" + nameTmp + ",匹配:" + blickList.Contains(nameTmp));
 
                 list.Add(name);//一级变异,
                 if (blickList.Contains(nameTmp)) //机率再减50%
@@ -144,7 +144,7 @@ namespace DoubleMutantMod
             }
             catch (Exception ex)
             {
-                global::Debug.Log(ex.Message);
+                Debug.Log(ex.Message);
             }
 
         }
@@ -162,7 +162,7 @@ namespace DoubleMutantMod
         {
 
             string ot = blickList[randA.Next(0, blickList.Length)];
-            //  global::Debug.Log("双重变异为:" + ot);
+            //  Debug.Log("双重变异为:" + ot);
             return ot;
         }
     }

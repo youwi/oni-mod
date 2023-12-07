@@ -221,7 +221,7 @@ namespace TeleporterBuildingMod
             TemplateContainer template = TemplateCache.GetTemplate(templateName);
             TemplateLoader.Stamp(template, Grid.CellToPos(cell), delegate
             {
-                global::Debug.Log("替换打印了...");
+                Debug.Log("替换打印了...");
             });
         }
 

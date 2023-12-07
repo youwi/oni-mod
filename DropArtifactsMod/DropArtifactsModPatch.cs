@@ -11,10 +11,10 @@ namespace DropArtifactsMod
         {
             // GameObject go = __instance;
             ArtifactModule artifactModule = __instance.GetComponent<ArtifactModule>();
-            global::Debug.Log("配置火箭自动.Artifact..");
+            Debug.Log("配置火箭自动.Artifact..");
             World.Instance.Subscribe((int)GameHashes.RocketLanded, delegate (object data)
             {
-                global::Debug.Log("火箭着陆了A...");
+                Debug.Log("火箭着陆了A...");
             });
 
             __instance.Subscribe((int)GameHashes.RocketLanded, delegate (object data)
@@ -36,7 +36,7 @@ namespace DropArtifactsMod
                     }
                 }
                 // GameHashes.Rocket
-                global::Debug.Log("火箭着陆了...");
+                Debug.Log("火箭着陆了...");
             });
         }
 

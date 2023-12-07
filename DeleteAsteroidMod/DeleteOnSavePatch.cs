@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace DeleteAsteroid
+namespace DeleteAsteroidMod
 {
     [HarmonyPatch(typeof(SaveLoader), nameof(SaveLoader.Save),
          new Type[] { typeof(string), typeof(bool), typeof(bool) })]
@@ -16,13 +16,13 @@ namespace DeleteAsteroid
 
             try
             {
-                global::Debug.Log("-->DeleteOnSavePatch.Prefix--<");
+                Debug.Log("-->DeleteOnSavePatch.Prefix--<");
                 UnRegMarkedAsteroid();
                 DeleteAstoidLoop();
             }
             catch (Exception ex)
             {
-                global::Debug.LogWarning(ex.Message);
+                Debug.LogWarning(ex.Message);
             }
 
         }
@@ -86,7 +86,7 @@ namespace DeleteAsteroid
             }
 
             var newwidth = maxWidthOff + 37;//设置新大小.不改高度.
-            global::Debug.Log($">>>> 星数:{list.Count} 最大位置:<{maxOffsetx},{maxWidthOff}>, Grid.WidthInCells :{Grid.WidthInCells},新大小: {newwidth},{Grid.HeightInCells}");
+            Debug.Log($">>>> 星数:{list.Count} 最大位置:<{maxOffsetx},{maxWidthOff}>, Grid.WidthInCells :{Grid.WidthInCells},新大小: {newwidth},{Grid.HeightInCells}");
             //星数:8 最大位置:<404,500>, Grid.WidthInCells :636,新大小: 537,404
             //星数:8 最大位置:<404,500>, Grid.WidthInCells :636,新大小: 537,404
             if (Grid.WidthInCells > newwidth + 99 || Grid.WidthInCells < newwidth)
@@ -100,7 +100,7 @@ namespace DeleteAsteroid
                 // Grid.WidthInCells=newwidth;
                 // Game.Instance.gasConduitFlow.
                 // Game.Instance.gasConduitFlow.
-                global::Debug.Log($">>>>设置新大小: {newwidth},{Grid.HeightInCells}");
+                Debug.Log($">>>>设置新大小: {newwidth},{Grid.HeightInCells}");
             }
             // GridSettings.Reset(worldGen.GetSize().x, worldGen.GetSize().y);
 
@@ -122,11 +122,11 @@ namespace DeleteAsteroid
                 {
                     continue;
                 }
-                //  global::Debug.Log(orderedKey.ToString()+" -->"+list.Count);
+                //  Debug.Log(orderedKey.ToString()+" -->"+list.Count);
 
                 if (orderedKey.Name == "Asteroid")
                 {
-                    // global::Debug.Log(" 搜索Asteroid: ");
+                    // Debug.Log(" 搜索Asteroid: ");
                     for (int i = 0; i < list.Count; i++)
                     {
                         SaveLoadRoot item = list[i];
@@ -145,14 +145,12 @@ namespace DeleteAsteroid
                                 UnityEngine.Object.Destroy(item);
                                 list.RemoveAt(i);
                                 i--;
-                                global::Debug.Log("--->Delete Asteroid +1  删除+1");
+                                Debug.Log("--->Delete Asteroid +1  删除+1");
                             }
-
-
                         }
                     }
 
-                    // global::Debug.Log(" 搜索Asteroid:结束 ");
+                    // Debug.Log(" 搜索Asteroid:结束 ");
                     // ResizeMapAfterDelete(list);
                 }
             }
@@ -210,7 +208,7 @@ namespace DeleteAsteroid
             //ClusterManager.Instance.GetAllWorldsAccessibleAmounts
             //WorldContainer markDeleteWorld = null;
 
-            //global::Debug.Log($"Worlds.Count:{worlds.Count} 包括火箭" );
+            //Debug.Log($"Worlds.Count:{worlds.Count} 包括火箭" );
             for (int i = 0; i < worlds.Count; i++)
             {
                 if (worlds.Count > 1)
@@ -231,16 +229,16 @@ namespace DeleteAsteroid
                     //var wi = world.GetComponentInParent<WorldInventory>();
                     //var wom = world.GetComponentInParent<OrbitalMechanics>();
                     //var wsmc = world.GetComponentInParent<StateMachineController>();
-                    //global::Debug.Log("WorldInventory  ---> :" + wi);
-                    //global::Debug.Log("OrbitalMechanics  ---> :" + wom);
-                    //global::Debug.Log("StateMachineController  ---> :" + wsmc);
-                    //global::Debug.Log("AsteroidGridEntity-->:" + age);
+                    //Debug.Log("WorldInventory  ---> :" + wi);
+                    //Debug.Log("OrbitalMechanics  ---> :" + wom);
+                    //Debug.Log("StateMachineController  ---> :" + wsmc);
+                    //Debug.Log("AsteroidGridEntity-->:" + age);
 
                     if (gridEntity != null)
                     {
                         if (gridEntity.Name == "delete" || gridEntity.Name.Trim().ToLower() == "delete")  // 获取右上角底层的实体名.
                         {
-                            global::Debug.Log("Unregister删除小行星:" + gridEntity.Name);
+                            Debug.Log("Unregister删除小行星:" + gridEntity.Name);
 
                             ClusterManager.Instance.UnregisterWorldContainer(world);
                             //DeleteWorldBuildings(world);
@@ -261,9 +259,9 @@ namespace DeleteAsteroid
             //GameObject gameObject = Util.KInstantiate(Assets.GetPrefab("Asteroid"), null, null);
             //GameObject gameObject2 = Util.KInstantiate(Assets.GetPrefab("Asteroid"), null, null);
 
-            // global::Debug.Log("KInstantiate:gameObject:" + gameObject);
-            // global::Debug.Log("KInstantiate:gameObject:对象相等：" + gameObject.Equals(gameObject2));
-            // global::Debug.Log("Asteroid:gameObject:对象相等：" + Assets.GetPrefab("Asteroid").Equals(Assets.GetPrefab("Asteroid")));
+            // Debug.Log("KInstantiate:gameObject:" + gameObject);
+            // Debug.Log("KInstantiate:gameObject:对象相等：" + gameObject.Equals(gameObject2));
+            // Debug.Log("Asteroid:gameObject:对象相等：" + Assets.GetPrefab("Asteroid").Equals(Assets.GetPrefab("Asteroid")));
             // GameObject go = Assets.GetPrefab("Asteroid");//好像只初始化一个星球.
             //好像是空对象.
             //===> Asteroid(KPrefabID)
@@ -274,24 +272,24 @@ namespace DeleteAsteroid
             //===> Asteroid(AsteroidGridEntity)
             //===> Asteroid(OrbitalMechanics)
             //===> Asteroid(StateMachineController)
-            //global::Debug.Log("Asteroid GameObject :" + go);
+            //Debug.Log("Asteroid GameObject :" + go);
             ////go.RemoveTag("");
             //var s = go.GetComponents<KMonoBehaviour>();
             //foreach (var tmp in s)
             //{
-            //    global::Debug.Log("===>  " + tmp.ToString());
+            //    Debug.Log("===>  " + tmp.ToString());
             //    if (tmp is AsteroidGridEntity tt)
             //    {
 
-            //        global::Debug.Log("AsteroidGridEntity.Name:  " + tt.Name);
+            //        Debug.Log("AsteroidGridEntity.Name:  " + tt.Name);
             //        // YamlIO.Save(tmp, "D:/GameObject3.yaml");
             //    }
             //    if (tmp is KPrefabID iD)
             //    {
-            //        global::Debug.Log("KPrefabID" + iD.InstanceID);
+            //        Debug.Log("KPrefabID" + iD.InstanceID);
             //    }
             //}
-            // global::Debug.Log("Asteroid  ->AsteroidGridEntity.length :" + go.GetComponents<AsteroidGridEntity>().Length);
+            // Debug.Log("Asteroid  ->AsteroidGridEntity.length :" + go.GetComponents<AsteroidGridEntity>().Length);
             // YamlIO.Save(go, "D:/GameObject.yaml");
             // YamlIO.Save(gameObject, "D:/GameObjectIn.yaml");
             // go.DeleteObject();
@@ -299,10 +297,10 @@ namespace DeleteAsteroid
             //go.IsNullOrDestroyed();
             //go.re
             // go.
-            //  global::Debug.Log(" a - config :" + go.GetComponent<AsteroidConfig>());
+            //  Debug.Log(" a - config :" + go.GetComponent<AsteroidConfig>());
             //go.gameObjects
             //string json = JsonConvert.SerializeObject(go);
-            // global::Debug.Log("Asteroid GameObject: "+json);
+            // Debug.Log("Asteroid GameObject: "+json);
 
 
 
@@ -315,54 +313,54 @@ namespace DeleteAsteroid
             //var asc = Game.Instance.GetComponent<AsteroidConfig>();
             //if (asc != null)
             //{
-            //     global::Debug.Log("Game.Instance.GetComponent<AsteroidConfig>:" + asc.ToString());
+            //     Debug.Log("Game.Instance.GetComponent<AsteroidConfig>:" + asc.ToString());
             //}else
-            //{  global::Debug.Log("Game.Instance.GetComponent<AsteroidConfig>:空");
+            //{  Debug.Log("Game.Instance.GetComponent<AsteroidConfig>:空");
             //}
             //var tmp= Game.Instance.FindComponent("Asteroid");
             //if (tmp != null)
             //{
-            //     global::Debug.Log("Game.Instance.GetComponent<AsteroidConfig>:" + tmp.ToString());
+            //     Debug.Log("Game.Instance.GetComponent<AsteroidConfig>:" + tmp.ToString());
             //}
             //else
             //{
-            //     global::Debug.Log(" Game.Instance.FindComponent> Asteroid:空");
+            //     Debug.Log(" Game.Instance.FindComponent> Asteroid:空");
             //}
             //tmp = ClusterManager.Instance.FindComponent("Asteroid");
-            // global::Debug.Log("ClusterManager.Instance.FindComponent  Asteroid(:" +tmp);
+            // Debug.Log("ClusterManager.Instance.FindComponent  Asteroid(:" +tmp);
             //tmp = ClusterManager.Instance.FindComponent("AsteroidConfig");
-            // global::Debug.Log("ClusterManager.Instance.FindComponent AsteroidConfig(:" +tmp );
+            // Debug.Log("ClusterManager.Instance.FindComponent AsteroidConfig(:" +tmp );
             //tmp= SaveLoader.Instance.FindComponent("AsteroidConfig");
-            // global::Debug.Log("find AsteroidConfig(:" + tmp);
+            // Debug.Log("find AsteroidConfig(:" + tmp);
             //tmp = SaveLoader.Instance.FindComponent("Asteroid");
-            // global::Debug.Log("find Asteroid(:" + tmp);
+            // Debug.Log("find Asteroid(:" + tmp);
 
 
             //if (tmp == null)
             //{
-            //     global::Debug.Log("tmp为空");
+            //     Debug.Log("tmp为空");
             //}
             //var sse=SaveLoader.Instance.GetComponentInParent<AsteroidConfig>();
-            // global::Debug.Log("SaveLoader.GetComponentInParent<AsteroidConfig>:" + sse );
+            // Debug.Log("SaveLoader.GetComponentInParent<AsteroidConfig>:" + sse );
 
             //sse=ClusterManager.Instance.gameObject.GetComponent<AsteroidConfig>();
-            // global::Debug.Log("gameObject.GetComponent<AsteroidConfig>:" + sse);
+            // Debug.Log("gameObject.GetComponent<AsteroidConfig>:" + sse);
             ////Game.Instance.gameObject.GetComponents
             //sse=Global.Instance.GetComponent<AsteroidConfig>();
 
-            // global::Debug.Log("Global.GetComponent<AsteroidConfig> :" + sse);
+            // Debug.Log("Global.GetComponent<AsteroidConfig> :" + sse);
 
             //tmp = Global.Instance.FindComponent("AsteroidConfig");
-            // global::Debug.Log("Global.FindComponent<AsteroidConfig> :" + tmp);
+            // Debug.Log("Global.FindComponent<AsteroidConfig> :" + tmp);
             //tmp = Global.Instance.FindComponent("AsteroidGridEntity");
-            // global::Debug.Log("Global.FindComponent<AsteroidGridEntity> :" + tmp);
+            // Debug.Log("Global.FindComponent<AsteroidGridEntity> :" + tmp);
             //if (tmp == null)
             //{
-            //     global::Debug.Log("tmp为空");
+            //     Debug.Log("tmp为空");
             //}
             //if (sse == null)
             //{
-            //     global::Debug.Log("sse为空");
+            //     Debug.Log("sse为空");
             //}
             //  Game.Instance 29个功能.
             //  SaveLoader.Instance 3个功能
@@ -379,7 +377,7 @@ namespace DeleteAsteroid
             //KMonoBehaviour[] components = SaveGame.Instance. GetComponents<KMonoBehaviour>();
             //if (components == null)
             //{
-            //     global::Debug.Log("components为空");
+            //     Debug.Log("components为空");
             //}
             //else
             //{
@@ -388,21 +386,21 @@ namespace DeleteAsteroid
             //    {
             //        if( kMonoBehaviour.name == "Asteroid")
             //        {
-            //             global::Debug.Log("找到一个KMonoBehaviour/Asteroid: " );
+            //             Debug.Log("找到一个KMonoBehaviour/Asteroid: " );
             //        }
             //        if (num < 100)
             //        {
-            //             global::Debug.Log(kMonoBehaviour.ToString());
+            //             Debug.Log(kMonoBehaviour.ToString());
             //        }
             //    }
-            //     global::Debug.Log("SaveGame:num: "+num);
+            //     Debug.Log("SaveGame:num: "+num);
             //}
 
             // 
             //components = ClusterManager.Instance.GetComponents<KMonoBehaviour>();
             //if (components == null)
             //{
-            //     global::Debug.Log("components为空");
+            //     Debug.Log("components为空");
             //}
             //else
             //{
@@ -411,21 +409,21 @@ namespace DeleteAsteroid
             //    {
             //        if (kMonoBehaviour.name == "Asteroid")
             //        {
-            //             global::Debug.Log("找到一个KMonoBehaviour/Asteroid: ");
+            //             Debug.Log("找到一个KMonoBehaviour/Asteroid: ");
             //        }
             //        if (num < 100)
             //        {
-            //             global::Debug.Log(kMonoBehaviour.ToString());
+            //             Debug.Log(kMonoBehaviour.ToString());
             //        }
             //    }
             //// 
-            //     global::Debug.Log("ClusterManager: num: " + num);
+            //     Debug.Log("ClusterManager: num: " + num);
             //}
 
             //var tt = ClusterManager.Instance.GetComponentsInChildren<Behaviour>();
             //if (components == null)
             //{
-            //     global::Debug.Log("tt 为空");
+            //     Debug.Log("tt 为空");
             //}
             //else
             //{
@@ -434,15 +432,15 @@ namespace DeleteAsteroid
             //    {
             //        if (kMonoBehaviour.name == "Asteroid")
             //        {
-            //             global::Debug.Log("找到一个KMonoBehaviour/Asteroid: ");
+            //             Debug.Log("找到一个KMonoBehaviour/Asteroid: ");
             //        }
             //        if (num < 100)
             //        {
-            //             global::Debug.Log(kMonoBehaviour.ToString());
+            //             Debug.Log(kMonoBehaviour.ToString());
             //        }
             //    }
             //    // 
-            //     global::Debug.Log("Behaviour.GetComponentsInChildren: num: " + num);
+            //     Debug.Log("Behaviour.GetComponentsInChildren: num: " + num);
             //}
             // WorldGenSpawner 
 
@@ -459,7 +457,7 @@ namespace DeleteAsteroid
             //        if (gridEntity.Name == "delete" || gridEntity.Name.Trim().ToLower() == "delete")  // 获取右上角底层的实体名.
             //        {
             //            asteroidList[i] = null;//删除元素
-            //             global::Debug.Log("删除了星名:" + gridEntity.Name);
+            //             Debug.Log("删除了星名:" + gridEntity.Name);
             //        };
             //    }
             //}

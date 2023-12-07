@@ -49,7 +49,7 @@ namespace ForestTree
 
                if (seedParent != null)
                {
-                    global::Debug.Log("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
+                    Debug.Log("ForestTreeBranchConfig树枝上级生成时：GetComponentInParent<MutantPlant>：" + seedParent.SpeciesID);
                }
 
                MutantPlant seed = gameObject.GetComponent<MutantPlant>();*/
@@ -75,8 +75,8 @@ namespace ForestTree
                         // PlantSubSpeciesCatalog.Instance.DiscoverSubSpecies(GetSubSpeciesInfo(), seed);
             */
 
-            // global::Debug.Log("ForestTreeBranchConfig树枝生成时：seed.MutationIDs：" + seed.SpeciesID);
-            //  global::Debug.Log("ForestTreeBranchConfig树枝生成时：seed.IsOriginal：" + seed.IsOriginal);
+            // Debug.Log("ForestTreeBranchConfig树枝生成时：seed.MutationIDs：" + seed.SpeciesID);
+            //  Debug.Log("ForestTreeBranchConfig树枝生成时：seed.IsOriginal：" + seed.IsOriginal);
 
             //  return gameObject;
         }
@@ -93,7 +93,7 @@ namespace ForestTree
         public static void Postfix(BuddingTrunk __instance)
         {
             // var gameObject = __instance.GetComponentInParent<MutantPlant>();
-            // global::Debug.Log("BuddingTrunk 测试变异信息：" + gameObject.SpeciesID); //结果是 ForestTree
+            // Debug.Log("BuddingTrunk 测试变异信息：" + gameObject.SpeciesID); //结果是 ForestTree
             /*  __instance.AddTag(GameTags.MutatedSeed);
               __instance.FindOrAddComponent<MutantPlant>();*/
 
@@ -111,7 +111,7 @@ namespace ForestTree
         public static void Postfix(TreeBud __instance)
         {
             var mutantBranch = __instance.GetComponentInParent<MutantPlant>();
-            //  global::Debug.Log("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
+            //  Debug.Log("BTreeBudPatch 测试变异信息：" + mutantBranch.SpeciesID);//结果是 ForestTreeBranch
             var mutantUp = __instance.buddingTrunk.Get().GetComponentInParent<MutantPlant>();
             //防止多余的复制。在重新加载时可防止为负
             if (mutantBranch.MutationIDs == null || mutantBranch.MutationIDs.Count == 0)

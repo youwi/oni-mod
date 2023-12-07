@@ -31,7 +31,7 @@ namespace MeteorChangeMod
         //    //    {
         //    //        if (codeInstruction.operand != null)
         //    //        {
-        //    //            global::Debug.Log(codeInstruction.operand.ToString());
+        //    //            Debug.Log(codeInstruction.operand.ToString());
         //    //        }
         //    //        if ((MethodInfo)codeInstruction.operand == GetFNWithoutExtensionMethodInfo)
         //    //        {

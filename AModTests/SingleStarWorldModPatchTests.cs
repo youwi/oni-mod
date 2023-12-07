@@ -8,14 +8,14 @@ namespace SingleStarWorldMod.Tests
         [TestMethod()]
         public void rand1Test()
         {
-            global::Debug.Log(SingleStarWorldModPatch.rand1());
-            global::Debug.Log(SingleStarWorldModPatch.rand1());
-            global::Debug.Log(SingleStarWorldModPatch.rand1());
-            global::Debug.Log(SingleStarWorldModPatch.rand1());
-            global::Debug.Log(SingleStarWorldModPatch.rand1());
-            global::Debug.Log(SingleStarWorldModPatch.rand1());
+            Debug.Log(SingleStarWorldModPatch.rand1());
+            Debug.Log(SingleStarWorldModPatch.rand1());
+            Debug.Log(SingleStarWorldModPatch.rand1());
+            Debug.Log(SingleStarWorldModPatch.rand1());
+            Debug.Log(SingleStarWorldModPatch.rand1());
+            Debug.Log(SingleStarWorldModPatch.rand1());
 
-            global::Debug.Log(new System.Random().Next(1, 10000));
+            Debug.Log(new System.Random().Next(1, 10000));
         }
     }
 }

@@ -25,7 +25,7 @@ namespace SingleStarWorldMod
         {
 
             var ModPath = Db_Initialize_Patch.ModPath;
-            global::Debug.Log("插入了模板中: " + ModPath);
+            Debug.Log("插入了模板中: " + ModPath);
             int width = gen.data.world.size.x;
             int height = gen.data.world.size.y;
             //  gen.data.world.HeightInCells;
@@ -39,7 +39,7 @@ namespace SingleStarWorldMod
             //
             //TemplateLoader.Stamp(bottomTemplate, new Vector2I(10, 10), delegate
             //{
-            //   global::Debug.Log("插入了模板成功");
+            //   Debug.Log("插入了模板成功");
             //});
             //Vector2I bottomPos = new Vector2I(2, 2);//在地底插入模板
             //gen.data.gameSpawnData.AddTemplate(bottomTemplate, bottomPos, ref claimedCells);

@@ -40,7 +40,7 @@ namespace InfiniteResearch
             }
             catch (Exception ex)
             {
-                global::Debug.Log(ex.Message);
+                Debug.Log(ex.Message);
                 YamlIO.Save(config, fileName);
 
             }

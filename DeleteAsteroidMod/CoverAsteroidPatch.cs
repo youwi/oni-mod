@@ -12,9 +12,9 @@ using System.Text;
 using System.Timers;
 using UnityEngine;
 
-namespace CoverAsteroidMod
+namespace DeleteAsteroidMod
 {
-    ////创建游戏时就加载
+    //创建游戏时就加载
     [HarmonyPatch(typeof(AsteroidGridEntity), "OnSpawn")]
     public class CoverAsteroidMod_Patch
     {
@@ -31,15 +31,28 @@ namespace CoverAsteroidMod
             new EventSystem.IntraObjectHandler<AsteroidGridEntity>(
                 delegate (AsteroidGridEntity component, object data)
                 {
+                    KIconButtonMenu.ButtonInfo buttonDelete = new KIconButtonMenu.ButtonInfo(
+                        "status_item_toilet_needs_emptying",
+                        "!Delete!",
+                        null,
+                        global::Action.SwitchActiveWorld8,
+                        null, null, null,
+                        "Delete this Asteroid (You should backup first)",
+                        true);
+
                     KIconButtonMenu.ButtonInfo button = new KIconButtonMenu.ButtonInfo(
                         "status_item_toilet_needs_emptying",
                         "Hide",
                         null,
                         global::Action.SwitchActiveWorld8,
                         null, null, null,
-                        "Hide this Asteroid",
+                        "Temporary Hide this Asteroid (Do not work after reload)",
                         true);
-
+                    buttonDelete.onClick = () =>
+                    {
+                        DeleteCurrAsteroid(component);
+                       
+                    };
                     button.onClick = delegate ()
                     {
                         if (button.text == "Hide")
@@ -56,17 +69,24 @@ namespace CoverAsteroidMod
                         Game.Instance.userMenu.Refresh(component.gameObject);
                     };
                     Game.Instance.userMenu.AddButton(component.gameObject, button, 1f);
-                   
+                    Game.Instance.userMenu.AddButton(component.gameObject, buttonDelete, 2f);
                 });
+        public static void DeleteCurrAsteroid(AsteroidGridEntity age)
+        {
+            Debug.Log($"---> 删除功能未完成 <---" );
+            var m_worldContainer = age.GetComponent<WorldContainer>();
+            Traverse.Create(age).Field("Name").SetValue("delete");
+            DeleteOnSavePatch.DeleteAstoidLoop();
+        }
         public static void UnRegMarkedAsteroid(AsteroidGridEntity age,bool flag)
         {
             var m_worldContainer=age.GetComponent<WorldContainer>();
             //  var worlds = ClusterManager.Instance.WorldContainers;
             int worldId = m_worldContainer.id;
 
-            if(m_worldContainer.IsStartWorld)
+            if(m_worldContainer.IsStartWorld || !m_worldContainer.IsDiscovered)
             {
-                Debug.Log($"---> 隐藏 IsStartWorld skiped ");
+                Debug.Log($"---> 隐藏 IsStartWorld skiped ,IsDiscovered:" + m_worldContainer.IsDiscovered);
                 return;
             }
             if (flag)
@@ -85,13 +105,18 @@ namespace CoverAsteroidMod
                 //m_worldContainer.SetDupeVisited(false);ClusterManager.Instance.GetWorld(age.GetMyWorldId())
                 //var gsmi2=ClusterManager.Instance.activeWorld.GetSMI<GameplaySeasonManager.Instance>();
                 //gsmi2?.activeSeasons.RemoveAll(x => x.worldId == worldId);
-
-                var gsmi3=m_worldContainer.GetSMI<GameplaySeasonManager.Instance>();
-                gsmi3?.activeSeasons.RemoveAll(x => x.worldId == m_worldContainer.id);
-                //.StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
-                // GameplaySeasonManager.Instance.activeSeasons.RemoveAll(x => x.worldId == age.GetMyWorldId());
-                // GameplaySeasonManager.Instance. activeSeasons.Remove(where );
-                ClusterManager.Instance.UnregisterWorldContainer(m_worldContainer);
+                try
+                {
+                    var gsmi3 = m_worldContainer.GetSMI<GameplaySeasonManager.Instance>();
+                    gsmi3?.activeSeasons.RemoveAll(x => x.worldId == m_worldContainer.id);
+                    //.StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
+                    // GameplaySeasonManager.Instance.activeSeasons.RemoveAll(x => x.worldId == age.GetMyWorldId());
+                    // GameplaySeasonManager.Instance. activeSeasons.Remove(where );
+                    ClusterManager.Instance.UnregisterWorldContainer(m_worldContainer);
+                }catch(Exception e)
+                {
+                    Debug.Log($"---> Hide 异常:{age.Name} {flag} {e}");
+                }
             }
             else
             {
@@ -99,7 +124,7 @@ namespace CoverAsteroidMod
                 m_worldContainer.SetDiscovered(true);
                 ClusterManager.Instance.RegisterWorldContainer(m_worldContainer);
             }
-            Debug.Log($"--->Cover 隐藏小行星:{age.Name} {flag} ");   
+            Debug.Log($"---> Hide 隐藏小行星:{age.Name} {flag} ");   
         }
 
     }

@@ -31,7 +31,7 @@ namespace InfiniteResearch
                 /*   if (fun != null)
                        fun.Invoke(researchCenter, null);*/
 
-                global::Debug.Log("UpdateState: " + fun);
+                Debug.Log("UpdateState: " + fun);
                 var par = fun.GetParameters();
 
 
@@ -47,7 +47,7 @@ namespace InfiniteResearch
                 {
                     // var fun = AccessTools.Method(typeof(ResearchCenter), "CreateChore");
                     // ___chore = (Chore)fun.Invoke(__instance,null);
-                    //      global::Debug.Log("RemoveDupe ....chore:"+chore);
+                    //      Debug.Log("RemoveDupe ....chore:"+chore);
                     ___chore = CreateChoreAccess(__instance);
                     return;
                 }
@@ -70,13 +70,13 @@ namespace InfiniteResearch
         }
         private static bool CanPreemptCB(Chore.Precondition.Context context)
         {
-            // global::Debug.Log("判断任务是不是可以抢占");
+            // Debug.Log("判断任务是不是可以抢占");
             return false;
         }
 
         public static Chore CreateChoreAccess(ResearchCenter __instance)
         {
-            global::Debug.Log("CreateChoreAccess 创建了新任务");
+            Debug.Log("CreateChoreAccess 创建了新任务");
             var chore = new WorkChore<ResearchCenter>(Db.Get().ChoreTypes.PowerTinker, __instance, null, true, null, null, null, true, null, false, true, null, true, true, true, PriorityScreen.PriorityClass.basic, 5, false, true)
             {
                 preemption_cb = new Func<Chore.Precondition.Context, bool>(CanPreemptCB)
@@ -112,14 +112,14 @@ namespace InfiniteResearch
             while (enumerator.MoveNext())
             {
                 Flag tmp = enumerator.Current.Key;
-                global::Debug.Log("-->.Operational.Flags  :  " + tmp.Name + enumerator.Current);
+                Debug.Log("-->.Operational.Flags  :  " + tmp.Name + enumerator.Current);
             }
 
             var opP = AccessTools.Field(typeof(Operational), "IsOperational");
-            global::Debug.Log("Operational.IsOperational(反射)  :  " + opP);
+            Debug.Log("Operational.IsOperational(反射)  :  " + opP);
             var opM = AccessTools.Method(typeof(Operational), "IsOperational");
-            global::Debug.Log("Operational.IsOperational(方法)  :  " + opM);
-            global::Debug.Log("Operational.IsOperational  :  " + op.IsOperational);
+            Debug.Log("Operational.IsOperational(方法)  :  " + opM);
+            Debug.Log("Operational.IsOperational  :  " + op.IsOperational);
 
 
 
