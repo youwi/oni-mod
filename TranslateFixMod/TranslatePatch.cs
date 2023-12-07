@@ -125,6 +125,7 @@ namespace TranslateFixMod
                         var tmp = typeof(MockRoomConstraints).GetField(fieldOri.Name, staticflags);
                         if(tmp != null)
                         {
+
                             // ROOMS.CRITERIA.CEILING_HEIGHT.DESCRIPTION
                             // ROOMS.CRITERIA.MINIMUM_SIZE.DESCRIPTION
                             // fieldOri.SetValue(null, tmp.GetValue(null));
@@ -140,6 +141,11 @@ namespace TranslateFixMod
                     if (translateDictionary.TryGetValue(obja.description, out var descZh))
                     {
                         obja.description = descZh;
+                    }
+                    if (obja.name.Contains("Cots"))
+                    {
+                        obja.name += " (床铺)";
+                        //指定翻译
                     }
                     count++;
                 }

@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+
+	  <ModTitle>Cover Asteroid 隐藏星球</ModTitle>
+	  <Description>Cover Asteroid 隐藏星球</Description>
+	  <BaseOutputPath></BaseOutputPath>
+	  <AssemblyVersion>2023.12.7.137</AssemblyVersion>
+	  <FileVersion>1.0.0.136</FileVersion>
+  </PropertyGroup>
+
+</Project>

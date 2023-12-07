@@ -345,7 +345,7 @@ namespace PerformanceLogMod
                 return true;
             }
             tickRefresh++;
-            if (tickRefresh > 100)
+            if (tickRefresh > 10000)
             {
                 Debug.Log($"---> 刷新次数:{tickRefresh} ");
                 tickRefresh = 0;
@@ -367,7 +367,7 @@ namespace PerformanceLogMod
                 return true;
             }
             tickRefresh++;
-            if (tickRefresh > 100)
+            if (tickRefresh > 10000)
             {
                 Debug.Log($"---> OverlayModes.Power 刷新次数:{tickRefresh} ");
                 tickRefresh = 0;

@@ -26,11 +26,14 @@
 	*	 对GC进行拦截.
 	*	 G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
 	* 11 [完成] 崩溃修复:TeleporterBuild 传送器可建造
+	* 12 不删除星球,只隐藏星球 ing
+
 # 反射和JSON笔记:
 	Traverse.Create 
     Newtonsoft.Json.JsonConvert.DeserializeObject<SettingsFile>(string);
 	StampTool 图章工具
 	TemplateCache  Yaml处理工具
+	TargetScreen 建筑菜单.
 # 性能
 	内置性能表,可能有点用
 	Global.Instance.GetComponent<PerformanceMonitor>().FPS;
@@ -113,4 +116,6 @@
 	 AtSurface 在上层生成
 	 AtDepths  在下层生成
 	 AtEdge   在边缘生成(是区块边还是地图边不清)
+# 222
+	
  

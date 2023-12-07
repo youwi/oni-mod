@@ -5,14 +5,12 @@ using System.Timers;
 namespace ForceEruptionMod
 {
     // Token: 0x02000002 RID: 2
-    [HarmonyPatch(typeof(Geyser))]
-    [HarmonyPatch("OnSpawn")]
+    [HarmonyPatch(typeof(Geyser), "OnSpawn")]  
     public class ForceEruptionPatch : UserMod2
     {
-        // Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250
         private static void Postfix(Geyser __instance)
         {
-            __instance.Subscribe<Geyser>(493375141, ForceEruptionPatch.OnRefreshUserMenuDelegate);
+            __instance.Subscribe<Geyser>((int)GameHashes.RefreshUserMenu, ForceEruptionPatch.OnRefreshUserMenuDelegate);
         }
         public static void setEmittingState(Geyser gb, bool emitting)
         {
@@ -31,8 +29,6 @@ namespace ForceEruptionMod
         }
 
         //目标正喷发:STRINGS.BUILDING.STATUSITEMS.GEOTUNER_GEYSER_STATUS.NAME_ERUPTING
-
-        // Token: 0x04000001 RID: 1
         private static readonly EventSystem.IntraObjectHandler<Geyser> OnRefreshUserMenuDelegate =
             new EventSystem.IntraObjectHandler<Geyser>(
                 delegate (Geyser component, object data)
