@@ -4,7 +4,13 @@ ThreadedHttps.Send  StartHttpsRequest.Start()
 KleiItems.StartHttpsRequest();
 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUriString);
 
-
+Exception while loading mod Yu.PerformanceCapturePatch at D:/Doc/Klei/OxygenNotIncluded/mods/Local/PerformanceLogMod. 
+HarmonyLib.HarmonyException: Patching exception in method System.String ThreadedHttps`1<T>::Send(System.Byte[] byteArray, System.Boolean isForce) ---> System.FormatException: Method System.String ThreadedHttps`1<T>::Send(System.Byte[] byteArray, System.Boolean isForce) cannot be patched. Reason: Could not execute the method because the containing type is not fully instantiated.
+  at HarmonyLib.PatchFunctions.UpdateWrapper (System.Reflection.MethodBase original, HarmonyLib.PatchInfo patchInfo) [0x0008c] in <6dcb326e4f6442999f701f1e67d0b5a0>:0 
+  at HarmonyLib.PatchClassProcessor.ProcessPatchJob (HarmonyLib.PatchJobs`1+Job[T] job) [0x000bb] in <6dcb326e4f6442999f701f1e67d0b5a0>:0 
+   --- End of inner exception stack trace ---
+   
+Build: U50-583750-SD
 
 设置boot.config
 以下2个参数比较重要

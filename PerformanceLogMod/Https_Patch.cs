@@ -9,18 +9,44 @@ using UnityEngine.Scripting;
 
 namespace PerformanceLogMod
 {
-    [HarmonyPatch(typeof(ThreadedHttps<>), "Send")] 
-    public class Https_Patch
+    [HarmonyPatch(typeof(ThreadedHttps<KleiAccount>), "Send")]
+    public class Https_KleiAccount_Patch
+    {
+        public static void Postfix(System.Byte[] byteArray, System.Boolean isForce)
+        {
+            Https_KleiItems_Patch. calc_count();
+        }
+    }
+    [HarmonyPatch(typeof(ThreadedHttps<KleiMetrics>), "Send")]
+    public class Https_KleiMetrics_Patch
+    {
+ 
+
+        public static void Postfix(System.Byte[] byteArray, System.Boolean isForce)
+        {
+            Https_KleiItems_Patch. calc_count();
+        }
+    }
+
+    [HarmonyPatch(typeof(ThreadedHttps<KleiItems>), "Send")] 
+    public class Https_KleiItems_Patch
     {
         static long http_count = 0;
         static float http_last_time = 0;
-        public static void Postfix()
+
+        public static void Postfix(System.Byte[] byteArray, System.Boolean isForce)
         {
+            calc_count();
+        }
+        public static void calc_count()
+        {
+            //ThreadedHttps<KleiAccount>
+            //ThreadedHttps<KleiItems>
+            //ThreadedHttps<KleiMetrics>
             http_count++;
-            if(http_count > 100)
+            if (http_count > 100)
             {
-              
-                if(UnityEngine.Time.realtimeSinceStartup < http_last_time + 10)
+                if (UnityEngine.Time.realtimeSinceStartup < http_last_time + 10)
                 {
                     Debug.LogWarning("---> ThreadedHttps.Send Count: 100 Reset in 10s");
                 }
