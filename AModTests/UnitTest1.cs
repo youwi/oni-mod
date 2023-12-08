@@ -7,6 +7,7 @@ using STRINGS;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -122,10 +123,41 @@ namespace ModTests.Tests
             Console.WriteLine((dd - tflot) / 10000 / 1000);
             // Time.time
         }
+        [TestMethod()]
+        public void testRef()
+        {
+            var harmony = new Harmony("ModTests.Tests");
+             
+            //harmony.PatchAll();
+            //ldftn System.Void <>c::<InitializeStates>b__6_0(StatesInstance smi)
+            //RocketUsageRestriction+<>c.<InitializeStates>b__6_0 (RocketUsageRestriction+StatesInstance smi)
+            var sk = AccessTools.Method("RocketUsageRestriction.<>c:<InitializeStates>b__6_0",
+                     new Type[] { typeof(RocketUsageRestriction.StatesInstance)});
+            Console.WriteLine("----->:"+sk );
+            //作者：geleisisisi https://www.bilibili.com/read/cv22698875/ 出处：bilibili
+        }
+        [HarmonyPatch(typeof(RocketUsageRestriction), "InitializeStates")]
+        public class test_patch
+        {
+            public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            {
+                List<CodeInstruction> codes = new List<CodeInstruction>(instructions);
+                foreach (var item in codes)
+                {
+                    Console.WriteLine(item);  
+                }
+                return codes.AsEnumerable<CodeInstruction>();
+            }
+        }
+       
 
         [TestMethod()]
         public void TestMethodFFsssF2222()
         {
+
+            AsteroidGridEntity age=new AsteroidGridEntity();
+            Traverse.Create(age).Field("m_name").SetValue("delete");
+            Console.Write(age.Name);
             for (int i = 0; i < 20; i++)
             {
 

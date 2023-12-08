@@ -26,7 +26,8 @@
 	*	 对GC进行拦截.
 	*	 G:\Steam\steamapps\common\OxygenNotIncluded\memory\*.csv
 	* 11 [完成] 崩溃修复:TeleporterBuild 传送器可建造
-	* 12 不删除星球,只隐藏星球 ing
+	* 12 不删除星球,只隐藏星球 OK
+	* 13 调查内存崩溃的问题.有可能是网络导致
 
 # 反射和JSON笔记:
 	Traverse.Create 
@@ -34,6 +35,7 @@
 	StampTool 图章工具
 	TemplateCache  Yaml处理工具
 	TargetScreen 建筑菜单.
+	https://www.bilibili.com/read/cv22698875/
 # 性能
 	内置性能表,可能有点用
 	Global.Instance.GetComponent<PerformanceMonitor>().FPS;

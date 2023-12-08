@@ -73,9 +73,22 @@ namespace DeleteAsteroidMod
                 });
         public static void DeleteCurrAsteroid(AsteroidGridEntity age)
         {
-            Debug.Log($"---> 删除功能未完成 <---" );
-            var m_worldContainer = age.GetComponent<WorldContainer>();
-            Traverse.Create(age).Field("Name").SetValue("delete");
+            var world = age.GetComponent<WorldContainer>();
+            if (world.IsStartWorld)
+            {
+                Debug.Log($"---> Delete IsStartWorld skiped <---" );
+                return;
+            }
+            //如果这个星当成了火箭地,也不能删除
+             
+            Traverse.Create(age).Field("m_name").SetValue("delete");
+            //age.Name = "SF";
+            SpeedControlScreen.Instance.Pause();
+ 
+            DeleteOnSavePatch.UnRegMarkedAsteroid();
+            var ss = world.GetAllSMI<RocketUsageRestriction.StatesInstance>();
+            
+            ss.ForEach(state => { state.StopSM("---> stop <---"); state.FreeResources(); }); 
             DeleteOnSavePatch.DeleteAstoidLoop();
         }
         public static void UnRegMarkedAsteroid(AsteroidGridEntity age,bool flag)

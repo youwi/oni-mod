@@ -4,8 +4,8 @@
 	<ModTitle>Rocket Drop Artifacts火箭自动释放工艺品</ModTitle>
 	<Description>Rocket Drop Artifacts火箭自动释放工艺品.DropArtifactsMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.5.51</AssemblyVersion>
-    <FileVersion>1.0.0.50</FileVersion>
+    <AssemblyVersion>2023.12.7.52</AssemblyVersion>
+    <FileVersion>1.0.0.51</FileVersion>
   </PropertyGroup>
 
 </Project>

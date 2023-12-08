@@ -4,8 +4,8 @@
 	<ModTitle>Info Overlay fix</ModTitle>
 	<Description>Info Overlay fix</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.5.51</AssemblyVersion>
-    <FileVersion>1.0.0.50</FileVersion>
+    <AssemblyVersion>2023.12.7.52</AssemblyVersion>
+    <FileVersion>1.0.0.51</FileVersion>
   </PropertyGroup>
 
 </Project>

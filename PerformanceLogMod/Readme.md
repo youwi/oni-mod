@@ -1,4 +1,11 @@
 ﻿
+网络设置:
+ThreadedHttps.Send  StartHttpsRequest.Start()
+KleiItems.StartHttpsRequest();
+HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUriString);
+
+
+
 设置boot.config
 以下2个参数比较重要
 job-worker-count=5
