@@ -9,7 +9,7 @@ using UnityEngine.Scripting;
 
 namespace PerformanceLogMod
 {
-    [HarmonyPatch("ThreadedHttps", "Send")] 
+    [HarmonyPatch(typeof(ThreadedHttps<>), "Send")] 
     public class Https_Patch
     {
         static long http_count = 0;
