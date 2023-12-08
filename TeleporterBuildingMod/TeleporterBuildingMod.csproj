@@ -4,8 +4,8 @@
 	<ModTitle>Teleporter Transmitter Buildable 复制人传送器可建造</ModTitle>
 	<Description>Teleporter Transmitter Buildable 复制人传送器可建造.TeleporterBuildingMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.7.59</AssemblyVersion>
-    <FileVersion>1.0.0.58</FileVersion>
+    <AssemblyVersion>2023.12.8.60</AssemblyVersion>
+    <FileVersion>1.0.0.59</FileVersion>
   </PropertyGroup>
 
 </Project>

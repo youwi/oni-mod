@@ -8,10 +8,11 @@ Exception while loading mod Yu.PerformanceCapturePatch at D:/Doc/Klei/OxygenNotI
 HarmonyLib.HarmonyException: Patching exception in method System.String ThreadedHttps`1<T>::Send(System.Byte[] byteArray, System.Boolean isForce) ---> System.FormatException: Method System.String ThreadedHttps`1<T>::Send(System.Byte[] byteArray, System.Boolean isForce) cannot be patched. Reason: Could not execute the method because the containing type is not fully instantiated.
   at HarmonyLib.PatchFunctions.UpdateWrapper (System.Reflection.MethodBase original, HarmonyLib.PatchInfo patchInfo) [0x0008c] in <6dcb326e4f6442999f701f1e67d0b5a0>:0 
   at HarmonyLib.PatchClassProcessor.ProcessPatchJob (HarmonyLib.PatchJobs`1+Job[T] job) [0x000bb] in <6dcb326e4f6442999f701f1e67d0b5a0>:0 
-   --- End of inner exception stack trace ---
-   
-Build: U50-583750-SD
-
+ 
+[15:09:33.327] [1060] [WARNING] 23:09:33 KleiMetrics: Exception (retrying in 16 seconds): 
+  at System.Net.HttpWebRequest.GetRequestStream () [0x00013] in <0463b2ef957545c0a51b42f372cd4fbb>:0 
+  at (wrapper dynamic-method) ThreadedHttps`1[KleiItems].ThreadedHttps`1[[KleiItems, Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]].Send_Patch1(ThreadedHttps`1<KleiItems>,byte[],bool)
+ 
 设置boot.config
 以下2个参数比较重要
 job-worker-count=5
@@ -78,4 +79,13 @@ UnityEngine.Scripting.GarbageCollector::CollectIncremental(System.UInt64 nanosec
 Method static System.Boolean UnityEngine.Scripting.GarbageCollector::CollectIncremental(System.UInt64 nanoseconds) cannot be patched. Reason: 
 Invalid IL code in (wrapper dynamic-method) UnityEngine.Scripting.GarbageCollector:UnityEngine.Scripting.GarbageCollector.CollectIncremental_Patch1 (ulong): IL_000b: unused42  
 
- 
+ Exception while loading mod Yu.PerformanceCapturePatch at D:/Doc/Klei/OxygenNotIncluded/mods/Local/PerformanceLogMod. 
+HarmonyLib.HarmonyException: Patching exception in method null ---> System.ArgumentException: Undefined target method for patch method static System.Void PerformanceLogMod.SystemHttpsPatch::Postfix(System.Net.TransportContext con)
+  Exception while loading mod Yu.PerformanceCapturePatch at D:/Doc/Klei/OxygenNotIncluded/mods/Local/PerformanceLogMod. 
+HarmonyLib.HarmonyException: Patching exception in method null ---> System.ArgumentException: Undefined target method for patch method static System.Void PerformanceLogMod.SystemHttpsPatch::Postfix(System.Net.TransportContext con)
+  at HarmonyLib.PatchClassProcessor.PatchWithAttributes (System.Reflection.MethodBase& lastOriginal) [0x00047] in <6dcb326e4f6442999f701f1e67d0b5a0>:0 
+  at HarmonyLib.PatchClassProcessor.Patch () [0x00068] in <6dcb326e4f6442999f701f1e67d0b5a0>:0 
+   --- End of inner exception stack trace ---
+   
+Build: U50-583750-SD
+Build: U50-583750-SD

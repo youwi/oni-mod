@@ -3,17 +3,20 @@ using Klei;
 using Klei.AI;
 using Klei.CustomSettings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PerformanceLogMod;
 using STRINGS;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Timers;
 using TranslateFixMod;
+using UnityEngine.Scripting;
 using static STRINGS.ROOMS.CRITERIA;
 
 namespace ModTests.Tests
@@ -110,6 +113,15 @@ namespace ModTests.Tests
             }
 
         }
+        [TestMethod()]
+        public void CollectTest()
+        {
+            var harmony = new Harmony("ModTests.Tests");
+            harmony.PatchAll();
+          //  GarbageCollector.CollectIncremental();
+        }
+     
+
         [TestMethod()]
         public void TestMethodFFsssF3()
         {
@@ -339,6 +351,7 @@ namespace ModTests.Tests
         }
  
     }
+
     [HarmonyPatch(typeof(DlcManager), nameof(DlcManager.IsPureVanilla))]
     public static class PatchSSS
     {
@@ -375,5 +388,13 @@ namespace ModTests.Tests
             return false;
         }
     }
-
+    [HarmonyPatch(typeof(GarbageCollector), "CollectIncremental")]
+    public class GCPatch___
+    {
+        public static void Postfix()
+        {
+            Console.WriteLine("GarbageCollector ---->");
+            //GarbageCollector.CollectIncremental();
+        }
+    }
 }

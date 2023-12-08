@@ -4,8 +4,8 @@
 	<ModTitle>Bomb Space 真空炸弹</ModTitle>
 	<Description>Bomb Space 真空炸弹.VacuumSpaceMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.7.55</AssemblyVersion>
-    <FileVersion>1.0.0.54</FileVersion>
+    <AssemblyVersion>2023.12.8.56</AssemblyVersion>
+    <FileVersion>1.0.0.55</FileVersion>
   </PropertyGroup>
 
 </Project>

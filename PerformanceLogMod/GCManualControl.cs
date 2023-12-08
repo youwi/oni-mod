@@ -10,7 +10,7 @@ public class GCManualControlS : MonoBehaviour
     const long kCollectAfterAllocating = 128 * 1024 * 1024;
 
     // Perform an instant, full GC if we have more than 128 MB of managed heap.
-    const long kHighWater = 4096L * 1024L * 1024L;
+    const long kHighWater = 4096L * 1024L * 1024L*2;
 
     long lastFrameMemory = 0;
     long lastGCTime = 0;

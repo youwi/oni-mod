@@ -4,8 +4,8 @@
 	<ModTitle>Show Destination POI fix 显示小行星名字图标</ModTitle>
 	<Description>Show Destination POI fix 显示小行星名字图标.ShowDestinationPOIFixMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.7.58</AssemblyVersion>
-    <FileVersion>1.0.0.57</FileVersion>
+    <AssemblyVersion>2023.12.8.59</AssemblyVersion>
+    <FileVersion>1.0.0.58</FileVersion>
   </PropertyGroup>
 
 </Project>

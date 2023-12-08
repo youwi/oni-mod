@@ -267,7 +267,7 @@ namespace PerformanceLogMod
         }
     }
 
-    [HarmonyPatch] // make sure Harmony inspects the class
+    [HarmonyPatch] 
     public class GCAllMyPatches
     {
         public static List<string> cache = new System.Collections.Generic.List<string>();
@@ -280,9 +280,10 @@ namespace PerformanceLogMod
         }
         public static void Postfix()
         {
-            if (cache.Count > 100000)
+            if (cache.Count > 10000)
             {  //消耗太大,重置.
-                cache = new System.Collections.Generic.List<string>();
+                cache.Clear();
+                // cache = new System.Collections.Generic.List<string>();
             }
             cache.Add(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
             // 
@@ -292,15 +293,18 @@ namespace PerformanceLogMod
                 );
         }
     }
-    //[HarmonyPatch(typeof(GarbageCollector), "CollectIncremental")]
-    //public class GCPatch
-    //{
-    //    public static void Postfix()
-    //    {
-    //        //GarbageCollector.CollectIncremental();
-    //        GCAllMyPatches.Postfix();
-    //    }
-    //}
+    //为何注释了?
+    //native方法不成功 报异常
+    //报异常无法成功.
+   // [HarmonyPatch(typeof(GarbageCollector), "CollectIncremental",new Type[] { typeof(ulong) })]
+    public class CollectIncrementalPatch
+    {
+        public static void Postfix()
+        {
+            //GarbageCollector.CollectIncremental();
+            GCAllMyPatches.Postfix();
+        }
+    }
 
 
 
@@ -330,59 +334,5 @@ namespace PerformanceLogMod
     //    }
     //}
 
-    //调整刷新速度,看能不能提升性能
-    [HarmonyPatch(typeof(EnergyInfoScreen), "Refresh")]
-    public class EnergyInfoScreen_Refresh_Patch
-    {
-        static float tickSecond = 0;
-        static float tickRefresh = 0;
-        public static bool Prefix()
-        {
-             
-            if (Time.realtimeSinceStartup - tickSecond > 5)
-            {
-                tickSecond = Time.realtimeSinceStartup;
-                return true;
-            }
-            tickRefresh++;
-            if (tickRefresh > 10000)
-            {
-                Debug.Log($"---> 刷新次数:{tickRefresh} ");
-                tickRefresh = 0;
-            }
-            return false;
-        }
-    }
-    [HarmonyPatch(typeof(OverlayModes.Power), "Update")]
-    public class OverlayModes_Power_Update_Patch
-    {
-        static float tickSecond = 0;
-        static float tickRefresh = 0;
-        public static bool Prefix()
-        {
 
-            if (Time.realtimeSinceStartup - tickSecond > 2)
-            {
-                tickSecond = Time.realtimeSinceStartup;
-                return true;
-            }
-            tickRefresh++;
-            if (tickRefresh > 10000)
-            {
-                Debug.Log($"---> OverlayModes.Power 刷新次数:{tickRefresh} ");
-                tickRefresh = 0;
-            }
-            return false;
-        }
-    }
-    //禁止 腐烂物的消息,可能有助于减少内存. 功能测试中,好像有点用...
-
-    [HarmonyPatch(typeof(RotPile), "TryCreateNotification")]
-    public class OplefPatch
-    {
-        public static bool Prefix()
-        {
-            return false;
-        }
-    }
 }

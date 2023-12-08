@@ -46,18 +46,19 @@ try{
        // process.exitCode = 1;
     }
 }
- 
-/*
+
+/* 没有实际效果,所以注释了
 const ModConfig=JSON.parse(FS.readFileSync(modConfigName).toString());
 ModConfig.mods.forEach(element => {
     if(element.label.id==projectName){
-        element.enabled=true;
+        element.enabled = true;
+        element.crash_count = 0;
         console.log(projectName+"-----Mod enabled A 模组启用了\n");
     }
 });
 FS.writeFileSync(modConfigName, JSON.stringify(ModConfig,null,2))
 //console.log(projectName+"-----Mod enabled B 模组启用了\n");
-*/
+ */
 
 // 有3个办法.我直接使用读文件
 //https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/

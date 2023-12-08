@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,16 @@ using UnityEngine.Scripting;
 
 namespace PerformanceLogMod
 {
+
+    //出异常了,报错.
+   // [HarmonyPatch(typeof(System.Net.HttpWebRequest), "GetRequestStream",new Type[] { typeof(TransportContext) })]
+    public class SystemHttpsPatch
+    {
+        public static void Postfix(TransportContext con)
+        {
+            Https_KleiItems_Patch.calc_count();
+        }
+    }
     [HarmonyPatch(typeof(ThreadedHttps<KleiAccount>), "Send")]
     public class Https_KleiAccount_Patch
     {
