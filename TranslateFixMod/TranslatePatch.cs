@@ -2,6 +2,9 @@
 
 using HarmonyLib;
 using Klei.CustomSettings;
+using KMod;
+using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 using STRINGS;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,25 @@ using UnityEngine;
 
 namespace TranslateFixMod
 {
+    public class ForceFirstLoad  : UserMod2
+    {
+        public override void OnLoad(Harmony harmony)
+        {
+
+            base.OnLoad(harmony);
+            Debug.Log("---> ForceFirstLoad translate ");
+            //原生调用翻译
+            try
+            {   //有部分异常
+                Localization.Initialize();
+            }catch(System.Exception e)
+            {
+                Debug.LogWarning(e);
+            }
+            //var dic = Localization.LoadStringsFile(stringDir, false);
+            // ModManager
+        }
+    }
      [HarmonyPatch(typeof(PressureDoorConfig), "CreateBuildingDef")] //创建游戏时就加载
     //[HarmonyPatch(typeof(Game), nameof(Game.Load))] //游戏开始时加载
     public class TestTranslatePath

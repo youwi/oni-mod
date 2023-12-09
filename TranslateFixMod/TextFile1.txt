@@ -1,4 +1,35 @@
-﻿Exception while loading mod Yu.TranslateFixMod at D:/Doc/Klei/OxygenNotIncluded/mods/Local/TranslateFixMod. 
+﻿
+
+
+
+Exception while loading mod Yu.TranslateFixMod at D:/Doc/Klei/OxygenNotIncluded/mods/Local/TranslateFixMod. 
+System.NullReferenceException: Object reference not set to an instance of an object
+  at GameUtil.ActionToBinding (Action action) [0x00021] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at GameUtil.GetActionString (Action action) [0x00010] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at GameUtil.GetHotkeyString (Action action) [0x00013] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at LocText+<>c.<ParseText>b__24_0 (System.Text.RegularExpressions.Match m) [0x00021] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at System.Text.RegularExpressions.RegexReplacement.Replace (System.Text.RegularExpressions.MatchEvaluator evaluator, System.Text.RegularExpressions.Regex regex, System.String input, System.Int32 count, System.Int32 startat) [0x0009c] in <0463b2ef957545c0a51b42f372cd4fbb>:0 
+  at System.Text.RegularExpressions.Regex.Replace (System.String input, System.Text.RegularExpressions.MatchEvaluator evaluator, System.Int32 count, System.Int32 startat) [0x0000e] in <0463b2ef957545c0a51b42f372cd4fbb>:0 
+  at System.Text.RegularExpressions.Regex.Replace (System.String input, System.Text.RegularExpressions.MatchEvaluator evaluator) [0x00023] in <0463b2ef957545c0a51b42f372cd4fbb>:0 
+  at System.Text.RegularExpressions.Regex.Replace (System.String input, System.String pattern, System.Text.RegularExpressions.MatchEvaluator evaluator, System.Text.RegularExpressions.RegexOptions options, System.TimeSpan matchTimeout) [0x0000a] in <0463b2ef957545c0a51b42f372cd4fbb>:0 
+  at System.Text.RegularExpressions.Regex.Replace (System.String input, System.String pattern, System.Text.RegularExpressions.MatchEvaluator evaluator) [0x00000] in <0463b2ef957545c0a51b42f372cd4fbb>:0 
+  at LocText.ParseText (System.String input) [0x00006] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at LocText.FilterInput (System.String input) [0x00003] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at LocText.set_text (System.String value) [0x00000] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at LocText.SwapFont (TMPro.TMP_FontAsset font, System.Boolean isRightToLeft) [0x0002a] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Localization.SwapToLocalizedFont (System.String fontname) [0x00062] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Localization.LoadTranslationFromLines (System.String[] lines) [0x00044] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Localization.LoadLocalTranslationFile (Localization+SelectedLanguageType source, System.String path) [0x00015] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Localization.LoadPreinstalledTranslation (System.String code) [0x0001c] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at Localization.Initialize () [0x0006a] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+  at TranslateFixMod.ForceFirstLoad.OnLoad (HarmonyLib.Harmony harmony) [0x00011] in <52b03df70ec94392ad99ecb1d71a923e>:0 
+  at KMod.DLLLoader.LoadDLLs (KMod.Mod ownerMod, System.String harmonyId, System.String path, System.Boolean isDev) [0x00222] in <e519dd73da9048a8894ab7f073f3ead7>:0 
+   
+
+
+
+
+Exception while loading mod Yu.TranslateFixMod at D:/Doc/Klei/OxygenNotIncluded/mods/Local/TranslateFixMod. 
 HarmonyLib.HarmonyException: Patching exception in method null --->
 System.ArgumentException: 
 Undefined target method for patch method static System.Void TranslateFixMod.TestTranslatePath::Postfix()
