@@ -28,7 +28,15 @@
 	* 11 [完成] 崩溃修复:TeleporterBuild 传送器可建造
 	* 12 不删除星球,只隐藏星球 OK
 	* 13 调查内存崩溃的问题.有可能是网络导致
-
+# VS调试:
+	下载Unity 2020.3.30f1 这个版本(https://unity.com/releases/editor/archive#download-archive-2020)
+	复制:D:\Unity 2020.3.30f1\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_development_mono
+	调试版本到ONI,然后启动 VS 附加到Unity调试
+	我放了个zip文件在仓库里.
+	wait-for-native-debugger=1
+	hdr-display-enabled=0
+	single-instance=1
+	player-connection-debug=1
 # 反射和JSON笔记:
 	Traverse.Create 
     Newtonsoft.Json.JsonConvert.DeserializeObject<SettingsFile>(string);

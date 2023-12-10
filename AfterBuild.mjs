@@ -19,6 +19,7 @@ var args = process.argv.slice(2);
 var sourceDir="resource";
 var projectName=args[1];
 var projectDll = args[0];
+var projectPdb = projectDll.substring(0, projectDll.length - 4)+".pdb"
  
 var modConfigName=process.env.ONI_MOD_LOCAL+"/../mods.json";
 
@@ -36,29 +37,63 @@ FS.cpSync(sourceDir, process.env.ONI_MOD_LOCAL+"/"+projectName,{recursive: true}
 console.log(projectName+"-----Resource Files 文件已经复制");
 
 //复制DLL
-try{
-    FS.copyFileSync(projectDll,process.env.ONI_MOD_LOCAL+"/"+projectName+"/"+projectName+".dll")
-    console.log(projectName+"-----Mod DLL 文件已经复制");
+try {
+    var targetDll = process.env.ONI_MOD_LOCAL+"/" + projectName + "/" + projectName + ".dll";
+    var targetPdb = process.env.ONI_MOD_LOCAL + "/" + projectName + "/" + projectName + ".pdb";
+  
+    FS.copyFileSync(projectDll, targetDll)
+    console.log(projectName + "-----Mod DLL,文件已经复制");
+    if (FS.existsSync(projectPdb)) {
+        FS.copyFileSync(projectPdb, targetPdb)
+    } else {
+        FS.unlinkSync(targetPdb);
+    }
+    console.log(projectName+"-----Mod Pdb 文件已经复制");
 } catch (e) {
     console.log(projectName + "-----Error dll copy fail, Oni Running???---");
+    console.log("---"+e)
     //判断单元测试时要忽略.
     if (!projectName.includes("Test")) {
        // process.exitCode = 1;
     }
 }
 
-/* 没有实际效果,所以注释了
-const ModConfig=JSON.parse(FS.readFileSync(modConfigName).toString());
+//没有实际效果,所以注释了
+const ModConfig = JSON.parse(FS.readFileSync(modConfigName).toString());
+var foundjson = false;
+var expObj = {
+    "label": {
+        "distribution_platform": 0,
+        "id": projectName,
+        "title": projectName,
+        "version": -550861533
+    },
+    "status": 1,
+    "enabled": true,
+    "enabledForDlc": [
+        "EXPANSION1_ID"
+    ],
+    "crash_count": 0,
+    "reinstall_path": null,
+    "staticID": "Yu." + projectName
+}
 ModConfig.mods.forEach(element => {
-    if(element.label.id==projectName){
+   
+    if (element.label.id == projectName) {
+        foundjson = true;
         element.enabled = true;
         element.crash_count = 0;
-        console.log(projectName+"-----Mod enabled A 模组启用了\n");
     }
 });
-FS.writeFileSync(modConfigName, JSON.stringify(ModConfig,null,2))
+if (foundjson) {
+    console.log(projectName + "-----Mod enable 模组:" + foundjson);
+    FS.writeFileSync(modConfigName, JSON.stringify(ModConfig, null, 2))
+} else {
+    ModConfig.mods.splice(0,null,expObj);
+    FS.writeFileSync(modConfigName, JSON.stringify(ModConfig, null, 2))
+}
 //console.log(projectName+"-----Mod enabled B 模组启用了\n");
- */
+
 
 // 有3个办法.我直接使用读文件
 //https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/

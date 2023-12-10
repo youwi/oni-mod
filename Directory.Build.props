@@ -52,7 +52,7 @@
   <PropertyGroup>
     <Product>Oxygen Not Included Mod</Product>
     <Authors>Yu</Authors>
-    <Copyright>Copyright ©Yu2023</Copyright>
+    <Copyright>Copyright ©Yu 2023</Copyright>
     <TargetFramework>net471</TargetFramework>
     <SupportedContent>VANILLA_ID,EXPANSION1_ID</SupportedContent>
     <LastWorkingBuild>0</LastWorkingBuild>

@@ -39,7 +39,7 @@ staticID: Yu.$(AssemblyName)
 			</ModDescriptionFileContent>
 		    <ModDescriptionFileContent  Condition=" '$(ModTitle)' != '' " >
 title: "$(ModTitle)"
-Description: "$(Description)"
+description: "$(Description)"
 staticID: Yu.$(AssemblyName)
 		    </ModDescriptionFileContent>
 		</PropertyGroup>
