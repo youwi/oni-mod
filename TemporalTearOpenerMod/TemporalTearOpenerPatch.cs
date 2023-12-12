@@ -68,7 +68,7 @@ namespace TemporalTearOpenerPatch
             __instance.root.Enter(delegate (TemporalTearOpener.Instance smi)
             {
 
-                //  smi.UpdateMeter();
+                //smi.UpdateMeter();
                 FieldInfo fld = typeof(TemporalTearOpener).GetField("charging"); //初始化
                 FieldInfo ready_fld = typeof(TemporalTearOpener).GetField("ready"); //初始化
                 FieldInfo check_fld = typeof(TemporalTearOpener).GetField("check_requirements"); //初始化
@@ -128,22 +128,24 @@ namespace TemporalTearOpenerPatch
     [HarmonyPatch(typeof(TemporalTearOpener.Instance), "UpdateMeter")]
     public class TemporalTearOpener_UpdateMeter_Patch
     {
-
+        static bool inited=false;
         public static void Postfix(TemporalTearOpener.Instance __instance)
         {
+            //if (inited) return;
             //内部自动延时.
             // var sm=Traverse.Create(__instance).Field("charging").GetValue() as TemporalTearOpener.ChargingState;
             var hps = __instance.GetComponent<HighEnergyParticleStorage>();
             // GameHashes.OnParticleStorageChanged= - 1837862626
             hps.Subscribe((int)GameHashes.OnParticleStorageChanged, new Action<object>((o) =>
             {
-                if (hps.IsFull()
-                    && ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
-                { //防误触发
+                if (hps.IsFull() && ClusterManager.Instance.GetClusterPOIManager().IsTemporalTearOpen())
+                {
+                    //防误触发
                     Debug.Log("<<<<<触发陨石>>>>>>>>");
                     SidescreenButtonInteractablePatch.autoFire(__instance);
                 }
             }));
+            // inited = true;
             // 充能会无限触发.
             // 加载时会触发一次.
             // Debug.Log("<<<<<UpdateMeter 充能>>>>>>>>>>");
@@ -160,7 +162,7 @@ namespace TemporalTearOpenerPatch
             if (__instance.GetComponent<HighEnergyParticleStorage>().IsFull())
             {
                 __result = true;
-                // SidescreenButtonInteractablePatch.autoFire(__instance);
+                SidescreenButtonInteractablePatch.autoFire(__instance);
             }
             // __instance.GoTo(__instance.sm.opening_tear_beam_pre);
             // TemporalTearOpener.Instance.FireTemporalTearOpener();
@@ -176,13 +178,22 @@ namespace TemporalTearOpenerPatch
             var st = new System.Timers.Timer(3000); //延迟
             st.AutoReset = false;
             st.Enabled = true;
+            var heps = __instance.GetComponent<HighEnergyParticleStorage>();//放在外线程.定时器是多线程.
             st.Elapsed += (object data2, ElapsedEventArgs ss) =>
             {
                 fireing = false;//后面容易出异常
                 //方案一:内置启动
                 //  Traverse.Create(__instance) .Method("OpenTemporalTear");
                 //方案二:手动启动 
-                __instance.GetComponent<HighEnergyParticleStorage>().ConsumeAll();//重置
+                try
+                {
+                    //  var heps = __instance.GetComponent<HighEnergyParticleStorage>();
+                    heps.ConsumeAll();//重置
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning(ex);
+                }
                 __instance.CreateBeamFX();//冲天特别动画,对的.
                 //方案D:
                 randomMeterPlanD(worldId);
@@ -200,7 +211,7 @@ namespace TemporalTearOpenerPatch
 
             };
             st.Start();
-            Debug.Log("<<<<<autoFire--10s-will-->>>>>>>>>>");
+            Debug.Log("<<<<<autoFire--3s-will-->>>>>>>>>>");
             //默认为标准陨石.
 
             // Db.Get().GameplaySeasons  

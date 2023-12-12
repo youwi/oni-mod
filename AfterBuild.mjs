@@ -101,6 +101,17 @@ if (foundjson) {
     ModConfig.mods.splice(0,null,expObj);
     FS.writeFileSync(modConfigName, JSON.stringify(ModConfig, null, 2))
 }
+
+var bootConfig = "G:\\Steam\\steamapps\\common\\OxygenNotIncluded\\OxygenNotIncluded_Data\\boot.config";
+replaceFileSync(bootConfig, /wait-for-native-debugger.*/, "wait-for-native-debugger=0\nplayer-connection-debug=1")
+replaceFileSync(bootConfig, /player-connection-debug=1\nplayer-connection-debug.*/, "player-connection-debug=1")
+
+console.log(projectName + "-----boot.config 已经修改" );
+
+//wait-for-native-debugger=1
+//hdr-display-enabled=0
+//single-instance=1
+//player-connection-debug=1
 //console.log(projectName+"-----Mod enabled B 模组启用了\n");
 
 
