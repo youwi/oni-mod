@@ -4,8 +4,8 @@
 	<ModTitle>Reuse Temporal Tear Opener 可重用</ModTitle>
 	<Description>Reuse Temporal Tear Opener 可重用.TemporalTearOpenerMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.12.85</AssemblyVersion>
-    <FileVersion>1.0.0.84</FileVersion>
+    <AssemblyVersion>2023.12.12.86</AssemblyVersion>
+    <FileVersion>1.0.0.85</FileVersion>
   </PropertyGroup>
 
 </Project>

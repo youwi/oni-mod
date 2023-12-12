@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Timers;
 using UnityEngine;
+using static STRINGS.UI.BUILDCATEGORIES;
 
 namespace TemporalTearOpenerPatch
 {
@@ -174,48 +175,50 @@ namespace TemporalTearOpenerPatch
         {
             if (fireing == true) { return; };//已经开始了.防重进
             fireing = true;
-            int worldId = __instance.GetMyWorldId();
+
+            selectPlan(__instance);
+
             var st = new System.Timers.Timer(3000); //延迟
             st.AutoReset = false;
             st.Enabled = true;
-            var heps = __instance.GetComponent<HighEnergyParticleStorage>();//放在外线程.定时器是多线程.
             st.Elapsed += (object data2, ElapsedEventArgs ss) =>
             {
-                fireing = false;//后面容易出异常
-                //方案一:内置启动
-                //  Traverse.Create(__instance) .Method("OpenTemporalTear");
-                //方案二:手动启动 
-                try
-                {
-                    //  var heps = __instance.GetComponent<HighEnergyParticleStorage>();
-                    heps.ConsumeAll();//重置
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogWarning(ex);
-                }
-                __instance.CreateBeamFX();//冲天特别动画,对的.
-                //方案D:
-                randomMeterPlanD(worldId);
-                //方案ABC
-                //var gameplaySeason = randomMeterPlanC(); //PlanA好像出错了. PlanB太慢了.
-                //var gsi = ClusterManager.Instance.GetWorld(worldId).GetSMI<GameplaySeasonManager.Instance>();
-                //gsi.StartNewSeason(gameplaySeason);
-                //var dlcFlag=DlcManager.IsContentActive(gameplaySeason.dlcId);
-
-
-                //不为空:
-                //var ct = gsi.activeSeasons.Count;
-                // Debug.Log($"<<<<<AutoFire---on-> Count:{ct}>>>");//tt.Id和Name一样
-                //Debug.Log($"<<<<<AutoFire--end-on->world:{worldId}>>>{gameplaySeason.Name}:{dlcFlag}");//tt.Id和Name一样
-
+              //  selectPlan(__instance);
             };
-            st.Start();
+            st.Start();// 在debug本息的unity中,定时器会失效.
             Debug.Log("<<<<<autoFire--3s-will-->>>>>>>>>>");
             //默认为标准陨石.
 
             // Db.Get().GameplaySeasons  
             // GameScreenManager.Instance.Scr
+        }
+        public static void selectPlan(TemporalTearOpener.Instance __instance)
+        {
+            int worldId = __instance.GetMyWorldId();
+            var heps = __instance.GetComponent<HighEnergyParticleStorage>();//放在外线程.定时器是多线程.
+
+            fireing = false;
+            //后面容易出异常
+            //方案一:内置启动
+            //  Traverse.Create(__instance) .Method("OpenTemporalTear");
+            //方案二:手动启动 
+        
+            heps.ConsumeAll();//重置
+         
+            __instance.CreateBeamFX();//冲天特别动画,对的.
+                                      //方案D:
+            randomMeterPlanD(worldId);
+            //方案ABC
+            //var gameplaySeason = randomMeterPlanC(); //PlanA好像出错了. PlanB太慢了.
+            //var gsi = ClusterManager.Instance.GetWorld(worldId).GetSMI<GameplaySeasonManager.Instance>();
+            //gsi.StartNewSeason(gameplaySeason);
+            //var dlcFlag=DlcManager.IsContentActive(gameplaySeason.dlcId);
+
+
+            //不为空:
+            //var ct = gsi.activeSeasons.Count;
+            // Debug.Log($"<<<<<AutoFire---on-> Count:{ct}>>>");//tt.Id和Name一样
+            //Debug.Log($"<<<<<AutoFire--end-on->world:{worldId}>>>{gameplaySeason.Name}:{dlcFlag}");//tt.Id和Name一样
 
         }
 
