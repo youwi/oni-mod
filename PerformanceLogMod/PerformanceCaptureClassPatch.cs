@@ -95,6 +95,10 @@ namespace PerformanceLogMod
             //翻译测试:
             Debug.Log("---->" + STRINGS.DUPLICANTS.TRAITS.GREENTHUMB.NAME);
         }
+        public static void ProfilerTest()
+        {
+            //Profiler.
+        }
         static int ondoing = 0;
         static System.Timers.Timer timer = null;
         static long lastMemSizeM = 0;

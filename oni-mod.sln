@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 		Directory.Build.targets = Directory.Build.targets
 		README.md = README.md
 		Steam语法.txt = Steam语法.txt
+		unity-debug-version.zip = unity-debug-version.zip
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeleporterBuildingMod", "TeleporterBuildingMod\TeleporterBuildingMod.csproj", "{A72C572F-0112-4B93-9D38-5F1AD37A8678}"

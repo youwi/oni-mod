@@ -2,7 +2,7 @@
 <Project>
 
 <Target Name="CopyAllFileToDir" AfterTargets="PostBuildEvent" Condition="  '$(ModTitle)' != ''">
-	<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName) " />
+	<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command="node ../AfterBuild.mjs $(TargetPath)  $(ProjectName) $(Configuration) " />
 </Target>
   <Target Name="SetPlatform" BeforeTargets="CoreCompile">
     <PropertyGroup>

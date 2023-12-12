@@ -117,10 +117,16 @@ namespace ModTests.Tests
         public void CollectTest()
         {
             var harmony = new Harmony("ModTests.Tests");
-            harmony.PatchAll();
-          //  GarbageCollector.CollectIncremental();
+          //  harmony.PatchAll();
+
+
+           var tt1= System.DateTime.Now.Ticks/10000/1000;
+            Thread.Sleep(1000);
+            var tt2 = System.DateTime.Now.Ticks / 10000 / 1000;
+            Console.Write(tt2-tt1);
+            //GarbageCollector.CollectIncremental();
         }
-     
+
 
         [TestMethod()]
         public void TestMethodFFsssF3()

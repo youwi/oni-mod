@@ -1,5 +1,6 @@
 
 //自动更新版本号 的脚本
+import { debug } from 'console';
 import FS from 'fs';
  
 let replaceFileSync=function( filePath, sourceRegx, targetStr){
@@ -20,7 +21,8 @@ var sourceDir="resource";
 var projectName=args[1];
 var projectDll = args[0];
 var projectPdb = projectDll.substring(0, projectDll.length - 4)+".pdb"
- 
+var debugFlag = args[2];
+
 var modConfigName=process.env.ONI_MOD_LOCAL+"/../mods.json";
 
 if (FS.existsSync("resource/mod_info.yaml")) {
@@ -42,13 +44,20 @@ try {
     var targetPdb = process.env.ONI_MOD_LOCAL + "/" + projectName + "/" + projectName + ".pdb";
   
     FS.copyFileSync(projectDll, targetDll)
-    console.log(projectName + "-----Mod DLL,文件已经复制");
-    if (FS.existsSync(projectPdb)) {
-        FS.copyFileSync(projectPdb, targetPdb)
+    console.log(projectName + "-----Mod DLL,文件已经复制:" + debugFlag);
+    if (debugFlag == "Debug") {
+        if (FS.existsSync(projectPdb)) {
+            FS.copyFileSync(projectPdb, targetPdb)
+        } else {
+            FS.unlinkSync(targetPdb);
+        }
+        console.log(projectName + "-----Mod Pdb 文件已经复制");
     } else {
-        FS.unlinkSync(targetPdb);
+        if (FS.existsSync(targetPdb))
+            FS.unlinkSync(targetPdb);
     }
-    console.log(projectName+"-----Mod Pdb 文件已经复制");
+    
+ 
 } catch (e) {
     console.log(projectName + "-----Error dll copy fail, Oni Running???---");
     console.log("---"+e)

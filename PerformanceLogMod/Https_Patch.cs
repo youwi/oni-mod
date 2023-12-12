@@ -57,7 +57,8 @@ namespace PerformanceLogMod
             http_count++;
             if (http_count > 100)
             {
-                if (UnityEngine.Time.realtimeSinceStartup < http_last_time + 10)
+                var second_now = System.DateTime.Now.Ticks / 10000 / 1000;
+                if (second_now < http_last_time + 10)
                 {
                     Debug.LogWarning("---> ThreadedHttps.Send Count: 100 Reset in 10s");
                 }
@@ -66,7 +67,8 @@ namespace PerformanceLogMod
                     Debug.Log("---> ThreadedHttps.Send Count: 100 Reset");
                 }
                 http_count = 0;
-                http_last_time = UnityEngine.Time.realtimeSinceStartup;
+
+                http_last_time = second_now;// UnityEngine.Time.realtimeSinceStartup;
             }
         }
     }
