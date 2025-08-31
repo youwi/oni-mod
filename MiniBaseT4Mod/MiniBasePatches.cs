@@ -452,36 +452,45 @@ namespace MiniBase
                         component.prefabSpawnFn += new KPrefabID.PrefabFn(config.OnSpawn);
                         Assets.AddPrefab(component);
                     }
-                    AddPrefab(new HarvestablePOIConfig.HarvestablePOIParams("metallic_asteroid_field", new HarvestablePOIConfigurator.HarvestablePOIType("NiobiumAsteroidField", new Dictionary<SimHashes, float>()
-                    {
+                    AddPrefab(
+                        new HarvestablePOIConfig.HarvestablePOIParams("metallic_asteroid_field",
+                            poiType: new HarvestablePOIConfigurator.HarvestablePOIType("NiobiumAsteroidField",
+                            new Dictionary<SimHashes, float>()
+                            {
+                                {
+                                    SimHashes.Obsidian,
+                                    5.0f
+                                },
+                                {
+                                    SimHashes.MoltenTungsten,
+                                    3.0f
+                                },
+                                {
+                                    SimHashes.Niobium,
+                                    0.03f
+                                }
+                            }, forbiddenDlcIds: null))
+                     );
+                    AddPrefab(
+                        new HarvestablePOIConfig.HarvestablePOIParams("gilded_asteroid_field",
+                        new HarvestablePOIConfigurator.HarvestablePOIType("ResinAsteroidField",
+                        new Dictionary<SimHashes, float> () 
                         {
-                            SimHashes.Obsidian,
-                            5.0f
-                        },
-                        {
-                            SimHashes.MoltenTungsten,
-                            3.0f
-                        },
-                        {
-                            SimHashes.Niobium,
-                            0.03f
+                            {
+                                SimHashes.Fossil,
+                                0.2f
+                            },
+                            {
+                                SimHashes.CrudeOil,
+                                0.4f
+                            },
+                            {
+                                SimHashes.Resin,
+                                0.4f
+                            }
                         }
-                    })));
-                    AddPrefab(new HarvestablePOIConfig.HarvestablePOIParams("gilded_asteroid_field", new HarvestablePOIConfigurator.HarvestablePOIType("ResinAsteroidField", new Dictionary<SimHashes, float>()
-                    {
-                        {
-                            SimHashes.Fossil,
-                            0.2f
-                        },
-                        {
-                            SimHashes.CrudeOil,
-                            0.4f
-                        },
-                        {
-                            SimHashes.Resin,
-                            0.4f
-                        }
-                    }, 56250, 56250, 30000, 30000)));
+                       , 56250, 56250, 30000, 30000,forbiddenDlcIds:null))
+                        );
                 }
             }
         }

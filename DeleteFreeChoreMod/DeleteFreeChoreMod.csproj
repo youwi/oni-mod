@@ -4,8 +4,8 @@
 	<ModTitle>No Free Idle Chore 删除太空服空闲任务</ModTitle>
 	<Description>No Free Idle Chore 删除太空服空闲任务</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.12.54</AssemblyVersion>
-    <FileVersion>1.0.0.53</FileVersion>
+    <AssemblyVersion>2025.8.31.63</AssemblyVersion>
+    <FileVersion>1.0.0.62</FileVersion>
   </PropertyGroup>
 
 </Project>

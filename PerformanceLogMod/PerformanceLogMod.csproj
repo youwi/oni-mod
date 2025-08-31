@@ -4,8 +4,8 @@
 	<ModTitle>Clean Memory  Performance Capture 性能监视</ModTitle>
 	<Description>Clean Memory  Performance Capture 性能监视</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.12.80</AssemblyVersion>
-    <FileVersion>1.0.0.79</FileVersion>
+    <AssemblyVersion>2025.8.31.89</AssemblyVersion>
+    <FileVersion>1.0.0.88</FileVersion>
   </PropertyGroup>
 
 </Project>

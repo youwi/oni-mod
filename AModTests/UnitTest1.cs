@@ -309,14 +309,14 @@ namespace ModTests.Tests
                 | BindingFlags.SetProperty;
             var harmony = new Harmony("ModTests.Tests");
             harmony.PatchAll();
-            ToggleSettingConfig StressBreaks = new ToggleSettingConfig("StressBreaks", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.TOOLTIP, new SettingLevel("Disabled", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.TOOLTIP, 1L), new SettingLevel("Default", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L), "Default", "Default", 262144L, 5L);
+            ToggleSettingConfig StressBreaks = new ToggleSettingConfig("StressBreaks", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.TOOLTIP, new SettingLevel("Disabled", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DISABLED.TOOLTIP, 1L), new SettingLevel("Default", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L), "Default", "Default", 262144L, true);
             ToggleSettingConfig StressBreaks2 = new ToggleSettingConfig("StressBreaks","汉字测试A", "汉字测试B",
                 new SettingLevel("Disabled",
                 "汉字测试C", "汉字测试D", 1L), 
                 new SettingLevel("Default",
                 UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.NAME,
                 UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.STRESS_BREAKS.LEVELS.DEFAULT.TOOLTIP, 0L),
-                "Default", "Default", 262144L, 5L);
+                "Default", "Default", 262144L, false);
             Traverse.Create(StressBreaks2).Field("<label>k__BackingField").SetValue("---sss---");
 
             Traverse.Create(StressBreaks2.on_level).Field("<label>k__BackingField").SetValue("dsdfsdfsdf");
@@ -340,9 +340,10 @@ namespace ModTests.Tests
             var field = typeof(SettingConfig).GetField("<label>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic);
             field.SetValue(StressBreaks2, "---xdfsdfsdf---");
 
-            ListSettingConfig ClusterLayout = new ListSettingConfig("ClusterLayout", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.TOOLTIP, null, null, null, -1L, -1L, debug_only: false, triggers_custom_game: false, "", "", editor_only: true);
+            //ListSettingConfig ClusterLayout = new ListSettingConfig("ClusterLayout", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.TOOLTIP, null, null, null, -1L, -1L, debug_only: false, triggers_custom_game: false, "", "", editor_only: true);
+              ListSettingConfig ClusterLayout = new ListSettingConfig("ClusterLayout", UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.NAME, UI.FRONTEND.CUSTOMGAMESETTINGSSCREEN.SETTINGS.CLUSTER_CHOICE.TOOLTIP, null, null, null, -1L, debug_only: false, triggers_custom_game: false, null, "", hide_in_ui: true);
 
-            var langFilename = $"G:/Steam/steamapps/common/OxygenNotIncluded/OxygenNotIncluded_Data/StreamingAssets/strings/strings_preinstalled_zh_klei.po";
+        var langFilename = $"G:/Steam/steamapps/common/OxygenNotIncluded/OxygenNotIncluded_Data/StreamingAssets/strings/strings_preinstalled_zh_klei.po";
              
             TestTranslatePath.translateDictionary = ReadPoIIIIIIII.TranslatedStringsEnCn(File.ReadAllLines(langFilename, Encoding.UTF8));
             TestTranslatePath.updateLabelAndTooltip(ClusterLayout);

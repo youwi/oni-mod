@@ -71,7 +71,7 @@ namespace ColdWheatSeedDropMod
             if (__instance.seedInfo.seedId.Contains("ColdWheat")
                 || __instance.seedInfo.seedId.Contains("BeanPlant"))
             {
-                Worker completed_by = __instance.GetComponent<Harvestable>().completed_by;
+                WorkerBase completed_by = __instance.GetComponent<Harvestable>().completed_by;
                 float num = 0.1f;
                 if (completed_by != null)
                 {

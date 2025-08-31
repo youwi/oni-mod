@@ -4,8 +4,8 @@
 	<ModTitle>Beauty Door 对称的门</ModTitle>
 	<Description>Beauty Door 对称的门.GoodDoorMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.12.61</AssemblyVersion>
-    <FileVersion>1.0.0.60</FileVersion>
+    <AssemblyVersion>2025.8.31.70</AssemblyVersion>
+    <FileVersion>1.0.0.69</FileVersion>
   </PropertyGroup>
 	<Target Name="生成动画A" AfterTargets="PostBuildEvent">
 		<Exec StdErrEncoding="utf-8" StdOutEncoding="utf-8" Command=".\..\anim-project\kanimal-cli.exe kanim ../anim-project/door_manual_scml/door_manual.scml -o  resource/anim\assets/door_manual_beauty" />

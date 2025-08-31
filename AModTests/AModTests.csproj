@@ -2,8 +2,8 @@
 	<PropertyGroup>
 		<DistributeMod>false</DistributeMod>
 		<BaseOutputPath></BaseOutputPath>
-		<AssemblyVersion>2023.12.12.154</AssemblyVersion>
-		<FileVersion>1.0.0.153</FileVersion>
+		<AssemblyVersion>2025.8.31.163</AssemblyVersion>
+		<FileVersion>1.0.0.162</FileVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />

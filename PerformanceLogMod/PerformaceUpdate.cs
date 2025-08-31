@@ -8,10 +8,14 @@ using UnityEngine;
 
 namespace PerformanceLogMod
 {
+    //TargetScreen
     //调整刷新速度,看能不能提升性能
-    [HarmonyPatch(typeof(EnergyInfoScreen), "Refresh")]
+   //  [HarmonyPatch(typeof(EnergyInfoScreen), "Refresh")]
+    [HarmonyPatch(typeof(TargetScreen), "Refresh")]
+    
     public class EnergyInfoScreen_Refresh_Patch
     {
+       
         static float tickSecond = 0;
         static float tickRefresh = 0;
         public static bool Prefix()

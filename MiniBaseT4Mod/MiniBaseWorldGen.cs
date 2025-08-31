@@ -7,6 +7,7 @@ using ProcGenGame;
 using STRINGS;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TemplateClasses;
 using UnityEngine;
@@ -268,8 +269,15 @@ namespace MiniBase
             // Settle simulation
             // This writes the cells to the world, then performs a couple of game frames of simulation, then saves the game
             Log("Settling sim");
-            running.SetValue(WorldGenSimUtil.DoSettleSim(gen.Settings, ref cells, ref bgTemp, ref dc, updateProgressFn, data, templateSpawnTargets, errorCallback, baseId));
+            // running.SetValue(WorldGenSimUtil.DoSettleSim(gen.Settings, ref cells, ref bgTemp, ref dc, updateProgressFn, data, templateSpawnTargets, errorCallback, error_cb, baseId));
 
+            /*            WorldGen sfs;
+                        uint simSeed;
+                        BinaryWriter writer;*/
+            BinaryWriter writer=null;
+            uint simSeed = 0;
+            running.SetValue(WorldGenSimUtil.DoSettleSim(gen.Settings, writer, simSeed, ref cells, ref bgTemp, ref dc, updateProgressFn, data, templateSpawnTargets, errorCallback, baseId));
+            
             // Place templates, pretty much just the printing pod
             Log("Placing templates");
             var claimedCells = new Dictionary<int, int>();
@@ -287,7 +295,9 @@ namespace MiniBase
 
             // Finish and save
             Log("Saving world");
-            gen.SaveWorldGen();
+            //  gen.SaveWorldGen(); //函数删除了?
+            gen.GenerateWorldData();
+            
             updateProgressFn(UI.WORLDGEN.COMPLETE.key, 1f, WorldGenProgressStages.Stages.Complete);
             running.SetValue(false);
             return true;

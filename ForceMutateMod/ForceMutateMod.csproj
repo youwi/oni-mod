@@ -4,8 +4,8 @@
 	<ModTitle>Force Mutate 手动添加变异</ModTitle>
 	<Description>ForceMutateMod.Force Mutate 手动添加变异</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2023.12.4.38</AssemblyVersion>
-    <FileVersion>1.0.0.37</FileVersion>
+    <AssemblyVersion>2025.8.31.47</AssemblyVersion>
+    <FileVersion>1.0.0.46</FileVersion>
   </PropertyGroup>
 
 </Project>
