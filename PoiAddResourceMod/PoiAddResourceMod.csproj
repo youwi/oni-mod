@@ -4,8 +4,8 @@
 	<ModTitle>Asteroid add Rare Resources.小行星增加稀有资源</ModTitle>
 	<Description>Asteroid add Rare Resources.小行星增加稀有资源.PoiAddResource</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2025.8.31.47</AssemblyVersion>
-    <FileVersion>1.0.0.46</FileVersion>
+    <AssemblyVersion>2025.8.31.48</AssemblyVersion>
+    <FileVersion>1.0.0.47</FileVersion>
   </PropertyGroup>
 
 </Project>

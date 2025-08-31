@@ -4,8 +4,8 @@
 	<ModTitle>MiniBase SpaceOut fix T4</ModTitle>
 	<Description>MiniBase SpaceOut fix T4</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2025.8.31.56</AssemblyVersion>
-    <FileVersion>1.0.0.55</FileVersion>
+    <AssemblyVersion>2025.8.31.57</AssemblyVersion>
+    <FileVersion>1.0.0.56</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="OldUtils.cs.txt" />

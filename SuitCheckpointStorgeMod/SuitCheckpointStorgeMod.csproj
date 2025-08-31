@@ -4,8 +4,8 @@
 	<ModTitle>Backup Suit 备用气压服</ModTitle>
 	<Description>Backup Suit 备用气压服.SuitCheckpointStorgeMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2025.8.31.64</AssemblyVersion>
-    <FileVersion>1.0.0.63</FileVersion>
+    <AssemblyVersion>2025.8.31.65</AssemblyVersion>
+    <FileVersion>1.0.0.64</FileVersion>
   </PropertyGroup>
 
 </Project>

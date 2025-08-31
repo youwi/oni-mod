@@ -4,8 +4,8 @@
 	<ModTitle>Single World OneStar 单一星球 </ModTitle>
 	<Description>OneStar单一星球.Single Star WorldMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2025.8.31.65</AssemblyVersion>
-    <FileVersion>1.0.0.64</FileVersion>
+    <AssemblyVersion>2025.8.31.66</AssemblyVersion>
+    <FileVersion>1.0.0.65</FileVersion>
   </PropertyGroup>
 
 </Project>

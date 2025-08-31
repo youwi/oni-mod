@@ -4,8 +4,8 @@
 	<ModTitle>Teleporter Buildable 传送器可建造</ModTitle>
 	<Description>Teleporter Buildable 传送器可建造.WarpConduitReceiverMod</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2025.8.31.48</AssemblyVersion>
-    <FileVersion>1.0.0.47</FileVersion>
+    <AssemblyVersion>2025.8.31.49</AssemblyVersion>
+    <FileVersion>1.0.0.48</FileVersion>
   </PropertyGroup>
 
 </Project>

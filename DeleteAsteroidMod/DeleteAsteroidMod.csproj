@@ -4,8 +4,8 @@
 	<ModTitle>Delete Asteroid 删除星球</ModTitle>
 	<Description>Delete Asteroid 删除星球</Description>
     <BaseOutputPath></BaseOutputPath>
-    <AssemblyVersion>2025.8.31.67</AssemblyVersion>
-    <FileVersion>1.0.0.66</FileVersion>
+    <AssemblyVersion>2025.8.31.68</AssemblyVersion>
+    <FileVersion>1.0.0.67</FileVersion>
   </PropertyGroup>
 
 </Project>
